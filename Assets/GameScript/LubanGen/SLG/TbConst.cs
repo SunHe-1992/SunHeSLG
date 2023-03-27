@@ -31,9 +31,9 @@ public sealed partial class TbConst
     }
 
     /// <summary>
-    /// 服务器从匹配成功到最终进入游戏总时长（毫秒）
+    /// test read this value 
     /// </summary>
-     public long MatchTotalTime => _data.MatchTotalTime;
+     public long TestConstValue => _data.TestConstValue;
 
     public void Resolve(Dictionary<string, object> _tables)
     {

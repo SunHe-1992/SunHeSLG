@@ -21,7 +21,7 @@ MonoBehaviour:
     PackageDesc: 
     Groups:
     - GroupName: battle
-      GroupDesc: "\u6218\u6597"
+      GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
@@ -50,7 +50,7 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: shader
-      GroupDesc: "\u7740\u8272\u5668"
+      GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
@@ -63,7 +63,7 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: scene
-      GroupDesc: "\u573A\u666F"
+      GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
@@ -76,7 +76,7 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: ugui
-      GroupDesc: "\u9762\u677F"
+      GroupDesc: 
       AssetTags: 
       ActiveRuleName: EnableGroup
       Collectors:
@@ -105,7 +105,7 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: Config
-      GroupDesc: "\u914D\u7F6E\u8868"
+      GroupDesc: json config datas
       AssetTags: Config
       ActiveRuleName: EnableGroup
       Collectors:

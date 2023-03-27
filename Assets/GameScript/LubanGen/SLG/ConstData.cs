@@ -18,13 +18,13 @@ public sealed partial class ConstData :  Bright.Config.BeanBase
 {
     public ConstData(JSONNode _json) 
     {
-        { if(!_json["MatchTotalTime"].IsNumber) { throw new SerializationException(); }  MatchTotalTime = _json["MatchTotalTime"]; }
+        { if(!_json["TestConstValue"].IsNumber) { throw new SerializationException(); }  TestConstValue = _json["TestConstValue"]; }
         PostInit();
     }
 
-    public ConstData(long MatchTotalTime ) 
+    public ConstData(long TestConstValue ) 
     {
-        this.MatchTotalTime = MatchTotalTime;
+        this.TestConstValue = TestConstValue;
         PostInit();
     }
 
@@ -34,9 +34,9 @@ public sealed partial class ConstData :  Bright.Config.BeanBase
     }
 
     /// <summary>
-    /// 服务器从匹配成功到最终进入游戏总时长（毫秒）
+    /// test read this value 
     /// </summary>
-    public long MatchTotalTime { get; private set; }
+    public long TestConstValue { get; private set; }
 
     public const int __ID__ = 739339437;
     public override int GetTypeId() => __ID__;
@@ -53,7 +53,7 @@ public sealed partial class ConstData :  Bright.Config.BeanBase
     public override string ToString()
     {
         return "{ "
-        + "MatchTotalTime:" + MatchTotalTime + ","
+        + "TestConstValue:" + TestConstValue + ","
         + "}";
     }
     

@@ -30,13 +30,13 @@ public class GameLoader : MonoBehaviour
     }
 
 
-    //加载表格
+    //load config data
     private void LoadData()
     {
-
+        
         ConfigManager.LoadJsonInfos(() =>
         {
-            //Translator.Init();
+            Translator.Init();//load language table
             //TranslationHelper.translateStr = Translator.GetStr;
             //ConfigInited = true;
             //TestAfterLoadConfig();
@@ -44,7 +44,7 @@ public class GameLoader : MonoBehaviour
     }
     //void TestAfterLoadConfig()
     //{
-    //    var tbconst = ConfigManager.table.TbConst;
-    //    var tbLang= ConfigManager.table.TbLanguage;
+    //    string testStr = Translator.GetStr("T-test");
+    //    Debugger.Log("test str " + testStr);
     //}
 }
