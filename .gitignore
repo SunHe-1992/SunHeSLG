@@ -7,6 +7,7 @@
 /.[Vv][Ss][Cc]ode/
 /.[Vv][Ss]/
 /Assets/AssetStoreTools*
+/Bundles/
 
 # Generated if you use the new UIElements (either for editor or runtime in 2020)
 /[Uu][Ii][Ee]lements[Ss]chema/

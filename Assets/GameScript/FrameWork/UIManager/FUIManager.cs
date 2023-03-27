@@ -248,7 +248,7 @@ public class FUIManager : MonoSingleton<FUIManager>
                 {
                     GRoot.inst.ShowWindow(nextWin);
                 }
-                if (closedUIType != FUIBase.UIShowType.TIPS && closedUIType != FUIBase.UIShowType.GuidePage)
+                if (closedUIType != FUIBase.UIShowType.TIPS)
                 {
                     nextWin.NotifyRefresh();
                 }
@@ -300,7 +300,7 @@ public class FUIManager : MonoSingleton<FUIManager>
                 {
                     GRoot.inst.ShowWindow(nextWin);
                 }
-                if (closedUIType != FUIBase.UIShowType.TIPS && closedUIType != FUIBase.UIShowType.GuidePage)
+                if (closedUIType != FUIBase.UIShowType.TIPS)
                 {
                     nextWin.NotifyRefresh();
                 }
@@ -572,7 +572,7 @@ public class FUIManager : MonoSingleton<FUIManager>
 
         var windowType = cmd.window.uiShowType;
 
-        if (windowType == FUIBase.UIShowType.MAINPAGEOther || windowType == FUIBase.UIShowType.MAINPAGE || cmd.window.packageName == "CommonPackage")
+        if (windowType == FUIBase.UIShowType.MAINPAGE)
             cmd.window.WindowLiveness = -1;
         else
             cmd.window.WindowLiveness = 0;
@@ -598,17 +598,11 @@ public class FUIManager : MonoSingleton<FUIManager>
         {
             case FUIBase.UIShowType.MAINPAGE:
                 break;
-            case FUIBase.UIShowType.MAINPAGEOther:
-                HideSomeLayer(FUIBase.UIShowType.MAINPAGEOther, cmd.window);
-                break;
             case FUIBase.UIShowType.SCREEN:
                 HideAllWindowPage();
                 HideSomeLayer(FUIBase.UIShowType.SCREEN, cmd.window);
                 break;
             case FUIBase.UIShowType.WINDOW:
-                break;
-            case FUIBase.UIShowType.GuidePage:
-                HideSomeLayer(FUIBase.UIShowType.GuidePage, cmd.window);
                 break;
             case FUIBase.UIShowType.TIPS:
                 break;
@@ -638,7 +632,7 @@ public class FUIManager : MonoSingleton<FUIManager>
 
         FUIBase oldestWin = null;
         int oldestWinLiveness = 0;
-        FUIDef.FWindow fWindow = FUIDef.FWindow.HallPage;
+        FUIDef.FWindow fWindow = FUIDef.FWindow.TestUI;
 
         foreach (var win in windowsDic)
         {
@@ -707,7 +701,7 @@ public class FUIManager : MonoSingleton<FUIManager>
 
         foreach (var win in windowsDic.Values)
         {
-            if (win != null && win.isShowing && win.uiShowType == FUIBase.UIShowType.GuidePage)
+            if (win != null && win.isShowing)
             {
                 if (hasTip)
                 {
@@ -768,7 +762,8 @@ public class FUIManager : MonoSingleton<FUIManager>
     /// < returns ></ returns >
     public string GetUIAbName(string packageName)
     {
-        return "FGUIRes/" + packageName;
+        //return "FGUIRes/" + packageName;
+        return packageName;
     }
 
     public delegate void CreateWindowDelegate(FUIBase baseUI);
@@ -845,9 +840,7 @@ public class FUIManager : MonoSingleton<FUIManager>
         if (topWin != null)
         {
             var winType = (FUIDef.FWindow)topWin.FUIWindowType;
-            if (winType != FUIDef.FWindow.HallPage &&
-                winType != FUIDef.FWindow.UIMahjong &&
-                topWin.uiShowType != FUIBase.UIShowType.MAINPAGEOther)
+            if (winType != FUIDef.FWindow.TestUI)
             {
                 HideUI(topWin);
             }
@@ -974,7 +967,7 @@ public class FUIManager : MonoSingleton<FUIManager>
         else
             allSavePackageUI.Clear();
 
-        var allInfos = YooAssets.GetAssetInfos("ui");
+        var allInfos = YooAssets.GetAssetInfos("fgui");
         foreach (var info in allInfos)
         {
             var path = info.AssetPath;
@@ -989,6 +982,7 @@ public class FUIManager : MonoSingleton<FUIManager>
             var findName = info.AssetPath;
             if (findName.StartsWith("Assets/GameRes/"))
                 findName = findName.Replace("Assets/GameRes/", "");
+            //findName = System.IO.Path.GetFileName(findName);
             allSavePackageUI[saveName[0]].Add(findName);
 
         }
@@ -1069,7 +1063,7 @@ public class FUIManager : MonoSingleton<FUIManager>
     private object LoadFunc(string name, string extension, System.Type type, out DestroyMethod method)
     {
         method = DestroyMethod.None; //注意：这里一定要设置为None
-        string location = $"UI/FGUIRes/{name}{extension}";
+        string location = $"FGUIRes/{name}{extension}";
         if (allLoadInfos.ContainsKey(location))
             return allLoadInfos[location];
         else

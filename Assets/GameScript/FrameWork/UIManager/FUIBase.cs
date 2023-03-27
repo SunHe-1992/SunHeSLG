@@ -47,17 +47,9 @@ public class FUIBase : Window
         /// </summary>
         MAINPAGE = 2,
         /// <summary>
-        /// 主UI类型的其他内容，特殊处理
-        /// </summary>
-        MAINPAGEOther = 3,
-        /// <summary>
-        /// 引导界面
-        /// </summary>
-        GuidePage = 4,
-        /// <summary>
         /// 提示UI 永远最上面
         /// </summary>
-        TIPS = 5,
+        TIPS = 3,
     }
     /// <summary>
     /// UI显示类型，默认为全屏模式，显示时会隐藏前一个全屏UI

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AssetBundleCollectorSetting
   m_EditorClassIdentifier: 
   ShowPackageView: 0
-  EnableAddressable: 1
+  EnableAddressable: 0
   UniqueBundleName: 0
   ShowEditorAlias: 0
   Packages:
@@ -75,38 +75,22 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-    - GroupName: ugui
-      GroupDesc: 
-      AssetTags: 
+    - GroupName: fgui
+      GroupDesc: fairy gui assets
+      AssetTags: fgui
       ActiveRuleName: EnableGroup
       Collectors:
-      - CollectPath: Assets/GameRes/UIImage
-        CollectorGUID: 30c57db62bb02a24590e7046d3a9e33a
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-      - CollectPath: Assets/GameRes/UIPanel
-        CollectorGUID: 12d33f33f3a55224c9c747d7bffa1c68
+      - CollectPath: Assets/GameRes/FGUIRes
+        CollectorGUID: cdcb55ec8462a2b4583d37b6acfe6e83
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackSeparately
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-      - CollectPath: Assets/GameRes/UISprite
-        CollectorGUID: 01865ad6f7c806147b6cb37f2d83bc96
-        CollectorType: 0
-        AddressRuleName: AddressByFileName
-        PackRuleName: PackTopDirectory
-        FilterRuleName: CollectAll
-        AssetTags: 
-        UserData: 
-    - GroupName: Config
+    - GroupName: config
       GroupDesc: json config datas
-      AssetTags: Config
+      AssetTags: config
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/GameRes/Config

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
@@ -132,7 +132,7 @@ namespace YooAsset
 		/// <param name="priority">优先级</param>
 		public static SceneOperationHandle LoadSceneAsync(string location, LoadSceneMode sceneMode = LoadSceneMode.Single, bool activateOnLoad = true, int priority = 100)
 		{
-			DebugCheckDefaultPackageValid();
+            DebugCheckDefaultPackageValid();
 			return _defaultPackage.LoadSceneAsync(location, sceneMode, activateOnLoad, priority);
 		}
 

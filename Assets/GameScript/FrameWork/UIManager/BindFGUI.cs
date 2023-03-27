@@ -7,6 +7,6 @@ public static class BindFGUI
     /// </summary>
     public static void BindAll()
     {
-
+        PackageDebug.PackageDebugBinder.BindAll();
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Diagnostics;
 using System.Collections;
@@ -137,14 +137,22 @@ namespace YooAsset
 
 			if (_locationToLower)
 				location = location.ToLower();
-
-			if (AssetPathMapping.TryGetValue(location, out string assetPath))
+            string assetPath = null;
+            if (AssetPathMapping.TryGetValue(location, out assetPath))
 			{
 				return assetPath;
 			}
 			else
 			{
-				YooLogger.Warning($"Failed to mapping location to asset path : {location}");
+                if (!location.StartsWith("Assets/GameRes"))
+                {
+                    string fixedLocation= "Assets/GameRes/" + location;
+                    if (AssetPathMapping.TryGetValue(fixedLocation, out assetPath))
+                    {
+                        return assetPath;
+                    }
+                }
+                YooLogger.Warning($"Failed to mapping location to asset path : {location}");
 				return string.Empty;
 			}
 		}

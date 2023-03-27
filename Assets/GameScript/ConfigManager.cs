@@ -54,7 +54,7 @@ public class ConfigManager : LogicSingleton<ConfigManager>
         unityActionBack = unityAction;
 
         //��ȡdata������Щ����Ҫ�Լ�д������
-        var allInfosConfig = YooAssets.GetAssetInfos("Config");
+        var allInfosConfig = YooAssets.GetAssetInfos("config");
         allNums = allInfosConfig.Length;
         foreach (var info in allInfosConfig)
         {
@@ -82,7 +82,7 @@ public class ConfigManager : LogicSingleton<ConfigManager>
     public static void LoadInfo(string name)
     {
 
-        string tableDataFile = $"{name}";
+        string tableDataFile = $"Config/{name}";
 
         AssetOperationHandle assetOperationHandle;
 

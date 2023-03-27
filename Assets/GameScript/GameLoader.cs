@@ -25,19 +25,25 @@ public class GameLoader : MonoBehaviour
     }
     public void InitEnv()
     {
-        BindFGUI.BindAll();
-        LoadData();
+        BindFGUI.BindAll();//fairy code bind 
+        LoadData();//load json configs
+        ResObjPoolMgr.Init();//object pool initialize
+        FUIManager.ReSetBundle();//FUIManager initialize
+        FUIManager.Instance.Init();
+
+        //show test ui
+        FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
     }
 
 
     //load config data
     private void LoadData()
     {
-        
+
         ConfigManager.LoadJsonInfos(() =>
         {
             Translator.Init();//load language table
-            //TranslationHelper.translateStr = Translator.GetStr;
+            FairyGUI.TranslationHelper.translateStr = Translator.GetStr;
             //ConfigInited = true;
             //TestAfterLoadConfig();
         });
