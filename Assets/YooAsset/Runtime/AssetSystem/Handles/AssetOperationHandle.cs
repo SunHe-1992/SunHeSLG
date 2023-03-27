@@ -1,14 +1,43 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace YooAsset
 {
-	public sealed class AssetOperationHandle : OperationHandleBase, IDisposable
+    public class CacheBack
+    {
+        //-------------客户端的存储的数据
+        public UnityAction customAction;
+        public UnityAction customAction2;
+        public UnityAction<GameObject> customActionBackObj;
+        public UnityAction<CacheBack> customActionBackCache;
+
+        public string customParam;
+        public string customParam2;
+
+        public object customParamObj;
+        public object customParamObj2;
+        public object customParamObj3;
+        public object customParamObj4;
+        public object customParamObj5;
+
+        public int customIntParam;
+        public Dictionary<int, int> customValues;
+        public Dictionary<string, int> customValues_ByString;
+        public Dictionary<string, string> customValues_ByString2;
+
+        public UnityEngine.Object CacheBackObj;
+
+        public bool unRelease = false;
+    }
+    public sealed class AssetOperationHandle : OperationHandleBase, IDisposable
 	{
 		private System.Action<AssetOperationHandle> _callback;
 
-		internal AssetOperationHandle(ProviderBase provider) : base(provider)
+        public CacheBack cacheBack;
+
+        internal AssetOperationHandle(ProviderBase provider) : base(provider)
 		{
 		}
 		internal override void InvokeCallback()

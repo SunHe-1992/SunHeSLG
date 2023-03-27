@@ -6,32 +6,35 @@ using YooAsset;
 public class Boot : MonoBehaviour
 {
     /// <summary>
-    /// ×ÊÔ´ÏµÍ³ÔËĞĞÄ£Ê½
+    /// èµ„æºç³»ç»Ÿè¿è¡Œæ¨¡å¼
     /// </summary>
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
+    public static EPlayMode GamePlayMode;
 
     void Awake()
     {
-        Debug.Log($"×ÊÔ´ÏµÍ³ÔËĞĞÄ£Ê½£º{PlayMode}");
+        Debug.Log($"èµ„æºç³»ç»Ÿè¿è¡Œæ¨¡å¼ï¼š{PlayMode}");
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
     }
     void Start()
     {
-        // ³õÊ¼»¯ÊÂ¼şÏµÍ³
+        GamePlayMode = PlayMode;
+
+        // åˆå§‹åŒ–äº‹ä»¶ç³»ç»Ÿ
         UniEvent.Initalize();
 
-        // ³õÊ¼»¯¹ÜÀíÏµÍ³
+        // åˆå§‹åŒ–ç®¡ç†ç³»ç»Ÿ
         UniModule.Initialize();
 
-        // ³õÊ¼»¯×ÊÔ´ÏµÍ³
+        // åˆå§‹åŒ–èµ„æºç³»ç»Ÿ
         YooAssets.Initialize();
         YooAssets.SetOperationSystemMaxTimeSlice(30);
 
-        // ´´½¨²¹¶¡¹ÜÀíÆ÷
+        // åˆ›å»ºè¡¥ä¸ç®¡ç†å™¨
         UniModule.CreateModule<PatchManager>();
 
-        // ¿ªÊ¼²¹¶¡¸üĞÂÁ÷³Ì
+        // å¼€å§‹è¡¥ä¸æ›´æ–°æµç¨‹
         PatchManager.Instance.Run(PlayMode);
     }
 }

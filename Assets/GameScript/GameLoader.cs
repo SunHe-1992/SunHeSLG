@@ -25,7 +25,7 @@ public class GameLoader : MonoBehaviour
     }
     public void InitEnv()
     {
-        //BindFGUI.BindAll();
+        BindFGUI.BindAll();
         LoadData();
     }
 
