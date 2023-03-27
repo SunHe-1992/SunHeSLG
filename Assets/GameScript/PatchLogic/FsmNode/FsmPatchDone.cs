@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Machine;
@@ -9,18 +9,22 @@ using UniFramework.Module;
 /// </summary>
 internal class FsmPatchDone : IStateNode
 {
-	void IStateNode.OnCreate(StateMachine machine)
-	{
-	}
-	void IStateNode.OnEnter()
-	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("start game！");
+    void IStateNode.OnCreate(StateMachine machine)
+    {
+    }
+    void IStateNode.OnEnter()
+    {
+        PatchEventDefine.PatchStatesChange.SendEventMessage("start game！");
 
-	}
-	void IStateNode.OnUpdate()
-	{
-	}
-	void IStateNode.OnExit()
-	{
-	}
+        var obj = new GameObject("GameLoader");
+        var gl = obj.AddComponent<GameLoader>();
+        UnityEngine.Object.DontDestroyOnLoad(obj);
+        gl.InitEnv();
+    }
+    void IStateNode.OnUpdate()
+    {
+    }
+    void IStateNode.OnExit()
+    {
+    }
 }

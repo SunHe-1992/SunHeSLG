@@ -90,10 +90,21 @@
             "DependIDs": []
         },
         {
-            "Address": "about",
-            "AssetPath": "Assets/GameRes/Config/about.txt",
-            "AssetTags": [],
+            "Address": "slg_tbconst",
+            "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
+            "AssetTags": [
+                "Config"
+            ],
             "BundleID": 4,
+            "DependIDs": []
+        },
+        {
+            "Address": "slg_tblanguage",
+            "AssetPath": "Assets/GameRes/Config/slg_tblanguage.json",
+            "AssetTags": [
+                "Config"
+            ],
+            "BundleID": 5,
             "DependIDs": []
         }
     ],
@@ -139,13 +150,27 @@
             "ReferenceIDs": []
         },
         {
-            "BundleName": "assets_gameres_config_about_txt.rawfile",
+            "BundleName": "assets_gameres_config_slg_tbconst.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,
-            "IsRawFile": true,
+            "IsRawFile": false,
             "LoadMethod": 0,
-            "Tags": [],
+            "Tags": [
+                "Config"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_config_slg_tblanguage.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Config"
+            ],
             "ReferenceIDs": []
         }
     ]

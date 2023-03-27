@@ -104,16 +104,16 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
-    - GroupName: config
+    - GroupName: Config
       GroupDesc: "\u914D\u7F6E\u8868"
-      AssetTags: 
+      AssetTags: Config
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/GameRes/Config
         CollectorGUID: 1894d23646ddbf8479e579cc03261dde
         CollectorType: 0
         AddressRuleName: AddressByFileName
-        PackRuleName: PackRawFile
+        PackRuleName: PackSeparately
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
