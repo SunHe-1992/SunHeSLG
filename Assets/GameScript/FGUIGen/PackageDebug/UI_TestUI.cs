@@ -10,6 +10,7 @@ namespace PackageDebug
         public GGraph bg;
         public GImage frame;
         public GButton btn_test;
+        public GButton btn_slg;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -24,6 +25,7 @@ namespace PackageDebug
             bg = (GGraph)GetChild("bg");
             frame = (GImage)GetChild("frame");
             btn_test = (GButton)GetChild("btn_test");
+            btn_slg = (GButton)GetChild("btn_slg");
         }
     }
 }

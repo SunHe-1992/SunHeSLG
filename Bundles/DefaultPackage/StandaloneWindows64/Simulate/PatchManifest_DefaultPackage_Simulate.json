@@ -91,16 +91,16 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_atlas0.png",
+            "AssetPath": "Assets/GameRes/Scene/SLGMapTest.unity",
             "AssetTags": [
-                "fgui"
+                "scene"
             ],
             "BundleID": 4,
             "DependIDs": []
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_fui.bytes",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_atlas0.png",
             "AssetTags": [
                 "fgui"
             ],
@@ -109,7 +109,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh70.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_fui.bytes",
             "AssetTags": [
                 "fgui"
             ],
@@ -118,7 +118,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh71.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh70.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -127,7 +127,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh72.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh71.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -136,7 +136,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh73.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh72.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -145,7 +145,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh74.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh73.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -154,7 +154,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh75.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh74.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -163,7 +163,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh76.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh75.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -172,7 +172,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh77.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh76.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -181,7 +181,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh78.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh77.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -190,7 +190,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh79.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh78.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -199,7 +199,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_fui.bytes",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh79.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -208,7 +208,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/UIFont/OPPOSans-M.ttf",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_fui.bytes",
             "AssetTags": [
                 "fgui"
             ],
@@ -217,11 +217,20 @@
         },
         {
             "Address": "",
+            "AssetPath": "Assets/GameRes/UIFont/OPPOSans-M.ttf",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 18,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
             "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 18,
+            "BundleID": 19,
             "DependIDs": []
         },
         {
@@ -230,7 +239,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 19,
+            "BundleID": 20,
             "DependIDs": []
         }
     ],
@@ -273,6 +282,18 @@
             "IsRawFile": false,
             "LoadMethod": 0,
             "Tags": [],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_scene.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "scene"
+            ],
             "ReferenceIDs": []
         },
         {

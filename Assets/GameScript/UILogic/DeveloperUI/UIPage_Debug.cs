@@ -5,6 +5,8 @@ using FairyGUI;
 using PackageDebug;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+using YooAsset;
 
 public class UIPage_Debug : FUIBase
 {
@@ -17,6 +19,7 @@ public class UIPage_Debug : FUIBase
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
         ui.btn_test.onClick.Set(BtnNoClick);
+        ui.btn_slg.onClick.Set(BtnLoadScene);
 
     }
     protected override void OnShown()
@@ -53,6 +56,15 @@ public class UIPage_Debug : FUIBase
     void RefreshContent()
     {
 
+
+    }
+    void BtnLoadScene()
+    {
+        SceneOperationHandle handle = YooAssets.LoadSceneAsync("Scene/SLGMapTest", LoadSceneMode.Single);
+        handle.Completed += LoadSceneDone;
+    }
+    void LoadSceneDone(SceneOperationHandle handle)
+    {
 
     }
 }

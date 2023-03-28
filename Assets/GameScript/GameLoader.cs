@@ -97,6 +97,7 @@ public class GameLoader : MonoBehaviour
             }
             //show test ui
             FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+            DontDestroyOnLoad(StageCamera.main);
         }
     }
 }

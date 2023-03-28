@@ -63,15 +63,23 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: scene
-      GroupDesc: 
-      AssetTags: 
+      GroupDesc: scene
+      AssetTags: scene
       ActiveRuleName: EnableGroup
       Collectors:
       - CollectPath: Assets/GameRes/Scene
         CollectorGUID: 6070eae1192f2994887f2983a177d503
         CollectorType: 0
         AddressRuleName: AddressByFileName
-        PackRuleName: PackSeparately
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectScene
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/GameRes/SkyBox
+        CollectorGUID: a6101b4c3016e9d4d8690be7d41ae84f
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
