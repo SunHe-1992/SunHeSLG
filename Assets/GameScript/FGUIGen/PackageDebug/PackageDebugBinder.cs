@@ -8,6 +8,7 @@ namespace PackageDebug
     {
         public static void BindAll()
         {
+            UIObjectFactory.SetPackageItemExtension(UI_SamplePage.URL, typeof(UI_SamplePage));
             UIObjectFactory.SetPackageItemExtension(UI_TestUI.URL, typeof(UI_TestUI));
         }
     }

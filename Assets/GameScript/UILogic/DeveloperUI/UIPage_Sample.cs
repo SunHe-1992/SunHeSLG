@@ -6,18 +6,17 @@ using PackageDebug;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UIPage_Debug : FUIBase
+public class UIPage_Sample : FUIBase
 {
 
-    UI_TestUI ui;
+    UI_SamplePage ui;
     protected override void OnInit()
     {
         base.OnInit();
-        ui = this.contentPane as UI_TestUI;
+        ui = this.contentPane as UI_SamplePage;
         this.uiShowType = UIShowType.WINDOW;
-        this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.Default];
-        ui.btn_test.onClick.Set(BtnNoClick);
-
+        this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
+        ui.btn_ok.onClick.Set(BtnOKClick);
     }
     protected override void OnShown()
     {
@@ -42,15 +41,12 @@ public class UIPage_Debug : FUIBase
         base.OnHide();
 
     }
-    void BtnNoClick()
+    void BtnOKClick()
     {
-        //FUIManager.Instance.HideUI(this);
-        Debugger.Log("click btn ");
-    }
-    void BtnYesClick()
-    {
+        FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
         FUIManager.Instance.HideUI(this);
     }
+
     void RefreshContent()
     {
 

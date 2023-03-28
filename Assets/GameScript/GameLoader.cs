@@ -31,6 +31,10 @@ public class GameLoader : MonoBehaviour
         FUIManager.ReSetBundle();//FUIManager initialize
         FUIManager.Instance.Init();
 
+        if (PatchWindow.Inst)
+        {
+            Destroy(PatchWindow.Inst);
+        }
         //show test ui
         FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
     }

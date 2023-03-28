@@ -7,7 +7,7 @@ public class FUIDef
     public enum FWindow
     {
         TestUI,
-
+        SamplePage,
     }
     /// <summary>
     /// package names
@@ -23,6 +23,7 @@ public class FUIDef
     public static Dictionary<FWindow, FPackage> windowUIpair = new Dictionary<FWindow, FPackage>()
     {
         {FWindow.TestUI, FPackage.PackageDebug},
+        {FWindow.SamplePage, FPackage.PackageDebug},
 
 
     };

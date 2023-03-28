@@ -1,110 +1,128 @@
 {
     "FileVersion": "1.4.6",
-    "EnableAddressable": true,
+    "EnableAddressable": false,
     "OutputNameStyle": 1,
     "PackageName": "DefaultPackage",
     "PackageVersion": "Simulate",
     "AssetList": [
         {
-            "Address": "engines_enemy",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Effect/Engines/engines_enemy.prefab",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
         },
         {
-            "Address": "engines_player",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Effect/Engines/engines_player.prefab",
             "AssetTags": [],
             "BundleID": 0,
             "DependIDs": []
         },
         {
-            "Address": "explosion_asteroid",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Effect/Explosions/explosion_asteroid.prefab",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
         },
         {
-            "Address": "explosion_enemy",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Effect/Explosions/explosion_enemy.prefab",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
         },
         {
-            "Address": "explosion_player",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Effect/Explosions/explosion_player.prefab",
             "AssetTags": [],
             "BundleID": 1,
             "DependIDs": []
         },
         {
-            "Address": "music_background",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/music_background.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "sound_explosion_asteroid",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_asteroid.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "sound_explosion_enemy",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_enemy.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "sound_explosion_player",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_player.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "sound_weapon_enemy",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_weapon_enemy.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "sound_weapon_player",
+            "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_weapon_player.wav",
             "AssetTags": [],
             "BundleID": 2,
             "DependIDs": []
         },
         {
-            "Address": "MyShaderVariants",
+            "Address": "",
             "AssetPath": "Assets/GameArt/ShaderVariants/MyShaderVariants.shadervariants",
             "AssetTags": [],
             "BundleID": 3,
             "DependIDs": []
         },
         {
-            "Address": "slg_tbconst",
-            "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_atlas0.png",
             "AssetTags": [
-                "Config"
+                "fgui"
             ],
             "BundleID": 4,
             "DependIDs": []
         },
         {
-            "Address": "slg_tblanguage",
-            "AssetPath": "Assets/GameRes/Config/slg_tblanguage.json",
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_fui.bytes",
             "AssetTags": [
-                "Config"
+                "fgui"
             ],
             "BundleID": 5,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
+            "AssetTags": [
+                "config"
+            ],
+            "BundleID": 6,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Config/slg_tblanguage.json",
+            "AssetTags": [
+                "config"
+            ],
+            "BundleID": 7,
             "DependIDs": []
         }
     ],
@@ -150,6 +168,30 @@
             "ReferenceIDs": []
         },
         {
+            "BundleName": "assets_gameres_fguires_packagedebug_atlas0.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packagedebug_fui.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
             "BundleName": "assets_gameres_config_slg_tbconst.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
@@ -157,7 +199,7 @@
             "IsRawFile": false,
             "LoadMethod": 0,
             "Tags": [
-                "Config"
+                "config"
             ],
             "ReferenceIDs": []
         },
@@ -169,7 +211,7 @@
             "IsRawFile": false,
             "LoadMethod": 0,
             "Tags": [
-                "Config"
+                "config"
             ],
             "ReferenceIDs": []
         }
