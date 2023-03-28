@@ -226,7 +226,7 @@ namespace FairyGUI
             {
                 _promptText = value;
                 if (!string.IsNullOrEmpty(_promptText))
-                {
+                {    
                     _decodedPromptText = UBBParser.inst.Parse(XMLUtils.EncodeString(_promptText));
                     if (TranslationHelper.translateStr != null)
                         _decodedPromptText = TranslationHelper.translateStr(_decodedPromptText);

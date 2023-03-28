@@ -461,7 +461,6 @@ namespace FairyGUI
                 r = this.root;
 
             this.SetXY(0, 0);
-
             //this.SetXY((int)((r.width - this.width) / 2), (int)((r.height - this.height) / 2), true);
             if (restraint)
             {

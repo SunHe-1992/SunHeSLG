@@ -47,8 +47,7 @@ namespace FairyGUI
         public Window()
             : base()
         {
-
-        if (displayObject == null)
+            if (displayObject == null)
                 return;
 
             _uiSources = new List<IUISource>();

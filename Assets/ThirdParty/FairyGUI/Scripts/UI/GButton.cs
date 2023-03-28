@@ -110,7 +110,6 @@ namespace FairyGUI
                     _title = TranslationHelper.translateStr(value);
                 else
                     _title = value;
-
                 if (_titleObject != null)
                     _titleObject.text = (_selected && _selectedTitle != null) ? _selectedTitle : _title;
                 UpdateGear(6);

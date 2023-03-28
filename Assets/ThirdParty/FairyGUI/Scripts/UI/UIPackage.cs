@@ -69,7 +69,7 @@ namespace FairyGUI
         string _assetPath;
         string[] _branches;
         internal int _branchIndex;
-
+        AssetBundle _resBundle;
         string _customId;
         bool _fromBundle;
         LoadResource _loadFunc;
@@ -258,7 +258,7 @@ namespace FairyGUI
             ByteBuffer buffer = new ByteBuffer(source);
 
             UIPackage pkg = new UIPackage();
-
+            pkg._resBundle = res;
             pkg._fromBundle = true;
             int pos = mainAssetName.IndexOf("_fui");
             if (pos != -1)
@@ -648,6 +648,13 @@ namespace FairyGUI
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public AssetBundle resBundle
+        {
+            get { return _resBundle; }
+        }
 
         /// <summary>
         /// 获得本包依赖的包的id列表
@@ -981,9 +988,11 @@ namespace FairyGUI
                 }
             }
 
-            if (unloadBundleByFGUI)
+            if (unloadBundleByFGUI &&
+                _resBundle != null)
             {
-
+                _resBundle.Unload(true);
+                _resBundle = null;
             }
         }
 
@@ -1003,6 +1012,8 @@ namespace FairyGUI
         /// </summary>
         public void ReloadAssets(AssetBundle resBundle)
         {
+            _resBundle = resBundle;
+            _fromBundle = _resBundle != null;
 
             int cnt = _items.Count;
             for (int i = 0; i < cnt; i++)
@@ -1046,9 +1057,11 @@ namespace FairyGUI
             }
             _items.Clear();
 
-            if (unloadBundleByFGUI)
+            if (unloadBundleByFGUI &&
+                _resBundle != null)
             {
-
+                _resBundle.Unload(true);
+                _resBundle = null;
             }
         }
 
@@ -1268,7 +1281,10 @@ namespace FairyGUI
 
                 if (_fromBundle)
                 {
-
+                    if (_resBundle != null)
+                        tex = _resBundle.LoadAsset<Texture>(fileName);
+                    else
+                        Debug.LogWarning("FairyGUI: bundle already unloaded.");
 
                     dm = DestroyMethod.None;
                 }
@@ -1356,7 +1372,8 @@ namespace FairyGUI
 
                 if (_fromBundle)
                 {
-
+                    if (_resBundle != null)
+                        audioClip = _resBundle.LoadAsset<AudioClip>(fileName);
                     dm = DestroyMethod.None;
                 }
                 else
@@ -1378,16 +1395,25 @@ namespace FairyGUI
             string fileName = item.file.Substring(0, item.file.Length - ext.Length);
 
             TextAsset ta;
-
-            DestroyMethod dm;
-            object ret = _loadFunc(fileName, ext, typeof(TextAsset), out dm);
-            if (ret == null)
-                return null;
-            if (ret is byte[])
-                return (byte[])ret;
+            if (_resBundle != null)
+            {
+                ta = _resBundle.LoadAsset<TextAsset>(fileName);
+                if (ta != null)
+                    return ta.bytes;
+                else
+                    return null;
+            }
             else
-                return ((TextAsset)ret).bytes;
-
+            {
+                DestroyMethod dm;
+                object ret = _loadFunc(fileName, ext, typeof(TextAsset), out dm);
+                if (ret == null)
+                    return null;
+                if (ret is byte[])
+                    return (byte[])ret;
+                else
+                    return ((TextAsset)ret).bytes;
+            }
         }
 
         void LoadMovieClip(PackageItem item)

@@ -10,6 +10,7 @@ namespace FairyGUI
     public class FontManager
     {
         public static Dictionary<string, BaseFont> sFontFactory = new Dictionary<string, BaseFont>();
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,26 +55,13 @@ namespace FairyGUI
                     return font;
             }
 
-
             if (sFontFactory.TryGetValue(name, out font))
                 return font;
-            else if (sFontFactory.ContainsKey("WendingKaiti"))
-            {
-                return sFontFactory["WendingKaiti"];
-            }
-            else
-            {
-                foreach (var e in sFontFactory)
-                {
-                    Debug.LogError("ssssssssss"+e.Key);
-                }
-                Debug.LogError("怎么web没找到这个字体" + name);
-            }
-          
 
             object asset = Resources.Load(name);
             if (asset == null)
                 asset = Resources.Load("Fonts/" + name);
+
             //Try to use new API in Uinty5 to load
             if (asset == null)
             {

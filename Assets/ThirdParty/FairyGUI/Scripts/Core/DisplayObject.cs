@@ -1701,7 +1701,7 @@ namespace FairyGUI
             else if (parent != null)
             {
                 if (cachedTransform == null || parent == null || parent.cachedTransform == null) return;
-
+                
                 cachedTransform.SetParent(parent.cachedTransform, false);
 
                 if (_visible)

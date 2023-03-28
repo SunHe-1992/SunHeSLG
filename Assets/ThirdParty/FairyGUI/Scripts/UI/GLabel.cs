@@ -238,7 +238,7 @@ namespace FairyGUI
             if (this.data != null)
             {
                 string txtKey = (string)this.data;
-                if (!string.IsNullOrEmpty(txtKey) )
+                if (!string.IsNullOrEmpty(txtKey))
                 {
                     txtKey = txtKey.Trim();
                     this.title = txtKey;

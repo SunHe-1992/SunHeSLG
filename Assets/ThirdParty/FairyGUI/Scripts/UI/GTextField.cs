@@ -59,8 +59,7 @@ namespace FairyGUI
                     _text = TranslationHelper.translateStr(value.Trim());
                 else
                     _text = value.Trim();
-
-
+                
                 SetTextFieldText();
                 UpdateSize();
                 UpdateGear(6);
