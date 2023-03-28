@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +39,7 @@ namespace FairyGUI
             foreach (string key in toDelete)
                 sFontFactory.Remove(key);
         }
-
+        static string defaultFontName = "OPPOSans-M";
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +57,10 @@ namespace FairyGUI
 
             if (sFontFactory.TryGetValue(name, out font))
                 return font;
+            else if(sFontFactory.ContainsKey(defaultFontName))
+            {
+                return sFontFactory[defaultFontName];
+            }
 
             object asset = Resources.Load(name);
             if (asset == null)

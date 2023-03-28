@@ -109,11 +109,119 @@
         },
         {
             "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh70.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 6,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh71.mp3",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh72.mp3",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 8,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh73.mp3",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 9,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh74.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 10,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh75.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 11,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh76.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 12,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh77.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 13,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh78.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 14,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh79.wav",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 15,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_fui.bytes",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 16,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UIFont/OPPOSans-M.ttf",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 17,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
             "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 6,
+            "BundleID": 18,
             "DependIDs": []
         },
         {
@@ -122,7 +230,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 7,
+            "BundleID": 19,
             "DependIDs": []
         }
     ],
@@ -181,6 +289,150 @@
         },
         {
             "BundleName": "assets_gameres_fguires_packagedebug_fui.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh70.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh71.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh72.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh73.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh74.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh75.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh76.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh77.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh78.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_7rh79.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packageshared_fui.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uifont.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,

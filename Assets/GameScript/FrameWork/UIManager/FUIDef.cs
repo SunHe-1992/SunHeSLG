@@ -15,7 +15,7 @@ public class FUIDef
     public enum FPackage
     {
         PackageDebug,
-
+        PackageShared,
     }
     /// <summary>
     /// dic : key=window name, value=package name
