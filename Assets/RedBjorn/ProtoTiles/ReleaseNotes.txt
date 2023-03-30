@@ -1,0 +1,52 @@
+Version 1.1.1
+- Added Spawner.Despawn method with delay
+- Added new extension methods for List and Random classes
+- Fixed MapEntity.LineCastNonAlloc logic
+- Removed MapSettings.Create method
+
+Version 1.1.0
+- Added 2D-support (XY, ZY axis)
+- Added hexagonal pointy topped support
+- Added asmdef for core map scripts
+- Added asmdef for utils scripts
+- Added prefix to Log output
+- Added BinarySerializer helper class
+- Added SerializableVector3 class
+
+Version 1.0.5
+- Added VerticesInner to MapEntity (vertices shifted towards the tile center by a small amount)
+- Added single method for MapSettings path creation
+- Added helper class for asset operations (AssetDatabaseUtils)
+- Changed CoroutineLauncher to DontDestroyable object
+- Fixed Hex.HexCubeNearest invalid condition logic
+- Updated code formatting
+
+Version 1.0.4
+- Added dark theme support
+- Added Log class that wraps Debug.Log
+- Added ScriptablePath constants
+- Changed Spawner.Spawn signature order
+- Fixed EnumerableExtensions.ToColumn display
+- Fixed bug with invalid window settings find logic
+- Fixed bug with wrong editor ui display when not common ui scale is used
+- Refactored Square.Area and Hex.Area methods
+- Refactored MapEntity.LineCast method
+
+Version 1.0.3
+- Added multi-edit ability for extended version of Monobehaviour and ScriptableObject classes
+- Improved documentation (added Prefabs section and added important ExampleScript.cs note)
+- Improved MapEntity.CreateCell method (Now it can draw inner part and border part independently)
+- Changed distance methods' calculations from int values to float
+- Fixed algorithm of finding positions of walkable border
+
+Version 1.0.2
+- Added MapRules field to MapEntity class
+- Fixed Discord invite link in the documentation
+
+Version 1.0.1
+- Added map grid display at Play mode
+- Added new utility scripts
+- Fixed code style formatting
+
+Version 1.0.0
+- Initial release

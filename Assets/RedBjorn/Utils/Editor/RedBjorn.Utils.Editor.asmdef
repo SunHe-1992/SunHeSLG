@@ -1,0 +1,17 @@
+{
+    "name": "RedBjorn.Utils.Editor",
+    "references": [
+        "GUID:96e9f47f731d0c44c8405076362a38db"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
