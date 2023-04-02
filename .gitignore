@@ -40,3 +40,6 @@ sysinfo.txt
 .DS_Store
 .bak
 .BAK
+Bundles/DefaultPackage/StandaloneWindows64/Simulate/PatchManifest_DefaultPackage_Simulate.bytes
+Bundles/DefaultPackage/StandaloneWindows64/Simulate/PatchManifest_DefaultPackage_Simulate.hash
+Bundles/DefaultPackage/StandaloneWindows64/Simulate/PatchManifest_DefaultPackage_Simulate.json
