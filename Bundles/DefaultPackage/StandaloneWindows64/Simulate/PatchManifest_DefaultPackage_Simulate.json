@@ -42,51 +42,58 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Audio/music_background.wav",
+            "AssetPath": "Assets/GameRes/Effect/Signs/arrowSign.prefab",
             "AssetTags": [],
             "BundleID": 2,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Audio/music_background.wav",
+            "AssetTags": [],
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_asteroid.wav",
             "AssetTags": [],
-            "BundleID": 2,
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_enemy.wav",
             "AssetTags": [],
-            "BundleID": 2,
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_explosion_player.wav",
             "AssetTags": [],
-            "BundleID": 2,
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_weapon_enemy.wav",
             "AssetTags": [],
-            "BundleID": 2,
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameRes/Audio/sound_weapon_player.wav",
             "AssetTags": [],
-            "BundleID": 2,
+            "BundleID": 3,
             "DependIDs": []
         },
         {
             "Address": "",
             "AssetPath": "Assets/GameArt/ShaderVariants/MyShaderVariants.shadervariants",
             "AssetTags": [],
-            "BundleID": 3,
+            "BundleID": 4,
             "DependIDs": []
         },
         {
@@ -95,7 +102,79 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 4,
+            "BundleID": 5,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Scene/SLGMapTest_MapSquare.asset",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 5,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/GreenLight_Skybox.mat",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 6,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/back.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/bottom.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/front.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/left.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/right.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/SkyBox/SKYBOX_GreenLight/Textures/top.bmp",
+            "AssetTags": [
+                "scene"
+            ],
+            "BundleID": 7,
             "DependIDs": []
         },
         {
@@ -104,7 +183,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 5,
+            "BundleID": 8,
             "DependIDs": []
         },
         {
@@ -113,7 +192,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 6,
+            "BundleID": 9,
             "DependIDs": []
         },
         {
@@ -122,7 +201,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 7,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -131,7 +210,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 8,
+            "BundleID": 11,
             "DependIDs": []
         },
         {
@@ -140,7 +219,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 9,
+            "BundleID": 12,
             "DependIDs": []
         },
         {
@@ -149,7 +228,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 10,
+            "BundleID": 13,
             "DependIDs": []
         },
         {
@@ -158,7 +237,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 11,
+            "BundleID": 14,
             "DependIDs": []
         },
         {
@@ -167,7 +246,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 12,
+            "BundleID": 15,
             "DependIDs": []
         },
         {
@@ -176,7 +255,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 13,
+            "BundleID": 16,
             "DependIDs": []
         },
         {
@@ -185,7 +264,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 14,
+            "BundleID": 17,
             "DependIDs": []
         },
         {
@@ -194,7 +273,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 15,
+            "BundleID": 18,
             "DependIDs": []
         },
         {
@@ -203,7 +282,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 16,
+            "BundleID": 19,
             "DependIDs": []
         },
         {
@@ -212,7 +291,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 17,
+            "BundleID": 20,
             "DependIDs": []
         },
         {
@@ -221,7 +300,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 18,
+            "BundleID": 21,
             "DependIDs": []
         },
         {
@@ -230,7 +309,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 19,
+            "BundleID": 22,
             "DependIDs": []
         },
         {
@@ -239,7 +318,106 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 20,
+            "BundleID": 23,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/F_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 24,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/F_AA_002.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 25,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/M_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 26,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/M_AA_002.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 27,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacter.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 28,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacterAll.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 29,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalFemale.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 30,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalMale.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 31,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Items/Axe_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 32,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Items/Helmet_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 33,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Items/Shield_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 34,
             "DependIDs": []
         }
     ],
@@ -256,6 +434,16 @@
         },
         {
             "BundleName": "assets_gameres_effect_explosions.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_effect_signs.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,
@@ -286,6 +474,30 @@
         },
         {
             "BundleName": "assets_gameres_scene.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "scene"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_skybox_skybox_greenlight.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "scene"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_skybox_skybox_greenlight_textures.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,
@@ -485,6 +697,138 @@
             "LoadMethod": 0,
             "Tags": [
                 "config"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_f_aa_001.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_f_aa_002.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_m_aa_001.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_m_aa_002.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_universalcharacter.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_universalcharacterall.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_universalfemale.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_pawns_universalmale.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_items_axe_aa_001.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_items_helmet_aa_001.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_items_shield_aa_001.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "Pawn"
             ],
             "ReferenceIDs": []
         }
