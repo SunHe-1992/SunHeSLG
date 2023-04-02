@@ -179,7 +179,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_atlas0.png",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageBattle_atlas0.png",
             "AssetTags": [
                 "fgui"
             ],
@@ -188,7 +188,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_fui.bytes",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageBattle_fui.bytes",
             "AssetTags": [
                 "fgui"
             ],
@@ -197,7 +197,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh70.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_atlas0.png",
             "AssetTags": [
                 "fgui"
             ],
@@ -206,7 +206,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh71.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageDebug_fui.bytes",
             "AssetTags": [
                 "fgui"
             ],
@@ -215,7 +215,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh72.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh70.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -224,7 +224,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh73.mp3",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh71.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -233,7 +233,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh74.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh72.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -242,7 +242,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh75.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh73.mp3",
             "AssetTags": [
                 "fgui"
             ],
@@ -251,7 +251,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh76.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh74.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -260,7 +260,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh77.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh75.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -269,7 +269,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh78.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh76.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -278,7 +278,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh79.wav",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh77.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -287,7 +287,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_fui.bytes",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh78.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -296,7 +296,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/UIFont/OPPOSans-M.ttf",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_7rh79.wav",
             "AssetTags": [
                 "fgui"
             ],
@@ -305,11 +305,29 @@
         },
         {
             "Address": "",
+            "AssetPath": "Assets/GameRes/FGUIRes/PackageShared_fui.bytes",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 22,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UIFont/OPPOSans-M.ttf",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 23,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
             "AssetPath": "Assets/GameRes/Config/slg_tbconst.json",
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 22,
+            "BundleID": 24,
             "DependIDs": []
         },
         {
@@ -318,7 +336,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 23,
+            "BundleID": 25,
             "DependIDs": []
         },
         {
@@ -327,7 +345,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 24,
+            "BundleID": 26,
             "DependIDs": []
         },
         {
@@ -336,7 +354,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 25,
+            "BundleID": 27,
             "DependIDs": []
         },
         {
@@ -345,7 +363,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 26,
+            "BundleID": 28,
             "DependIDs": []
         },
         {
@@ -354,7 +372,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 27,
+            "BundleID": 29,
             "DependIDs": []
         },
         {
@@ -363,7 +381,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 28,
+            "BundleID": 30,
             "DependIDs": []
         },
         {
@@ -372,7 +390,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 29,
+            "BundleID": 31,
             "DependIDs": []
         },
         {
@@ -381,7 +399,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 30,
+            "BundleID": 32,
             "DependIDs": []
         },
         {
@@ -390,7 +408,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 31,
+            "BundleID": 33,
             "DependIDs": []
         },
         {
@@ -399,7 +417,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 32,
+            "BundleID": 34,
             "DependIDs": []
         },
         {
@@ -408,7 +426,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 33,
+            "BundleID": 35,
             "DependIDs": []
         },
         {
@@ -417,7 +435,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 34,
+            "BundleID": 36,
             "DependIDs": []
         }
     ],
@@ -505,6 +523,30 @@
             "LoadMethod": 0,
             "Tags": [
                 "scene"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packagebattle_atlas0.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_fguires_packagebattle_fui.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
             ],
             "ReferenceIDs": []
         },

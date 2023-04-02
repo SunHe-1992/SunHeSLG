@@ -8,6 +8,7 @@ public class FUIDef
     {
         TestUI,
         SamplePage,
+        BattlePanel,
     }
     /// <summary>
     /// package names
@@ -16,6 +17,7 @@ public class FUIDef
     {
         PackageDebug,
         PackageShared,
+        PackageBattle,
     }
     /// <summary>
     /// dic : key=window name, value=package name
@@ -24,7 +26,7 @@ public class FUIDef
     {
         {FWindow.TestUI, FPackage.PackageDebug},
         {FWindow.SamplePage, FPackage.PackageDebug},
-
+        {FWindow.BattlePanel, FPackage.PackageBattle},
 
     };
 }

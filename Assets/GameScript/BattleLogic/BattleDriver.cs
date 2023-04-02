@@ -100,8 +100,6 @@ namespace SunHeSLG
 
         public void SwitchDriveState(BattleDriveState driveState)
         {
-            Debugger.LogError(" SwitchDriveState " + driveState);
-
             nextDriveState = driveState;
         }
 
@@ -115,7 +113,7 @@ namespace SunHeSLG
 
             currDriveState = nextDriveState;
 
-            Debugger.LogError(" ChangeDriveState " + currDriveState);
+            Debugger.Log(" ChangeDriveState " + currDriveState);
 
 
             switch (currDriveState)
@@ -234,6 +232,7 @@ namespace SunHeSLG
         private void OnEnterInBattleState()
         {
             logicInst.PostInitProcess();
+            FUIManager.Instance.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
         }
 
         private void OnEnterGoNextStageState()
@@ -249,7 +248,7 @@ namespace SunHeSLG
         #endregion
 
         #region MyRegion
-        GameObject CursorObj;
+        public GameObject CursorObj;
         #endregion
     }
 }
