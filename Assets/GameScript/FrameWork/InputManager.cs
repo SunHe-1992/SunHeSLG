@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace SunHeSLG
+namespace SunHeTBS
 {
 
     public class InputManager : MonoSingleton<InputManager>

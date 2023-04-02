@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
-namespace SunHeSLG
+namespace SunHeTBS
 {
     public class PawnBase
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RedBjorn.ProtoTiles;
-namespace SunHeSLG
+namespace SunHeTBS
 {
     public class PawnController : MonoBehaviour
     {

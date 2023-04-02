@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using YooAsset;
-using SunHeSLG;
+using SunHeTBS;
 public class UIPage_Debug : FUIBase
 {
 

@@ -7,7 +7,7 @@ using System;
 using YooAsset;
 using UnityEngine.SceneManagement;
 
-namespace SunHeSLG
+namespace SunHeTBS
 {
     public enum BattleDriveState
     {
