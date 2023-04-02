@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -85,7 +85,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
 
                 //    if (IsPersist)
                 //    {
-                //        DontDestroyOnLoad(m_Instance);
+                DontDestroyOnLoad(m_Instance);
                 //    }
                 //}
 

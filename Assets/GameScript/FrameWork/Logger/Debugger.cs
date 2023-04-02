@@ -150,5 +150,11 @@ public class Debugger
         Debugger.Log(infoStr);
     }
 
+    public static void Print(object obj)
+    {
+#if UNITY_EDITOR
+        Debugger.Log($"print {nameof(obj)} = {obj.ToString()}");
+#endif
+    }
 }
 
