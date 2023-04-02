@@ -7,7 +7,6 @@ namespace PackageDebug
 {
     public partial class UI_TestUI : GComponent
     {
-        public GGraph bg;
         public GImage frame;
         public GButton btn_test;
         public GButton btn_slg;
@@ -22,7 +21,6 @@ namespace PackageDebug
         {
             base.ConstructFromXML(xml);
 
-            bg = (GGraph)GetChild("bg");
             frame = (GImage)GetChild("frame");
             btn_test = (GButton)GetChild("btn_test");
             btn_slg = (GButton)GetChild("btn_slg");
