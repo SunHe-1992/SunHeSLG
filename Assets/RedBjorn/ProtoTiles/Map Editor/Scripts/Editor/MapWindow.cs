@@ -1,4 +1,4 @@
-﻿using RedBjorn.Utils;
+using RedBjorn.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +32,7 @@ namespace RedBjorn.ProtoTiles
         MapWindowSettings Settings;
 
         string ButtonPlacePrefabs = "Place Prefabs";
+        string ButtonExportData = "Export Data";
 
         static readonly string[] TileToolNames = new string[]
         {
@@ -217,6 +218,12 @@ namespace RedBjorn.ProtoTiles
                 }
             }
             GUILayout.Space(10f);
+            if(GUILayout.Button(ButtonExportData, GUILayout.MaxWidth(MapWindowSettings.WindowMinSize.x - 6 * Border)))
+            {
+                SunHeTBS.MapDataTool.ExportData();
+            }
+            GUILayout.Space(10f);
+
             var guiEnabled = GUI.enabled;
             GUI.enabled = Map;
             GUILayout.BeginHorizontal();
@@ -536,7 +543,7 @@ namespace RedBjorn.ProtoTiles
             switch (Map.Type)
             {
                 case RedBjorn.ProtoTiles.GridType.HexFlat: PlacePrefabsHexFlat(); break;
-                case RedBjorn.ProtoTiles.GridType.HexPointy: PlacePrefabsHexPointy(); break; 
+                case RedBjorn.ProtoTiles.GridType.HexPointy: PlacePrefabsHexPointy(); break;
                 case RedBjorn.ProtoTiles.GridType.Square: PlacePrefabsSquare(); break;
             }
 #if UNITY_EDITOR
