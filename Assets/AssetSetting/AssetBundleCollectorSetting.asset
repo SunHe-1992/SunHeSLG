@@ -30,7 +30,7 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectAll
+        FilterRuleName: CollectPrefab
         AssetTags: 
         UserData: 
       - CollectPath: Assets/GameRes/Entity
@@ -72,7 +72,7 @@ MonoBehaviour:
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
-        FilterRuleName: CollectScene
+        FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
       - CollectPath: Assets/GameRes/SkyBox
@@ -115,5 +115,26 @@ MonoBehaviour:
         AddressRuleName: AddressByFileName
         PackRuleName: PackSeparately
         FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Pawn
+      GroupDesc: 
+      AssetTags: Pawn
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/GameRes/Pawns
+        CollectorGUID: 9dd79bcdf4c6fbe4795a4d2cffbcf736
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackSeparately
+        FilterRuleName: CollectPrefab
+        AssetTags: 
+        UserData: 
+      - CollectPath: Assets/GameRes/Items
+        CollectorGUID: 172f8fa260ebda14d8cb86d59975b50a
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackSeparately
+        FilterRuleName: CollectPrefab
         AssetTags: 
         UserData: 
