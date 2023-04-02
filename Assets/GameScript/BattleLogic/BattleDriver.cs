@@ -175,8 +175,12 @@ namespace SunHeSLG
             SceneOperationHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
             handle.Completed += (scene) =>
             {
-
-
+                //hide EditorGizmos
+                var gizmos = GameObject.Find("EditorGizmos");
+                if (gizmos != null)
+                {
+                    gizmos.SetActive(false);
+                }
                 SwitchDriveState(BattleDriveState.STATE_PRELOAD_RES);
             };
 
