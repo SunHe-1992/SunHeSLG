@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using YooAsset;
-
+using SunHeSLG;
 public class UIPage_Debug : FUIBase
 {
 
@@ -18,8 +18,8 @@ public class UIPage_Debug : FUIBase
         ui = this.contentPane as UI_TestUI;
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
-        ui.btn_test.onClick.Set(BtnNoClick);
-        ui.btn_slg.onClick.Set(BtnLoadScene);
+        ui.btn_test.onClick.Set(BtnTestClick);
+        ui.btn_slg.onClick.Set(BtnGotoBattle);
 
     }
     protected override void OnShown()
@@ -45,12 +45,19 @@ public class UIPage_Debug : FUIBase
         base.OnHide();
 
     }
-    void BtnNoClick()
+    void BtnTestClick()
     {
         //FUIManager.Instance.HideUI(this);
-        Debugger.Log("click btn ");
-        FUIManager.Instance.ShowUI<UIPage_Sample>(FUIDef.FWindow.SamplePage);
-        FUIManager.Instance.HideUI(this);
+        //Debugger.Log("click btn ");
+        //FUIManager.Instance.ShowUI<UIPage_Sample>(FUIDef.FWindow.SamplePage);
+        //FUIManager.Instance.HideUI(this);
+        var mapEntity = BattleDriver.Instance.GetMapEntity();
+
+        foreach (var pawn in BLogic.Instance.pawnList)
+        {
+            //mapEntity.
+            //pawn.curPosition
+        }
     }
 
     void RefreshContent()
@@ -58,13 +65,20 @@ public class UIPage_Debug : FUIBase
 
 
     }
-    void BtnLoadScene()
+
+    void BtnGotoBattle()
     {
-        SceneOperationHandle handle = YooAssets.LoadSceneAsync("Scene/SLGMapTest", LoadSceneMode.Single);
-        handle.Completed += LoadSceneDone;
-    }
-    void LoadSceneDone(SceneOperationHandle handle)
-    {
+        BattleManager.StartLocalBattle();
 
     }
+
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+
+    }
+
+
 }
