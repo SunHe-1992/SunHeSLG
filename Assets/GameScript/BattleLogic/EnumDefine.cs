@@ -51,4 +51,56 @@ namespace SunHeTBS
         PlayerAlly,
         Neutral,
     }
+
+
+    public enum EffectType : int
+    {
+        /// <summary>
+        /// normal tile 
+        /// </summary>
+        None,
+        /// <summary>
+        /// +30 avo
+        /// </summary>
+        Avoid,
+        /// <summary>
+        /// heal/turn+10
+        /// </summary>
+        Healing,
+        /// <summary>
+        ///  +30 Avo, heal/turn+10
+        /// </summary>
+        Protection,
+        /// <summary>
+        /// Mov+2
+        /// </summary>
+        Frost,
+    }
+    /// <summary>
+    /// tile pass type
+    /// </summary>
+    public enum TilePassType : int
+    {
+        /// <summary>
+        /// passable for all pawns
+        /// </summary>
+        Passable = 0,
+        /// <summary>
+        /// not passable
+        /// </summary>
+        Impassable = 1,
+        /// <summary>
+        ///  Fliers can pass,others can not
+        /// </summary>
+        FliersOnly = 2,
+    }
+    public enum PawnMoveType : int
+    {
+        Ground = 0,
+        Flier = 1,
+    }
+
+
+
+
 }

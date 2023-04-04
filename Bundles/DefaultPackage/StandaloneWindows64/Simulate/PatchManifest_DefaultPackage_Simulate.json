@@ -341,16 +341,16 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/F_AA_001.prefab",
+            "AssetPath": "Assets/GameRes/Config/SLGMapTest.json",
             "AssetTags": [
-                "Pawn"
+                "config"
             ],
             "BundleID": 26,
             "DependIDs": []
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/F_AA_002.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/F_AA_001.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -359,7 +359,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/M_AA_001.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/F_AA_002.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -368,7 +368,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/M_AA_002.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/M_AA_001.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -377,7 +377,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacter.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/M_AA_002.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -386,7 +386,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacterAll.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacter.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -395,7 +395,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/UniversalFemale.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalCharacterAll.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -404,7 +404,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Pawns/UniversalMale.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalFemale.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -413,7 +413,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Items/Axe_AA_001.prefab",
+            "AssetPath": "Assets/GameRes/Pawns/UniversalMale.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -422,7 +422,7 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Items/Helmet_AA_001.prefab",
+            "AssetPath": "Assets/GameRes/Items/Axe_AA_001.prefab",
             "AssetTags": [
                 "Pawn"
             ],
@@ -431,11 +431,20 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameRes/Items/Shield_AA_001.prefab",
+            "AssetPath": "Assets/GameRes/Items/Helmet_AA_001.prefab",
             "AssetTags": [
                 "Pawn"
             ],
             "BundleID": 36,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Items/Shield_AA_001.prefab",
+            "AssetTags": [
+                "Pawn"
+            ],
+            "BundleID": 37,
             "DependIDs": []
         }
     ],
@@ -732,6 +741,18 @@
         },
         {
             "BundleName": "assets_gameres_config_slg_tblanguage.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "config"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_config_slgmaptest.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,

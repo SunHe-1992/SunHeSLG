@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace SunHeTBS
 {
+    /// <summary>
+    /// data format for saving to json
+    /// </summary>
     public class TileData4Json
     {
         public int pType = 0;
@@ -12,13 +15,35 @@ namespace SunHeTBS
         public int x;
         public int y;
     }
-    public class BattleMapData
+
+    //public class BattleMapData
+    //{
+    //    public int MapID;
+    //    public int MapRows;
+    //    public int MapCols;
+
+    //}
+
+    #region node interfaces
+    public interface INode
     {
-        public int MapID;
+        public Vector3Int Position { get; }
+        int MovableArea { get; }
+        void ChangeMovableAreaPreset(int area);
 
-        public int MapRows;
-        public int MapCols;
+        bool Vacant { get; }
 
+        int Depth { get; set; }
+        bool Visited { get; set; }
+        bool Considered { get; set; }
     }
-
+    public interface IMapNode
+    {
+        int Distance(INode x, INode y, bool extraPrice);
+        IEnumerable<INode> Neighbours(INode node);
+        IEnumerable<INode> NeighborsMovable(INode node);
+        void Reset();
+        void Reset(int range, INode startNode);
+    }
+    #endregion
 }

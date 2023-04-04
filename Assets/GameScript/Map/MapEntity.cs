@@ -1,0 +1,246 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace SunHeTBS
+{
+    public class MapEntity : IMapNode
+    {
+
+        #region IMapNode implement
+
+        public int Distance(INode x, INode y, bool extraPrice)
+        {
+            return Distance(x, y, extraPrice);
+        }
+
+        public IEnumerable<INode> NeighborsMovable(INode node)
+        {
+            throw new System.NotImplementedException();
+        }
+        public static readonly Vector3Int[] NeighbourArray = new Vector3Int[]
+   {
+            new Vector3Int(0,1,0),
+            new Vector3Int(1,0,0),
+            new Vector3Int(0,-1,0),
+            new Vector3Int(-1,0,0),
+   };
+        public IEnumerable<INode> Neighbours(INode node)
+        {
+            for (int i = 0; i < NeighbourArray.Length; i++)
+            {
+                yield return TileOrDefault(node.Position + NeighbourArray[i]);
+            }
+        }
+
+        public void Reset()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Reset(int range, INode startNode)
+        {
+            if (startNode != null)
+            {
+                ResetSquare(startNode.Position, (int)range);
+            }
+        }
+        #endregion
+
+
+        public int MapID;
+        public int MapRows;
+        public int MapCols;
+        /// <summary>
+        /// unity world size of a tile
+        /// </summary>
+        float TileSize = 1f;
+        Dictionary<int, TileEntity> TileDic = new Dictionary<int, TileEntity>();
+        int XY2TileId(int x, int y)
+        {
+            return MapCols * x + y;
+        }
+        int XY2TileId(Vector3Int vect)
+        {
+            return XY2TileId(vect.x, vect.y);
+        }
+
+        Vector3Int TileId2XY(int tileId)
+        {
+            return new Vector3Int(tileId / MapCols, tileId % MapCols);
+        }
+        public void InitData(int row, int col, List<TileData4Json> tdjList)
+        {
+            this.MapRows = row;
+            this.MapCols = col;
+            TileDic = new Dictionary<int, TileEntity>();
+
+
+            foreach (TileData4Json tdj in tdjList)
+            {
+                int tileId = XY2TileId(tdj.x, tdj.y);
+
+                TileEntity tile = new TileEntity(new Vector3Int(tdj.x, tdj.y), tileId);
+                tile.passType = (TilePassType)tdj.pType;
+                tile.extraPassPrice = tdj.cost;
+                tile.effectType = (EffectType)tdj.effect;
+                TileDic[tileId] = tile;
+            }
+
+        }
+
+        /// <summary>
+        /// TileEntity pos -> unity pos
+        /// </summary>
+        /// <param name="tile"></param>
+        /// <returns></returns>
+        public Vector3 WorldPosition(TileEntity tile)
+        {
+            if (tile == null)
+                return Vector3.zero;
+
+            return WorldPosition(tile.Position);
+        }
+        /// <summary>
+        /// tile pos -> unity pos
+        /// </summary>
+        /// <param name="vect"></param>
+        /// <returns></returns>
+        public Vector3 WorldPosition(Vector3Int vect)
+        {
+            return new Vector3(vect.x * TileSize, 0f, vect.y * TileSize);
+        }
+        /// <summary>
+        /// unity pos -> tile pos
+        /// </summary>
+        /// <param name="worldPos"></param>
+        /// <returns></returns>
+        public Vector3Int WorldPosToTilePos(Vector3 worldPos)
+        {
+            return new Vector3Int(Mathf.RoundToInt(worldPos.x / TileSize), Mathf.RoundToInt(worldPos.z / TileSize), 0);
+        }
+        /// <summary>
+        /// unity pos -> tile
+        /// </summary>
+        /// <param name="worldPos"></param>
+        /// <returns></returns>
+        public TileEntity WorldPosToTile(Vector3 worldPos)
+        {
+            Vector3Int vect = WorldPosToTilePos(worldPos);
+            int tileId = XY2TileId(vect.x, vect.y);
+            return GetTileFromDic(tileId);
+        }
+        /// <summary>
+        /// tile id -> tile
+        /// </summary>
+        /// <param name="tileId"></param>
+        /// <returns></returns>
+        public TileEntity GetTileFromDic(int tileId)
+        {
+            if (TileDic.ContainsKey(tileId)) return TileDic[tileId];
+            return null;
+        }
+        /// <summary>
+        /// unity pos -> tile
+        /// </summary>
+        /// <param name="worldPos"></param>
+        /// <returns></returns>
+        public TileEntity Tile(Vector3 worldPos)
+        {
+            return WorldPosToTile(worldPos);
+        }
+        /// <summary>
+        /// tile pos -> tile
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public TileEntity Tile(Vector3Int pos)
+        {
+            return GetTileFromDic(XY2TileId(pos));
+        }
+        public TileEntity TileOrDefault(Vector3Int pos)
+        {
+            var tile = GetTileFromDic(XY2TileId(pos));
+            if (tile != null) return tile;
+            else return default;
+        }
+        /// <summary>
+        /// tile -> tile pos
+        /// </summary>
+        /// <param name="tile"></param>
+        /// <returns></returns>
+        public Vector3 TileCenter(TileEntity tile)
+        {
+            return WorldPosition(tile);
+        }
+
+        /// <summary>
+        /// Distance between two tiles located at corresponding world space positions
+        /// </summary>
+        /// <param name="worldPosA"></param>
+        /// <param name="worldPosB"></param>
+        /// <returns></returns>
+        public int Distance(Vector3 worldPosA, Vector3 worldPosB, bool extraPrice = false)
+        {
+            var tileA = WorldPosToTile(worldPosA);
+            var tileB = WorldPosToTile(worldPosB);
+            return Distance(tileA.Position, tileB.Position, extraPrice); //for fliers no extra pass price
+        }
+        /// <summary>
+        /// Chessboard distance
+        /// </summary>
+        /// <param name="posA"></param>
+        /// <param name="posB"></param>
+        /// <returns></returns>
+        public int Distance(Vector3Int posA, Vector3Int posB)
+        {
+            return Mathf.Abs(posA.x - posB.x) + Mathf.Abs(posA.y - posB.y);
+        }
+        /// <summary>
+        /// Distance when calculating ground pawn
+        /// </summary>
+        /// <param name="tileA"></param>
+        /// <param name="tileB"></param>
+        /// <returns></returns>
+        public int Distance(TileEntity tileA, TileEntity tileB, bool extraPrice = false)
+        {
+            if (tileA == null || tileB == null)
+                return int.MaxValue;
+            return Distance(tileA.Position, tileB.Position) + (extraPrice ? tileB.extraPassPrice : 0);
+        }
+
+        /// <summary>
+        /// Get walkable tiles around origin at range maximum
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="range"></param>
+        /// <returns></returns>
+        public HashSet<TileEntity> WalkableTiles(Vector3Int origin, int range)
+        {
+            var nodes = NodePathFinder.WalkableArea(this, Tile(origin), range);
+            var tiles = new HashSet<TileEntity>();
+            foreach (var n in nodes)
+            {
+                tiles.Add(n as TileEntity);
+            }
+            return tiles;
+        }
+
+
+        void ResetSquare(Vector3Int startPos, int range)
+        {
+            for (int x = -range; x <= range; x++)
+                for (int y = -range; y <= range; y++)
+                {
+                    var tile = GetTileFromDic(XY2TileId(startPos.x + x, startPos.y + y));
+                    if (tile != null)
+                    {
+                        tile.Depth = int.MaxValue;
+                        tile.Visited = false;
+                        tile.Considered = false;
+                    }
+                }
+        }
+    }
+
+}

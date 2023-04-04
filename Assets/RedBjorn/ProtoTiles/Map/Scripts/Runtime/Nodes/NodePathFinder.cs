@@ -1,9 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace RedBjorn.ProtoTiles
 {
+    /*
+     寻路代码修改
+Square.distance 里面 加入判断 if coord2是树林 and 是地面单位 则distance+1
+MapEntity  NeighborsMovable  加入判断 飞行单位/地面单位 使用各自的 NeighbourMovable 数据结构*/
+    /// <summary>
+    /// path finding algorithm
+    /// </summary>
     public class NodePathFinder
     {
         static Dictionary<INode, float> ScoreG = new Dictionary<INode, float>();
@@ -22,7 +29,8 @@ namespace RedBjorn.ProtoTiles
             {
                 var current = open.Dequeue();
                 current.Considered = true;
-                foreach (var n in map.NeighborsMovable(current).Where(neigh => neigh != null))
+                var list = map.NeighborsMovable(current).Where(neigh => neigh != null);
+                foreach (var n in list)
                 {
                     if (n.Vacant && !n.Considered)
                     {
@@ -150,8 +158,10 @@ namespace RedBjorn.ProtoTiles
 
                 closed.Add(check);
                 open.Remove(check);
-                foreach (var node in map.NeighborsMovable(check).Where(n => n.Vacant))
+                var list = map.NeighborsMovable(check).Where(n => n.Vacant);
+                foreach (var node in list)
                 {
+                    Debug.Log("path 156");
                     var currengScoreG = ScoreG[check] + map.Distance(node, finish);
                     var gN = -1f;
                     if (ScoreG.TryGetValue(node, out gN))

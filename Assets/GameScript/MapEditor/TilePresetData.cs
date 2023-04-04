@@ -2,42 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SunHeTBS;
+/// <summary>
+/// editor set this data,then convert to json
+/// </summary>
 public class TilePresetData : MonoBehaviour
 {
-    public enum EffectType : int
-    {
-        /// <summary>
-        /// normal tile 
-        /// </summary>
-        None,
-        /// <summary>
-        /// +30 avo
-        /// </summary>
-        Avoid,
-        /// <summary>
-        /// heal/turn+10
-        /// </summary>
-        Healing,
-        /// <summary>
-        ///  +30 Avo, heal/turn+10
-        /// </summary>
-        Protection,
-        /// <summary>
-        /// Mov+2
-        /// </summary>
-        Frost,
-    }
-    public enum PassType : int
-    {
-        All,
-        Impassable,
-        FliersOnly,
-    }
-    public PassType passType = PassType.All;
+    public TilePassType passType = TilePassType.Passable;
     /// <summary>
-    /// walk through cost move points
+    /// for ground pawns, extra move price 
     /// </summary>
-    public int moveCost = 1;
+    public int extraMovePrice = 0;
     public EffectType effectType = EffectType.None;
     public string tileName = "Floor";
   

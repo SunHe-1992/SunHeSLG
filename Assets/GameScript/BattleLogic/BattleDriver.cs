@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
-using RedBjorn.ProtoTiles;
 using System;
 using YooAsset;
 using UnityEngine.SceneManagement;
@@ -82,8 +81,7 @@ namespace SunHeTBS
         #region map entity 
 
         public MapEntity MapEntity { get; private set; }
-        MapSettings mapSetting;
-        public MapView MapView;
+       
 
         public MapEntity GetMapEntity()
         {
@@ -189,18 +187,27 @@ namespace SunHeTBS
 
         private void OnEnterLoadMapDataState()
         {
-            if (!MapView)
-            {
-                MapView = GameObject.FindObjectOfType<MapView>();
-            }
-            var assetInfo = YooAssets.GetAssetInfo($"Scene/{mapName}_MapSquare");
-            YooAssets.LoadAssetSync(assetInfo).Completed += (handle) =>
-            {
-                mapSetting = handle.AssetObject as MapSettings;
-                var tileData = mapSetting.Tiles[0];
+            //if (!MapView)
+            //{
+            //    MapView = GameObject.FindObjectOfType<MapView>();
+            //}
+            //var assetInfo = YooAssets.GetAssetInfo($"Scene/{mapName}_MapSquare");
+            //YooAssets.LoadAssetSync(assetInfo).Completed += (handle) =>
+            //{
+            //    mapSetting = handle.AssetObject as MapSettings;
+            //    var tileData = mapSetting.Tiles[0];
 
-                MapEntity = new MapEntity(mapSetting, MapView);
+            //    MapEntity = new MapEntity(mapSetting, MapView);
+            //};
+
+            TBSMapService.Instance.ClearData();
+            var jsonAssetInfo = YooAssets.GetAssetInfo($"Config/{mapName}");
+            YooAssets.LoadAssetSync(jsonAssetInfo).Completed += (handle) =>
+            {
+                var jStr = handle.AssetObject.ToString();
+                TBSMapService.Instance.LoadJsonData(jStr);
             };
+
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_PREFAB);
         }
 

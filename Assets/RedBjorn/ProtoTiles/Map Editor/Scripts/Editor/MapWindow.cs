@@ -32,7 +32,7 @@ namespace RedBjorn.ProtoTiles
         MapWindowSettings Settings;
 
         string ButtonPlacePrefabs = "Place Prefabs";
-        string ButtonExportData = "Export Data";
+        string ButtonExportData = "Export Data (only export tiles posX and posY >= 0 )";
 
         static readonly string[] TileToolNames = new string[]
         {
@@ -95,7 +95,7 @@ namespace RedBjorn.ProtoTiles
             }
         }
 
-        [MenuItem("Tools/Red Bjorn/Editors/Map")]
+        [MenuItem("Red Bjorn/MapEditor")]
         public static void DoShow()
         {
             DoShow(null);

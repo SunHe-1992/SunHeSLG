@@ -1,4 +1,4 @@
-﻿using RedBjorn.Utils;
+using RedBjorn.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -667,6 +667,8 @@ namespace RedBjorn.ProtoTiles
             var nodeEntity = Tiles.TryGetOrDefault(node.Position);
             for (int i = 0; i < NeighboursDirection.Length; i++)
             {
+                Debug.Log("map 670 "+i);
+
                 if (nodeEntity.NeighbourMovable[i] <= 0f)
                 {
                     var n = NeighboursDirection[i];

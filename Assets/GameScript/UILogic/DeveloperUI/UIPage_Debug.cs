@@ -51,13 +51,11 @@ public class UIPage_Debug : FUIBase
         //Debugger.Log("click btn ");
         //FUIManager.Instance.ShowUI<UIPage_Sample>(FUIDef.FWindow.SamplePage);
         //FUIManager.Instance.HideUI(this);
-        var mapEntity = BattleDriver.Instance.GetMapEntity();
 
-        foreach (var pawn in BLogic.Instance.pawnList)
-        {
-            //mapEntity.
-            //pawn.curPosition
-        }
+        var v1 = new Vector3Int(1, 1, 0);
+        var v2 = new Vector3Int(0, 0, 0);
+        float dist = Vector3Int.Distance(v1, v2);
+        Debugger.Print(dist);
     }
 
     void RefreshContent()
