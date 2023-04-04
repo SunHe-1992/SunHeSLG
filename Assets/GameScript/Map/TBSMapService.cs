@@ -41,6 +41,16 @@ namespace SunHeTBS
             map.InitData(xMax - xMin + 1, yMax - yMin + 1, tdjList);
 
         }
+        public void TestPath()
+        {
+            Debugger.Print("start test path");
+
+            var tiles = map.WalkableTiles(new Vector3Int(2, 2, 0), 1);
+            foreach (var tile in tiles)
+            {
+                Debugger.Print(tile.ToString());
+            }
+        }
     }
 
 }

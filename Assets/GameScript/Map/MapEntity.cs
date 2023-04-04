@@ -11,31 +11,49 @@ namespace SunHeTBS
 
         public int Distance(INode x, INode y, bool extraPrice)
         {
-            return Distance(x, y, extraPrice);
+            return Distance(x as TileEntity, y as TileEntity, extraPrice);
         }
 
         public IEnumerable<INode> NeighborsMovable(INode node)
         {
-            throw new System.NotImplementedException();
+            for (int i = 0; i < NeighbourArray.Length; i++)
+            {
+                var pos = node.Position + NeighbourArray[i];
+                int tileId = XY2TileId(pos);
+                if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
+                    continue;
+                else
+                    yield return TileDic[tileId];
+            }
         }
         public static readonly Vector3Int[] NeighbourArray = new Vector3Int[]
-   {
+        {
             new Vector3Int(0,1,0),
             new Vector3Int(1,0,0),
             new Vector3Int(0,-1,0),
             new Vector3Int(-1,0,0),
-   };
+        };
         public IEnumerable<INode> Neighbours(INode node)
         {
             for (int i = 0; i < NeighbourArray.Length; i++)
             {
-                yield return TileOrDefault(node.Position + NeighbourArray[i]);
+                var pos = node.Position + NeighbourArray[i];
+                int tileId = XY2TileId(pos);
+                if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
+                    continue;
+                else
+                    yield return TileDic[tileId];
             }
         }
 
-        public void Reset()
+        void IMapNode.Reset()
         {
-            throw new System.NotImplementedException();
+            foreach (var tile in TileDic.Values)
+            {
+                tile.Depth = int.MaxValue;
+                tile.Visited = false;
+                tile.Considered = false;
+            }
         }
 
         public void Reset(int range, INode startNode)
