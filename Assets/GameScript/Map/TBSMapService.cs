@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
+using UniFramework.Pooling;
+
 namespace SunHeTBS
 {
 
@@ -12,6 +14,7 @@ namespace SunHeTBS
         public void ClearData()
         {
             map = new MapEntity();
+            UnspawnAllCoverPlanes();
         }
         public void LoadJsonData(string jsonStr)
         {
@@ -44,13 +47,60 @@ namespace SunHeTBS
         public void TestPath()
         {
             Debugger.Print("start test path");
-
-            var tiles = map.WalkableTiles(new Vector3Int(2, 2, 0), 1);
+            UnspawnAllCoverPlanes();
+            var tiles = map.WalkableTiles(new Vector3Int(2, 2, 0), 3);
             foreach (var tile in tiles)
             {
                 Debugger.Print(tile.ToString());
+                var pos = map.WorldPosition(tile);
+                SpawnCoverPlaneBlue(pos);
             }
         }
+        #region cover planes on map
+        public static readonly string str_PlaneBlue = "Gizmos/CoverPlaneBlue";
+        public static readonly string str_PlanePurple = "Gizmos/CoverPlanePurple";
+        public static readonly string str_PlaneRed = "Gizmos/CoverPlaneRed";
+        Transform CoverPlaneTrans = null;
+        List<SpawnHandle> spHandleList = new List<SpawnHandle>();
+        public void UnspawnAllCoverPlanes()
+        {
+            if (spHandleList != null)
+            {
+                for (int i = spHandleList.Count - 1; i >= 0; i--)
+                {
+                    spHandleList[i].Restore();
+                    spHandleList.RemoveAt(i);
+                }
+            }
+        }
+        //public void DiscardAllCoverPlanes()
+        //{
+
+        //}
+        public void SpawnCoverPlaneBlue(Vector3 pos)
+        {
+            SpawnCoverPlane(pos, str_PlaneBlue);
+        }
+        public void SpawnCoverPlanePurple(Vector3 pos)
+        {
+            SpawnCoverPlane(pos, str_PlanePurple);
+        }
+        public void SpawnCoverPlaneRed(Vector3 pos)
+        {
+            SpawnCoverPlane(pos, str_PlaneRed);
+        }
+        void SpawnCoverPlane(Vector3 pos, string prefabName)
+        {
+            if (CoverPlaneTrans == null)
+            {
+                CoverPlaneTrans = new GameObject("CoverPlaneObj").transform;
+                CoverPlaneTrans.position = Vector3.zero;
+
+            }
+            var spawner = BattleDriver.Instance.spawner;
+            spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
+        }
+        #endregion
     }
 
 }

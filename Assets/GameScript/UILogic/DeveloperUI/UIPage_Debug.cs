@@ -8,6 +8,9 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using YooAsset;
 using SunHeTBS;
+using UniFramework.Pooling;
+using System.Collections;
+
 public class UIPage_Debug : FUIBase
 {
 
@@ -51,8 +54,12 @@ public class UIPage_Debug : FUIBase
         //Debugger.Log("click btn ");
         //FUIManager.Instance.ShowUI<UIPage_Sample>(FUIDef.FWindow.SamplePage);
         //FUIManager.Instance.HideUI(this);
+
+        //test map and path finding
         TBSMapService.Instance.TestPath();
+
     }
+
 
     void RefreshContent()
     {

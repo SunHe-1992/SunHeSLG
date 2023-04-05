@@ -5,6 +5,7 @@ using YooAsset;
 using System;
 using YooAsset;
 using UnityEngine.SceneManagement;
+using UniFramework.Pooling;
 
 namespace SunHeTBS
 {
@@ -81,7 +82,7 @@ namespace SunHeTBS
         #region map entity 
 
         public MapEntity MapEntity { get; private set; }
-       
+
 
         public MapEntity GetMapEntity()
         {
@@ -223,6 +224,8 @@ namespace SunHeTBS
             CursorObj = Instantiate(arrowHandle.AssetObject as GameObject);
             CursorObj.name = "CursorObj";
 
+
+
             SwitchDriveState(BattleDriveState.STATE_IN_BATTLE);
 
         }
@@ -230,6 +233,22 @@ namespace SunHeTBS
         private void OnEnterPreloadResState()
         {
             //todo load pawns and art resources
+            // 
+            spawner = UniPooling.CreateSpawner("DefaultPackage");
+
+            //spawner.CreateGameObjectPoolAsync()
+            StartCoroutine(CreateSpawners());
+
+        }
+        IEnumerator CreateSpawners()
+        {
+
+            var op1 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneBlue);
+            yield return op1;
+            var op2 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlanePurple);
+            yield return op2;
+            var op3 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneRed);
+            yield return op3;
 
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_DATA);
 
@@ -258,8 +277,14 @@ namespace SunHeTBS
 
         #endregion
 
-        #region MyRegion
+        #region manage Game objects and pooling
         public GameObject CursorObj;
+        /// <summary>
+        /// UniPooling's spawner
+        /// </summary>
+        public Spawner spawner;
+
+
         #endregion
     }
 }

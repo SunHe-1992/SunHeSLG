@@ -4,6 +4,7 @@ using FairyGUI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using YooAsset;
+using UniFramework.Pooling;
 public class GameLoader : MonoBehaviour
 {
     public static GameLoader Instance = null;
@@ -26,6 +27,7 @@ public class GameLoader : MonoBehaviour
     }
     public void InitEnv()
     {
+        UniPooling.Initalize();
         BindFGUI.BindAll();//fairy code bind 
         LoadData();//load json configs
         ResObjPoolMgr.Init();//object pool initialize

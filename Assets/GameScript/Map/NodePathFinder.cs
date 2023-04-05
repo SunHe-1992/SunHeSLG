@@ -10,6 +10,7 @@ namespace SunHeTBS
 
         public static HashSet<INode> WalkableArea(IMapNode map, INode origin, int range, bool extraPrice = false)
         {
+            /*ground units spend extra move price on some tiles, however fliers do not*/
             map.Reset(Mathf.CeilToInt(range), origin);
             origin.Depth = 0;
             var open = new Queue<INode>();
