@@ -49,6 +49,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/GameRes/Gizmos
+        CollectorGUID: 1bd847d80387b894f8ea594644ebb507
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectPrefab
+        AssetTags: 
+        UserData: 
     - GroupName: shader
       GroupDesc: 
       AssetTags: 
