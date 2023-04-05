@@ -150,3 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ddbf3e1fa02fc468beeeb926b2c984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passType: 0
+  extraMovePrice: 0
+  effectType: 0
+  tileName: Floor

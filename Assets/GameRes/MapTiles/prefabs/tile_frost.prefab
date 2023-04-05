@@ -151,6 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passType: 0
-  moveCost: 1
+  extraMovePrice: 0
   effectType: 4
   tileName: Frost
