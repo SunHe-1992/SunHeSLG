@@ -28,9 +28,9 @@ public class GameLoader : MonoBehaviour
     public void InitEnv()
     {
         UniPooling.Initalize();
+        SunHeTBS.BattleDriver.UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
         BindFGUI.BindAll();//fairy code bind 
         LoadData();//load json configs
-        ResObjPoolMgr.Init();//object pool initialize
 
         LoadFontRes();
         FUIManager.ReSetBundle();//FUIManager initialize

@@ -1008,7 +1008,7 @@ public class FUIManager : MonoSingleton<FUIManager>
             {
                 numSet = numSet + 1;
                 if (name.EndsWith(".bytes"))
-                    ResObjPoolMgr.Take<TextAsset>(name, new CacheBack()
+                    ResObjPoolTake<TextAsset>(name, new CacheBack()
                     {
                         customParam = packageName,
                         customParam2 = name,
@@ -1016,7 +1016,7 @@ public class FUIManager : MonoSingleton<FUIManager>
                         customActionBackCache = CallBack
                     });
                 else if (name.EndsWith(".png"))
-                    ResObjPoolMgr.Take<Texture>(name, new CacheBack()
+                    ResObjPoolTake<Texture>(name, new CacheBack()
                     {
                         customParam = packageName,
                         customParam2 = name,
@@ -1024,7 +1024,7 @@ public class FUIManager : MonoSingleton<FUIManager>
                         customActionBackCache = CallBack
                     });
                 else
-                    ResObjPoolMgr.Take<AudioClip>(name, new CacheBack()
+                    ResObjPoolTake<AudioClip>(name, new CacheBack()
                     {
                         customParam = packageName,
                         customParam2 = name,
@@ -1059,6 +1059,69 @@ public class FUIManager : MonoSingleton<FUIManager>
             callBack.customAction();
 
     }
+
+    #region Res Load
+    private static Dictionary<string, UnityEngine.Object> cacheObjInfos = new Dictionary<string, UnityEngine.Object>(); //缓存的数据
+
+    /// 从池中拿取一个GameObject
+    static public void ResObjPoolTake<TObject>(string name, CacheBack cacheBack) where TObject : UnityEngine.Object
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            Debugger.LogError("Invalid Name Give To Take, Path: " + name);
+            return;
+        }
+
+        string poolName = name;
+        UnityEngine.Object info;
+
+        var bExist = cacheObjInfos.TryGetValue(poolName, out info);//寻找对应GameObject的池
+
+        if (cacheBack == null)
+        {
+            Debugger.LogError("回调有问题啊" + name);
+            return;
+        }
+        if (bExist)
+        {
+            info = cacheObjInfos[poolName];
+
+            cacheBack.CacheBackObj = info;
+            if (cacheBack.customActionBackCache != null)
+                cacheBack.customActionBackCache(cacheBack);
+        }
+        else
+        {
+
+            AssetOperationHandle assetOperationHandle;
+            assetOperationHandle = YooAssets.LoadAssetSync<TObject>(name);
+
+
+            assetOperationHandle.cacheBack = new CacheBack();
+            assetOperationHandle.cacheBack.customParam = name;  //名称
+            assetOperationHandle.cacheBack.customParamObj = cacheBack; //cache的数据
+            assetOperationHandle.Completed += (aassetLoad) =>
+            {
+                if (aassetLoad.AssetObject == null)
+                {
+                    Debugger.LogError("获取的组件怎么会是空呢" + aassetLoad.cacheBack.customParam);
+                    return;
+                }
+
+                var getInfo = aassetLoad.AssetObject;
+
+                cacheObjInfos[aassetLoad.cacheBack.customParam] = getInfo;
+
+                var CacheBack = (CacheBack)assetOperationHandle.cacheBack.customParamObj;
+                CacheBack.CacheBackObj = getInfo;
+                if (CacheBack.customActionBackCache != null)
+                    CacheBack.customActionBackCache(CacheBack);
+            };
+
+        }
+    }
+
+    #endregion
 
     private object LoadFunc(string name, string extension, System.Type type, out DestroyMethod method)
     {

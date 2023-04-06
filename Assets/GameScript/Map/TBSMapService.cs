@@ -97,7 +97,7 @@ namespace SunHeTBS
                 CoverPlaneTrans.position = Vector3.zero;
 
             }
-            var spawner = BattleDriver.Instance.spawner;
+            var spawner = BattleDriver.UniSpawner;
             spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
         }
         #endregion

@@ -233,8 +233,9 @@ namespace SunHeTBS
         private void OnEnterPreloadResState()
         {
             //todo load pawns and art resources
-            // 
-            spawner = UniPooling.CreateSpawner("DefaultPackage");
+            //
+            if (UniSpawner == null)
+                UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
 
             //spawner.CreateGameObjectPoolAsync()
             StartCoroutine(CreateSpawners());
@@ -243,15 +244,14 @@ namespace SunHeTBS
         IEnumerator CreateSpawners()
         {
 
-            var op1 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneBlue);
+            var op1 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneBlue);
             yield return op1;
-            var op2 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlanePurple);
+            var op2 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlanePurple);
             yield return op2;
-            var op3 = spawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneRed);
+            var op3 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneRed);
             yield return op3;
 
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_DATA);
-
         }
 
         private void OnEnterWaitBattleState()
@@ -282,7 +282,7 @@ namespace SunHeTBS
         /// <summary>
         /// UniPooling's spawner
         /// </summary>
-        public Spawner spawner;
+        public static Spawner UniSpawner;
 
 
         #endregion
