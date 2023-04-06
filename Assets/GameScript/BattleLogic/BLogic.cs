@@ -135,5 +135,22 @@ namespace SunHeTBS
             //todo
         }
         #endregion
+
+        #region cursor select pawn
+        public Vector3Int cursorPos;
+        public Pawn selectedPawn;
+
+        /// <summary>
+        /// input order try move cursor,
+        /// </summary>
+        /// <param name="xAdd"></param>
+        /// <param name="yAdd"></param>
+        public void CursorInputMove(int xAdd, int yAdd)
+        {
+            Vector3Int newPos = new Vector3Int(xAdd, yAdd) + cursorPos;
+            newPos = TBSMapService.Instance.map.TrimPos_Border(newPos);
+            cursorPos = newPos;
+        }
+        #endregion
     }
 }

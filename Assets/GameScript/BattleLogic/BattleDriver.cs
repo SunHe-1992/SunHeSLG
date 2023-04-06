@@ -79,17 +79,6 @@ namespace SunHeTBS
 
         bool isWindowEditor = false;
 
-        #region map entity 
-
-        public MapEntity MapEntity { get; private set; }
-
-
-        public MapEntity GetMapEntity()
-        {
-            return this.MapEntity;
-        }
-        #endregion
-
 
         #region state machine manage
 
@@ -284,7 +273,14 @@ namespace SunHeTBS
         /// </summary>
         public static Spawner UniSpawner;
 
-
+        public void MoveCursorObj()
+        {
+            if (CursorObj)
+            {
+                Vector3 pos = TBSMapService.Instance.map.WorldPosition(logicInst.cursorPos);
+                CursorObj.transform.position = pos;
+            }
+        }
         #endregion
     }
 }

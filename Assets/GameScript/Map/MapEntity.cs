@@ -142,7 +142,7 @@ namespace SunHeTBS
         /// </summary>
         /// <param name="worldPos"></param>
         /// <returns></returns>
-        public TileEntity WorldPosToTile(Vector3 worldPos)
+        public TileEntity WorldPosition(Vector3 worldPos)
         {
             Vector3Int vect = WorldPosToTilePos(worldPos);
             int tileId = XY2TileId(vect.x, vect.y);
@@ -165,7 +165,7 @@ namespace SunHeTBS
         /// <returns></returns>
         public TileEntity Tile(Vector3 worldPos)
         {
-            return WorldPosToTile(worldPos);
+            return WorldPosition(worldPos);
         }
         /// <summary>
         /// tile pos -> tile
@@ -200,8 +200,8 @@ namespace SunHeTBS
         /// <returns></returns>
         public int Distance(Vector3 worldPosA, Vector3 worldPosB, bool extraPrice = false)
         {
-            var tileA = WorldPosToTile(worldPosA);
-            var tileB = WorldPosToTile(worldPosB);
+            var tileA = WorldPosition(worldPosA);
+            var tileB = WorldPosition(worldPosB);
             return Distance(tileA.Position, tileB.Position, extraPrice); //for fliers no extra pass price
         }
         /// <summary>
@@ -258,6 +258,15 @@ namespace SunHeTBS
                         tile.Considered = false;
                     }
                 }
+        }
+
+        public Vector3Int TrimPos_Border(Vector3Int pos)
+        {
+            if (pos.x < 0) pos.x = 0;
+            if (pos.y < 0) pos.y = 0;
+            if (pos.x > MapRows - 1) pos.x = MapRows - 1;
+            if (pos.y > MapCols - 1) pos.y = MapCols - 1;
+            return pos;
         }
     }
 

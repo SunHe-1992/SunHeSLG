@@ -59,10 +59,8 @@ public class UIPage_BattleMain : FUIBase
                 else if (inputInst.axisUp) zAdd = 1;
                 if (inputInst.axisLeft) xAdd = -1;
                 else if (inputInst.axisRight) xAdd = 1;
-                cursorPos.x += xAdd;
-                cursorPos.z += zAdd;
-                BattleDriver.Instance.CursorObj.transform.position = cursorPos;
+                BLogic.Instance.CursorInputMove(xAdd, zAdd);
+                BattleDriver.Instance.MoveCursorObj();
             }
     }
-    Vector3Int cursorPos;
 }

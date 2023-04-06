@@ -30,7 +30,7 @@ namespace SunHeTBS
                     if (pathQueue != null && pathQueue.Count > 0)
                     {
                         nextTile = pathQueue.Dequeue();
-                        MapEntity mapEntity = BattleDriver.Instance.GetMapEntity();
+                        MapEntity mapEntity = TBSMapService.Instance.map;
 
                         //destPos = mapEntity.WorldPosition(nextTile);
                     }
@@ -57,7 +57,7 @@ namespace SunHeTBS
         void SetPosition()
         {
             //set obj to cur position instantly
-            MapEntity mapEntity = BattleDriver.Instance.GetMapEntity();
+            MapEntity mapEntity = TBSMapService.Instance.map;
             //var curTile = mapEntity.Tile(this.m_Pawn.curPosition);
             //Vector3 wPos = mapEntity.WorldPosition(curTile);
             //this.transform.position = wPos;
