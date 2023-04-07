@@ -1,11 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniFramework.Singleton;
+
 namespace SunHeTBS
 {
 
-    public class InputManager : MonoSingleton<InputManager>
+    public class InputManager : ISingleton
     {
+
+
+        public static InputManager Inst { get; private set; }
+        public static void Init()
+        {
+            Inst = UniSingleton.CreateSingleton<InputManager>();
+        }
+        public void OnCreate(object createParam)
+        {
+        }
+
+        public void OnUpdate()
+        {
+            InputUpdate();
+        }
+
+        public void OnDestroy()
+        {
+        }
+        public void OnFixedUpdate()
+        {
+        }
+
         /// <summary>
         /// last axis input time stamp (milli seconds)
         /// </summary>
@@ -24,7 +49,7 @@ namespace SunHeTBS
         public bool axisUp { get; private set; }
         public bool axisDown { get; private set; }
 
-        void Update()
+        void InputUpdate()
         {
             #region Read input Axis
             axisLeft = false;

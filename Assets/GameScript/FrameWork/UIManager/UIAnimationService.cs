@@ -1,17 +1,34 @@
 using FairyGUI;
 using UnityEngine;
+using UniFramework.Singleton;
 using static FUIManager;
 
 /// <summary>
 /// ui动画的播放内容
 /// </summary>
-public class UIAnimationService : LogicSingleton<UIAnimationService>
+public class UIAnimationService : ISingleton
 {
-    int windowType = -1;
-    public void InitPageData()
+
+    public static UIAnimationService Inst { get; private set; }
+    public static void Init()
     {
-        windowType = FUIManager.allUIAnimation[OpenUIAnimationType.WindowOpen];
+        Inst = UniSingleton.CreateSingleton<UIAnimationService>();
     }
+    public void OnCreate(object createParam)
+    {
+    }
+
+    public void OnUpdate()
+    {
+    }
+
+    public void OnDestroy()
+    {
+    }
+    public void OnFixedUpdate()
+    {
+    }
+    int windowType = (int)OpenUIAnimationType.NoAnimation;
 
     Vector2 Vector2 = new Vector2(1, 1);
     //开启界面前的设置

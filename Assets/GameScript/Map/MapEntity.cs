@@ -78,7 +78,7 @@ namespace SunHeTBS
         {
             return MapCols * x + y;
         }
-        int XY2TileId(Vector3Int vect)
+        public int XY2TileId(Vector3Int vect)
         {
             return XY2TileId(vect.x, vect.y);
         }

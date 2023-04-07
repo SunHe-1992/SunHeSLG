@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -86,11 +86,34 @@ namespace UniFramework.Singleton
 				_wrappers[i].Singleton.OnUpdate();
 			}
 		}
+        internal static void FixedUpdate()
+        {
+            // 如果需要重新排序
+            //if (_isDirty)
+            //{
+            //    _isDirty = false;
+            //    _wrappers.Sort((left, right) =>
+            //    {
+            //        if (left.Priority > right.Priority)
+            //            return -1;
+            //        else if (left.Priority == right.Priority)
+            //            return 0;
+            //        else
+            //            return 1;
+            //    });
+            //}
 
-		/// <summary>
-		/// 获取单例
-		/// </summary>
-		public static T GetSingleton<T>() where T : class, ISingleton
+            // 轮询所有模块
+            for (int i = 0; i < _wrappers.Count; i++)
+            {
+                _wrappers[i].Singleton.OnFixedUpdate();
+            }
+        }
+
+        /// <summary>
+        /// 获取单例
+        /// </summary>
+        public static T GetSingleton<T>() where T : class, ISingleton
 		{
 			System.Type type = typeof(T);
 			for (int i = 0; i < _wrappers.Count; i++)

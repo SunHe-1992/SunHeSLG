@@ -3,12 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using UniFramework.Pooling;
+using UniFramework.Singleton;
 
 namespace SunHeTBS
 {
 
-    public class TBSMapService : LogicSingleton<TBSMapService>
+    public class TBSMapService : ISingleton
     {
+        public static TBSMapService Inst { get; private set; }
+        public static void Init()
+        {
+            Inst = UniSingleton.CreateSingleton<TBSMapService>();
+        }
+        public void OnCreate(object createParam)
+        {
+        }
+
+        public void OnUpdate()
+        {
+        }
+
+        public void OnDestroy()
+        {
+        }
+        public void OnFixedUpdate()
+        {
+        }
+
         public MapEntity map;
 
         public void ClearData()
@@ -101,6 +122,13 @@ namespace SunHeTBS
             spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
         }
         #endregion
+
+        public int GetTileId(Vector3Int pos)
+        {
+            if (map != null)
+                return map.XY2TileId(pos);
+            return 0;
+        }
     }
 
 }

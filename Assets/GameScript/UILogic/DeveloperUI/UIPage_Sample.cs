@@ -15,7 +15,7 @@ public class UIPage_Sample : FUIBase
         base.OnInit();
         ui = this.contentPane as UI_SamplePage;
         this.uiShowType = UIShowType.WINDOW;
-        this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
+        this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.btn_ok.onClick.Set(BtnOKClick);
     }
     protected override void OnShown()
@@ -43,8 +43,8 @@ public class UIPage_Sample : FUIBase
     }
     void BtnOKClick()
     {
-        FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
-        FUIManager.Instance.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+        FUIManager.Inst.HideUI(this);
     }
 
     void RefreshContent()

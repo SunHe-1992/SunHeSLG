@@ -9,7 +9,7 @@ namespace SunHeTBS
         {
             // todo  generate  random seed number
     
-            BattleDriver.Instance.SwitchDriveState(BattleDriveState.STATE_PREPARE_BATTLE);
+            BattleDriver.Inst.SwitchDriveState(BattleDriveState.STATE_PREPARE_BATTLE);
         }
     }
 }

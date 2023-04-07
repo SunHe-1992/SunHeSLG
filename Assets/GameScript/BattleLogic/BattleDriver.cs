@@ -6,6 +6,7 @@ using System;
 using YooAsset;
 using UnityEngine.SceneManagement;
 using UniFramework.Pooling;
+using UniFramework.Singleton;
 
 namespace SunHeTBS
 {
@@ -30,22 +31,41 @@ namespace SunHeTBS
         STATE_CLEAN_UP = 11,  //战斗结束，清理资源 
     }
 
-    public class BattleDriver : MonoSingleton<BattleDriver>
+    public class BattleDriver : ISingleton
     {
 
-        // Start is called before the first frame update
-        void Awake()
+
+        public static BattleDriver Inst { get; private set; }
+        public static void Init()
+        {
+            Inst = UniSingleton.CreateSingleton<BattleDriver>();
+        }
+        public void OnCreate(object createParam)
         {
             isWindowEditor = Application.platform == RuntimePlatform.WindowsEditor;
-
             currDriveState = BattleDriveState.STATE_IDLE;
             nextDriveState = BattleDriveState.STATE_IDLE;
             PawnControllers = new List<PawnController>();
         }
 
+        public void OnUpdate()
+        {
+            DoUpdate();
+
+        }
+
+        public void OnDestroy()
+        {
+        }
+        public void OnFixedUpdate()
+        {
+            ChangeDriveState();
+
+        }
+
         float deltaTime = 0;
         // Update is called once per frame
-        void Update()
+        void DoUpdate()
         {
             if (isWindowEditor)
             {
@@ -54,11 +74,6 @@ namespace SunHeTBS
             deltaTime = Time.deltaTime;
             OnBattleFrameUpdate(deltaTime);
         }
-        private void FixedUpdate()
-        {
-            ChangeDriveState();
-        }
-
 
         private void OnBattleFrameUpdate(float deltaTime)
         {
@@ -152,7 +167,7 @@ namespace SunHeTBS
         private BLogic logicInst;
         private void OnEnterPrepareBattleState()
         {
-            logicInst = BLogic.Instance;
+            logicInst = BLogic.Inst;
             //todo prepare load config blabla
             SwitchDriveState(BattleDriveState.STATE_LOAD_SCENE);
         }
@@ -190,12 +205,12 @@ namespace SunHeTBS
             //    MapEntity = new MapEntity(mapSetting, MapView);
             //};
 
-            TBSMapService.Instance.ClearData();
+            TBSMapService.Inst.ClearData();
             var jsonAssetInfo = YooAssets.GetAssetInfo($"Config/{mapName}");
             YooAssets.LoadAssetSync(jsonAssetInfo).Completed += (handle) =>
             {
                 var jStr = handle.AssetObject.ToString();
-                TBSMapService.Instance.LoadJsonData(jStr);
+                TBSMapService.Inst.LoadJsonData(jStr);
             };
 
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_PREFAB);
@@ -210,7 +225,7 @@ namespace SunHeTBS
         {
             //load arrow cursor object
             var arrowHandle = YooAssets.LoadAssetSync("Effect/Signs/arrowSign", typeof(GameObject));
-            CursorObj = Instantiate(arrowHandle.AssetObject as GameObject);
+            CursorObj = GameObject.Instantiate(arrowHandle.AssetObject as GameObject);
             CursorObj.name = "CursorObj";
 
 
@@ -227,7 +242,7 @@ namespace SunHeTBS
                 UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
 
             //spawner.CreateGameObjectPoolAsync()
-            StartCoroutine(CreateSpawners());
+            UniSingleton.StartCoroutine(CreateSpawners());
 
         }
         IEnumerator CreateSpawners()
@@ -251,7 +266,7 @@ namespace SunHeTBS
         private void OnEnterInBattleState()
         {
             logicInst.PostInitProcess();
-            FUIManager.Instance.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
+            FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
         }
 
         private void OnEnterGoNextStageState()
@@ -277,7 +292,7 @@ namespace SunHeTBS
         {
             if (CursorObj)
             {
-                Vector3 pos = TBSMapService.Instance.map.WorldPosition(logicInst.cursorPos);
+                Vector3 pos = TBSMapService.Inst.map.WorldPosition(logicInst.cursorPos);
                 CursorObj.transform.position = pos;
             }
         }

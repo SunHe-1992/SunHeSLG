@@ -4,9 +4,30 @@ using UnityEngine;
 using SimpleJSON;
 using YooAsset;
 using UnityEngine.Events;
-
-public class ConfigManager : LogicSingleton<ConfigManager>
+using UniFramework.Singleton;
+public class ConfigManager : ISingleton
 {
+
+    public static ConfigManager Inst { get; private set; }
+    public static void Init()
+    {
+        Inst = UniSingleton.CreateSingleton<ConfigManager>();
+    }
+    public void OnCreate(object createParam)
+    {
+    }
+
+    public void OnUpdate()
+    {
+    }
+
+    public void OnDestroy()
+    {
+        table = null;
+    }
+    public void OnFixedUpdate()
+    {
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -102,4 +123,5 @@ public class ConfigManager : LogicSingleton<ConfigManager>
         };
 
     }
+
 }

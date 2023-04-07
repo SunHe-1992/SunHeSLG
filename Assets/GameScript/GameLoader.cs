@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using FairyGUI;
 using UnityEngine;
 using UnityEngine.UIElements;
-using YooAsset;
+using UniFramework.Singleton;
+using UniFramework.Animation;
 using UniFramework.Pooling;
+using UniFramework.Tween;
+using UniFramework.Window;
+using YooAsset;
+using SunHeTBS;
 public class GameLoader : MonoBehaviour
 {
     public static GameLoader Instance = null;
@@ -28,14 +33,26 @@ public class GameLoader : MonoBehaviour
     public void InitEnv()
     {
         UniPooling.Initalize();
+
+        UniSingleton.Initialize();
+
+        UniTween.Initalize();
+
         SunHeTBS.BattleDriver.UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
+        //init Uni singletons 
+        BattleDriver.Init();
+        BLogic.Init();
+        ConfigManager.Init();
+        InputManager.Init();
+        FUIManager.Init();
+        UIAnimationService.Init();
+        TBSMapService.Init();
+
         BindFGUI.BindAll();//fairy code bind 
         LoadData();//load json configs
 
         LoadFontRes();
         FUIManager.ReSetBundle();//FUIManager initialize
-        FUIManager.Instance.Init();
-
 
     }
 
@@ -81,10 +98,10 @@ public class GameLoader : MonoBehaviour
 
         needDoneAllNum = 2;
 
-        FUIManager.Instance.IncPackageReference("PackageShared");
-        FUIManager.Instance.PreAddPackage(FUIDef.FPackage.PackageShared.ToString(), loadCommonDone);
-        FUIManager.Instance.IncPackageReference("PackageDebug");
-        FUIManager.Instance.PreAddPackage(FUIDef.FPackage.PackageDebug.ToString(), loadCommonDone);
+        FUIManager.Inst.IncPackageReference("PackageShared");
+        FUIManager.Inst.PreAddPackage(FUIDef.FPackage.PackageShared.ToString(), loadCommonDone);
+        FUIManager.Inst.IncPackageReference("PackageDebug");
+        FUIManager.Inst.PreAddPackage(FUIDef.FPackage.PackageDebug.ToString(), loadCommonDone);
     }
 
     void loadCommonDone()
@@ -98,7 +115,7 @@ public class GameLoader : MonoBehaviour
                 Destroy(PatchWindow.Inst);
             }
             //show test ui
-            FUIManager.Instance.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+            FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
             DontDestroyOnLoad(StageCamera.main);
         }
     }

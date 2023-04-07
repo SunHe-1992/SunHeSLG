@@ -6,9 +6,32 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 using YooAsset;
-
-public class FUIManager : MonoSingleton<FUIManager>
+using UniFramework.Singleton;
+public class FUIManager : ISingleton
 {
+    public static FUIManager Inst { get; private set; }
+    public static void Init()
+    {
+        Inst = UniSingleton.CreateSingleton<FUIManager>();
+    }
+    public void OnCreate(object createParam)
+    {
+        FUIAwake();
+    }
+
+    public void OnUpdate()
+    {
+        UIMgrUpdate();
+    }
+
+    public void OnDestroy()
+    {
+    }
+    public void OnFixedUpdate()
+    {
+    }
+
+
     /// <summary>
     /// window 实例存放
     /// </summary>
@@ -33,22 +56,18 @@ public class FUIManager : MonoSingleton<FUIManager>
     //动画类型
     public enum OpenUIAnimationType
     {
+        NoAnimation,   //没有动画
         Default,           //初始设置（window和TipWindow_Check使用默认动画）
         MainPageChange, //上一个界面渐影，下一个界面直接渐变过来
         WindowOpen,     //界面直接缩放变大
         ScreenOpen,    //界面直接移动过来的，渐隐
         BattleOpen,    //战斗界面，渐隐
-        NoAnimation,   //没有动画
     }
 
 
-    public static Dictionary<OpenUIAnimationType, int> allUIAnimation = new Dictionary<OpenUIAnimationType, int>(); //所有的动画类型
 
-
-    void Awake()
+    void FUIAwake()
     {
-        IsPersist = true;
-        DontDestroyOnLoad(this);
         windowsDic = new Dictionary<FUIDef.FWindow, FUIBase>();
         windowStack = new Stack<FUIBase>();
         packageRefCountDict = new Dictionary<string, int>();
@@ -60,22 +79,8 @@ public class FUIManager : MonoSingleton<FUIManager>
 
         m_controlCmdQueue = new Queue<ControlCommand>();
         m_openingWindows = new HashSet<FUIDef.FWindow>();
-        allUIAnimation = new Dictionary<OpenUIAnimationType, int>();
-        InitAnimation();
-
-        UIAnimationService.Instance.InitPageData();
     }
 
-    void InitAnimation()
-    {
-        allUIAnimation.Clear();
-        allUIAnimation.Add(OpenUIAnimationType.Default, (int)OpenUIAnimationType.Default);
-        allUIAnimation.Add(OpenUIAnimationType.MainPageChange, (int)OpenUIAnimationType.MainPageChange);
-        allUIAnimation.Add(OpenUIAnimationType.WindowOpen, (int)OpenUIAnimationType.WindowOpen);
-        allUIAnimation.Add(OpenUIAnimationType.ScreenOpen, (int)OpenUIAnimationType.ScreenOpen);
-        allUIAnimation.Add(OpenUIAnimationType.BattleOpen, (int)OpenUIAnimationType.BattleOpen);
-        allUIAnimation.Add(OpenUIAnimationType.NoAnimation, (int)OpenUIAnimationType.NoAnimation);
-    }
 
     /// <summary>
     /// 外部接口 ShowUI
@@ -579,12 +584,12 @@ public class FUIManager : MonoSingleton<FUIManager>
 
         var animationType = cmd.window.animationType;
         if (animationType == 0 && (windowType == FUIBase.UIShowType.WINDOW))
-            animationType = allUIAnimation[OpenUIAnimationType.WindowOpen];
-        UIAnimationService.Instance.StartAnimationTypeBafore(animationType, cmd.window);
+            animationType = (int)OpenUIAnimationType.WindowOpen;
+        UIAnimationService.Inst.StartAnimationTypeBafore(animationType, cmd.window);
 
 
         //将这个内容变动
-        UIAnimationService.Instance.StartAnimationByType(animationType, cmd.window);
+        UIAnimationService.Inst.StartAnimationByType(animationType, cmd.window);
 
         if (cmd.jobDoneDo != null)
         {
@@ -823,7 +828,7 @@ public class FUIManager : MonoSingleton<FUIManager>
     }
 
 
-    void Update()
+    void UIMgrUpdate()
     {
         //每帧最多处理一个UI事件
         ExecutiveCommand();
@@ -1135,5 +1140,6 @@ public class FUIManager : MonoSingleton<FUIManager>
             return null;
         }
     }
+
     #endregion
 }

@@ -16,7 +16,7 @@ public class UIPage_BattleMain : FUIBase
         base.OnInit();
         ui = this.contentPane as UI_BattlePanel;
         this.uiShowType = UIShowType.WINDOW;
-        this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
+        this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
 
     }
     protected override void OnShown()
@@ -47,9 +47,9 @@ public class UIPage_BattleMain : FUIBase
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        var inputInst = InputManager.Instance;
+        var inputInst = InputManager.Inst;
         //right=x+1 up=z+1
-        var cursorObj = BattleDriver.Instance.CursorObj;
+        var cursorObj = BattleDriver.Inst.CursorObj;
         if (cursorObj != null)
             if (inputInst.axisDown || inputInst.axisUp || inputInst.axisLeft || inputInst.axisRight)
             {
@@ -59,8 +59,8 @@ public class UIPage_BattleMain : FUIBase
                 else if (inputInst.axisUp) zAdd = 1;
                 if (inputInst.axisLeft) xAdd = -1;
                 else if (inputInst.axisRight) xAdd = 1;
-                BLogic.Instance.CursorInputMove(xAdd, zAdd);
-                BattleDriver.Instance.MoveCursorObj();
+                BLogic.Inst.CursorInputMove(xAdd, zAdd);
+                BattleDriver.Inst.MoveCursorObj();
             }
     }
 }

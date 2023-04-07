@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace UniFramework.Singleton
 {
@@ -8,5 +8,9 @@ namespace UniFramework.Singleton
 		{
 			UniSingleton.Update();
 		}
-	}
+        void FixedUpdate()
+        {
+			UniSingleton.FixedUpdate();
+        }
+    }
 }

@@ -10,7 +10,7 @@ using YooAsset;
 using SunHeTBS;
 using UniFramework.Pooling;
 using System.Collections;
-
+using UniFramework.Event;
 public class UIPage_Debug : FUIBase
 {
 
@@ -20,7 +20,7 @@ public class UIPage_Debug : FUIBase
         base.OnInit();
         ui = this.contentPane as UI_TestUI;
         this.uiShowType = UIShowType.WINDOW;
-        this.animationType = FUIManager.allUIAnimation[FUIManager.OpenUIAnimationType.NoAnimation];
+        this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_slg.onClick.Set(BtnGotoBattle);
 
@@ -30,6 +30,7 @@ public class UIPage_Debug : FUIBase
         base.OnShown();
 
     }
+
 
     public void ResetInfo(string notice, UnityAction success, UnityAction failAction, int showBtn)
     {
@@ -56,7 +57,8 @@ public class UIPage_Debug : FUIBase
         //FUIManager.Instance.HideUI(this);
 
         //test map and path finding
-        TBSMapService.Instance.TestPath();
+        //TBSMapService.Instance.TestPath();
+
 
     }
 

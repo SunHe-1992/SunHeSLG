@@ -9,6 +9,11 @@ namespace SunHeTBS
         public Vector3Int curPosition;
         public PawnCamp camp = PawnCamp.Default;
         public bool actionEnd = false;
+
+        public int TilePosId()
+        {
+            return TBSMapService.Inst.GetTileId(curPosition);
+        }
     }
     public class Pawn : PawnBase
     {
@@ -46,5 +51,11 @@ namespace SunHeTBS
         {
             return this.modelName;
         }
+
+        #region Attribute for test
+        public PawnMoveType moveType = PawnMoveType.Ground;
+        public int move_points = 4;
+        public int atk_range = 1;
+        #endregion
     }
 }

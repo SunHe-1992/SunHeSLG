@@ -24,6 +24,7 @@ public class Boot : MonoBehaviour
         // 初始化事件系统
         UniEvent.Initalize();
 
+
         // 初始化管理系统
         UniModule.Initialize();
 
