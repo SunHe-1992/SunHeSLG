@@ -73,6 +73,9 @@ namespace SunHeTBS
         /// unity world size of a tile
         /// </summary>
         float TileSize = 1f;
+        /// <summary>
+        /// key=tileId, value=TileEntity
+        /// </summary>
         Dictionary<int, TileEntity> TileDic = new Dictionary<int, TileEntity>();
         int XY2TileId(int x, int y)
         {
@@ -92,7 +95,6 @@ namespace SunHeTBS
             this.MapRows = row;
             this.MapCols = col;
             TileDic = new Dictionary<int, TileEntity>();
-
 
             foreach (TileData4Json tdj in tdjList)
             {
@@ -231,11 +233,11 @@ namespace SunHeTBS
         /// Get walkable tiles around origin at range maximum
         /// </summary>
         /// <param name="origin"></param>
-        /// <param name="range"></param>
+        /// <param name="movePoints"></param>
         /// <returns></returns>
-        public HashSet<TileEntity> WalkableTiles(Vector3Int origin, int range)
+        public HashSet<TileEntity> WalkableTiles(Vector3Int origin, int movePoints, bool extraPrice, bool passFoe)
         {
-            var nodes = NodePathFinder.WalkableArea(this, Tile(origin), range);
+            var nodes = NodePathFinder.WalkableArea(this, Tile(origin), movePoints, extraPrice, passFoe);
             var tiles = new HashSet<TileEntity>();
             foreach (var n in nodes)
             {

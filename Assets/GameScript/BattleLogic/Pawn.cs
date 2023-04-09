@@ -27,6 +27,11 @@ namespace SunHeTBS
         {
             this.LoadModel();
         }
+        public override string ToString()
+        {
+            return $"Pawn camp={camp} pos={curPosition} posId={TilePosId()} model={modelName}";
+        }
+
         public void LoadModel()
         {
             if (this.controller == null)
@@ -56,6 +61,32 @@ namespace SunHeTBS
         public PawnMoveType moveType = PawnMoveType.Ground;
         public int move_points = 4;
         public int atk_range = 1;
+
+        /// <summary>
+        /// pawn will cost extra move points in certain tiles
+        /// </summary>
+        /// <returns></returns>
+        public bool IsExtraMoveCost()
+        {
+            if (this.moveType == PawnMoveType.Flier)
+                return false;
+            //any else skill or buff
+            return true;
+        }
+        /// <summary>
+        /// foes do not block this unit's movement 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsPassFoe()
+        {
+            //todo check skill
+            return false;
+        }
+        public int GetAtkRange()
+        {
+            //todo check this pawn has attack ability 
+            return atk_range;
+        }
         #endregion
     }
 }

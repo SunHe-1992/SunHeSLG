@@ -65,26 +65,39 @@ namespace SunHeTBS
             map.InitData(xMax - xMin + 1, yMax - yMin + 1, tdjList);
 
         }
-        public void TestPath()
+        public void ShowPawnCoverPlanes(Pawn p)
         {
-            Debugger.Print("start test path");
             UnspawnAllCoverPlanes();
-            var tiles = map.WalkableTiles(new Vector3Int(2, 2, 0), 3);
-            foreach (var tile in tiles)
+            HashSet<TileEntity> walkableTiles = map.WalkableTiles(p.curPosition, p.move_points, p.IsExtraMoveCost(), p.IsPassFoe());
+            foreach (var tile in walkableTiles)
             {
-                Debugger.Print(tile.ToString());
+                moveTileIds.Add(tile.tileId);
                 var pos = map.WorldPosition(tile);
                 SpawnCoverPlaneBlue(pos);
             }
+            //int atkRange = p.GetAtkRange();
+            //if (atkRange > 0)
+            //{
+
+            //}
         }
         #region cover planes on map
         public static readonly string str_PlaneBlue = "Gizmos/CoverPlaneBlue";
         public static readonly string str_PlanePurple = "Gizmos/CoverPlanePurple";
         public static readonly string str_PlaneRed = "Gizmos/CoverPlaneRed";
+
+        public HashSet<int> moveTileIds;
+        public HashSet<int> atkTileIds;
+        public HashSet<int> healTileIds;
+        public HashSet<int> staffTileIds;
         Transform CoverPlaneTrans = null;
         List<SpawnHandle> spHandleList = new List<SpawnHandle>();
         public void UnspawnAllCoverPlanes()
         {
+            moveTileIds = new HashSet<int>();
+            atkTileIds = new HashSet<int>();
+            healTileIds = new HashSet<int>();
+            staffTileIds = new HashSet<int>();
             if (spHandleList != null)
             {
                 for (int i = spHandleList.Count - 1; i >= 0; i--)
@@ -119,7 +132,8 @@ namespace SunHeTBS
 
             }
             var spawner = BattleDriver.UniSpawner;
-            spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
+            var spHandle = spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
+            spHandleList.Add(spHandle);
         }
         #endregion
 

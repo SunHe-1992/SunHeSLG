@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -165,7 +165,7 @@ namespace UniFramework.Event
 		/// <summary>
 		/// 实时广播事件
 		/// </summary>
-		public static void SendMessage(int eventId, IEventMessage message)
+		public static void SendMessage(int eventId, IEventMessage message = null)
 		{
 			if (_listeners.ContainsKey(eventId) == false)
 				return;

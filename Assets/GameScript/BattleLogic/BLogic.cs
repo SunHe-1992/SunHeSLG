@@ -9,7 +9,7 @@ namespace SunHeTBS
     /// </summary>
     public class BLogic : ISingleton
     {
-       
+
         //todo read data , deploy battle field
 
         float FixedLogicTime = 0;
@@ -102,6 +102,8 @@ namespace SunHeTBS
             if (!mapPawnDic.ContainsKey(tileId))
             {
                 mapPawnDic[tileId] = p;
+                var tileEntity = TBSMapService.Inst.map.Tile(p.curPosition);
+                tileEntity.camp = p.camp;
             }
             else
             {
@@ -170,17 +172,18 @@ namespace SunHeTBS
             Vector3Int newPos = new Vector3Int(xAdd, yAdd) + cursorPos;
             newPos = TBSMapService.Inst.map.TrimPos_Border(newPos);
             cursorPos = newPos;
+            CheckCursorPos();
         }
         void CheckCursorPos()
         {
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
             if (mapPawnDic.ContainsKey(tileId))//todo cursor points a pawn,show info and move area
             {
-
+                selectedPawn = mapPawnDic[tileId];
             }
-            else //todo no pawn in cursor pos ,show tile info
+            else
             {
-
+                selectedPawn = null;
             }
         }
 

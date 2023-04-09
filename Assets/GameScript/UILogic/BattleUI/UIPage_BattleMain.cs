@@ -7,6 +7,7 @@ using PackageBattle;
 using UnityEngine;
 using UnityEngine.Events;
 using SunHeTBS;
+using UniFramework.Event;
 public class UIPage_BattleMain : FUIBase
 {
 
@@ -22,7 +23,7 @@ public class UIPage_BattleMain : FUIBase
     protected override void OnShown()
     {
         base.OnShown();
-
+        UniEvent.AddListener(GameEventDefine.CURSOR_MOVED, OnCursorMoved);
     }
 
 
@@ -35,6 +36,7 @@ public class UIPage_BattleMain : FUIBase
     protected override void OnHide()
     {
         base.OnHide();
+        UniEvent.RemoveListener(GameEventDefine.CURSOR_MOVED, OnCursorMoved);
 
     }
 
@@ -47,7 +49,7 @@ public class UIPage_BattleMain : FUIBase
     protected override void OnUpdate()
     {
         base.OnUpdate();
-        var inputInst = InputManager.Inst;
+        var inputInst = InputReceiver.Inst;
         //right=x+1 up=z+1
         var cursorObj = BattleDriver.Inst.CursorObj;
         if (cursorObj != null)
@@ -61,6 +63,23 @@ public class UIPage_BattleMain : FUIBase
                 else if (inputInst.axisRight) xAdd = 1;
                 BLogic.Inst.CursorInputMove(xAdd, zAdd);
                 BattleDriver.Inst.MoveCursorObj();
+                UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
             }
+    }
+
+    void OnCursorMoved(IEventMessage msg)
+    {
+        Pawn selectedPawn = BLogic.Inst.selectedPawn;
+        if (selectedPawn != null) //selected a pawn ,show its info
+        {
+            //todo ui show pawn summary
+            //todo map show planes
+            Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
+            TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+        }
+        else
+        {
+            TBSMapService.Inst.UnspawnAllCoverPlanes();
+        }
     }
 }

@@ -42,14 +42,11 @@ namespace SunHeTBS
 
     public enum PawnCamp
     {
-        Default,
-        Player,
-        /// <summary>
-        /// 
-        /// </summary>
-        Villain,
-        PlayerAlly,
-        Neutral,
+        Default = 0,
+        Player = 1,
+        Villain = 2,
+        PlayerAlly = 3,
+        Neutral = 4,
     }
 
 

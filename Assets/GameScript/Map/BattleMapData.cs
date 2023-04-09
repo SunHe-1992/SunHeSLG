@@ -36,6 +36,10 @@ namespace SunHeTBS
         int Depth { get; set; }
         bool Visited { get; set; }
         bool Considered { get; set; }
+        /// <summary>
+        /// occupied camp
+        /// </summary>
+        PawnCamp camp { get; set; }
     }
     public interface IMapNode
     {

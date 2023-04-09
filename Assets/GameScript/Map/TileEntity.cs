@@ -9,7 +9,7 @@ namespace SunHeTBS
     {
         int CachedMovabeArea;
         Vector3Int TilePos;
-        public int Id;
+        public int tileId;
         public TilePassType passType = TilePassType.Passable;
         public EffectType effectType = EffectType.None;
         public int extraPassPrice = 0;
@@ -32,13 +32,15 @@ namespace SunHeTBS
         public int Depth { get; set; }
         public Vector3Int Position { get { return TilePos; } }
 
+        PawnCamp _camp;
+        public PawnCamp camp { get => _camp; set => _camp = value; }
 
         TileEntity() { }
 
         public TileEntity(Vector3Int pos, int _tileId)
         {
             TilePos = pos;
-            this.Id = _tileId;
+            this.tileId = _tileId;
         }
 
         public override string ToString()
