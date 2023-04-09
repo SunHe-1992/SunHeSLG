@@ -79,7 +79,11 @@ namespace SunHeTBS
         Dictionary<int, TileEntity> TileDic = new Dictionary<int, TileEntity>();
         int XY2TileId(int x, int y)
         {
-            return MapCols * x + y;
+            if (x < 0 || y < 0)
+            {
+                return -1;
+            }
+            return x + y * MapRows;
         }
         public int XY2TileId(Vector3Int vect)
         {
@@ -176,7 +180,12 @@ namespace SunHeTBS
         /// <returns></returns>
         public TileEntity Tile(Vector3Int pos)
         {
-            return GetTileFromDic(XY2TileId(pos));
+            var tile = GetTileFromDic(XY2TileId(pos));
+            if (tile != null && tile.Position != pos)
+            {
+                Debugger.LogError("get tile pos is not correct");
+            }
+            return tile;
         }
         public TileEntity TileOrDefault(Vector3Int pos)
         {
@@ -269,6 +278,18 @@ namespace SunHeTBS
             if (pos.x > MapRows - 1) pos.x = MapRows - 1;
             if (pos.y > MapCols - 1) pos.y = MapCols - 1;
             return pos;
+        }
+
+        public void ClearTilesRangeHash()
+        {
+            foreach (var tile in TileDic.Values)
+            {
+                tile.rangeHash.Clear();
+            }
+        }
+        public Dictionary<int, TileEntity> GetTileDic()
+        {
+            return TileDic;
         }
     }
 

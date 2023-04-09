@@ -31,7 +31,7 @@ namespace SunHeTBS
         public bool Considered { get; set; }
         public int Depth { get; set; }
         public Vector3Int Position { get { return TilePos; } }
-
+        public HashSet<int> rangeHash = new HashSet<int>();
         PawnCamp _camp;
         public PawnCamp camp { get => _camp; set => _camp = value; }
 
@@ -41,6 +41,7 @@ namespace SunHeTBS
         {
             TilePos = pos;
             this.tileId = _tileId;
+            rangeHash = new HashSet<int>();
         }
 
         public override string ToString()
@@ -51,6 +52,18 @@ namespace SunHeTBS
         public void ChangeMovableAreaPreset(int area)
         {
 
+        }
+        public bool ContainsRange(int rangeMin, int rangeMax)
+        {
+            if (this.rangeHash != null && rangeHash.Count > 0)
+            {
+                for (int i = rangeMin; i <= rangeMax; i++)
+                {
+                    if (rangeHash.Contains(i))
+                        return true;
+                }
+            }
+            return false;
         }
     }
 

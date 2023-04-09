@@ -58,6 +58,36 @@ namespace SunHeTBS
             }
             return closed;
         }
+
+        /// <summary>
+        /// given a tilePos,save range in tiles ,in range of (rangeMin,rangeMax)
+        /// </summary>
+        /// <param name="rangeMin"></param>
+        /// <param name="rangeMax"></param>
+        /// <param name="centerPos"></param>
+        public static void MarkTileATKRange(int rangeMin, int rangeMax, Vector3Int centerPos)
+        {
+            // need clear all tiles' rangeHash
+            for (int m = -rangeMax; m <= rangeMax; m++)
+            {
+                int rangeN = rangeMax - Mathf.Abs(m);
+                for (int n = -rangeN; n <= rangeN; n++) //m,n loop the diamond shape around centerPos
+                {
+                    int tileRange = Mathf.Abs(m) + Mathf.Abs(n);
+                    if (rangeMin > 0 && tileRange < rangeMin)//consider min range
+                    {
+                        continue;
+                    }
+                    // m,n is the pos
+                    Vector3Int pos = new Vector3Int(centerPos.x + m, centerPos.y + n, 0);
+                    var tile = TBSMapService.Inst.map.Tile(pos);
+                    if (tile != null)
+                    {
+                        tile.rangeHash.Add(tileRange);
+                    }
+                }
+            }
+        }
     }
 
 }

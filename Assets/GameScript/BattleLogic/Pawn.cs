@@ -59,8 +59,9 @@ namespace SunHeTBS
 
         #region Attribute for test
         public PawnMoveType moveType = PawnMoveType.Ground;
-        public int move_points = 4;
-        public int atk_range = 1;
+        public int move_points = 0;
+        public int atk_range_max = 8;
+        public int atk_range_min = 3;
 
         /// <summary>
         /// pawn will cost extra move points in certain tiles
@@ -82,10 +83,14 @@ namespace SunHeTBS
             //todo check skill
             return false;
         }
-        public int GetAtkRange()
+        public int GetAtkRangeMax()
         {
             //todo check this pawn has attack ability 
-            return atk_range;
+            return atk_range_max;
+        }
+        public int GetAtkRangeMin()
+        {
+            return atk_range_min;
         }
         #endregion
     }

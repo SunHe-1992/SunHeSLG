@@ -69,17 +69,42 @@ namespace SunHeTBS
         {
             UnspawnAllCoverPlanes();
             HashSet<TileEntity> walkableTiles = map.WalkableTiles(p.curPosition, p.move_points, p.IsExtraMoveCost(), p.IsPassFoe());
+            //show blue planes in walkable tiles
             foreach (var tile in walkableTiles)
             {
                 moveTileIds.Add(tile.tileId);
                 var pos = map.WorldPosition(tile);
                 SpawnCoverPlaneBlue(pos);
             }
-            //int atkRange = p.GetAtkRange();
-            //if (atkRange > 0)
-            //{
+            map.ClearTilesRangeHash();
+            int atkRangeMax = p.GetAtkRangeMax();
+            int atkRangeMin = p.GetAtkRangeMin();
 
-            //}
+            //mark tile atk ranges ,for every walkable tile
+            foreach (var tile in walkableTiles)
+            {
+                NodePathFinder.MarkTileATKRange(atkRangeMin, atkRangeMax, tile.Position);
+            }
+
+            var tileDic = map.GetTileDic();
+            foreach (var pair in tileDic)
+            {
+                var tile = pair.Value;
+                if (tile.ContainsRange(atkRangeMin, atkRangeMax))
+                {
+                    atkTileIds.Add(tile.tileId);
+                }
+            }
+            //show red planes in attackable tiles, walkable tiles excluded
+            foreach (int tileId in atkTileIds)
+            {
+                if (!moveTileIds.Contains(tileId))
+                {
+                    var tile = map.GetTileFromDic(tileId);
+                    var pos = map.WorldPosition(tile);
+                    SpawnCoverPlaneRed(pos);
+                }
+            }
         }
         #region cover planes on map
         public static readonly string str_PlaneBlue = "Gizmos/CoverPlaneBlue";
