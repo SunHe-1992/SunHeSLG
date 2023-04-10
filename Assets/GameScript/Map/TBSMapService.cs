@@ -55,6 +55,7 @@ namespace SunHeTBS
                 tdj.x = int.Parse(subJd["x"].ToString());
                 tdj.y = int.Parse(subJd["y"].ToString());
                 tdj.name = subJd["name"].ToString();
+                tdj.h = float.Parse(subJd["h"].ToString());
                 tdjList.Add(tdj);
 
                 xMax = Mathf.Max(tdj.x, xMax);
@@ -74,7 +75,7 @@ namespace SunHeTBS
             {
                 moveTileIds.Add(tile.tileId);
                 var pos = map.WorldPosition(tile);
-                SpawnCoverPlaneBlue(pos);
+                SpawnCoverPlaneBlue(pos, tile.topHeight);
             }
             map.ClearTilesRangeHash();
             int atkRangeMax = p.GetAtkRangeMax();
@@ -102,7 +103,7 @@ namespace SunHeTBS
                 {
                     var tile = map.GetTileFromDic(tileId);
                     var pos = map.WorldPosition(tile);
-                    SpawnCoverPlaneRed(pos);
+                    SpawnCoverPlaneRed(pos, tile.topHeight);
                 }
             }
         }
@@ -136,28 +137,32 @@ namespace SunHeTBS
         //{
 
         //}
-        public void SpawnCoverPlaneBlue(Vector3 pos)
+        public void SpawnCoverPlaneBlue(Vector3 pos, float height)
         {
-            SpawnCoverPlane(pos, str_PlaneBlue);
+            SpawnCoverPlane(pos, str_PlaneBlue, height);
         }
-        public void SpawnCoverPlanePurple(Vector3 pos)
+        public void SpawnCoverPlanePurple(Vector3 pos, float height)
         {
-            SpawnCoverPlane(pos, str_PlanePurple);
+            SpawnCoverPlane(pos, str_PlanePurple, height);
         }
-        public void SpawnCoverPlaneRed(Vector3 pos)
+        public void SpawnCoverPlaneRed(Vector3 pos, float height)
         {
-            SpawnCoverPlane(pos, str_PlaneRed);
+            SpawnCoverPlane(pos, str_PlaneRed, height);
         }
-        void SpawnCoverPlane(Vector3 pos, string prefabName)
+        void SpawnCoverPlane(Vector3 pos, string prefabName, float height)
         {
+            if (height > 0)
+            {
+                ;
+            }
             if (CoverPlaneTrans == null)
             {
                 CoverPlaneTrans = new GameObject("CoverPlaneObj").transform;
                 CoverPlaneTrans.position = Vector3.zero;
-
             }
             var spawner = BattleDriver.UniSpawner;
-            var spHandle = spawner.SpawnAsync(prefabName, CoverPlaneTrans, pos, Quaternion.identity);
+            var spHandle = spawner.SpawnAsync(prefabName, CoverPlaneTrans,
+               new Vector3(0, height, 0) + pos, Quaternion.identity);
             spHandleList.Add(spHandle);
         }
         #endregion

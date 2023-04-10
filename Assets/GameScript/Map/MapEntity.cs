@@ -104,7 +104,7 @@ namespace SunHeTBS
             {
                 int tileId = XY2TileId(tdj.x, tdj.y);
 
-                TileEntity tile = new TileEntity(new Vector3Int(tdj.x, tdj.y), tileId);
+                TileEntity tile = new TileEntity(new Vector3Int(tdj.x, tdj.y), tileId, tdj.h);
                 tile.passType = (TilePassType)tdj.pType;
                 tile.extraPassPrice = tdj.cost;
                 tile.effectType = (EffectType)tdj.effect;

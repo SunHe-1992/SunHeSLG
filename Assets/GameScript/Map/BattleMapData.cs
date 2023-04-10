@@ -14,6 +14,10 @@ namespace SunHeTBS
         public string name = "";
         public int x;
         public int y;
+        /// <summary>
+        /// top height of model
+        /// </summary>
+        public float h;
     }
 
     //public class BattleMapData

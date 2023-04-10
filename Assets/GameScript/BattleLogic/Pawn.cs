@@ -59,7 +59,7 @@ namespace SunHeTBS
 
         #region Attribute for test
         public PawnMoveType moveType = PawnMoveType.Ground;
-        public int move_points = 0;
+        public int move_points = 5;
         public int atk_range_max = 8;
         public int atk_range_min = 3;
 

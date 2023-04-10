@@ -32,7 +32,7 @@ namespace RedBjorn.ProtoTiles
         MapWindowSettings Settings;
 
         string ButtonPlacePrefabs = "Place Prefabs";
-        string ButtonExportData = "Export Data (only export tiles posX and posY >= 0 )";
+        string ButtonExportData = "Export Json Data";
 
         static readonly string[] TileToolNames = new string[]
         {

@@ -41,8 +41,16 @@ namespace SunHeTBS
                     //position
                     data.x = (int)pos.x;
                     data.y = (int)pos.z;
+
+
                     if (data.x >= 0 && data.y >= 0)
                     {
+                        var peakTrans = tileTrans.Find("peakObj");
+                        float height = 0;
+                        if (peakTrans != null)
+                        {
+                            height = peakTrans.localPosition.y;
+                        }
                         var vect = new Vector2Int(data.x, data.y);
                         if (vectHash.Contains(vect))
                         {
@@ -60,6 +68,7 @@ namespace SunHeTBS
                         data.cost = tpd.extraMovePrice;//move price
                         data.effect = (int)tpd.effectType;//effect
                         data.name = tpd.tileName;
+                        data.h = height;
                         tdList.Add(data);
                     }
                     else

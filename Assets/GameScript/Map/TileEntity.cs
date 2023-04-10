@@ -13,6 +13,7 @@ namespace SunHeTBS
         public TilePassType passType = TilePassType.Passable;
         public EffectType effectType = EffectType.None;
         public int extraPassPrice = 0;
+        public float topHeight = 0f;
         /// <summary>
         /// standing pawn id
         /// </summary>
@@ -37,10 +38,11 @@ namespace SunHeTBS
 
         TileEntity() { }
 
-        public TileEntity(Vector3Int pos, int _tileId)
+        public TileEntity(Vector3Int pos, int _tileId, float height)
         {
             TilePos = pos;
             this.tileId = _tileId;
+            this.topHeight = height;
             rangeHash = new HashSet<int>();
         }
 
