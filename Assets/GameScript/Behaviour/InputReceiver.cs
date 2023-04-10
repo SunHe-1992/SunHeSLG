@@ -83,11 +83,11 @@ public class InputReceiver : MonoBehaviour
     /// <summary>
     /// if second input triggered within this time interval ,ignore it .(milli seconds)
     /// </summary>
-    long interval_cursor_move = 230;
+    long interval_cursor_move = 100;
     /// <summary>
     /// how deep the input is considered taking effect
     /// </summary>
-    float axis_move_sensitivity = 0.2f;
+    float axis_move_sensitivity = 0.20f;
     // Update is called once per frame
     public bool axisLeft { get; private set; }
     public bool axisRight { get; private set; }

@@ -63,8 +63,16 @@ namespace SunHeTBS
                 yMin = Mathf.Min(tdj.y, yMin);
                 yMax = Mathf.Max(tdj.y, yMax);
             }
-            map.InitData(xMax - xMin + 1, yMax - yMin + 1, tdjList);
+            int row = xMax - xMin + 1;
+            int col = yMax - yMin + 1;
+            map.InitData(row, col, tdjList);
 
+            //map.TileSize
+            var rect = new Rect();
+            rect.xMin = 0; rect.yMin = 0;
+            rect.xMax = col * map.TileSize;
+            rect.yMax = row * map.TileSize;
+            mapCamera.SetMapBorderPos(rect);
         }
         public void ShowPawnCoverPlanes(Pawn p)
         {
@@ -151,10 +159,6 @@ namespace SunHeTBS
         }
         void SpawnCoverPlane(Vector3 pos, string prefabName, float height)
         {
-            if (height > 0)
-            {
-                ;
-            }
             if (CoverPlaneTrans == null)
             {
                 CoverPlaneTrans = new GameObject("CoverPlaneObj").transform;
@@ -173,6 +177,18 @@ namespace SunHeTBS
                 return map.XY2TileId(pos);
             return 0;
         }
+
+        #region map camera manage
+        public MapCamera mapCamera;
+        public void InitMapCamera()
+        {
+            var camObj = GameObject.Find("Main Camera");
+            if (camObj != null)
+            {
+                mapCamera = camObj.GetComponent<MapCamera>();
+            }
+        }
+        #endregion
     }
 
 }

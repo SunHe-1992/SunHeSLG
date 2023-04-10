@@ -184,6 +184,8 @@ namespace SunHeTBS
                 {
                     gizmos.SetActive(false);
                 }
+
+                TBSMapService.Inst.InitMapCamera();
                 SwitchDriveState(BattleDriveState.STATE_PRELOAD_RES);
             };
 
@@ -293,7 +295,14 @@ namespace SunHeTBS
             if (CursorObj)
             {
                 Vector3 pos = TBSMapService.Inst.map.WorldPosition(logicInst.cursorPos);
-                CursorObj.transform.position = pos;
+                var tile = TBSMapService.Inst.map.Tile(logicInst.cursorPos);
+                float topHeight = 0f;
+                if (tile != null)
+                {
+                    topHeight = tile.topHeight;
+                }
+                CursorObj.transform.position = pos + new Vector3(0, topHeight, 0);
+                TBSMapService.Inst.mapCamera.SetTargetTilePos(pos);
             }
         }
         #endregion

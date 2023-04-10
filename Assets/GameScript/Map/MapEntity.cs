@@ -72,7 +72,7 @@ namespace SunHeTBS
         /// <summary>
         /// unity world size of a tile
         /// </summary>
-        float TileSize = 1f;
+        public float TileSize = 1f;
         /// <summary>
         /// key=tileId, value=TileEntity
         /// </summary>
