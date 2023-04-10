@@ -181,10 +181,10 @@ namespace SunHeTBS
         public TileEntity Tile(Vector3Int pos)
         {
             var tile = GetTileFromDic(XY2TileId(pos));
-            if (tile != null && tile.Position != pos)
-            {
-                Debugger.LogError("get tile pos is not correct");
-            }
+            //if (tile != null && tile.Position != pos)
+            //{
+            //    Debugger.LogError("get tile pos is not correct");
+            //}
             return tile;
         }
         public TileEntity TileOrDefault(Vector3Int pos)
