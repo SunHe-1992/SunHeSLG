@@ -69,17 +69,20 @@ public class UIPage_BattleMain : FUIBase
 
     void OnCursorMoved(IEventMessage msg)
     {
-        Pawn selectedPawn = BLogic.Inst.selectedPawn;
-        if (selectedPawn != null) //selected a pawn ,show its info
+        if (BLogic.Inst.oldCursorPos != BLogic.Inst.cursorPos)
         {
-            //todo ui show pawn summary
-            //todo map show planes
-            Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
-            TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
-        }
-        else
-        {
-            TBSMapService.Inst.UnspawnAllCoverPlanes();
+            Pawn selectedPawn = BLogic.Inst.selectedPawn;
+            if (selectedPawn != null) //selected a pawn ,show its info
+            {
+                //todo ui show pawn summary
+                //todo map show planes
+                Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
+                TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+            }
+            else
+            {
+                TBSMapService.Inst.UnspawnAllCoverPlanes();
+            }
         }
     }
 }
