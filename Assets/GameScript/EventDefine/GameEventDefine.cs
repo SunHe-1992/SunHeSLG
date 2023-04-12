@@ -13,6 +13,12 @@ namespace SunHeTBS
 
         #region TBS game events
         public static int CURSOR_MOVED = GenID(0, 1);//map cursor moved
+        public static int ClickConfirm = GenID(0, 2);
+        public static int ClickCancel = GenID(0, 3);
+        public static int InputAxis = GenID(0, 4);
+        public static int PhaseSwitch = GenID(0, 5);
+        public static int ShowSelectPawn = GenID(0, 6);
+
         #endregion
     }
 

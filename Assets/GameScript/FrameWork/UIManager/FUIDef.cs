@@ -9,6 +9,7 @@ public class FUIDef
         TestUI,
         SamplePage,
         BattlePanel,
+        BattlePrepare,
     }
     /// <summary>
     /// package names
@@ -27,6 +28,6 @@ public class FUIDef
         {FWindow.TestUI, FPackage.PackageDebug},
         {FWindow.SamplePage, FPackage.PackageDebug},
         {FWindow.BattlePanel, FPackage.PackageBattle},
-
+        {FWindow.BattlePrepare, FPackage.PackageBattle},
     };
 }

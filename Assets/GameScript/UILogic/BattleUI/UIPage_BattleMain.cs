@@ -24,6 +24,14 @@ public class UIPage_BattleMain : FUIBase
     {
         base.OnShown();
         UniEvent.AddListener(GameEventDefine.CURSOR_MOVED, OnCursorMoved);
+        UniEvent.AddListener(GameEventDefine.InputAxis, OnInputAxis);
+        UniEvent.AddListener(GameEventDefine.ClickConfirm, OnClickConfirm);
+        UniEvent.AddListener(GameEventDefine.PhaseSwitch, OnPhaseSwitch);
+        UniEvent.AddListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
+
+        //test  instant switch to map pawn control
+        InputReceiver.Inst.inputComp.SwitchCurrentActionMap("Player");
+
     }
 
 
@@ -37,6 +45,10 @@ public class UIPage_BattleMain : FUIBase
     {
         base.OnHide();
         UniEvent.RemoveListener(GameEventDefine.CURSOR_MOVED, OnCursorMoved);
+        UniEvent.RemoveListener(GameEventDefine.InputAxis, OnInputAxis);
+        UniEvent.RemoveListener(GameEventDefine.ClickConfirm, OnClickConfirm);
+        UniEvent.RemoveListener(GameEventDefine.PhaseSwitch, OnPhaseSwitch);
+        UniEvent.RemoveListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
 
     }
 
@@ -44,11 +56,17 @@ public class UIPage_BattleMain : FUIBase
     void RefreshContent()
     {
 
-
     }
-    protected override void OnUpdate()
+    void HideUIComp()
     {
-        base.OnUpdate();
+        ui.bottomBar.visible = false;
+        ui.nameBar.visible = false;
+        ui.tileInfoComp.visible = false;
+        ui.phaseCom.visible = false;
+    }
+    #region battle map input control
+    void OnInputAxis(IEventMessage msg)
+    {
         var inputInst = InputReceiver.Inst;
         //right=x+1 up=z+1
         var cursorObj = BattleDriver.Inst.CursorObj;
@@ -84,5 +102,53 @@ public class UIPage_BattleMain : FUIBase
                 TBSMapService.Inst.UnspawnAllCoverPlanes();
             }
         }
+    }
+
+
+    /*player pawn control state:
+     * 1 not selected any pawn,move to pawn show its summary 
+       2 selected players pawn, move cursor selected destination
+       3 confirm and perform pawn walking
+    */
+    void OnClickConfirm(IEventMessage msg)
+    {
+        var selectedPawn = BLogic.Inst.selectedPawn;
+        if (selectedPawn == null) //todo open menu
+        {
+
+        }
+        else
+        {
+            var pawnCamp = selectedPawn.camp;
+            if (pawnCamp == PawnCamp.Player)
+            {
+
+            }
+            else if (pawnCamp == PawnCamp.Villain || pawnCamp == PawnCamp.Neutral)
+            {
+                //todo click enemy pawn ,toggle pawn's atk range planes
+            }
+        }
+    }
+    #endregion
+
+    void OnPhaseSwitch(IEventMessage msg)
+    {
+        HideUIComp();
+        int campNum = (int)BLogic.Inst.curCamp;
+        ui.phaseCom.visible = true;
+        ui.phaseCom.ctrl_phase.selectedIndex = campNum;
+        ui.anim_phase.Play(PhaseSwitchEnd);
+    }
+    void PhaseSwitchEnd()
+    {
+        HideUIComp();
+        BLogic.Inst.PhaseSwitchDone();
+    }
+
+    void ShowSelectPawn(IEventMessage msg)
+    {
+        HideUIComp();
+
     }
 }

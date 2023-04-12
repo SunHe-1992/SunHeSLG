@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Text;
 using FairyGUI;
 using PackageDebug;
+using PackageBattle;
 using UnityEngine;
 using UniFramework.Event;
-
-public class UIPage_Sample : FUIBase
+using SunHeTBS;
+public class UIPage_BattlePrepare : FUIBase
 {
 
-    UI_SamplePage ui;
+    UI_BattlePrepare ui;
     protected override void OnInit()
     {
         base.OnInit();
-        ui = this.contentPane as UI_SamplePage;
+        ui = this.contentPane as UI_BattlePrepare;
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
-        ui.btn_ok.onClick.Set(BtnOKClick);
+        ui.btn_fight.onClick.Set(BtnFightClick);
     }
     protected override void OnShown()
     {
         base.OnShown();
 
     }
-
 
     public override void Refresh(object param)
     {
@@ -36,15 +36,20 @@ public class UIPage_Sample : FUIBase
         base.OnHide();
 
     }
-    void BtnOKClick()
+    void BtnFightClick()
     {
-        FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
-        FUIManager.Inst.HideUI(this);
+        BLogic.Inst.SetNextGamePlayState(GamePlayState.MovieTime);
+        OnBtnClose();
     }
 
     void RefreshContent()
     {
 
+
+    }
+    void OnBtnClose()
+    {
+        FUIManager.Inst.HideUI(this);
 
     }
 }

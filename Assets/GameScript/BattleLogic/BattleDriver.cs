@@ -51,7 +51,6 @@ namespace SunHeTBS
         public void OnUpdate()
         {
             DoUpdate();
-
         }
 
         public void OnDestroy()
@@ -60,7 +59,6 @@ namespace SunHeTBS
         public void OnFixedUpdate()
         {
             ChangeDriveState();
-
         }
 
         float deltaTime = 0;
@@ -77,10 +75,7 @@ namespace SunHeTBS
 
         private void OnBattleFrameUpdate(float deltaTime)
         {
-            if (logicInst == null)
-            {
-                return;
-            }
+
         }
 
         private void CheckGMKey()
@@ -268,7 +263,7 @@ namespace SunHeTBS
         private void OnEnterInBattleState()
         {
             logicInst.PostInitProcess();
-            FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
+            logicInst.SetNextGamePlayState(GamePlayState.BeforeBattle);
         }
 
         private void OnEnterGoNextStageState()

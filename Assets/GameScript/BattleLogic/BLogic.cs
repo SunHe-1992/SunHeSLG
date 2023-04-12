@@ -2,8 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Singleton;
+using UniFramework.Event;
 namespace SunHeTBS
 {
+    public enum GamePlayState : int
+    {
+        Default = 0,
+        /// <summary>
+        /// pawn swap space
+        /// </summary>
+        BeforeBattle = 1,
+        MovieTime = 2,
+        DialoguePlay = 3,
+        ActionPlay = 4,
+        PhaseSwitch = 5,
+        /// <summary>
+        /// waiting for player controll a pawn
+        /// </summary>
+        SelectingPawn = 6,
+        /// <summary>
+        /// player select a move destination
+        /// </summary>
+        SelectingMoveDest = 7,
+        /// <summary>
+        /// waiting
+        /// </summary>
+        PawnMoving = 8,
+        /// <summary>
+        /// combat HUD, and pawn attack anim
+        /// </summary>
+        CombatPlay = 9,
+
+        /* UI stats : for UI and map switch*/
+        /// <summary>
+        /// UI exp and level up
+        /// </summary>
+        UIExpPlay = 10,
+        UIBattlePrepare = 11,
+        /// <summary>
+        /// pawn moves to dest,and show action menu UI
+        /// </summary>
+        UIActionMenu = 12,
+        /// <summary>
+        /// UI combat predict ,and target pawn select
+        /// </summary>
+        UICombatPredict = 13,
+
+    }
     /// <summary>
     /// Battle Logic
     /// </summary>
@@ -24,39 +69,72 @@ namespace SunHeTBS
         /// <summary>
         /// current battle machine state
         /// </summary>
-        BattleState battleState = BattleState.Default;
+        GamePlayState gameState = GamePlayState.Default;
         /// <summary>
         /// change to target state
         /// </summary>
-        BattleState m_nextBattleState = BattleState.Default;
+        GamePlayState nextGameState = GamePlayState.Default;
 
-        public BattleState GetBattleState()
+        public PawnCamp curCamp { get; private set; }
+        List<PawnCamp> campList;
+        public PawnCamp GetNextCamp()
         {
-            return battleState;
+
+            campList = new List<PawnCamp>();
+            HashSet<PawnCamp> hash = new HashSet<PawnCamp>();
+            foreach (var pawn in pawnList)
+            {
+                hash.Add(pawn.camp);
+            }
+            campList.AddRange(hash);
+            campList.Sort();
+            if (campList.Count == 0)
+            {
+                Debugger.LogError("no valid camp !");
+            }
+            PawnCamp camp = campList[0];
+            if ((int)camp + 1 > campList.Count)
+                camp = PawnCamp.Player;
+            else
+                camp = curCamp + 1;
+            return camp;
+        }
+        public GamePlayState GetBattleState()
+        {
+            return gameState;
+        }
+        public void SetNextGamePlayState(GamePlayState gps)
+        {
+            nextGameState = gps;
         }
         bool SwitchBattleState()
         {
-
             //state changes
-            if (m_nextBattleState != BattleState.Default && battleState != m_nextBattleState)
+            if (nextGameState != GamePlayState.Default && gameState != nextGameState)
             {
-                switch (m_nextBattleState)
+                Debug.Log($"game play state {gameState}=>{nextGameState}");
+                gameState = nextGameState;
+                switch (nextGameState)
                 {
-                    case BattleState.BeforeBattle: OnEnterBeforeBattle(); break;
-                    case BattleState.AfterBattle: break;
-                    case BattleState.PlayerAllyPhase: break;
-                    case BattleState.PlayerPhase: break;
-                    case BattleState.NeutralPhase: break;
-                    case BattleState.VillainPhase: break;
-                    case BattleState.Story: break;
-                    case BattleState.Ending: break;
+                    case GamePlayState.BeforeBattle: OnEnterBeforeBattle(); break;
+                    case GamePlayState.MovieTime: OnEnterMovieTime(); break;
+                    case GamePlayState.ActionPlay: break;
+                    case GamePlayState.DialoguePlay: break;
+                    case GamePlayState.PhaseSwitch: OnEnterPhaseSwitch(); break;
+                    case GamePlayState.SelectingPawn: OnEnterSelectPawn(); break;
+                    case GamePlayState.SelectingMoveDest: break;
+                    case GamePlayState.PawnMoving: break;
+                    case GamePlayState.UIActionMenu: break;
+                    case GamePlayState.UICombatPredict: break;
+                    case GamePlayState.CombatPlay: break;
+                    case GamePlayState.UIExpPlay: break;
                 }
                 return true;
             }
             //no change
             return false;
         }
-        void OnLogicUpdate(float dt)
+        public void OnLogicUpdate(float dt)
         {
             FixedLogicTime += dt;
             LogicStateUpdate(dt);
@@ -74,7 +152,7 @@ namespace SunHeTBS
 
         void OnEnterBeforeBattle()
         {
-
+            FUIManager.Inst.ShowUI<UIPage_BattlePrepare>(FUIDef.FWindow.BattlePrepare);
         }
         #endregion
 
@@ -83,7 +161,7 @@ namespace SunHeTBS
         /// </summary>
         public void StartPlayerPhase()
         {
-            m_nextBattleState = BattleState.PlayerPhase;
+            //nextGameState =  GamePlayState.;
 
         }
 
@@ -211,7 +289,29 @@ namespace SunHeTBS
         }
         public void OnFixedUpdate()
         {
+            SwitchBattleState();
         }
         #endregion
+
+        public void OnEnterMovieTime()
+        {
+            //no movie in demo ,show battle main page
+            FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel,
+                (win) => { SetNextGamePlayState(GamePlayState.PhaseSwitch); });
+        }
+        public void OnEnterPhaseSwitch()
+        {
+            curCamp = GetNextCamp();
+            UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
+        }
+        public void PhaseSwitchDone()
+        {
+            SetNextGamePlayState(GamePlayState.SelectingPawn);
+        }
+
+        public void OnEnterSelectPawn()
+        {
+            UniEvent.SendMessage(GameEventDefine.ShowSelectPawn);
+        }
     }
 }

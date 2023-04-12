@@ -4,7 +4,6 @@ using System.Text;
 using FairyGUI;
 using PackageDebug;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using YooAsset;
 using SunHeTBS;
@@ -23,7 +22,7 @@ public class UIPage_Debug : FUIBase
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_slg.onClick.Set(BtnGotoBattle);
-
+        ui.btn_close.onClick.Set(OnBtnClose);
     }
     protected override void OnShown()
     {
@@ -31,12 +30,6 @@ public class UIPage_Debug : FUIBase
 
     }
 
-
-    public void ResetInfo(string notice, UnityAction success, UnityAction failAction, int showBtn)
-    {
-
-        RefreshContent();
-    }
 
     public override void Refresh(object param)
     {
@@ -82,6 +75,9 @@ public class UIPage_Debug : FUIBase
 
 
     }
-
+    void OnBtnClose()
+    {
+        FUIManager.Inst.HideUI(this);
+    }
 
 }

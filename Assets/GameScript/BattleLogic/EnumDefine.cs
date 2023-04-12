@@ -21,26 +21,9 @@ namespace SunHeTBS
         CombatAct,
         ActionDone,
     }
-    /// <summary>
-    /// battle machine state
-    /// </summary>
-    public enum BattleState
-    {
-        Default = 0,
-        BeforeBattle,
-        PlayerPhase,
-        /// <summary>
-        /// player's enemy phase
-        /// </summary>
-        VillainPhase,
-        PlayerAllyPhase,
-        NeutralPhase,
-        AfterBattle,
-        Story,
-        Ending,
-    }
 
-    public enum PawnCamp
+
+    public enum PawnCamp : int
     {
         Default = 0,
         Player = 1,

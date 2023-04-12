@@ -2,13 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
-
+using UniFramework.Event;
+using SunHeTBS;
 public class InputReceiver : MonoBehaviour
 {
     public static InputReceiver Inst { get; private set; }
+    public PlayerInput inputComp;
     private void Awake()
     {
         Inst = this;
+        inputComp = this.GetComponent<PlayerInput>();
     }
     private void OnDestroy()
     {
@@ -22,7 +25,7 @@ public class InputReceiver : MonoBehaviour
         {
             //Debug.Log("on confirm click");
             //Debug.Log("input " + m_Move);
-
+            UniEvent.SendMessage(GameEventDefine.ClickConfirm);
         }
     }
     public void GameplayCancelClick(InputAction.CallbackContext context)
@@ -30,7 +33,7 @@ public class InputReceiver : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             //Debug.Log("on cancel click");
-
+            UniEvent.SendMessage(GameEventDefine.ClickCancel);
         }
     }
     private Vector2 m_Move;
@@ -38,6 +41,7 @@ public class InputReceiver : MonoBehaviour
     {
         m_Move = context.ReadValue<Vector2>();
         //Debug.Log("input " + m_Move);
+        UniEvent.SendMessage(GameEventDefine.InputAxis);
     }
 
     #endregion
@@ -94,4 +98,5 @@ public class InputReceiver : MonoBehaviour
     public bool axisUp { get; private set; }
     public bool axisDown { get; private set; }
     #endregion
+
 }

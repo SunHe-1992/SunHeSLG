@@ -8,5 +8,7 @@ public static class BindFGUI
     public static void BindAll()
     {
         PackageDebug.PackageDebugBinder.BindAll();
+        PackageBattle.PackageBattleBinder.BindAll();
+        PackageShared.PackageSharedBinder.BindAll();
     }
 }
