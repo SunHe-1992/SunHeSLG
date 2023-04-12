@@ -77,41 +77,31 @@ namespace SunHeTBS
         public void ShowPawnCoverPlanes(Pawn p)
         {
             UnspawnAllCoverPlanes();
-            HashSet<TileEntity> walkableTiles = map.WalkableTiles(p.curPosition, p.move_points, p.IsExtraMoveCost(), p.IsPassFoe());
-            //show blue planes in walkable tiles
-            foreach (var tile in walkableTiles)
+            if (p.moveTileIds == null)
             {
-                moveTileIds.Add(tile.tileId);
+                p.CalculateMoveArea();
+                p.CalculateRangeArea();
+            }
+            foreach (int tileId in p.moveTileIds)
+            {
+                var tile = map.GetTileFromDic(tileId);
                 var pos = map.WorldPosition(tile);
                 SpawnCoverPlaneBlue(pos, tile.topHeight);
             }
-            map.ClearTilesRangeHash();
+
             int atkRangeMax = p.GetAtkRangeMax();
             int atkRangeMin = p.GetAtkRangeMin();
+            var atkTileIdList = p.GetTileIdsInRange(atkRangeMin, atkRangeMax);
 
-            //mark tile atk ranges ,for every walkable tile
-            foreach (var tile in walkableTiles)
-            {
-                NodePathFinder.MarkTileATKRange(atkRangeMin, atkRangeMax, tile.Position);
-            }
-
-            var tileDic = map.GetTileDic();
-            foreach (var pair in tileDic)
-            {
-                var tile = pair.Value;
-                if (tile.ContainsRange(atkRangeMin, atkRangeMax))
-                {
-                    atkTileIds.Add(tile.tileId);
-                }
-            }
             //show red planes in attackable tiles, walkable tiles excluded
-            foreach (int tileId in atkTileIds)
+            foreach (int tileId in atkTileIdList)
             {
-                if (!moveTileIds.Contains(tileId))
+                if (!p.moveTileIds.Contains(tileId))
                 {
                     var tile = map.GetTileFromDic(tileId);
                     var pos = map.WorldPosition(tile);
                     SpawnCoverPlaneRed(pos, tile.topHeight);
+
                 }
             }
         }
@@ -120,18 +110,10 @@ namespace SunHeTBS
         public static readonly string str_PlanePurple = "Gizmos/CoverPlanePurple";
         public static readonly string str_PlaneRed = "Gizmos/CoverPlaneRed";
 
-        public HashSet<int> moveTileIds;
-        public HashSet<int> atkTileIds;
-        public HashSet<int> healTileIds;
-        public HashSet<int> staffTileIds;
         Transform CoverPlaneTrans = null;
         List<SpawnHandle> spHandleList = new List<SpawnHandle>();
         public void UnspawnAllCoverPlanes()
         {
-            moveTileIds = new HashSet<int>();
-            atkTileIds = new HashSet<int>();
-            healTileIds = new HashSet<int>();
-            staffTileIds = new HashSet<int>();
             if (spHandleList != null)
             {
                 for (int i = spHandleList.Count - 1; i >= 0; i--)

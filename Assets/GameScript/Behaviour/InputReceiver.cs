@@ -36,18 +36,23 @@ public class InputReceiver : MonoBehaviour
             UniEvent.SendMessage(GameEventDefine.ClickCancel);
         }
     }
-    private Vector2 m_Move;
-    public void GameplayMove(InputAction.CallbackContext context)
-    {
-        m_Move = context.ReadValue<Vector2>();
-        //Debug.Log("input " + m_Move);
-        UniEvent.SendMessage(GameEventDefine.InputAxis);
-    }
 
     #endregion
 
     #region axis receive
+    private Vector2 m_Move;
+    public void GameplayMove(InputAction.CallbackContext context)
+    {
+        m_Move = context.ReadValue<Vector2>();
+    }
+
     private void Update()
+    {
+        ReadInputAxis();
+        if (axisDown || axisUp || axisLeft || axisRight)
+            UniEvent.SendMessage(GameEventDefine.InputAxis);
+    }
+    private void ReadInputAxis()
     {
         #region Read input Axis
         axisLeft = false;
@@ -91,7 +96,7 @@ public class InputReceiver : MonoBehaviour
     /// <summary>
     /// how deep the input is considered taking effect
     /// </summary>
-    float axis_move_sensitivity = 0.20f;
+    float axis_move_sensitivity = 0.10f;
     // Update is called once per frame
     public bool axisLeft { get; private set; }
     public bool axisRight { get; private set; }

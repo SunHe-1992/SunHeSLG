@@ -71,18 +71,17 @@ public class UIPage_BattleMain : FUIBase
         //right=x+1 up=z+1
         var cursorObj = BattleDriver.Inst.CursorObj;
         if (cursorObj != null)
-            if (inputInst.axisDown || inputInst.axisUp || inputInst.axisLeft || inputInst.axisRight)
-            {
-                int xAdd = 0;
-                int zAdd = 0;
-                if (inputInst.axisDown) zAdd = -1;
-                else if (inputInst.axisUp) zAdd = 1;
-                if (inputInst.axisLeft) xAdd = -1;
-                else if (inputInst.axisRight) xAdd = 1;
-                BLogic.Inst.CursorInputMove(xAdd, zAdd);
-                BattleDriver.Inst.MoveCursorObj();
-                UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
-            }
+        {
+            int xAdd = 0;
+            int zAdd = 0;
+            if (inputInst.axisDown) zAdd = -1;
+            else if (inputInst.axisUp) zAdd = 1;
+            if (inputInst.axisLeft) xAdd = -1;
+            else if (inputInst.axisRight) xAdd = 1;
+            BLogic.Inst.CursorInputMove(xAdd, zAdd);
+            BattleDriver.Inst.MoveCursorObj();
+            UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+        }
     }
 
     void OnCursorMoved(IEventMessage msg)
@@ -94,7 +93,7 @@ public class UIPage_BattleMain : FUIBase
             {
                 //todo ui show pawn summary
                 //todo map show planes
-                Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
+                //Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
                 TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
             }
             else

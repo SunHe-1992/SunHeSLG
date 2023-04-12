@@ -59,9 +59,9 @@ namespace SunHeTBS
 
         #region Attribute for test
         public PawnMoveType moveType = PawnMoveType.Ground;
-        public int move_points = 5;
-        public int atk_range_max = 8;
-        public int atk_range_min = 3;
+        public int move_points = 4;
+        public int atk_range_max = 2;
+        public int atk_range_min = 1;
 
         /// <summary>
         /// pawn will cost extra move points in certain tiles
@@ -91,6 +91,96 @@ namespace SunHeTBS
         public int GetAtkRangeMin()
         {
             return atk_range_min;
+        }
+        #endregion
+
+        #region cache move and attack tile data
+
+        /// <summary>
+        /// save movable tiles, based on current pos and move points
+        /// </summary>
+        public HashSet<int> moveTileIds;
+        /// <summary>
+        /// save all moveable tile ids into moveTileIds
+        /// </summary>
+        public void CalculateMoveArea()
+        {
+            var map = TBSMapService.Inst.map;
+            moveTileIds = new HashSet<int>();
+            HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.move_points, this.IsExtraMoveCost(), this.IsPassFoe());
+            //show blue planes in walkable tiles
+            var curTile = map.Tile(this.curPosition);
+            foreach (var tile in walkableTiles)
+            {
+                var dist = map.Distance(tile, curTile, this.IsExtraMoveCost());
+                if (dist > this.move_points)
+                {
+                    Debug.LogError("error: pawn 117");
+                }
+                moveTileIds.Add(tile.tileId);
+                //var pos = map.WorldPosition(tile);
+            }
+        }
+        /// <summary>
+        /// key=range,value=tile ids
+        /// </summary>
+        Dictionary<int, HashSet<int>> rangeTileDic;
+        public void CalculateRangeArea()
+        {
+            var map = TBSMapService.Inst.map;
+
+            rangeTileDic = new Dictionary<int, HashSet<int>>();
+            int rangeMax = this.GetAtkRangeMax();
+            int rangeMin = this.GetAtkRangeMin();
+            foreach (int tileId in moveTileIds)//for every movable tile
+            {
+                var centerTile = map.GetTileFromDic(tileId);
+
+                for (int m = -rangeMax; m <= rangeMax; m++)
+                {
+                    int rangeN = rangeMax - Mathf.Abs(m);
+                    for (int n = -rangeN; n <= rangeN; n++) //m,n loop the diamond shape around centerPos
+                    {
+                        int tileRange = Mathf.Abs(m) + Mathf.Abs(n);
+                        if (rangeMin > 0 && tileRange < rangeMin)//consider min range
+                        {
+                            continue;
+                        }
+                        if (!rangeTileDic.ContainsKey(tileRange))
+                            rangeTileDic.Add(tileRange, new HashSet<int>());
+                        var rangeHashSet = rangeTileDic[tileRange];
+                        // m,n is the pos
+                        int targetTileId = map.XY2TileId(centerTile.Position.x + m, centerTile.Position.y + n);
+                        Vector3Int testVec = new Vector3Int(centerTile.Position.x + m, centerTile.Position.y + n, 0);
+                        if (!rangeHashSet.Contains(targetTileId))
+                        {
+                            if (map.GetTileFromDic(targetTileId) != null)
+                            {
+                                rangeTileDic[tileRange].Add(targetTileId);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// get tile ids in range
+        /// </summary>
+        /// <param name="minRange"></param>
+        /// <param name="maxRange"></param>
+        /// <returns></returns>
+        public List<int> GetTileIdsInRange(int minRange, int maxRange)
+        {
+            List<int> tileIdList = new List<int>();
+            for (int i = minRange; i <= maxRange; i++)
+            {
+                if (rangeTileDic.ContainsKey(i))
+                {
+                    tileIdList.AddRange(rangeTileDic[i]);
+                }
+            }
+            return tileIdList;
         }
         #endregion
     }

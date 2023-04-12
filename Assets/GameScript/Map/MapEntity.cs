@@ -77,7 +77,7 @@ namespace SunHeTBS
         /// key=tileId, value=TileEntity
         /// </summary>
         Dictionary<int, TileEntity> TileDic = new Dictionary<int, TileEntity>();
-        int XY2TileId(int x, int y)
+        public int XY2TileId(int x, int y)
         {
             if (x < 0 || y < 0)
             {
@@ -90,7 +90,7 @@ namespace SunHeTBS
             return XY2TileId(vect.x, vect.y);
         }
 
-        Vector3Int TileId2XY(int tileId)
+        public Vector3Int TileId2XY(int tileId)
         {
             return new Vector3Int(tileId / MapCols, tileId % MapCols);
         }
@@ -209,12 +209,13 @@ namespace SunHeTBS
         /// <param name="worldPosA"></param>
         /// <param name="worldPosB"></param>
         /// <returns></returns>
-        public int Distance(Vector3 worldPosA, Vector3 worldPosB, bool extraPrice = false)
-        {
-            var tileA = WorldPosition(worldPosA);
-            var tileB = WorldPosition(worldPosB);
-            return Distance(tileA.Position, tileB.Position, extraPrice); //for fliers no extra pass price
-        }
+        //public int Distance(Vector3 worldPosA, Vector3 worldPosB, bool extraPrice = false)
+        //{
+        //    var tileA = WorldPosition(worldPosA);
+        //    var tileB = WorldPosition(worldPosB);
+        //    return Distance(tileA.Position, tileB.Position, extraPrice); //for fliers no extra pass price
+        //}
+
         /// <summary>
         /// Chessboard distance
         /// </summary>
@@ -279,14 +280,7 @@ namespace SunHeTBS
             if (pos.y > MapCols - 1) pos.y = MapCols - 1;
             return pos;
         }
-
-        public void ClearTilesRangeHash()
-        {
-            foreach (var tile in TileDic.Values)
-            {
-                tile.rangeHash.Clear();
-            }
-        }
+        
         public Dictionary<int, TileEntity> GetTileDic()
         {
             return TileDic;
