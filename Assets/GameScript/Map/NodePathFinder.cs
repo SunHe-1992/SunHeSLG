@@ -60,6 +60,88 @@ namespace SunHeTBS
         }
 
 
+        #region path find
+
+        static Dictionary<INode, float> ScoreG = new Dictionary<INode, float>();
+        static Dictionary<INode, float> ScoreF = new Dictionary<INode, float>();
+        static Dictionary<INode, INode> CameFrom = new Dictionary<INode, INode>();
+
+        public static List<INode> Path(IMapNode map, INode from, INode to, bool isPassFoe)
+        {
+            return FindPath(map, from, to, isPassFoe);
+        }
+        static List<INode> FindPath(IMapNode map, INode start, INode finish, bool isPassFoe)
+        {
+            ScoreG.Clear();
+            ScoreF.Clear();
+            CameFrom.Clear();
+
+            var path = new List<INode>();
+            if (!finish.Vacant)
+            {
+                return path;
+            }
+            var open = new List<INode>();
+            var closed = new List<INode>();
+            open.Add(start);
+            ScoreF[start] = map.Distance(start, finish, false);
+            ScoreG[start] = 0;
+            PawnCamp startCamp = start.camp;
+
+            while (open.Any())
+            {
+                var check = open.OrderBy(o => ScoreF[o]).First();
+                if (check == finish)
+                {
+                    break;
+                }
+                else if (closed.Contains(check))
+                {
+                    continue;
+                }
+
+                closed.Add(check);
+                open.Remove(check);
+                var list = map.NeighborsMovable(check).Where(n => n.Vacant);
+                foreach (var node in list)
+                {
+                    bool campPassable = IsCampPassable(startCamp, node.camp, isPassFoe);
+                    if (campPassable == false)
+                        continue;
+                    var currengScoreG = ScoreG[check] + map.Distance(node, finish, false);
+                    var gN = -1f;
+                    if (ScoreG.TryGetValue(node, out gN))
+                    {
+                        if (currengScoreG < gN)
+                        {
+                            CameFrom[node] = check;
+                            ScoreG[node] = currengScoreG;
+                            ScoreF[node] = currengScoreG + map.Distance(node, finish, false);
+                            CameFrom[node] = check;
+                        }
+                    }
+                    else
+                    {
+                        open.Add(node);
+                        ScoreG[node] = currengScoreG;
+                        ScoreF[node] = currengScoreG + map.Distance(node, finish, false);
+                        CameFrom[node] = check;
+                    }
+                }
+            }
+            var current = finish;
+            while (CameFrom.ContainsKey(current))
+            {
+                path.Add(current);
+                current = CameFrom[current];
+            }
+            path.Add(start);
+            path.Reverse();
+
+            return path;
+        }
+
+        #endregion
     }
 
 }

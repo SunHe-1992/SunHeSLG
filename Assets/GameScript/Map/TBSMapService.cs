@@ -74,6 +74,10 @@ namespace SunHeTBS
             rect.yMax = row * map.TileSize;
             mapCamera.SetMapBorderPos(rect);
         }
+        /// <summary>
+        /// show Pawn's moveable tiles in blue, attackable tiles in red
+        /// </summary>
+        /// <param name="p"></param>
         public void ShowPawnCoverPlanes(Pawn p)
         {
             UnspawnAllCoverPlanes();
@@ -103,6 +107,22 @@ namespace SunHeTBS
                     SpawnCoverPlaneRed(pos, tile.topHeight);
 
                 }
+            }
+        }
+        /// <summary>
+        /// on given tile, show pawn's attackable tiles in red
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="tile"></param>
+        public void ShowPawnCoverPlanesOneTile(Pawn p, TileEntity startTile)
+        {
+            var tileList = p.GetInRangePosOneTile(p.GetAtkRangeMin(), p.GetAtkRangeMax(), startTile.tileId);
+
+            //show red planes in attackable tiles 
+            foreach (var tile in tileList)
+            {
+                var pos = map.WorldPosition(tile);
+                SpawnCoverPlaneRed(pos, tile.topHeight);
             }
         }
         #region cover planes on map

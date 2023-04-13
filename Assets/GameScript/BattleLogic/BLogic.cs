@@ -99,7 +99,7 @@ namespace SunHeTBS
                 camp = curCamp + 1;
             return camp;
         }
-        public GamePlayState GetBattleState()
+        public GamePlayState GetGamePlayState()
         {
             return gameState;
         }
@@ -122,7 +122,7 @@ namespace SunHeTBS
                     case GamePlayState.DialoguePlay: break;
                     case GamePlayState.PhaseSwitch: OnEnterPhaseSwitch(); break;
                     case GamePlayState.SelectingPawn: OnEnterSelectPawn(); break;
-                    case GamePlayState.SelectingMoveDest: break;
+                    case GamePlayState.SelectingMoveDest: OnEnterSelectingMoveDest(); break;
                     case GamePlayState.PawnMoving: break;
                     case GamePlayState.UIActionMenu: break;
                     case GamePlayState.UICombatPredict: break;
@@ -145,6 +145,14 @@ namespace SunHeTBS
             if (!this.Running)
                 return;
 
+            if (SwitchBattleState())
+            {
+                return;
+            }
+            switch (gameState)
+            {
+                case GamePlayState.PawnMoving: PawnMovingUpdate(dt); break;
+            }
         }
         #endregion
 
@@ -235,6 +243,13 @@ namespace SunHeTBS
         #region cursor select pawn
         public Vector3Int oldCursorPos;
         public Vector3Int cursorPos;
+        /// <summary>
+        /// pawn under cursor
+        /// </summary>
+        public Pawn pointedPawn;
+        /// <summary>
+        /// players pawn selected ,waiting for order
+        /// </summary>
         public Pawn selectedPawn;
 
         public BLogic()
@@ -259,11 +274,11 @@ namespace SunHeTBS
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
             if (mapPawnDic.ContainsKey(tileId))//todo cursor points a pawn,show info and move area
             {
-                selectedPawn = mapPawnDic[tileId];
+                pointedPawn = mapPawnDic[tileId];
             }
             else
             {
-                selectedPawn = null;
+                pointedPawn = null;
             }
         }
 
@@ -279,17 +294,19 @@ namespace SunHeTBS
 
         public void OnUpdate()
         {
+            OnLogicUpdate(Time.deltaTime);
+
         }
 
         public void OnDestroy()
         {
             Running = false;
-            selectedPawn = null;
+            pointedPawn = null;
             ResetBattleState();
         }
         public void OnFixedUpdate()
         {
-            SwitchBattleState();
+
         }
         #endregion
 
@@ -313,5 +330,56 @@ namespace SunHeTBS
         {
             UniEvent.SendMessage(GameEventDefine.ShowSelectPawn);
         }
+
+        public void OnEnterSelectingMoveDest()
+        {
+            selectedPawn = pointedPawn;
+
+        }
+
+        #region pawn move
+        Pawn movingPawn = null;
+        public void PawnStartMove(Pawn p, int tileId)
+        {
+            movingPawn = p;
+            var mapInst = GetMapInst();
+            var toTile = mapInst.GetTileFromDic(tileId);
+            var startTile = mapInst.Tile(movingPawn.curPosition);
+            var nodeList = NodePathFinder.Path(mapInst, startTile, toTile, movingPawn.IsPassFoe());
+            movingPawn.SetMovePath(nodeList);
+            pawnMoveTime = movingPawn.moveTileTime * nodeList.Count;
+            SetNextGamePlayState(GamePlayState.PawnMoving);
+            movingPawn.StartMove();
+        }
+        float pawnMoveTime = 0;
+        private void PawnMovingUpdate(float dt)
+        {
+            pawnMoveTime -= dt;
+            if (pawnMoveTime < 0)
+            {
+                pawnMoveTime = 0;
+                PawnMoveToTile();
+            }
+        }
+
+        void PawnMoveToTile()
+        {
+            //movingPawn
+            if (movingPawn != null)
+            {
+                Debugger.Log($" move end {movingPawn}");
+                movingPawn.StopMove();
+                movingPawn = null;
+                SetNextGamePlayState(GamePlayState.Default);
+            }
+        }
+        #endregion
+
+        MapEntity GetMapInst()
+        {
+            return TBSMapService.Inst.map;
+        }
+
+
     }
 }

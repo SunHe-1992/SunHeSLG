@@ -263,6 +263,7 @@ namespace SunHeTBS
         private void OnEnterInBattleState()
         {
             logicInst.PostInitProcess();
+            logicInst.Running = true;
             logicInst.SetNextGamePlayState(GamePlayState.BeforeBattle);
         }
 

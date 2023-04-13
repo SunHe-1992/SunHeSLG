@@ -4,6 +4,7 @@ using UnityEngine;
 using YooAsset;
 namespace SunHeTBS
 {
+
     public class PawnBase
     {
         public Vector3Int curPosition;
@@ -22,9 +23,14 @@ namespace SunHeTBS
         /// 3d model res name
         /// </summary>
         public string modelName;
-
+        /// <summary>
+        /// move 1 tile need time
+        /// </summary>
+        public float moveTileTime = 0.15f;
+        public PawnState curState;
         public void Init()
         {
+            curState = PawnState.Idle;
             this.LoadModel();
         }
         public override string ToString()
@@ -181,6 +187,61 @@ namespace SunHeTBS
                 }
             }
             return tileIdList;
+        }
+        public List<TileEntity> GetInRangePosOneTile(int rangeMin, int rangeMax, int startTileId)
+        {
+            List<TileEntity> tileList = new List<TileEntity>();
+            var map = TBSMapService.Inst.map;
+            var startTile = map.GetTileFromDic(startTileId);
+            for (int m = -rangeMax; m <= rangeMax; m++)
+            {
+                int rangeN = rangeMax - Mathf.Abs(m);
+                for (int n = -rangeN; n <= rangeN; n++) //m,n loop the diamond shape around centerPos
+                {
+                    int tileRange = Mathf.Abs(m) + Mathf.Abs(n);
+                    if (rangeMin > 0 && tileRange < rangeMin)//consider min range
+                    {
+                        continue;
+                    }
+                    Vector3Int pos = new Vector3Int(startTile.Position.x + m, startTile.Position.y + n, 0);
+                    var findTile = map.Tile(pos);
+                    if (findTile != null)
+                    {
+                        tileList.Add(findTile);
+                    }
+                }
+            }
+            return tileList;
+        }
+        #endregion
+
+        #region Pawn move functions
+
+        List<INode> moveTileList;
+        TileEntity moveDestTile;
+
+        public void SetMovePath(List<INode> nodeList)
+        {
+            this.moveTileList = nodeList;
+            if (this.controller != null)
+            {
+                controller.SetPaths(nodeList);
+            }
+        }
+        public void StartMove()
+        {
+            this.curState = PawnState.Moving;
+            controller.StartMove();
+            //hide this pawn's move/atk  planes
+            TBSMapService.Inst.UnspawnAllCoverPlanes();
+        }
+        public void StopMove()
+        {
+            this.curState = PawnState.Idle;
+            controller.StopMove();
+            moveDestTile = moveTileList[moveTileList.Count - 1] as TileEntity;
+            //todo show pawn's atk planes on this tile
+            TBSMapService.Inst.ShowPawnCoverPlanesOneTile(this, moveDestTile);
         }
         #endregion
     }

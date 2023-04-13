@@ -13,7 +13,11 @@ namespace SunHeTBS
         {
             return Distance(x as TileEntity, y as TileEntity, extraPrice);
         }
-
+        /// <summary>
+        /// find adjacent nodes that exist in map
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
         public IEnumerable<INode> NeighborsMovable(INode node)
         {
             for (int i = 0; i < NeighbourArray.Length; i++)

@@ -65,40 +65,62 @@ public class UIPage_BattleMain : FUIBase
         ui.phaseCom.visible = false;
     }
     #region battle map input control
+    bool AllowMapCursorMoving()
+    {
+        var gameState = BLogic.Inst.GetGamePlayState();
+        if (gameState == GamePlayState.SelectingPawn ||
+            gameState == GamePlayState.SelectingMoveDest ||
+            gameState == GamePlayState.UICombatPredict)
+            return true;
+        return false;
+    }
     void OnInputAxis(IEventMessage msg)
     {
         var inputInst = InputReceiver.Inst;
         //right=x+1 up=z+1
-        var cursorObj = BattleDriver.Inst.CursorObj;
-        if (cursorObj != null)
+        if (AllowMapCursorMoving())
         {
-            int xAdd = 0;
-            int zAdd = 0;
-            if (inputInst.axisDown) zAdd = -1;
-            else if (inputInst.axisUp) zAdd = 1;
-            if (inputInst.axisLeft) xAdd = -1;
-            else if (inputInst.axisRight) xAdd = 1;
-            BLogic.Inst.CursorInputMove(xAdd, zAdd);
-            BattleDriver.Inst.MoveCursorObj();
-            UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+            var cursorObj = BattleDriver.Inst.CursorObj;
+            if (cursorObj != null)
+            {
+                int xAdd = 0;
+                int zAdd = 0;
+                if (inputInst.axisDown) zAdd = -1;
+                else if (inputInst.axisUp) zAdd = 1;
+                if (inputInst.axisLeft) xAdd = -1;
+                else if (inputInst.axisRight) xAdd = 1;
+                BLogic.Inst.CursorInputMove(xAdd, zAdd);
+                BattleDriver.Inst.MoveCursorObj();
+                UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+            }
         }
     }
 
     void OnCursorMoved(IEventMessage msg)
     {
-        if (BLogic.Inst.oldCursorPos != BLogic.Inst.cursorPos)
+        var gameState = BLogic.Inst.GetGamePlayState();
+
+        if (AllowMapCursorMoving())
         {
-            Pawn selectedPawn = BLogic.Inst.selectedPawn;
-            if (selectedPawn != null) //selected a pawn ,show its info
+            if (BLogic.Inst.oldCursorPos != BLogic.Inst.cursorPos)
             {
-                //todo ui show pawn summary
-                //todo map show planes
-                //Debugger.Print($"selected a pawn {selectedPawn.ToString()}");
-                TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
-            }
-            else
-            {
-                TBSMapService.Inst.UnspawnAllCoverPlanes();
+                if (gameState == GamePlayState.SelectingPawn)
+                {
+                    Pawn selectedPawn = BLogic.Inst.pointedPawn;
+                    if (selectedPawn != null) //cursor pointed at a pawn ,show its info
+                    {
+                        //todo ui show pawn summary
+                        TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+                    }
+                    else
+                    {
+                        TBSMapService.Inst.UnspawnAllCoverPlanes();
+                    }
+                }
+                else if (gameState == GamePlayState.SelectingMoveDest)
+                {
+
+                }
             }
         }
     }
@@ -111,21 +133,72 @@ public class UIPage_BattleMain : FUIBase
     */
     void OnClickConfirm(IEventMessage msg)
     {
+        var pointedPawn = BLogic.Inst.pointedPawn;
         var selectedPawn = BLogic.Inst.selectedPawn;
-        if (selectedPawn == null) //todo open menu
+        var gameState = BLogic.Inst.GetGamePlayState();
+        if (gameState == GamePlayState.SelectingPawn)
         {
-
-        }
-        else
-        {
-            var pawnCamp = selectedPawn.camp;
-            if (pawnCamp == PawnCamp.Player)
+            bool openMenu = false;
+            if (pointedPawn == null)
             {
-
+                openMenu = true;
             }
-            else if (pawnCamp == PawnCamp.Villain || pawnCamp == PawnCamp.Neutral)
+            if (selectedPawn == null && pointedPawn != null)//click confirm on a pawn
             {
-                //todo click enemy pawn ,toggle pawn's atk range planes
+                if (pointedPawn.camp == PawnCamp.Player)//player's pawn
+                {
+                    if (pointedPawn.actionEnd == false)//move player's pawn
+                    {
+                        BLogic.Inst.SetNextGamePlayState(GamePlayState.SelectingMoveDest);
+                    }
+                    else
+                    {
+                        openMenu = true;
+                    }
+                }
+                else if (pointedPawn.camp == PawnCamp.Villain)//todo toggle enemy's attack range
+                {
+
+                }
+            }
+
+            if (openMenu)
+            {
+                //todo open menu
+            }
+        }
+
+        else if (gameState == GamePlayState.SelectingMoveDest)
+        {
+            //situation 1: cursor is out of walkable area, do nothing,  play alert sound
+            //situation 2: cursor is inside walkable area,pawn move
+            //situation 3: cursor is under a enemy pawn ,show combat predict
+            //situation 4: cursor is under a ally pawn and ready to heal this ally,show combat predict (heal)
+            var cursorPos = BLogic.Inst.cursorPos;
+            int cursorTileId = TBSMapService.Inst.GetTileId(cursorPos);
+            if (pointedPawn == null)//confirm on empty tile
+            {
+                if (selectedPawn.moveTileIds.Contains(cursorTileId))//walk to this tile
+                {
+                    Debugger.Log($"walk to tile {cursorPos}");
+                    BLogic.Inst.PawnStartMove(selectedPawn, cursorTileId);
+                }
+                else //alert sound
+                {
+
+                }
+            }
+            else //confirm on a pawn
+            {
+                bool canMoveToCursor = true;
+                if (false == selectedPawn.moveTileIds.Contains(cursorTileId))
+                {
+                    canMoveToCursor = false;
+                }
+                if (pointedPawn.camp == PawnCamp.Player || pointedPawn.camp == PawnCamp.PlayerAlly)
+                {
+                    //todo can heal pointedPawn ?
+                }
             }
         }
     }
