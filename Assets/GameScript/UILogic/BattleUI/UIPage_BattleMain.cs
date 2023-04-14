@@ -210,15 +210,27 @@ public partial class UIPage_BattleMain : FUIBase
 
     void OnClickCancel(IEventMessage msg)
     {
-        //todo 
         var gameState = BLogic.Inst.GetGamePlayState();
         if (gameState == GamePlayState.SelectingMoveDest)
         {
-
+            //click cancel on path selecting, cursor relocate to seletedPawn's pos
+            var selectedPawn = BLogic.Inst.selectedPawn;
+            if (selectedPawn != null)
+            {
+                selectedPawn.tempPos = selectedPawn.curPosition;
+                BLogic.Inst.CursorInputMoveTo(selectedPawn.curPosition);
+                BLogic.Inst.SetNextGamePlayState(GamePlayState.SelectingPawn);
+                BattleDriver.Inst.MoveCursorObj();
+                BLogic.Inst.selectedPawn = null;
+                UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+            }
         }
-        if (ui.actionCom.visible)
+        else if (gameState == GamePlayState.UIActionMenu)
         {
+            if (ui.actionCom.visible)
+            {
 
+            }
         }
     }
     #endregion

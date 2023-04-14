@@ -270,6 +270,13 @@ namespace SunHeTBS
             cursorPos = newPos;
             CheckCursorPos();
         }
+        public void CursorInputMoveTo(Vector3Int pos)
+        {
+            var newPos = TBSMapService.Inst.map.TrimPos_Border(pos);
+            cursorPos = newPos;
+            oldCursorPos = newPos;
+            CheckCursorPos();
+        }
         void CheckCursorPos()
         {
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
@@ -372,16 +379,16 @@ namespace SunHeTBS
             {
                 Debugger.Log($" move end {movingPawn}");
                 movingPawn.StopMove();
-                SetNextGamePlayState(GamePlayState.Default);
-                if (movingPawn.InstantActionAfterMove)//act to target pawn : attack/heal/dance
+                if (movingPawn.InstantActionAfterMove)//todo act to target pawn : attack/heal/dance
                 {
-
+                    SetNextGamePlayState(GamePlayState.CombatPlay);
                 }
                 else
                 {
+                    SetNextGamePlayState(GamePlayState.UIActionMenu);
                     //show pawn's atk planes on this tile
                     TBSMapService.Inst.ShowPawnCoverPlanesOneTile(movingPawn, movingPawn.tempPos);
-                    //todo show action menu
+                    //show action menu
                     UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
                 }
                 movingPawn = null;

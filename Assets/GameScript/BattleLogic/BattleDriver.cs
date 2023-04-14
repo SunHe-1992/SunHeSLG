@@ -286,6 +286,9 @@ namespace SunHeTBS
         /// </summary>
         public static Spawner UniSpawner;
 
+        /// <summary>
+        /// cursor obj relocate to BLogic cursorPos
+        /// </summary>
         public void MoveCursorObj()
         {
             if (CursorObj)
