@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using SunHeTBS;
 using UniFramework.Event;
-public class UIPage_BattleMain : FUIBase
+public partial class UIPage_BattleMain : FUIBase
 {
 
     UI_BattlePanel ui;
@@ -28,6 +28,8 @@ public class UIPage_BattleMain : FUIBase
         UniEvent.AddListener(GameEventDefine.ClickConfirm, OnClickConfirm);
         UniEvent.AddListener(GameEventDefine.PhaseSwitch, OnPhaseSwitch);
         UniEvent.AddListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
+        UniEvent.AddListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
+        UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
 
         //test  instant switch to map pawn control
         InputReceiver.Inst.inputComp.SwitchCurrentActionMap("Player");
@@ -49,6 +51,8 @@ public class UIPage_BattleMain : FUIBase
         UniEvent.RemoveListener(GameEventDefine.ClickConfirm, OnClickConfirm);
         UniEvent.RemoveListener(GameEventDefine.PhaseSwitch, OnPhaseSwitch);
         UniEvent.RemoveListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
+        UniEvent.RemoveListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
+        UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
 
     }
 
@@ -63,6 +67,7 @@ public class UIPage_BattleMain : FUIBase
         ui.nameBar.visible = false;
         ui.tileInfoComp.visible = false;
         ui.phaseCom.visible = false;
+        ui.actionCom.visible = false;
     }
     #region battle map input control
     bool AllowMapCursorMoving()
@@ -200,6 +205,20 @@ public class UIPage_BattleMain : FUIBase
                     //todo can heal pointedPawn ?
                 }
             }
+        }
+    }
+
+    void OnClickCancel(IEventMessage msg)
+    {
+        //todo 
+        var gameState = BLogic.Inst.GetGamePlayState();
+        if (gameState == GamePlayState.SelectingMoveDest)
+        {
+
+        }
+        if (ui.actionCom.visible)
+        {
+
         }
     }
     #endregion

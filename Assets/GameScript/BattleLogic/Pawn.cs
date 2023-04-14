@@ -28,6 +28,16 @@ namespace SunHeTBS
         /// </summary>
         public float moveTileTime = 0.15f;
         public PawnState curState;
+        /// <summary>
+        /// if false:show action menu on move end,true: act to target pawn
+        /// </summary>
+        public bool InstantActionAfterMove = false;
+        public Pawn targetPawn = null;
+        public List<Pawn> targetPawnList = null;
+        /// <summary>
+        /// when player controlling
+        /// </summary>
+        public Vector3Int tempPos;
         public void Init()
         {
             curState = PawnState.Idle;
@@ -157,7 +167,6 @@ namespace SunHeTBS
                         var rangeHashSet = rangeTileDic[tileRange];
                         // m,n is the pos
                         int targetTileId = map.XY2TileId(centerTile.Position.x + m, centerTile.Position.y + n);
-                        Vector3Int testVec = new Vector3Int(centerTile.Position.x + m, centerTile.Position.y + n, 0);
                         if (!rangeHashSet.Contains(targetTileId))
                         {
                             if (map.GetTileFromDic(targetTileId) != null)
@@ -188,11 +197,11 @@ namespace SunHeTBS
             }
             return tileIdList;
         }
-        public List<TileEntity> GetInRangePosOneTile(int rangeMin, int rangeMax, int startTileId)
+        public List<TileEntity> GetInRangePosOneTile(int rangeMin, int rangeMax, Vector3Int startPos)
         {
             List<TileEntity> tileList = new List<TileEntity>();
             var map = TBSMapService.Inst.map;
-            var startTile = map.GetTileFromDic(startTileId);
+            var startTile = map.Tile(startPos);
             for (int m = -rangeMax; m <= rangeMax; m++)
             {
                 int rangeN = rangeMax - Mathf.Abs(m);
@@ -218,7 +227,7 @@ namespace SunHeTBS
         #region Pawn move functions
 
         List<INode> moveTileList;
-        TileEntity moveDestTile;
+        public TileEntity moveDestTile;
 
         public void SetMovePath(List<INode> nodeList)
         {
@@ -240,8 +249,7 @@ namespace SunHeTBS
             this.curState = PawnState.Idle;
             controller.StopMove();
             moveDestTile = moveTileList[moveTileList.Count - 1] as TileEntity;
-            //todo show pawn's atk planes on this tile
-            TBSMapService.Inst.ShowPawnCoverPlanesOneTile(this, moveDestTile);
+            tempPos = moveDestTile.Position;
         }
         #endregion
     }

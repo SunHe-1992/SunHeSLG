@@ -10,6 +10,8 @@ namespace PackageBattle
         {
             UIObjectFactory.SetPackageItemExtension(UI_BattlePrepare.URL, typeof(UI_BattlePrepare));
             UIObjectFactory.SetPackageItemExtension(UI_PhaseComp.URL, typeof(UI_PhaseComp));
+            UIObjectFactory.SetPackageItemExtension(UI_MenuItem.URL, typeof(UI_MenuItem));
+            UIObjectFactory.SetPackageItemExtension(UI_ActionMenuComp.URL, typeof(UI_ActionMenuComp));
             UIObjectFactory.SetPackageItemExtension(UI_BattlePanel.URL, typeof(UI_BattlePanel));
             UIObjectFactory.SetPackageItemExtension(UI_PawnSummaryBar.URL, typeof(UI_PawnSummaryBar));
             UIObjectFactory.SetPackageItemExtension(UI_AttributeUnit.URL, typeof(UI_AttributeUnit));

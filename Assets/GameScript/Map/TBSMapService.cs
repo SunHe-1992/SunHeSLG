@@ -114,9 +114,9 @@ namespace SunHeTBS
         /// </summary>
         /// <param name="p"></param>
         /// <param name="tile"></param>
-        public void ShowPawnCoverPlanesOneTile(Pawn p, TileEntity startTile)
+        public void ShowPawnCoverPlanesOneTile(Pawn p, Vector3Int tempPos)
         {
-            var tileList = p.GetInRangePosOneTile(p.GetAtkRangeMin(), p.GetAtkRangeMax(), startTile.tileId);
+            var tileList = p.GetInRangePosOneTile(p.GetAtkRangeMin(), p.GetAtkRangeMax(), tempPos);
 
             //show red planes in attackable tiles 
             foreach (var tile in tileList)

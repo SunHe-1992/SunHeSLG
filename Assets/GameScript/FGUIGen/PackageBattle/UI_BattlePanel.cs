@@ -11,6 +11,7 @@ namespace PackageBattle
         public UI_PawnSummaryBar bottomBar;
         public UI_TileInfo tileInfoComp;
         public UI_PhaseComp phaseCom;
+        public UI_ActionMenuComp actionCom;
         public Transition anim_phase;
         public const string URL = "ui://fstosj6iscq58";
 
@@ -27,6 +28,7 @@ namespace PackageBattle
             bottomBar = (UI_PawnSummaryBar)GetChild("bottomBar");
             tileInfoComp = (UI_TileInfo)GetChild("tileInfoComp");
             phaseCom = (UI_PhaseComp)GetChild("phaseCom");
+            actionCom = (UI_ActionMenuComp)GetChild("actionCom");
             anim_phase = GetTransition("anim_phase");
         }
     }

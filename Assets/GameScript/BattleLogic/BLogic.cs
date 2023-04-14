@@ -49,6 +49,7 @@ namespace SunHeTBS
         UICombatPredict = 13,
 
     }
+
     /// <summary>
     /// Battle Logic
     /// </summary>
@@ -362,6 +363,8 @@ namespace SunHeTBS
             }
         }
 
+
+
         void PawnMoveToTile()
         {
             //movingPawn
@@ -369,8 +372,19 @@ namespace SunHeTBS
             {
                 Debugger.Log($" move end {movingPawn}");
                 movingPawn.StopMove();
-                movingPawn = null;
                 SetNextGamePlayState(GamePlayState.Default);
+                if (movingPawn.InstantActionAfterMove)//act to target pawn : attack/heal/dance
+                {
+
+                }
+                else
+                {
+                    //show pawn's atk planes on this tile
+                    TBSMapService.Inst.ShowPawnCoverPlanesOneTile(movingPawn, movingPawn.tempPos);
+                    //todo show action menu
+                    UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
+                }
+                movingPawn = null;
             }
         }
         #endregion
