@@ -251,6 +251,10 @@ namespace SunHeTBS
             moveDestTile = moveTileList[moveTileList.Count - 1] as TileEntity;
             tempPos = moveDestTile.Position;
         }
+        public void ResetPosition()
+        {
+            this.controller.SetPosition();
+        }
         #endregion
     }
 }

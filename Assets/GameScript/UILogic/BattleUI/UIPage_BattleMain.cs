@@ -211,10 +211,10 @@ public partial class UIPage_BattleMain : FUIBase
     void OnClickCancel(IEventMessage msg)
     {
         var gameState = BLogic.Inst.GetGamePlayState();
+        var selectedPawn = BLogic.Inst.selectedPawn;
         if (gameState == GamePlayState.SelectingMoveDest)
         {
             //click cancel on path selecting, cursor relocate to seletedPawn's pos
-            var selectedPawn = BLogic.Inst.selectedPawn;
             if (selectedPawn != null)
             {
                 selectedPawn.tempPos = selectedPawn.curPosition;
@@ -230,6 +230,18 @@ public partial class UIPage_BattleMain : FUIBase
             if (ui.actionCom.visible)
             {
 
+                if (selectedPawn != null)
+                {
+                    //todo check sub UI first: combatPredictUI/weaponSelectUI/pawnItemUI/TradeUI/TradeSelectPawnUI/
+                    //pawn model relocate to real pos, show move/atk planes
+                    ui.actionCom.visible = false;
+                    BLogic.Inst.oldCursorPos = selectedPawn.tempPos;
+                    selectedPawn.tempPos = selectedPawn.curPosition;
+                    selectedPawn.ResetPosition();
+                    BLogic.Inst.SetNextGamePlayState(GamePlayState.SelectingMoveDest);
+                    BattleDriver.Inst.MoveCursorObj();
+                    UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+                }
             }
         }
     }

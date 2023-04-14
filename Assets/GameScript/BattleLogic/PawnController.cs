@@ -69,7 +69,7 @@ namespace SunHeTBS
             m_Pawn = _pawn;
             SetPosition();
         }
-        void SetPosition()
+        public void SetPosition()
         {
             //set obj to cur position instantly
             MapEntity mapEntity = TBSMapService.Inst.map;
