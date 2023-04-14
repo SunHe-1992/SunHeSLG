@@ -341,8 +341,8 @@ namespace SunHeTBS
 
         public void OnEnterSelectingMoveDest()
         {
-            selectedPawn = pointedPawn;
-
+            if (pointedPawn != null)
+                selectedPawn = pointedPawn;
         }
 
         #region pawn move

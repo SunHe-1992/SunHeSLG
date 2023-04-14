@@ -12,6 +12,7 @@ namespace PackageBattle
         public UI_TileInfo tileInfoComp;
         public UI_PhaseComp phaseCom;
         public UI_ActionMenuComp actionCom;
+        public GTextField txt_logicState;
         public Transition anim_phase;
         public const string URL = "ui://fstosj6iscq58";
 
@@ -29,6 +30,7 @@ namespace PackageBattle
             tileInfoComp = (UI_TileInfo)GetChild("tileInfoComp");
             phaseCom = (UI_PhaseComp)GetChild("phaseCom");
             actionCom = (UI_ActionMenuComp)GetChild("actionCom");
+            txt_logicState = (GTextField)GetChild("txt_logicState");
             anim_phase = GetTransition("anim_phase");
         }
     }

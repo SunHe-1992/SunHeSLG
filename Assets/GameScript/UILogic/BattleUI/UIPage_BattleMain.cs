@@ -241,6 +241,7 @@ public partial class UIPage_BattleMain : FUIBase
                     BLogic.Inst.SetNextGamePlayState(GamePlayState.SelectingMoveDest);
                     BattleDriver.Inst.MoveCursorObj();
                     UniEvent.SendMessage(GameEventDefine.CURSOR_MOVED);
+                    TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
                 }
             }
         }
@@ -265,5 +266,27 @@ public partial class UIPage_BattleMain : FUIBase
     {
         HideUIComp();
 
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+#if UNITY_EDITOR
+        var state = BLogic.Inst.GetGamePlayState();
+        string debugStr = "";
+        debugStr += $"GameState = {state}\n";
+
+        var selectedPawn = BLogic.Inst.selectedPawn;
+        if (selectedPawn != null)
+            debugStr += $"selectedPawn={selectedPawn}\n";
+        else
+            debugStr += $"selectedPawn=null\n";
+        var pointedPawn = BLogic.Inst.pointedPawn;
+        if (pointedPawn != null)
+            debugStr += $"pointedPawn={pointedPawn}\n";
+        else
+            debugStr += $"pointedPawn=null\n";
+        ui.txt_logicState.text = debugStr;
+#endif
     }
 }
