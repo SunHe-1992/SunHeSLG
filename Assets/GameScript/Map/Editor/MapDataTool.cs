@@ -89,7 +89,7 @@ namespace SunHeTBS
 
                     string jsonStr = LitJson.JsonMapper.ToJson(tdList);
                     string sceneName = SceneManager.GetActiveScene().name;
-                    string savePath = $"{Application.dataPath}/GameRes/Config/{sceneName}.json";
+                    string savePath = $"{Application.dataPath}/GameRes/MapData/{sceneName}.json";
                     if (!File.Exists(savePath))
                     {
                         File.Create(savePath);

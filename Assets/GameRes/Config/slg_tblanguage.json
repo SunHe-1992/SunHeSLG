@@ -11,5 +11,95 @@
         "测试文本"
       ]
     ]
+  },
+  {
+    "ID": "T-Attack",
+    "Lans": [
+      [
+        "EN",
+        "Attack"
+      ]
+    ]
+  },
+  {
+    "ID": "T-Items",
+    "Lans": [
+      [
+        "EN",
+        "Items"
+      ]
+    ]
+  },
+  {
+    "ID": "T-Trade",
+    "Lans": [
+      [
+        "EN",
+        "Trade"
+      ]
+    ]
+  },
+  {
+    "ID": "T-Wait",
+    "Lans": [
+      [
+        "EN",
+        "Wait"
+      ]
+    ]
+  },
+  {
+    "ID": "Des-Attack",
+    "Lans": [
+      [
+        "EN",
+        "Combat a foe."
+      ]
+    ]
+  },
+  {
+    "ID": "Des-Items",
+    "Lans": [
+      [
+        "EN",
+        "Use or equip items."
+      ]
+    ]
+  },
+  {
+    "ID": "Des-Trade",
+    "Lans": [
+      [
+        "EN",
+        "Swap items with an ally."
+      ]
+    ]
+  },
+  {
+    "ID": "Des-Wait",
+    "Lans": [
+      [
+        "EN",
+        "End this unit's turn."
+      ]
+    ]
+  },
+  {
+    "ID": "T-Convey",
+    "Lans": [
+      [
+        "EN",
+        "Convey"
+      ]
+    ]
+  },
+  {
+    "ID": "Des-Convey",
+    "Lans": [
+      [
+        "EN",
+        "Store/retrieve items."
+      ]
+    ]
   }
 ]
