@@ -202,12 +202,13 @@ namespace SunHeTBS
                 Debugger.LogError($"map tile {p.curPosition.ToString()} already contains pawn!");
             }
         }
-        public void AddTestPawn()
+        public void AddTestPawn(PawnCamp camp, Vector3Int pos, PawnMoveType moveType)
         {
             Pawn p = new Pawn();
-            p.camp = PawnCamp.Player;
-            p.curPosition = new Vector3Int(0, 0, 0);
+            p.camp = camp;
+            p.curPosition = pos;
             p.modelName = "M_AA_001";
+            p.moveType = moveType;
             p.Init();
             AddPawn(p);
         }
@@ -229,7 +230,11 @@ namespace SunHeTBS
         public void PostInitProcess()
         {
             //test
-            AddTestPawn();
+            AddTestPawn(PawnCamp.Player, new Vector3Int(2, 2), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Player, new Vector3Int(4, 5), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 2), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground);
+
 
             InitPlayerPosition();
 

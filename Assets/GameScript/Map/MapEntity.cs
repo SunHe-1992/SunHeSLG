@@ -18,7 +18,7 @@ namespace SunHeTBS
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public IEnumerable<INode> NeighborsMovable(INode node, bool isFlier)
+        public IEnumerable<INode> NeighborsMovable(INode node, PawnCamp startCamp, bool isPassFoe, bool isFlier)
         {
             for (int i = 0; i < NeighbourArray.Length; i++)
             {
@@ -27,10 +27,16 @@ namespace SunHeTBS
                 if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
                     continue;
                 TileEntity findTile = TileDic[tileId];
-                if (findTile.passType == TilePassType.Impassable)
+                if (findTile.passType == TilePassType.Impassable)//tile is impassable
                     continue;
-                if (!isFlier && findTile.passType == TilePassType.FliersOnly)
+                if (!isFlier && findTile.passType == TilePassType.FliersOnly)//only flier can move here
                     continue;
+                if (!isPassFoe)
+                {
+                    //check if a foe stands here
+                    if (PawnCampTool.CampsHostile(startCamp, findTile.camp))
+                        continue;
+                }
                 yield return findTile;
             }
         }

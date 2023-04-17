@@ -41,7 +41,7 @@ namespace SunHeTBS
             {
                 var current = open.Dequeue();
                 current.Considered = true;
-                foreach (INode n in map.NeighborsMovable(current, isFlier).Where(neigh => neigh != null))
+                foreach (INode n in map.NeighborsMovable(current, originCamp, passFoe, isFlier).Where(neigh => neigh != null))
                 {
                     int currentDistance = current.Depth + map.Distance(current, n, extraPrice);
                     if (IsCampPassable(originCamp, n.camp, passFoe) && n.Vacant && !n.Considered && currentDistance <= movePoints)
@@ -102,7 +102,7 @@ namespace SunHeTBS
 
                 closed.Add(check);
                 open.Remove(check);
-                var list = map.NeighborsMovable(check, isFlier).Where(n => n.Vacant);
+                var list = map.NeighborsMovable(check, startCamp, isPassFoe, isFlier).Where(n => n.Vacant);
                 foreach (var node in list)
                 {
                     bool campPassable = IsCampPassable(startCamp, node.camp, isPassFoe);
