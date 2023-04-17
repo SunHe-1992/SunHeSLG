@@ -109,6 +109,10 @@ namespace SunHeTBS
         {
             return atk_range_min;
         }
+        public bool IsFlier()
+        {
+            return this.moveType == PawnMoveType.Flier;
+        }
         #endregion
 
         #region cache move and attack tile data
@@ -124,7 +128,7 @@ namespace SunHeTBS
         {
             var map = TBSMapService.Inst.map;
             moveTileIds = new HashSet<int>();
-            HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.move_points, this.IsExtraMoveCost(), this.IsPassFoe());
+            HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.move_points, this.IsExtraMoveCost(), this.IsPassFoe(), this.IsFlier());
             //show blue planes in walkable tiles
             var curTile = map.Tile(this.curPosition);
             foreach (var tile in walkableTiles)

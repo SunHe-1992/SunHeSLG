@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passType: 0
-  extraMovePrice: 0
+  extraMovePrice: 1
   effectType: 1
   tileName: Wood
 --- !u!1001 &3821424032862726711

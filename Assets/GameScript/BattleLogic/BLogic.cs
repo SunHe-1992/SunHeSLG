@@ -349,7 +349,7 @@ namespace SunHeTBS
             var mapInst = GetMapInst();
             var toTile = mapInst.GetTileFromDic(tileId);
             var startTile = mapInst.Tile(movingPawn.curPosition);
-            var nodeList = NodePathFinder.Path(mapInst, startTile, toTile, movingPawn.IsPassFoe());
+            var nodeList = NodePathFinder.Path(mapInst, startTile, toTile, movingPawn.IsExtraMoveCost(), movingPawn.IsPassFoe(), movingPawn.IsFlier());
             movingPawn.SetMovePath(nodeList);
             pawnMoveTime = movingPawn.moveTileTime * nodeList.Count;
             SetNextGamePlayState(GamePlayState.PawnMoving);
@@ -437,7 +437,7 @@ namespace SunHeTBS
             int tileId = p.TilePosId();
             var tile = TBSMapService.Inst.map.GetTileFromDic(tileId);
 
-            var nodes = TBSMapService.Inst.map.NeighborsMovable(tile).Where(neigh => neigh != null);
+            var nodes = TBSMapService.Inst.map.Neighbors(tile).Where(neigh => neigh != null);
             foreach (var node in nodes)
             {
                 var pawn = GetPawnOnTile(node as TileEntity);

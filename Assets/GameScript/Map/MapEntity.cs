@@ -18,7 +18,7 @@ namespace SunHeTBS
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public IEnumerable<INode> NeighborsMovable(INode node)
+        public IEnumerable<INode> NeighborsMovable(INode node, bool isFlier)
         {
             for (int i = 0; i < NeighbourArray.Length; i++)
             {
@@ -26,8 +26,27 @@ namespace SunHeTBS
                 int tileId = XY2TileId(pos);
                 if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
                     continue;
-                else
-                    yield return TileDic[tileId];
+                TileEntity findTile = TileDic[tileId];
+                if (findTile.passType == TilePassType.Impassable)
+                    continue;
+                if (!isFlier && findTile.passType == TilePassType.FliersOnly)
+                    continue;
+                yield return findTile;
+            }
+        }
+
+        public IEnumerable<INode> Neighbors(INode node)
+        {
+            for (int i = 0; i < NeighbourArray.Length; i++)
+            {
+                var pos = node.Position + NeighbourArray[i];
+                int tileId = XY2TileId(pos);
+                if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
+                    continue;
+                TileEntity findTile = TileDic[tileId];
+                if (findTile.passType == TilePassType.Impassable)
+                    continue;
+                yield return findTile;
             }
         }
         public static readonly Vector3Int[] NeighbourArray = new Vector3Int[]
@@ -236,7 +255,7 @@ namespace SunHeTBS
         /// <param name="tileA"></param>
         /// <param name="tileB"></param>
         /// <returns></returns>
-        public int Distance(TileEntity tileA, TileEntity tileB, bool extraPrice = false)
+        public int Distance(TileEntity tileA, TileEntity tileB, bool extraPrice)
         {
             if (tileA == null || tileB == null)
                 return int.MaxValue;
@@ -249,9 +268,9 @@ namespace SunHeTBS
         /// <param name="origin"></param>
         /// <param name="movePoints"></param>
         /// <returns></returns>
-        public HashSet<TileEntity> WalkableTiles(Vector3Int origin, int movePoints, bool extraPrice, bool passFoe)
+        public HashSet<TileEntity> WalkableTiles(Vector3Int origin, int movePoints, bool extraPrice, bool passFoe, bool isFlier)
         {
-            var nodes = NodePathFinder.WalkableArea(this, Tile(origin), movePoints, extraPrice, passFoe);
+            var nodes = NodePathFinder.WalkableArea(this, Tile(origin), movePoints, extraPrice, passFoe, isFlier);
             var tiles = new HashSet<TileEntity>();
             foreach (var n in nodes)
             {
@@ -284,7 +303,7 @@ namespace SunHeTBS
             if (pos.y > MapCols - 1) pos.y = MapCols - 1;
             return pos;
         }
-        
+
         public Dictionary<int, TileEntity> GetTileDic()
         {
             return TileDic;

@@ -49,7 +49,7 @@ namespace SunHeTBS
     {
         int Distance(INode x, INode y, bool extraPrice);
         IEnumerable<INode> Neighbours(INode node);
-        IEnumerable<INode> NeighborsMovable(INode node);
+        IEnumerable<INode> NeighborsMovable(INode node, bool isFlier);
         void Reset();
         void Reset(int range, INode startNode);
     }
