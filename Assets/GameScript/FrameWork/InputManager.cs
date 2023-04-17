@@ -52,35 +52,62 @@ namespace SunHeTBS
         void InputUpdate()
         {
             #region Read input Axis
-            axisLeft = false;
-            axisRight = false;
-            axisUp = false;
-            axisDown = false;
-            long milliTS = TimeUtil.GetMilliseconds();
-            if (milliTS - milliTS_cursor_moved < interval_cursor_move)
-            { }
-            else
+            //axisLeft = false;
+            //axisRight = false;
+            //axisUp = false;
+            //axisDown = false;
+            //long milliTS = TimeUtil.GetMilliseconds();
+            //if (milliTS - milliTS_cursor_moved < interval_cursor_move)
+            //{ }
+            //else
+            //{
+            //    float axis_horizontal = Input.GetAxis("Horizontal");
+            //    float axis_vertical = Input.GetAxis("Vertical");
+            //    if (Mathf.Abs(axis_horizontal) > axis_move_sensitivity)
+            //    {
+            //        if (axis_horizontal > 0)
+            //            axisRight = true;
+            //        else
+            //            axisLeft = true;
+            //        milliTS_cursor_moved = milliTS;
+            //    }
+            //    if (Mathf.Abs(axis_vertical) > axis_move_sensitivity)
+            //    {
+            //        if (axis_vertical > 0)
+            //            axisUp = true;
+            //        else
+            //            axisDown = true;
+            //        milliTS_cursor_moved = milliTS;
+            //    }
+            //}
+            #endregion
+            if (Input.GetMouseButtonUp(0))
             {
-                float axis_horizontal = Input.GetAxis("Horizontal");
-                float axis_vertical = Input.GetAxis("Vertical");
-                if (Mathf.Abs(axis_horizontal) > axis_move_sensitivity)
+                var groundPos = GroundPosition();
+                //mouse control
+                if (BLogic.Inst != null)
+                    BLogic.Inst.OnMouseClick(groundPos);
+            }
+
+        }
+
+        public static Camera mapCamera;
+        public static Vector3 GroundPosition()
+        {
+            if (mapCamera == null)
+                if (TBSMapService.Inst?.mapCamera?.m_camera != null)
+                    mapCamera = TBSMapService.Inst.mapCamera.m_camera;
+            if (mapCamera != null)
+            {
+                var plane = new Plane(Vector3.up, Vector3.zero);
+                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                float enter = 0f;
+                if (plane.Raycast(mouseRay, out enter))
                 {
-                    if (axis_horizontal > 0)
-                        axisRight = true;
-                    else
-                        axisLeft = true;
-                    milliTS_cursor_moved = milliTS;
-                }
-                if (Mathf.Abs(axis_vertical) > axis_move_sensitivity)
-                {
-                    if (axis_vertical > 0)
-                        axisUp = true;
-                    else
-                        axisDown = true;
-                    milliTS_cursor_moved = milliTS;
+                    return mouseRay.GetPoint(enter);
                 }
             }
-            #endregion
+            return Vector3.zero;
         }
     }
 }

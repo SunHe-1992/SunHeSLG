@@ -845,7 +845,8 @@ public class FUIManager : ISingleton
         if (topWin != null)
         {
             var winType = (FUIDef.FWindow)topWin.FUIWindowType;
-            if (winType != FUIDef.FWindow.TestUI)
+            if (winType != FUIDef.FWindow.BattlePanel
+            && winType != FUIDef.FWindow.BattlePrepare)
             {
                 HideUI(topWin);
             }

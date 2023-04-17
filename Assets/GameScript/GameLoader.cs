@@ -43,10 +43,11 @@ public class GameLoader : MonoBehaviour
         BattleDriver.Init();
         BLogic.Init();
         ConfigManager.Init();
-        //InputManager.Init();
+        InputManager.Init();
         FUIManager.Init();
         UIAnimationService.Init();
         TBSMapService.Init();
+        UIService.Init();
 
         BindFGUI.BindAll();//fairy code bind 
         LoadData();//load json configs

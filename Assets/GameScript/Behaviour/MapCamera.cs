@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MapCamera : MonoBehaviour
 {
+    public Camera m_camera;
     /*cam : map tiles   20  * 13
 cam rotation ( 86,0,0)
 cam pos : x =tile , y =10 , z= tile_z -1.5
@@ -11,7 +12,7 @@ cam pos : x =tile , y =10 , z= tile_z -1.5
     // Start is called before the first frame update
     void Start()
     {
-
+        m_camera = GetComponent<Camera>();
     }
 
     // Update is called once per frame

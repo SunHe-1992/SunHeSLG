@@ -81,6 +81,25 @@ namespace SunHeTBS
     }
 
 
-
+    public static class PawnCampTool
+    {
+        static Dictionary<PawnCamp, bool[]> friendDic = new Dictionary<PawnCamp, bool[]>()
+        {
+            //if a tile is default ,it is empty
+            /*                            defalut player villian ally   neutral */
+            { PawnCamp.Player,    new bool[]{true, true , false, true , false} },
+            { PawnCamp.Villain,   new bool[]{true, false, true, false, false } },
+            { PawnCamp.PlayerAlly,new bool[]{true, true , false ,true , false } },
+            { PawnCamp.Neutral,   new bool[]{true, false ,false, false, true } },
+        };
+        public static bool CampsHostile(PawnCamp campA, PawnCamp campB)
+        {
+            return friendDic[campA][(int)campB] == false;
+        }
+        public static bool CampsFriend(PawnCamp campA, PawnCamp campB)
+        {
+            return friendDic[campA][(int)campB] == false;
+        }
+    }
 
 }

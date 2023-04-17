@@ -37,11 +37,12 @@ namespace SunHeTBS
         /// <summary>
         /// when player controlling
         /// </summary>
-        public Vector3Int tempPos;
+        public Vector3Int savePos;
         public void Init()
         {
             curState = PawnState.Idle;
             this.LoadModel();
+            this.savePos = this.curPosition;
         }
         public override string ToString()
         {
@@ -249,12 +250,76 @@ namespace SunHeTBS
             this.curState = PawnState.Idle;
             controller.StopMove();
             moveDestTile = moveTileList[moveTileList.Count - 1] as TileEntity;
-            tempPos = moveDestTile.Position;
+            this.curPosition = moveDestTile.Position;
         }
         public void ResetPosition()
         {
             this.controller.SetPosition();
         }
         #endregion
+
+        #region trun and phase
+        public void OnNewTurnStart(int turnNum)
+        {
+
+        }
+        public void OnNewPhaseStart(PawnCamp phaseCamp)
+        {
+
+        }
+        public void EndAction()
+        {
+            this.actionEnd = true;
+        }
+        #endregion
+
+
+        public void ExecuteWait()
+        {
+            this.EndAction();
+        }
+
+        /// <summary>
+        /// on temp position
+        /// </summary>
+        public void CountNearPawns(out int atkPawns, out int tradablePawns, out int conveyPawns)
+        {
+            tradablePawns = 0;
+            conveyPawns = 0;
+            atkPawns = 0;
+            //find foes again
+            List<TileEntity> atkTiles = GetInRangePosOneTile(this.GetAtkRangeMin(), this.GetAtkRangeMax(), curPosition);
+            HashSet<int> tileHash = new HashSet<int>();
+            foreach (var tile in atkTiles)
+            {
+                tileHash.Add(tile.tileId);
+            }
+            var pawnList = BLogic.Inst.GetPawnsOnTiles(tileHash);
+            List<Pawn> foeList = pawnList.FindAll(p => { return PawnCampTool.CampsHostile(this.camp, p.camp); });
+            atkPawns = foeList.Count;
+
+            var neighbours = BLogic.Inst.GetAdjacentPawns(this);
+            foreach (var pawn in neighbours)
+            {
+                if (pawn.camp == this.camp)
+                    tradablePawns++;
+            }
+        }
+
+        public void ActionWait()
+        {
+            this.savePos = this.curPosition;
+            this.EndAction();
+            BLogic.Inst.OnPawnEndAction(this);
+            TBSMapService.Inst.UnspawnAllCoverPlanes();
+            BLogic.Inst.CheckPhaseSwitch();
+            BLogic.Inst.RefreshPawnMovement();
+            //recalculate movable tile datas
+            //CalculateMoveArea();
+            //CalculateRangeArea();
+            moveTileIds = null;
+            rangeTileDic = null;
+        }
+
     }
 }

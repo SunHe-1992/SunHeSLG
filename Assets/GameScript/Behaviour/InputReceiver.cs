@@ -104,4 +104,42 @@ public class InputReceiver : MonoBehaviour
     public bool axisDown { get; private set; }
     #endregion
 
+
+    #region UI control events
+    public void UIMove(InputAction.CallbackContext context)
+    {
+        m_Move = context.ReadValue<Vector2>();
+    }
+    public void UIConfirmClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            UniEvent.SendMessage(GameEventDefine.ClickConfirm);
+        }
+    }
+    public void UICancelClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            UniEvent.SendMessage(GameEventDefine.ClickCancel);
+        }
+    }
+
+    #endregion
+    public static bool InputInUI = true;
+    public static void SwitchInputToMap()
+    {
+        if (Inst?.inputComp != null)
+            Inst.inputComp.SwitchCurrentActionMap("Player");
+        InputInUI = false;
+        Debugger.Log($"SwitchInputTo Map");
+    }
+    public static void SwitchInputToUI()
+    {
+        if (Inst?.inputComp != null)
+            Inst.inputComp.SwitchCurrentActionMap("UI");
+        InputInUI = true;
+        Debugger.Log($"SwitchInputTo UI");
+    }
+
 }

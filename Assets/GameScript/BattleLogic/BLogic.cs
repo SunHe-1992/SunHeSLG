@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Singleton;
 using UniFramework.Event;
+using System.Linq;
+
 namespace SunHeTBS
 {
     public enum GamePlayState : int
@@ -17,13 +19,10 @@ namespace SunHeTBS
         ActionPlay = 4,
         PhaseSwitch = 5,
         /// <summary>
-        /// waiting for player controll a pawn
+        /// player controll pawns
         /// </summary>
-        SelectingPawn = 6,
-        /// <summary>
-        /// player select a move destination
-        /// </summary>
-        SelectingMoveDest = 7,
+        PlayerControl = 6,
+
         /// <summary>
         /// waiting
         /// </summary>
@@ -33,21 +32,22 @@ namespace SunHeTBS
         /// </summary>
         CombatPlay = 9,
 
-        /* UI stats : for UI and map switch*/
-        /// <summary>
-        /// UI exp and level up
-        /// </summary>
-        UIExpPlay = 10,
-        UIBattlePrepare = 11,
-        /// <summary>
-        /// pawn moves to dest,and show action menu UI
-        /// </summary>
-        UIActionMenu = 12,
-        /// <summary>
-        /// UI combat predict ,and target pawn select
-        /// </summary>
-        UICombatPredict = 13,
 
+    }
+    public enum PlayerControlState
+    {
+        Default,
+        /// <summary>
+        /// cursor moves freely
+        /// </summary>
+        TileSelect,
+        /// <summary>
+        /// click confirm ,go to cursor pos 
+        /// </summary>
+        PawnSelected,
+        PawnMoving,
+        /* UI stats : for UI and map switch*/
+        UIControl,
     }
 
     /// <summary>
@@ -75,7 +75,16 @@ namespace SunHeTBS
         /// change to target state
         /// </summary>
         GamePlayState nextGameState = GamePlayState.Default;
-
+        /// <summary>
+        /// Player control state
+        /// </summary>
+        public PlayerControlState pCtrlState = PlayerControlState.Default;
+        void SetPlayerCtrlState(PlayerControlState state)
+        {
+            pCtrlState = state;
+            Debugger.Log($"SetPlayerCtrlState {state}");
+        }
+        public int BattleTurn = 0;
         public PawnCamp curCamp { get; private set; }
         List<PawnCamp> campList;
         public PawnCamp GetNextCamp()
@@ -122,13 +131,9 @@ namespace SunHeTBS
                     case GamePlayState.ActionPlay: break;
                     case GamePlayState.DialoguePlay: break;
                     case GamePlayState.PhaseSwitch: OnEnterPhaseSwitch(); break;
-                    case GamePlayState.SelectingPawn: OnEnterSelectPawn(); break;
-                    case GamePlayState.SelectingMoveDest: OnEnterSelectingMoveDest(); break;
+                    case GamePlayState.PlayerControl: OnEnterPlayerControl(); break;
                     case GamePlayState.PawnMoving: break;
-                    case GamePlayState.UIActionMenu: break;
-                    case GamePlayState.UICombatPredict: break;
                     case GamePlayState.CombatPlay: break;
-                    case GamePlayState.UIExpPlay: break;
                 }
                 return true;
             }
@@ -242,7 +247,7 @@ namespace SunHeTBS
         #endregion
 
         #region cursor select pawn
-        public Vector3Int oldCursorPos;
+
         public Vector3Int cursorPos;
         /// <summary>
         /// pawn under cursor
@@ -257,38 +262,7 @@ namespace SunHeTBS
         {
         }
 
-        /// <summary>
-        /// input order try move cursor,
-        /// </summary>
-        /// <param name="xAdd"></param>
-        /// <param name="yAdd"></param>
-        public void CursorInputMove(int xAdd, int yAdd)
-        {
-            oldCursorPos = cursorPos;
-            Vector3Int newPos = new Vector3Int(xAdd, yAdd) + cursorPos;
-            newPos = TBSMapService.Inst.map.TrimPos_Border(newPos);
-            cursorPos = newPos;
-            CheckCursorPos();
-        }
-        public void CursorInputMoveTo(Vector3Int pos)
-        {
-            var newPos = TBSMapService.Inst.map.TrimPos_Border(pos);
-            cursorPos = newPos;
-            oldCursorPos = newPos;
-            CheckCursorPos();
-        }
-        void CheckCursorPos()
-        {
-            int tileId = TBSMapService.Inst.GetTileId(cursorPos);
-            if (mapPawnDic.ContainsKey(tileId))//todo cursor points a pawn,show info and move area
-            {
-                pointedPawn = mapPawnDic[tileId];
-            }
-            else
-            {
-                pointedPawn = null;
-            }
-        }
+
 
 
         public static BLogic Inst { get; private set; }
@@ -326,27 +300,49 @@ namespace SunHeTBS
         }
         public void OnEnterPhaseSwitch()
         {
-            curCamp = GetNextCamp();
+
             UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
         }
         public void PhaseSwitchDone()
         {
-            SetNextGamePlayState(GamePlayState.SelectingPawn);
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.camp == curCamp)
+                    pawn.actionEnd = false;
+            }
+            if (curCamp == PawnCamp.Default)
+                curCamp = PawnCamp.Player;
+            if (curCamp == PawnCamp.Player)
+            {
+                SetNextGamePlayState(GamePlayState.PlayerControl);
+                SetPlayerCtrlState(PlayerControlState.TileSelect);
+                InputReceiver.SwitchInputToMap();
+            }
+            else //todo AI pawn actions
+            {
+
+            }
         }
 
-        public void OnEnterSelectPawn()
+        public void OnEnterPlayerControl()
         {
-            UniEvent.SendMessage(GameEventDefine.ShowSelectPawn);
+
         }
 
-        public void OnEnterSelectingMoveDest()
-        {
-            if (pointedPawn != null)
-                selectedPawn = pointedPawn;
-        }
 
-        #region pawn move
+        #region Pawn Move
         Pawn movingPawn = null;
+        private void PawnTempMove()
+        {
+            int cursorTileId = TBSMapService.Inst.GetTileId(cursorPos);
+            if (pointedPawn == null)
+            {
+                if (selectedPawn.moveTileIds.Contains(cursorTileId))
+                {
+                    PawnStartMove(selectedPawn, cursorTileId);
+                }
+            }
+        }
         public void PawnStartMove(Pawn p, int tileId)
         {
             movingPawn = p;
@@ -385,14 +381,30 @@ namespace SunHeTBS
                 }
                 else
                 {
-                    SetNextGamePlayState(GamePlayState.UIActionMenu);
                     //show pawn's atk planes on this tile
-                    TBSMapService.Inst.ShowPawnCoverPlanesOneTile(movingPawn, movingPawn.tempPos);
+                    TBSMapService.Inst.ShowPawnCoverPlanesOneTile(movingPawn, movingPawn.curPosition);
                     //show action menu
+                    SetPlayerCtrlState(PlayerControlState.UIControl);
                     UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
+                    SetNextGamePlayState(GamePlayState.PlayerControl);
                 }
                 movingPawn = null;
             }
+        }
+        /// <summary>
+        /// click cancel on Action Menu
+        /// </summary>
+        public void PawnSetPostionBack()
+        {
+            if (selectedPawn == null) return;
+            if (gameState != GamePlayState.PlayerControl) return;
+            selectedPawn.curPosition = selectedPawn.savePos;
+            selectedPawn.ResetPosition();
+            SetPlayerCtrlState(PlayerControlState.TileSelect);
+            CursorInputMoveTo(selectedPawn.curPosition);
+            BattleDriver.Inst.MoveCursorObj();
+            TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+            InputReceiver.SwitchInputToMap();
         }
         #endregion
 
@@ -401,6 +413,244 @@ namespace SunHeTBS
             return TBSMapService.Inst.map;
         }
 
+        public List<Pawn> GetPawnsOnTiles(HashSet<int> tileHash)
+        {
+            List<Pawn> pawns = new List<Pawn>();
+            foreach (var pawn in this.pawnList)
+            {
+                if (tileHash.Contains(pawn.TilePosId()))
+                {
+                    pawns.Add(pawn);
+                }
+            }
+            return pawns;
+        }
+        public Pawn GetPawnOnTile(TileEntity tile)
+        {
+            if (mapPawnDic.ContainsKey(tile.tileId))
+                return mapPawnDic[tile.tileId];
+            return null;
+        }
+        public List<Pawn> GetAdjacentPawns(Pawn p)
+        {
+            List<Pawn> pList = new List<Pawn>();
+            int tileId = p.TilePosId();
+            var tile = TBSMapService.Inst.map.GetTileFromDic(tileId);
 
+            var nodes = TBSMapService.Inst.map.NeighborsMovable(tile).Where(neigh => neigh != null);
+            foreach (var node in nodes)
+            {
+                var pawn = GetPawnOnTile(node as TileEntity);
+                if (pawn != null)
+                    pList.Add(pawn);
+            }
+            return pList;
+        }
+
+        #region Cursor Move and Selecting Pawn
+        public void OnInputAxis(int xAdd, int yAdd)
+        {
+            switch (pCtrlState)
+            {
+                case PlayerControlState.TileSelect:
+                    CursorInputMove(xAdd, yAdd);
+                    if (pointedPawn != null)
+                        TBSMapService.Inst.ShowPawnCoverPlanes(pointedPawn);
+                    else
+                        TBSMapService.Inst.UnspawnPawnCoverPlanes(null);
+                    break;
+                case PlayerControlState.PawnSelected:
+                    CursorInputMove(xAdd, yAdd);
+                    //arrows
+                    break;
+            }
+
+        }
+        /// <summary>
+        /// input order try move cursor,
+        /// </summary>
+        /// <param name="xAdd"></param>
+        /// <param name="yAdd"></param>
+        public void CursorInputMove(int xAdd, int yAdd)
+        {
+            Vector3Int newPos = new Vector3Int(xAdd, yAdd) + cursorPos;
+            newPos = TBSMapService.Inst.map.TrimPos_Border(newPos);
+            ChangeCursorPos(newPos);
+        }
+        public void CursorInputMoveTo(Vector3Int pos)
+        {
+            var newPos = TBSMapService.Inst.map.TrimPos_Border(pos);
+            ChangeCursorPos(newPos);
+        }
+        /// <summary>
+        /// handle cursor pos changed
+        /// </summary>
+        /// <param name="newPos"></param>
+        void ChangeCursorPos(Vector3Int newPos)
+        {
+            if (newPos == cursorPos)
+                return;
+            cursorPos = newPos;
+
+            int tileId = TBSMapService.Inst.GetTileId(cursorPos);
+            if (mapPawnDic.ContainsKey(tileId))//todo cursor points a pawn,show info and move area
+            {
+                pointedPawn = mapPawnDic[tileId];
+            }
+            else
+            {
+                pointedPawn = null;
+            }
+
+            var cursorObj = BattleDriver.Inst.CursorObj;
+            if (cursorObj != null)
+            {
+                BattleDriver.Inst.MoveCursorObj();
+            }
+
+        }
+        public void OnMouseClick(Vector3 pos)
+        {
+            if (gameState == GamePlayState.PlayerControl)
+            {
+                if (pCtrlState == PlayerControlState.TileSelect)
+                {
+                    var clickTile = TBSMapService.Inst.map.Tile(pos);
+                    if (clickTile != null)
+                    {
+                        CursorInputMoveTo(clickTile.Position);//set pointedPawn
+                    }
+                }
+            }
+        }
+
+
+        #endregion
+        public void OnClickConfirm()
+        {
+            if (gameState != GamePlayState.PlayerControl)
+            {
+                return;
+            }
+            switch (pCtrlState)
+            {
+                case PlayerControlState.TileSelect:
+                    {
+                        if (pointedPawn != null)
+                        {
+                            if (pointedPawn.camp == PawnCamp.Player)//player's pawn
+                            {
+                                if (pointedPawn.actionEnd == false)//move player's pawn
+                                {
+                                    selectedPawn = pointedPawn;
+                                    SetPlayerCtrlState(PlayerControlState.PawnSelected);
+                                }
+                            }
+                            else if (PawnCampTool.CampsHostile(PawnCamp.Player, pointedPawn.camp))
+                            {
+                                //todo toggle enemy's attack range
+                            }
+                        }
+                    }
+                    break;
+
+                case PlayerControlState.PawnSelected:
+                    {
+                        if (selectedPawn.camp == PawnCamp.Player)//player's pawn
+                        {
+                            //goto pos
+                            PawnTempMove();
+                        }
+                    }
+                    break;
+            }
+        }
+        /// <summary>
+        /// On click cancel button
+        /// </summary>
+        public void OnClickCancel()
+        {
+            if (gameState != GamePlayState.PlayerControl)
+            {
+                return;
+            }
+            switch (gameState)
+            {
+                case GamePlayState.PlayerControl:
+                    PlayerControlCancel();
+                    break;
+            }
+        }
+        /// <summary>
+        /// Cancel on Player control state
+        /// </summary>
+        void PlayerControlCancel()
+        {
+            switch (pCtrlState)
+            {
+                case PlayerControlState.PawnSelected: /* click cancel when selecting dest tile*/
+                    selectedPawn.curPosition = selectedPawn.savePos;
+                    CursorInputMoveTo(selectedPawn.curPosition);
+                    SetPlayerCtrlState(PlayerControlState.TileSelect);
+                    BattleDriver.Inst.MoveCursorObj();
+                    TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+                    selectedPawn = null;
+                    InputReceiver.SwitchInputToMap();
+                    break;
+            }
+        }
+        /// <summary>
+        /// ui control back to map control
+        /// </summary>
+        public void UIControlToMap()
+        {
+            selectedPawn.curPosition = selectedPawn.savePos;
+            selectedPawn.ResetPosition();
+            BattleDriver.Inst.MoveCursorObj();
+            TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
+            InputReceiver.SwitchInputToMap();
+        }
+
+        public void CheckPhaseSwitch()
+        {
+            int activePawnCount = 0;
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.camp == curCamp && pawn.actionEnd == false)
+                {
+                    activePawnCount++;
+                }
+            }
+            if (activePawnCount == 0)
+            {
+                //go to next phase
+                EndCurrentPhase();
+            }
+        }
+        void EndCurrentPhase()
+        {
+            curCamp = GetNextCamp();
+            if (curCamp == PawnCamp.Player)
+            {
+                BattleTurn++;
+                SetNextGamePlayState(GamePlayState.PhaseSwitch);
+            }
+        }
+        public void RefreshPawnMovement()
+        {
+            mapPawnDic.Clear();
+            foreach (var pawn in pawnList)
+            {
+                int tileId = pawn.TilePosId();
+                mapPawnDic[tileId] = pawn;
+            }
+        }
+        public void OnPawnEndAction(Pawn p)
+        {
+            if (p.camp == PawnCamp.Player)
+            {
+                SetPlayerCtrlState(PlayerControlState.TileSelect);
+            }
+        }
     }
 }

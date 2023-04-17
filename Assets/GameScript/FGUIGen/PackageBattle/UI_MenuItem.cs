@@ -8,6 +8,7 @@ namespace PackageBattle
     public partial class UI_MenuItem : GButton
     {
         public GTextField txt_des;
+        public GLoader clickLoader;
         public const string URL = "ui://fstosj6ilay8k";
 
         public static UI_MenuItem CreateInstance()
@@ -20,6 +21,7 @@ namespace PackageBattle
             base.ConstructFromXML(xml);
 
             txt_des = (GTextField)GetChild("txt_des");
+            clickLoader = (GLoader)GetChild("clickLoader");
         }
     }
 }

@@ -80,7 +80,11 @@ namespace SunHeTBS
 
         private void CheckGMKey()
         {
-            //todo GM key open debug UI
+            //GM key open developer UI
+            if (Input.GetKeyUp(KeyCode.F1))
+            {
+                FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+            }
         }
 
         #region controller list
@@ -203,7 +207,7 @@ namespace SunHeTBS
             //};
 
             TBSMapService.Inst.ClearData();
-            var jsonAssetInfo = YooAssets.GetAssetInfo($"Config/{mapName}");
+            var jsonAssetInfo = YooAssets.GetAssetInfo($"MapData/{mapName}");
             YooAssets.LoadAssetSync(jsonAssetInfo).Completed += (handle) =>
             {
                 var jStr = handle.AssetObject.ToString();

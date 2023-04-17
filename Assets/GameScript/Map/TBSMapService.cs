@@ -143,6 +143,10 @@ namespace SunHeTBS
                 }
             }
         }
+        public void UnspawnPawnCoverPlanes(Pawn p)
+        {
+            UnspawnAllCoverPlanes(); //todo  save cover plane data and only unspawn this pawn's cover planes
+        }
         //public void DiscardAllCoverPlanes()
         //{
 

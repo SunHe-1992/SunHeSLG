@@ -314,17 +314,21 @@ MonoBehaviour:
     m_ActionId: 8278a81c-505e-4ca6-b3e7-91a6ba5e3346
     m_ActionName: Player/Fire[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1405638048}
+        m_TargetAssemblyTypeName: InputReceiver, Assembly-CSharp
+        m_MethodName: UIMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a7e1e3ab-a5f8-4a41-9c85-bd169a598966
     m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 36428dcb-376d-4e19-8f65-f63fe442fca0
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 931fcf26-0c34-4ad7-b5bb-b49c3c62f7f6
-    m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 8c1db1f6-85bc-47f7-8b48-61b9d090d7fe
@@ -385,6 +389,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2879ae5b-1b02-47e2-bdb7-63eedcbd1081
     m_ActionName: Player/Confirm[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1405638048}
+        m_TargetAssemblyTypeName: InputReceiver, Assembly-CSharp
+        m_MethodName: UICancelClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10c9e4b4-b838-470a-b8eb-663c5011fb45
+    m_ActionName: UI/Cancel[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1405638048}
+        m_TargetAssemblyTypeName: InputReceiver, Assembly-CSharp
+        m_MethodName: UIConfirmClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c430ca89-87f2-4938-9f0d-2228412a8c9b
+    m_ActionName: UI/Confirm[/Keyboard/j]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
