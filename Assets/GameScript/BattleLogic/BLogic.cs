@@ -631,6 +631,13 @@ namespace SunHeTBS
                 //go to next phase
                 EndCurrentPhase();
             }
+            else
+            {
+                if (curCamp == PawnCamp.Player)
+                {
+                    InputReceiver.SwitchInputToMap();
+                }
+            }
         }
         void EndCurrentPhase()
         {
@@ -641,13 +648,24 @@ namespace SunHeTBS
                 SetNextGamePlayState(GamePlayState.PhaseSwitch);
             }
         }
-        public void RefreshPawnMovement()
+        public void RefreshDataOnPawnMoved()
         {
+            //remake this dic <tileId,Pawn>
             mapPawnDic.Clear();
             foreach (var pawn in pawnList)
             {
                 int tileId = pawn.TilePosId();
                 mapPawnDic[tileId] = pawn;
+            }
+            //remake all tileEntity.camp
+            var tileDic = TBSMapService.Inst.map.GetTileDic();
+            foreach (var tile in tileDic.Values)
+            {
+                var pawn = GetPawnOnTile(tile);
+                if (pawn != null)
+                    tile.camp = pawn.camp;
+                else
+                    tile.camp = PawnCamp.Default;
             }
         }
         public void OnPawnEndAction(Pawn p)

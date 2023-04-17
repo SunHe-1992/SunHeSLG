@@ -316,13 +316,13 @@ namespace SunHeTBS
             this.EndAction();
             BLogic.Inst.OnPawnEndAction(this);
             TBSMapService.Inst.UnspawnAllCoverPlanes();
-            BLogic.Inst.CheckPhaseSwitch();
-            BLogic.Inst.RefreshPawnMovement();
+            BLogic.Inst.RefreshDataOnPawnMoved();
             //recalculate movable tile datas
             //CalculateMoveArea();
             //CalculateRangeArea();
             moveTileIds = null;
             rangeTileDic = null;
+            BLogic.Inst.CheckPhaseSwitch();
         }
 
     }
