@@ -257,7 +257,6 @@ public partial class UIPage_BattleMain : FUIBase
 
     void OnPhaseSwitch(IEventMessage msg)
     {
-        HideUIComp();
         int campNum = (int)BLogic.Inst.curCamp;
         ui.phaseCom.visible = true;
         ui.phaseCom.ctrl_phase.selectedIndex = campNum;
@@ -265,8 +264,7 @@ public partial class UIPage_BattleMain : FUIBase
     }
     void PhaseSwitchEnd()
     {
-        HideUIComp();
-        BLogic.Inst.PhaseSwitchDone();
+        ui.phaseCom.visible = false;
     }
 
     void ShowSelectPawn(IEventMessage msg)

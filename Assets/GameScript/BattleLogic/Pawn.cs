@@ -134,10 +134,6 @@ namespace SunHeTBS
             foreach (var tile in walkableTiles)
             {
                 var dist = map.Distance(tile, curTile, this.IsExtraMoveCost());
-                if (dist > this.move_points)
-                {
-                    Debug.LogError("error: pawn 117");
-                }
                 moveTileIds.Add(tile.tileId);
                 //var pos = map.WorldPosition(tile);
             }

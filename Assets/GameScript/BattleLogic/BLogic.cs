@@ -17,11 +17,12 @@ namespace SunHeTBS
         MovieTime = 2,
         DialoguePlay = 3,
         ActionPlay = 4,
-        PhaseSwitch = 5,
+        PhaseStart = 5,
+        PhaseEnding = 6,
         /// <summary>
         /// player controll pawns
         /// </summary>
-        PlayerControl = 6,
+        PlayerControl = 7,
 
         /// <summary>
         /// waiting
@@ -84,31 +85,7 @@ namespace SunHeTBS
             pCtrlState = state;
             Debugger.Log($"SetPlayerCtrlState {state}");
         }
-        public int BattleTurn = 0;
-        public PawnCamp curCamp { get; private set; }
-        List<PawnCamp> campList;
-        public PawnCamp GetNextCamp()
-        {
 
-            campList = new List<PawnCamp>();
-            HashSet<PawnCamp> hash = new HashSet<PawnCamp>();
-            foreach (var pawn in pawnList)
-            {
-                hash.Add(pawn.camp);
-            }
-            campList.AddRange(hash);
-            campList.Sort();
-            if (campList.Count == 0)
-            {
-                Debugger.LogError("no valid camp !");
-            }
-            PawnCamp camp = campList[0];
-            if ((int)camp + 1 > campList.Count)
-                camp = PawnCamp.Player;
-            else
-                camp = curCamp + 1;
-            return camp;
-        }
         public GamePlayState GetGamePlayState()
         {
             return gameState;
@@ -130,7 +107,8 @@ namespace SunHeTBS
                     case GamePlayState.MovieTime: OnEnterMovieTime(); break;
                     case GamePlayState.ActionPlay: break;
                     case GamePlayState.DialoguePlay: break;
-                    case GamePlayState.PhaseSwitch: OnEnterPhaseSwitch(); break;
+                    case GamePlayState.PhaseStart: OnEnterPhaseStart(); break;
+                    case GamePlayState.PhaseEnding: EndCurrentPhase(); break;
                     case GamePlayState.PlayerControl: OnEnterPlayerControl(); break;
                     case GamePlayState.PawnMoving: break;
                     case GamePlayState.CombatPlay: break;
@@ -300,34 +278,11 @@ namespace SunHeTBS
         public void OnEnterMovieTime()
         {
             //no movie in demo ,show battle main page
-            FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel,
-                (win) => { SetNextGamePlayState(GamePlayState.PhaseSwitch); });
-        }
-        public void OnEnterPhaseSwitch()
-        {
+            FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
 
-            UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
+            SetNextGamePlayState(GamePlayState.PhaseStart);
         }
-        public void PhaseSwitchDone()
-        {
-            foreach (var pawn in pawnList)
-            {
-                if (pawn.camp == curCamp)
-                    pawn.actionEnd = false;
-            }
-            if (curCamp == PawnCamp.Default)
-                curCamp = PawnCamp.Player;
-            if (curCamp == PawnCamp.Player)
-            {
-                SetNextGamePlayState(GamePlayState.PlayerControl);
-                SetPlayerCtrlState(PlayerControlState.TileSelect);
-                InputReceiver.SwitchInputToMap();
-            }
-            else //todo AI pawn actions
-            {
 
-            }
-        }
 
         public void OnEnterPlayerControl()
         {
@@ -616,38 +571,106 @@ namespace SunHeTBS
             InputReceiver.SwitchInputToMap();
         }
 
-        public void CheckPhaseSwitch()
+        #region Phase and Turn switch
+        public int BattleTurn = 0;
+        public PawnCamp curCamp { get; private set; }
+
+        public PawnCamp GetNextCamp()
         {
-            int activePawnCount = 0;
+            Dictionary<PawnCamp, int> countDic = new Dictionary<PawnCamp, int>();
+            countDic[PawnCamp.Default] = 0;
+            countDic[PawnCamp.Player] = 0;
+            countDic[PawnCamp.Villain] = 0;
+            countDic[PawnCamp.PlayerAlly] = 0;
+            countDic[PawnCamp.Neutral] = 0;
+
             foreach (var pawn in pawnList)
             {
-                if (pawn.camp == curCamp && pawn.actionEnd == false)
+                countDic[pawn.camp]++;
+            }
+            PawnCamp nextCamp = PawnCamp.Default;
+            for (PawnCamp i = PawnCamp.Player; i <= PawnCamp.Neutral; i++)
+            {
+                if (i > curCamp && countDic[i] > 0)
                 {
-                    activePawnCount++;
+                    nextCamp = i;
                 }
             }
-            if (activePawnCount == 0)
+            if (nextCamp == PawnCamp.Default)
+                nextCamp = PawnCamp.Player;
+            return nextCamp;
+        }
+        public void OnEnterPhaseStart()
+        {
+            UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
+            OnEnterNewPhase();
+            PhaseSwitchDone();
+        }
+        public void PhaseSwitchDone()
+        {
+            Debugger.Log("PhaseSwitchDone");
+
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.camp == curCamp)
+                    pawn.actionEnd = false;
+            }
+            if (curCamp == PawnCamp.Default)
+                curCamp = PawnCamp.Player;
+
+            if (curCamp == PawnCamp.Player)
+            {
+                SetPlayerCtrlState(PlayerControlState.TileSelect);
+                InputReceiver.SwitchInputToMap();
+                SetNextGamePlayState(GamePlayState.PlayerControl);
+            }
+            if (curCamp == PawnCamp.Player)
+            {
+                OnBattleTurnAdd();
+                SetNextGamePlayState(GamePlayState.PlayerControl);
+                SetPlayerCtrlState(PlayerControlState.TileSelect);
+                InputReceiver.SwitchInputToMap();
+            }
+            else //todo AI pawn actions
+            {
+                StartNPCCtrl();
+            }
+        }
+        void OnBattleTurnAdd()
+        {
+            BattleTurn++;
+
+        }
+        public void CheckPhaseSwitch()
+        {
+            //when a pawn ends action,  if there is no actable pawns,
+            int actableCount = GetActablePawnCount(curCamp);
+            if (actableCount == 0)
             {
                 //go to next phase
-                EndCurrentPhase();
+                SetNextGamePlayState(GamePlayState.PhaseEnding);
             }
-            else
+            else if (curCamp == PawnCamp.Player)//set up control to map
             {
-                if (curCamp == PawnCamp.Player)
-                {
-                    InputReceiver.SwitchInputToMap();
-                }
+                SetPlayerCtrlState(PlayerControlState.TileSelect);
+                InputReceiver.SwitchInputToMap();
+                SetNextGamePlayState(GamePlayState.PlayerControl);
             }
         }
         void EndCurrentPhase()
         {
+            var oldCamp = curCamp;
             curCamp = GetNextCamp();
-            if (curCamp == PawnCamp.Player)
-            {
-                BattleTurn++;
-                SetNextGamePlayState(GamePlayState.PhaseSwitch);
-            }
+            Debugger.Log($"phase camp {oldCamp}=>{curCamp}");
+            SetNextGamePlayState(GamePlayState.PhaseStart);
         }
+        void OnEnterNewPhase()
+        {
+            UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
+
+        }
+        #endregion
+
         public void RefreshDataOnPawnMoved()
         {
             //remake this dic <tileId,Pawn>
@@ -668,12 +691,38 @@ namespace SunHeTBS
                     tile.camp = PawnCamp.Default;
             }
         }
+
         public void OnPawnEndAction(Pawn p)
         {
-            if (p.camp == PawnCamp.Player)
+
+
+        }
+        int GetActablePawnCount(PawnCamp camp)
+        {
+            int count = 0;
+            foreach (var pawn in pawnList)
             {
-                SetPlayerCtrlState(PlayerControlState.TileSelect);
+                if (pawn.camp == camp && pawn.actionEnd == false)
+                    count++;
+            }
+            return count;
+        }
+        #region NPC pawn controls
+        int npcPawnIndex = 0;
+        void StartNPCCtrl()
+        {
+            SetNextGamePlayState(GamePlayState.Default);
+            SetPlayerCtrlState(PlayerControlState.Default);
+            npcPawnIndex = 0;
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.actionEnd == false && pawn.camp == PawnCamp.Villain)
+                {
+                    pawn.EndAction();
+                    pawn.ActionWait();
+                }
             }
         }
+        #endregion
     }
 }
