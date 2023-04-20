@@ -46,14 +46,14 @@ namespace SunHeTBS
 
         public override string ToString()
         {
-            return string.Format("Position: {0}. Vacant = {1}", Position, Vacant);
+            return string.Format($"tileId = {this.tileId} Position: {Position}");
         }
 
         public void ChangeMovableAreaPreset(int area)
         {
 
         }
-      
+
     }
 
 }

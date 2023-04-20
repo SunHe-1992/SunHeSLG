@@ -50,7 +50,12 @@ namespace SunHeTBS
         /* UI stats : for UI and map switch*/
         UIControl,
     }
-
+    public enum PerformMode
+    {
+        SkipPerform,
+        AutoPerform,
+        PlayerCommand,
+    }
     /// <summary>
     /// Battle Logic
     /// </summary>
@@ -58,7 +63,8 @@ namespace SunHeTBS
     {
 
         //todo read data , deploy battle field
-
+        public static PerformMode performMode = PerformMode.PlayerCommand;
+        public static bool skipNPCPhase = true;
         float FixedLogicTime = 0;
         public bool Running;
         /// <summary>
@@ -174,10 +180,12 @@ namespace SunHeTBS
                 mapPawnDic[tileId] = p;
                 var tileEntity = TBSMapService.Inst.map.Tile(p.curPosition);
                 tileEntity.camp = p.camp;
+                Debugger.LogError($"map tile {p.ToString()} add a pawn!");
+
             }
             else
             {
-                Debugger.LogError($"map tile {p.curPosition.ToString()} already contains pawn!");
+                Debugger.LogError($"map tile {p.ToString()} already contains pawn!");
             }
         }
         public void AddTestPawn(PawnCamp camp, Vector3Int pos, PawnMoveType moveType)
@@ -209,9 +217,9 @@ namespace SunHeTBS
         {
             //test
             AddTestPawn(PawnCamp.Player, new Vector3Int(2, 2), PawnMoveType.Ground);
-            AddTestPawn(PawnCamp.Player, new Vector3Int(4, 5), PawnMoveType.Ground);
+            //AddTestPawn(PawnCamp.Player, new Vector3Int(4, 5), PawnMoveType.Ground);
             AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 2), PawnMoveType.Ground);
-            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground);
+            //AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground);
 
 
             InitPlayerPosition();
@@ -602,14 +610,13 @@ namespace SunHeTBS
         }
         public void OnEnterPhaseStart()
         {
+            Debugger.Log($"Start Phase");
             UniEvent.SendMessage(GameEventDefine.PhaseSwitch);
             OnEnterNewPhase();
             PhaseSwitchDone();
         }
         public void PhaseSwitchDone()
         {
-            Debugger.Log("PhaseSwitchDone");
-
             foreach (var pawn in pawnList)
             {
                 if (pawn.camp == curCamp)
@@ -620,20 +627,22 @@ namespace SunHeTBS
 
             if (curCamp == PawnCamp.Player)
             {
+                performMode = PerformMode.PlayerCommand;
                 SetPlayerCtrlState(PlayerControlState.TileSelect);
                 InputReceiver.SwitchInputToMap();
                 SetNextGamePlayState(GamePlayState.PlayerControl);
-            }
-            if (curCamp == PawnCamp.Player)
-            {
                 OnBattleTurnAdd();
-                SetNextGamePlayState(GamePlayState.PlayerControl);
-                SetPlayerCtrlState(PlayerControlState.TileSelect);
-                InputReceiver.SwitchInputToMap();
             }
             else //todo AI pawn actions
             {
-                StartNPCCtrl();
+                if (skipNPCPhase)
+                {
+                    performMode = PerformMode.SkipPerform;
+                    StartNPCCtrl();
+                }
+                else
+                    performMode = PerformMode.AutoPerform;
+
             }
         }
         void OnBattleTurnAdd()
@@ -649,6 +658,7 @@ namespace SunHeTBS
             {
                 //go to next phase
                 SetNextGamePlayState(GamePlayState.PhaseEnding);
+                RepositionAllPawns();
             }
             else if (curCamp == PawnCamp.Player)//set up control to map
             {
@@ -661,7 +671,7 @@ namespace SunHeTBS
         {
             var oldCamp = curCamp;
             curCamp = GetNextCamp();
-            Debugger.Log($"phase camp {oldCamp}=>{curCamp}");
+            Debugger.Log($"End Phase :camp {oldCamp}=>{curCamp}");
             SetNextGamePlayState(GamePlayState.PhaseStart);
         }
         void OnEnterNewPhase()
@@ -671,25 +681,25 @@ namespace SunHeTBS
         }
         #endregion
 
-        public void RefreshDataOnPawnMoved()
+        /// <summary>
+        /// reset data when a pawn changed position
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="fromPos"></param>
+        /// <param name="toPos"></param>
+        public void RefreshDataOnPawnMoved(Pawn p, Vector3Int fromPos, Vector3Int toPos)
         {
-            //remake this dic <tileId,Pawn>
-            mapPawnDic.Clear();
-            foreach (var pawn in pawnList)
-            {
-                int tileId = pawn.TilePosId();
-                mapPawnDic[tileId] = pawn;
-            }
-            //remake all tileEntity.camp
+            if (fromPos == toPos)
+                return;
+            int fromTileId = TBSMapService.Inst.GetTileId(fromPos);
+            int toTileId = TBSMapService.Inst.GetTileId(toPos);
+            //remake dic <tileId,Pawn>
+            mapPawnDic[fromTileId] = null;
+            mapPawnDic[toTileId] = p;
+            //remake tileEntity.camp
             var tileDic = TBSMapService.Inst.map.GetTileDic();
-            foreach (var tile in tileDic.Values)
-            {
-                var pawn = GetPawnOnTile(tile);
-                if (pawn != null)
-                    tile.camp = pawn.camp;
-                else
-                    tile.camp = PawnCamp.Default;
-            }
+            tileDic[fromTileId].camp = PawnCamp.Default;
+            tileDic[toTileId].camp = p.camp;
         }
 
         public void OnPawnEndAction(Pawn p)
@@ -708,21 +718,41 @@ namespace SunHeTBS
             return count;
         }
         #region NPC pawn controls
-        int npcPawnIndex = 0;
+
         void StartNPCCtrl()
         {
             SetNextGamePlayState(GamePlayState.Default);
             SetPlayerCtrlState(PlayerControlState.Default);
-            npcPawnIndex = 0;
-            foreach (var pawn in pawnList)
+            var idlePawn = GetIdlePawn(PawnCamp.Villain);
+            if (idlePawn != null)
             {
-                if (pawn.actionEnd == false && pawn.camp == PawnCamp.Villain)
-                {
-                    pawn.EndAction();
-                    pawn.ActionWait();
-                }
+                idlePawn.DoAutoAction();
+                StartNPCCtrl();
+            }
+            else
+            {
+                CheckPhaseSwitch();
             }
         }
+        Pawn GetIdlePawn(PawnCamp camp)
+        {
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.actionEnd == false && pawn.camp == camp)
+                {
+                    return pawn;
+                }
+            }
+            return null;
+        }
         #endregion
+
+        public void RepositionAllPawns()
+        {
+            foreach (var pawn in pawnList)
+            {
+                pawn.ResetPosition();
+            }
+        }
     }
 }

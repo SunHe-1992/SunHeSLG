@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using YooAsset;
 namespace SunHeTBS
@@ -122,20 +123,26 @@ namespace SunHeTBS
         /// </summary>
         public HashSet<int> moveTileIds;
         /// <summary>
+        /// save tiles no pawns standing on
+        /// </summary>
+        public List<int> destTileIds;
+        /// <summary>
         /// save all moveable tile ids into moveTileIds
         /// </summary>
         public void CalculateMoveArea()
         {
             var map = TBSMapService.Inst.map;
             moveTileIds = new HashSet<int>();
+            destTileIds = new List<int>();
             HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.move_points, this.IsExtraMoveCost(), this.IsPassFoe(), this.IsFlier());
             //show blue planes in walkable tiles
-            var curTile = map.Tile(this.curPosition);
             foreach (var tile in walkableTiles)
             {
-                var dist = map.Distance(tile, curTile, this.IsExtraMoveCost());
                 moveTileIds.Add(tile.tileId);
-                //var pos = map.WorldPosition(tile);
+                if (tile.camp == PawnCamp.Default)
+                {
+                    destTileIds.Add(tile.tileId);
+                }
             }
         }
         /// <summary>
@@ -180,6 +187,12 @@ namespace SunHeTBS
             }
         }
 
+        List<int> GetDestTileList()
+        {
+            if (moveTileIds == null)
+                CalculateMoveArea();
+            return destTileIds;
+        }
         /// <summary>
         /// get tile ids in range
         /// </summary>
@@ -308,18 +321,53 @@ namespace SunHeTBS
 
         public void ActionWait()
         {
+            BLogic.Inst.RefreshDataOnPawnMoved(this, this.savePos, this.curPosition);
             this.savePos = this.curPosition;
             this.EndAction();
             BLogic.Inst.OnPawnEndAction(this);
             TBSMapService.Inst.UnspawnAllCoverPlanes();
-            BLogic.Inst.RefreshDataOnPawnMoved();
             //recalculate movable tile datas
             //CalculateMoveArea();
             //CalculateRangeArea();
             moveTileIds = null;
             rangeTileDic = null;
+            destTileIds = null;
             BLogic.Inst.CheckPhaseSwitch();
         }
 
+
+        #region AI Logic
+
+
+        public void DoAutoAction()
+        {
+            //test move randomly
+            int tileId = GetRandomDestTile();
+            InstantMove(tileId);
+            this.EndAction();
+        }
+
+        int GetRandomDestTile()
+        {
+            var destList = GetDestTileList();
+            return RandUtil.PickRandValue(destList);
+        }
+        void InstantMove(int tileId)
+        {
+            var map = TBSMapService.Inst.map;
+            var tile = map.GetTileFromDic(tileId);
+            if (tile != null)
+            {
+                this.curPosition = tile.Position;
+                BLogic.Inst.RefreshDataOnPawnMoved(this, this.savePos, this.curPosition);
+                this.savePos = this.curPosition;
+                BLogic.Inst.OnPawnEndAction(this);
+                moveTileIds = null;
+                rangeTileDic = null;
+                destTileIds = null;
+                this.EndAction();
+            }
+        }
+        #endregion
     }
 }
