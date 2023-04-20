@@ -180,8 +180,6 @@ namespace SunHeTBS
                 mapPawnDic[tileId] = p;
                 var tileEntity = TBSMapService.Inst.map.Tile(p.curPosition);
                 tileEntity.camp = p.camp;
-                Debugger.LogError($"map tile {p.ToString()} add a pawn!");
-
             }
             else
             {
@@ -294,7 +292,6 @@ namespace SunHeTBS
 
         public void OnEnterPlayerControl()
         {
-
         }
 
 
@@ -351,13 +348,18 @@ namespace SunHeTBS
                 {
                     //show pawn's atk planes on this tile
                     TBSMapService.Inst.ShowPawnCoverPlanesOneTile(movingPawn, movingPawn.curPosition);
-                    //show action menu
-                    SetPlayerCtrlState(PlayerControlState.UIControl);
-                    UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
-                    SetNextGamePlayState(GamePlayState.PlayerControl);
+                    ShowActionMenu();
                 }
                 movingPawn = null;
             }
+        }
+        void ShowActionMenu()
+        {
+            //show action menu
+            SetPlayerCtrlState(PlayerControlState.UIControl);
+            UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
+            SetNextGamePlayState(GamePlayState.PlayerControl);
+
         }
         /// <summary>
         /// click cancel on Action Menu
@@ -373,6 +375,7 @@ namespace SunHeTBS
             BattleDriver.Inst.MoveCursorObj();
             TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
             InputReceiver.SwitchInputToMap();
+            selectedPawn = null;
         }
         #endregion
 
@@ -422,10 +425,7 @@ namespace SunHeTBS
             {
                 case PlayerControlState.TileSelect:
                     CursorInputMove(xAdd, yAdd);
-                    if (pointedPawn != null)
-                        TBSMapService.Inst.ShowPawnCoverPlanes(pointedPawn);
-                    else
-                        TBSMapService.Inst.UnspawnPawnCoverPlanes(null);
+                    RefreshCoverPlanes();
                     break;
                 case PlayerControlState.PawnSelected:
                     CursorInputMove(xAdd, yAdd);
@@ -433,6 +433,13 @@ namespace SunHeTBS
                     break;
             }
 
+        }
+        void RefreshCoverPlanes()
+        {
+            if (pointedPawn != null)
+                TBSMapService.Inst.ShowPawnCoverPlanes(pointedPawn);
+            else
+                TBSMapService.Inst.UnspawnPawnCoverPlanes(null);
         }
         /// <summary>
         /// input order try move cursor,
@@ -443,11 +450,13 @@ namespace SunHeTBS
         {
             Vector3Int newPos = new Vector3Int(xAdd, yAdd) + cursorPos;
             newPos = TBSMapService.Inst.map.TrimPos_Border(newPos);
+            if (newPos == cursorPos) return;
             ChangeCursorPos(newPos);
         }
         public void CursorInputMoveTo(Vector3Int pos)
         {
             var newPos = TBSMapService.Inst.map.TrimPos_Border(pos);
+            if (newPos == cursorPos) return;
             ChangeCursorPos(newPos);
         }
         /// <summary>
@@ -456,8 +465,6 @@ namespace SunHeTBS
         /// <param name="newPos"></param>
         void ChangeCursorPos(Vector3Int newPos)
         {
-            if (newPos == cursorPos)
-                return;
             cursorPos = newPos;
 
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
@@ -524,10 +531,17 @@ namespace SunHeTBS
 
                 case PlayerControlState.PawnSelected:
                     {
-                        if (selectedPawn.camp == PawnCamp.Player)//player's pawn
+                        if (selectedPawn != null)
                         {
-                            //goto pos
-                            PawnTempMove();
+                            if (cursorPos == selectedPawn.curPosition)
+                            {
+                                ShowActionMenu();
+                            }
+                            else if (selectedPawn.camp == PawnCamp.Player)//player's pawn
+                            {
+                                //goto pos
+                                PawnTempMove();
+                            }
                         }
                     }
                     break;
@@ -632,6 +646,8 @@ namespace SunHeTBS
                 InputReceiver.SwitchInputToMap();
                 SetNextGamePlayState(GamePlayState.PlayerControl);
                 OnBattleTurnAdd();
+                ChangeCursorPos(cursorPos);
+                RefreshCoverPlanes();
             }
             else //todo AI pawn actions
             {
@@ -756,3 +772,4 @@ namespace SunHeTBS
         }
     }
 }
+
