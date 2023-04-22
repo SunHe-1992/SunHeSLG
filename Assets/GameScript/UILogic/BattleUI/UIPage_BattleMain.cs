@@ -35,6 +35,7 @@ public partial class UIPage_BattleMain : FUIBase
         //test  instant switch to map pawn control
         InputReceiver.Inst.inputComp.SwitchCurrentActionMap("Player");
         focusedList = null;
+        HideUIComp();
     }
 
 

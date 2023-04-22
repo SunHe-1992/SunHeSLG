@@ -190,6 +190,7 @@ namespace SunHeTBS
         {
             Pawn p = new Pawn();
             p.camp = camp;
+            p.CharacterId = 1000;
             p.curPosition = pos;
             p.modelName = "M_AA_001";
             p.moveType = moveType;

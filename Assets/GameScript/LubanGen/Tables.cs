@@ -15,6 +15,7 @@ public sealed partial class Tables
 {
     public SLG.TbConst TbConst {get; }
     public SLG.TbLanguage TbLanguage {get; }
+    public SLG.Character Character {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -23,10 +24,13 @@ public sealed partial class Tables
         tables.Add("SLG.TbConst", TbConst);
         TbLanguage = new SLG.TbLanguage(loader("slg_tblanguage")); 
         tables.Add("SLG.TbLanguage", TbLanguage);
+        Character = new SLG.Character(loader("slg_character")); 
+        tables.Add("SLG.Character", Character);
         PostInit();
 
         TbConst.Resolve(tables); 
         TbLanguage.Resolve(tables); 
+        Character.Resolve(tables); 
         PostResolve();
     }
 
@@ -34,6 +38,7 @@ public sealed partial class Tables
     {
         TbConst.TranslateText(translator); 
         TbLanguage.TranslateText(translator); 
+        Character.TranslateText(translator); 
     }
     
     partial void PostInit();

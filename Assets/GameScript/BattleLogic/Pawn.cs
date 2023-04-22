@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using YooAsset;
+using cfg.SLG;
 namespace SunHeTBS
 {
 
@@ -39,11 +40,28 @@ namespace SunHeTBS
         /// when player controlling
         /// </summary>
         public Vector3Int savePos;
+
+        #region Character Info
+        /// <summary>
+        /// id in TbCharacter
+        /// </summary>
+        public int CharacterId;
+
+        public BasicAttribute charAttr;
+        #endregion
+
         public void Init()
         {
             curState = PawnState.Idle;
             this.LoadModel();
             this.savePos = this.curPosition;
+
+            cfg.SLG.CharacterData configData = ConfigManager.table.Character.Get(CharacterId);
+            if (configData != null)
+            {
+                this.charAttr = new BasicAttribute(configData.CharAttr);
+            }
+
         }
         public override string ToString()
         {
