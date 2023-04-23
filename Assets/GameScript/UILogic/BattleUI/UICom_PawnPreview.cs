@@ -30,7 +30,7 @@ public partial class UIPage_BattleMain : FUIBase
     {
         ui.bottomBar.visible = true;
         ui.nameBar.visible = true;
-        ui.nameBar.txt_name.text = p.cfgData.CharName;
+        ui.nameBar.txt_name.text = p.charCfg.CharName;
 
         var btmBar = ui.bottomBar;
         var attr = p.GetAttribute();

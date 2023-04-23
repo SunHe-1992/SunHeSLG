@@ -18,6 +18,7 @@ namespace PackageBattle
         public UI_AttributeUnit AU_res;
         public UI_AttributeUnit AU_mov;
         public UI_AttributeUnit AU_level;
+        public GButton btn_detail;
         public const string URL = "ui://fstosj6iscq5a";
 
         public static UI_PawnSummaryBar CreateInstance()
@@ -40,6 +41,7 @@ namespace PackageBattle
             AU_res = (UI_AttributeUnit)GetChild("AU_res");
             AU_mov = (UI_AttributeUnit)GetChild("AU_mov");
             AU_level = (UI_AttributeUnit)GetChild("AU_level");
+            btn_detail = (GButton)GetChild("btn_detail");
         }
     }
 }

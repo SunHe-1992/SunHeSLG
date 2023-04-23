@@ -97,6 +97,17 @@ namespace SunHeTBS
         {
             attr = new int[(int)BasicStats.MAXVALUE];
         }
+        public BasicAttribute(BasicAttribute a)
+        {
+            attr = new int[(int)BasicStats.MAXVALUE];
+            AddAttr(a);
+        }
+        public BasicAttribute Clone(BasicAttribute a)
+        {
+            attr = new int[(int)BasicStats.MAXVALUE];
+            AddAttr(a);
+            return this;
+        }
         public BasicAttribute(cfg.SLG.BasicStats config)
         {
             attr = new int[(int)BasicStats.MAXVALUE];
@@ -112,13 +123,12 @@ namespace SunHeTBS
         public void AddConfigAttr(cfg.SLG.BasicStats config)
         {
             this.HPMax += config.HPMax;
-            this.Str = config.Str;
-            this.Mag = config.Mag;
-            this.Dex = config.Dex;
-            this.Res = config.Res;
-            this.Luk = config.Luk;
-            this.Bld = config.Bld;
-            this.Mov = config.Mov;
+            this.Str += config.Str;
+            this.Mag += config.Mag;
+            this.Dex += config.Dex;
+            this.Res += config.Res;
+            this.Luk += config.Luk;
+            this.Bld += config.Bld;
         }
 
         public int HPMax
@@ -171,6 +181,39 @@ namespace SunHeTBS
             get { return attr[(int)BasicStats.Mov]; }
             set { attr[(int)BasicStats.Mov] = value; }
         }
+
+        public void ApplyAttrCap(BasicAttribute cap)
+        {
+            for (int i = 0; i < attr.Length; i++)
+            {
+                if (attr[i] > cap.attr[i])
+                {
+                    attr[i] = cap.attr[i];
+                }
+            }
+        }
+        public void ApplyAttrFloor(BasicAttribute cap)
+        {
+            for (int i = 0; i < attr.Length; i++)
+            {
+                if (attr[i] < cap.attr[i])
+                {
+                    attr[i] = cap.attr[i];
+                }
+            }
+        }
+        public void AddAttr(BasicAttribute a)
+        {
+            for (int i = 0; i < attr.Length; i++)
+            {
+                attr[i] += a.attr[i];
+            }
+        }
+
     }
 
+    public static class AttrCalculator
+    {
+
+    }
 }

@@ -48,9 +48,13 @@ namespace SunHeTBS
         /// id in TbCharacter
         /// </summary>
         public int CharacterId;
-
+        /// <summary>
+        /// id in Class
+        /// </summary>
+        public int ClassId;
         public BasicAttribute charAttr;
-        public cfg.SLG.CharacterData cfgData;
+        public cfg.SLG.CharacterData charCfg;
+        public cfg.SLG.ClassData classCfg;
         #endregion
 
         public void Init()
@@ -62,12 +66,16 @@ namespace SunHeTBS
             this.LoadModel();
             this.savePos = this.curPosition;
 
-            cfgData = ConfigManager.table.Character.Get(CharacterId);
-            if (cfgData != null)
+            charCfg = ConfigManager.table.Character.Get(CharacterId);
+            if (charCfg != null)
             {
-                this.charAttr = new BasicAttribute(cfgData.CharAttr);
+                this.charAttr = new BasicAttribute(charCfg.CharAttr);
             }
+            classCfg = ConfigManager.table.Class.Get(ClassId);
+            if (classCfg != null)
+            {
 
+            }
         }
         public override string ToString()
         {
@@ -395,11 +403,30 @@ namespace SunHeTBS
         #endregion
 
         #region Attribute
-
+        BasicAttribute attrCache;
+        BasicAttribute attrCapTotal;
+        BasicAttribute attrFloor;
         public BasicAttribute GetAttribute()
         {
-            //todo calculate attrs: char,class,buff,skill
-            return this.charAttr;
+            //todo calculate attrs: buff,skill
+            //calculate attr cap
+            if (attrCapTotal == null)
+            {
+                attrCapTotal = new BasicAttribute();
+                attrCapTotal.AddConfigAttr(this.classCfg.Cap);
+                attrCapTotal.AddConfigAttr(this.charCfg.CapFix);
+            }
+
+            if (attrFloor == null)
+            {
+                attrFloor = new BasicAttribute();
+                attrFloor.AddConfigAttr(this.classCfg.BaseAttr);
+            }
+            //char attr
+            attrCache = new BasicAttribute(this.charAttr);
+            attrCache.ApplyAttrFloor(attrFloor);
+            attrCache.ApplyAttrCap(attrCapTotal);
+            return this.attrCache;
         }
 
         #endregion

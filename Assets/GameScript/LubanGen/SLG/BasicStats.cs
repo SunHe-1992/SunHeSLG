@@ -27,11 +27,10 @@ public sealed partial class BasicStats :  Bright.Config.BeanBase
         { if(!_json["Res"].IsNumber) { throw new SerializationException(); }  Res = _json["Res"]; }
         { if(!_json["Luk"].IsNumber) { throw new SerializationException(); }  Luk = _json["Luk"]; }
         { if(!_json["Bld"].IsNumber) { throw new SerializationException(); }  Bld = _json["Bld"]; }
-        { if(!_json["Mov"].IsNumber) { throw new SerializationException(); }  Mov = _json["Mov"]; }
         PostInit();
     }
 
-    public BasicStats(int HPMax, int Str, int Mag, int Dex, int Spd, int Def, int Res, int Luk, int Bld, int Mov ) 
+    public BasicStats(int HPMax, int Str, int Mag, int Dex, int Spd, int Def, int Res, int Luk, int Bld ) 
     {
         this.HPMax = HPMax;
         this.Str = Str;
@@ -42,7 +41,6 @@ public sealed partial class BasicStats :  Bright.Config.BeanBase
         this.Res = Res;
         this.Luk = Luk;
         this.Bld = Bld;
-        this.Mov = Mov;
         PostInit();
     }
 
@@ -87,10 +85,6 @@ public sealed partial class BasicStats :  Bright.Config.BeanBase
     /// Build
     /// </summary>
     public int Bld { get; private set; }
-    /// <summary>
-    /// Movement
-    /// </summary>
-    public int Mov { get; private set; }
 
     public const int __ID__ = 542478865;
     public override int GetTypeId() => __ID__;
@@ -116,7 +110,6 @@ public sealed partial class BasicStats :  Bright.Config.BeanBase
         + "Res:" + Res + ","
         + "Luk:" + Luk + ","
         + "Bld:" + Bld + ","
-        + "Mov:" + Mov + ","
         + "}";
     }
     

@@ -3,6 +3,7 @@
     "ID": 1000,
     "CharName": "TestChar1",
     "Description": "this is a test pawn",
+    "Gender": 1,
     "CharAttr": {
       "HPMax": 22,
       "Str": 6,
@@ -12,14 +13,36 @@
       "Def": 5,
       "Res": 3,
       "Luk": 5,
-      "Bld": 4,
-      "Mov": 4
+      "Bld": 4
+    },
+    "Growth": {
+      "HPMax": 60,
+      "Str": 35,
+      "Mag": 20,
+      "Dex": 45,
+      "Spd": 50,
+      "Def": 25,
+      "Res": 25,
+      "Luk": 40,
+      "Bld": 5
+    },
+    "CapFix": {
+      "HPMax": 1,
+      "Str": 0,
+      "Mag": 1,
+      "Dex": 1,
+      "Spd": 0,
+      "Def": 0,
+      "Res": 1,
+      "Luk": 0,
+      "Bld": 0
     }
   },
   {
     "ID": 1001,
     "CharName": "TestChar2",
     "Description": "this is a test pawn",
+    "Gender": 2,
     "CharAttr": {
       "HPMax": 22,
       "Str": 6,
@@ -29,8 +52,29 @@
       "Def": 5,
       "Res": 3,
       "Luk": 5,
-      "Bld": 4,
-      "Mov": 4
+      "Bld": 4
+    },
+    "Growth": {
+      "HPMax": 60,
+      "Str": 35,
+      "Mag": 20,
+      "Dex": 45,
+      "Spd": 50,
+      "Def": 25,
+      "Res": 25,
+      "Luk": 40,
+      "Bld": 5
+    },
+    "CapFix": {
+      "HPMax": 1,
+      "Str": 0,
+      "Mag": 1,
+      "Dex": 1,
+      "Spd": 0,
+      "Def": 0,
+      "Res": 1,
+      "Luk": 0,
+      "Bld": 0
     }
   }
 ]

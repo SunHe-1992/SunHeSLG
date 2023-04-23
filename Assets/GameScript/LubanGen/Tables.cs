@@ -17,6 +17,7 @@ public sealed partial class Tables
     public SLG.TbLanguage TbLanguage {get; }
     public SLG.Character Character {get; }
     public SLG.Item Item {get; }
+    public SLG.Class Class {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -29,12 +30,15 @@ public sealed partial class Tables
         tables.Add("SLG.Character", Character);
         Item = new SLG.Item(loader("slg_item")); 
         tables.Add("SLG.Item", Item);
+        Class = new SLG.Class(loader("slg_class")); 
+        tables.Add("SLG.Class", Class);
         PostInit();
 
         TbConst.Resolve(tables); 
         TbLanguage.Resolve(tables); 
         Character.Resolve(tables); 
         Item.Resolve(tables); 
+        Class.Resolve(tables); 
         PostResolve();
     }
 
@@ -44,6 +48,7 @@ public sealed partial class Tables
         TbLanguage.TranslateText(translator); 
         Character.TranslateText(translator); 
         Item.TranslateText(translator); 
+        Class.TranslateText(translator); 
     }
     
     partial void PostInit();
