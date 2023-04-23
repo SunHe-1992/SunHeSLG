@@ -477,7 +477,7 @@ namespace SunHeTBS
             {
                 pointedPawn = null;
             }
-
+            UniEvent.SendMessage(GameEventDefine.CursorPointToPawn);
             var cursorObj = BattleDriver.Inst.CursorObj;
             if (cursorObj != null)
             {

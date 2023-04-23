@@ -19,6 +19,7 @@ namespace SunHeTBS
         public static int PhaseSwitch = GenID(0, 5);
         public static int ShowSelectPawn = GenID(0, 6);
         public static int ShowActionMenu = GenID(0, 7);
+        public static int CursorPointToPawn = GenID(0, 8);
 
         #endregion
     }

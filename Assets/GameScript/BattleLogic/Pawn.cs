@@ -20,6 +20,8 @@ namespace SunHeTBS
     }
     public class Pawn : PawnBase
     {
+        public static int globalSequence = 0;
+        public int sequenceId = 0;
         public PawnController controller;
         /// <summary>
         /// 3d model res name
@@ -48,18 +50,22 @@ namespace SunHeTBS
         public int CharacterId;
 
         public BasicAttribute charAttr;
+        public cfg.SLG.CharacterData cfgData;
         #endregion
 
         public void Init()
         {
+            globalSequence++;
+            sequenceId = globalSequence;
+
             curState = PawnState.Idle;
             this.LoadModel();
             this.savePos = this.curPosition;
 
-            cfg.SLG.CharacterData configData = ConfigManager.table.Character.Get(CharacterId);
-            if (configData != null)
+            cfgData = ConfigManager.table.Character.Get(CharacterId);
+            if (cfgData != null)
             {
-                this.charAttr = new BasicAttribute(configData.CharAttr);
+                this.charAttr = new BasicAttribute(cfgData.CharAttr);
             }
 
         }
@@ -386,6 +392,16 @@ namespace SunHeTBS
                 this.EndAction();
             }
         }
+        #endregion
+
+        #region Attribute
+
+        public BasicAttribute GetAttribute()
+        {
+            //todo calculate attrs: char,class,buff,skill
+            return this.charAttr;
+        }
+
         #endregion
     }
 }

@@ -44,13 +44,14 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-        //FUIManager.Instance.HideUI(this);
-        //Debugger.Log("click btn ");
-        //FUIManager.Instance.ShowUI<UIPage_Sample>(FUIDef.FWindow.SamplePage);
-        //FUIManager.Instance.HideUI(this);
-
-        //test map and path finding
-        //TBSMapService.Instance.TestPath();
+        var dataList = ConfigManager.table.Item.DataList;
+        foreach (var data in dataList)
+        {
+            if (data.ItemType == cfg.SLG.ItemType.Sword)
+            {
+                ;
+            }
+        }
 
 
     }

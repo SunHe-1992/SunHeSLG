@@ -31,6 +31,7 @@ public partial class UIPage_BattleMain : FUIBase
         UniEvent.AddListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
         UniEvent.AddListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
         UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
+        UniEvent.AddListener(GameEventDefine.CursorPointToPawn, OnPointToPawn);
 
         //test  instant switch to map pawn control
         InputReceiver.Inst.inputComp.SwitchCurrentActionMap("Player");
@@ -55,6 +56,7 @@ public partial class UIPage_BattleMain : FUIBase
         UniEvent.RemoveListener(GameEventDefine.ShowSelectPawn, ShowSelectPawn);
         UniEvent.RemoveListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
         UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
+        UniEvent.RemoveListener(GameEventDefine.CursorPointToPawn, OnPointToPawn);
 
     }
 
