@@ -10,7 +10,6 @@ namespace SunHeTBS
     /// </summary>
     public enum BasicStats : int
     {
-        STARTVALUE = 0,
         /// <summary>
         /// Hit Points Max
         /// </summary>
@@ -130,7 +129,10 @@ namespace SunHeTBS
             this.Luk += config.Luk;
             this.Bld += config.Bld;
         }
-
+        public int GetAttr(BasicStats bsType)
+        {
+            return attr[(int)bsType];
+        }
         public int HPMax
         {
             get { return attr[(int)BasicStats.HPMax]; }

@@ -19,7 +19,7 @@ public partial class UIPage_BattleMain : FUIBase
         ui = this.contentPane as UI_BattlePanel;
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
-
+        this.ui.bottomBar.btn_detail.onClick.Set(OpenUnitDetail);
     }
     protected override void OnShown()
     {
@@ -305,4 +305,14 @@ public partial class UIPage_BattleMain : FUIBase
 
     private event Action UIConfirmAction;
     private event Action UICancelAction;
+
+    private void OpenUnitDetail()
+    {
+        var pawn = BLogic.Inst.pointedPawn;
+        if (pawn != null)
+        {
+            FUIManager.Inst.HideUI(this);
+            FUIManager.Inst.ShowUI<UIPage_UnitUI>(FUIDef.FWindow.UnitUI, null);
+        }
+    }
 }

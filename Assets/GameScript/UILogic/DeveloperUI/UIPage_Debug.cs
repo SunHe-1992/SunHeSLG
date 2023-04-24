@@ -44,14 +44,6 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-        var dataList = ConfigManager.table.Item.DataList;
-        foreach (var data in dataList)
-        {
-            if (data.ItemType == cfg.SLG.ItemType.Sword)
-            {
-                ;
-            }
-        }
 
 
     }

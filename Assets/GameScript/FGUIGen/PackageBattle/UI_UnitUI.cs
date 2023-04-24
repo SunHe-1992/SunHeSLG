@@ -9,6 +9,7 @@ namespace PackageBattle
     {
         public GGraph bg;
         public UI_PawnDetail pawn_detail;
+        public GButton btn_close;
         public const string URL = "ui://fstosj6igenvq";
 
         public static UI_UnitUI CreateInstance()
@@ -22,6 +23,7 @@ namespace PackageBattle
 
             bg = (GGraph)GetChild("bg");
             pawn_detail = (UI_PawnDetail)GetChild("pawn_detail");
+            btn_close = (GButton)GetChild("btn_close");
         }
     }
 }

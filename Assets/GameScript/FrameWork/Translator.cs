@@ -48,7 +48,6 @@ public class Translator
         Initialized = false;
         LoadCurrLanguage();
         LoadTextDict();
-
     }
 
     // TODO： 获取当前系统语言，或者玩家选择的语言
@@ -56,6 +55,9 @@ public class Translator
     {
         currLanguage = SystemLanguage.English;
         defaultLangName = "EN";
+
+        //currLanguage = SystemLanguage.ChineseSimplified;
+        //defaultLangName = "zh-CN";
     }
 
     public static void InitLangNameDict()

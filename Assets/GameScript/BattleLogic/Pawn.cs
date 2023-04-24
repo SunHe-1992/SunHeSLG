@@ -421,11 +421,14 @@ namespace SunHeTBS
             {
                 attrFloor = new BasicAttribute();
                 attrFloor.AddConfigAttr(this.classCfg.BaseAttr);
+                attrFloor.Mov = classCfg.Movement;
+                attrCapTotal.Mov = classCfg.Movement;
             }
             //char attr
             attrCache = new BasicAttribute(this.charAttr);
             attrCache.ApplyAttrFloor(attrFloor);
             attrCache.ApplyAttrCap(attrCapTotal);
+
             return this.attrCache;
         }
 

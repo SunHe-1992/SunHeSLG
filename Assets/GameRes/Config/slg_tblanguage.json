@@ -294,7 +294,7 @@
       ],
       [
         "zh-CN",
-        "闪避"
+        "回避"
       ]
     ]
   },
@@ -308,6 +308,136 @@
       [
         "zh-CN",
         "魔攻"
+      ]
+    ]
+  },
+  {
+    "ID": "Crit",
+    "Lans": [
+      [
+        "EN",
+        "Crit"
+      ],
+      [
+        "zh-CN",
+        "必杀"
+      ]
+    ]
+  },
+  {
+    "ID": "Ddg",
+    "Lans": [
+      [
+        "EN",
+        "Ddg"
+      ],
+      [
+        "zh-CN",
+        "必回"
+      ]
+    ]
+  },
+  {
+    "ID": "Armor",
+    "Lans": [
+      [
+        "EN",
+        "Armor"
+      ],
+      [
+        "zh-CN",
+        "重装"
+      ]
+    ]
+  },
+  {
+    "ID": "Backup",
+    "Lans": [
+      [
+        "EN",
+        "Backup"
+      ],
+      [
+        "zh-CN",
+        "连携"
+      ]
+    ]
+  },
+  {
+    "ID": "Cavalry",
+    "Lans": [
+      [
+        "EN",
+        "Cavalry"
+      ],
+      [
+        "zh-CN",
+        "骑马"
+      ]
+    ]
+  },
+  {
+    "ID": "Covert",
+    "Lans": [
+      [
+        "EN",
+        "Covert"
+      ],
+      [
+        "zh-CN",
+        "隐秘"
+      ]
+    ]
+  },
+  {
+    "ID": "Dragon",
+    "Lans": [
+      [
+        "EN",
+        "Dragon"
+      ],
+      [
+        "zh-CN",
+        "龙族"
+      ]
+    ]
+  },
+  {
+    "ID": "Flying",
+    "Lans": [
+      [
+        "EN",
+        "Flying"
+      ],
+      [
+        "zh-CN",
+        "飞行"
+      ]
+    ]
+  },
+  {
+    "ID": "Mystical",
+    "Lans": [
+      [
+        "EN",
+        "Mystical"
+      ],
+      [
+        "zh-CN",
+        "魔道"
+      ]
+    ]
+  },
+  {
+    "ID": "QiAdept",
+    "Lans": [
+      [
+        "EN",
+        "Qi Adept"
+      ],
+      [
+        "zh-CN",
+        "气功"
       ]
     ]
   }
