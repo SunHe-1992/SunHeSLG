@@ -11,6 +11,7 @@ public class FUIDef
         BattlePanel,
         BattlePrepare,
         UnitUI,
+        CombatPredict,
     }
     /// <summary>
     /// package names
@@ -31,5 +32,6 @@ public class FUIDef
         {FWindow.BattlePanel, FPackage.PackageBattle},
         {FWindow.BattlePrepare, FPackage.PackageBattle},
         {FWindow.UnitUI, FPackage.PackageBattle},
+        {FWindow.CombatPredict, FPackage.PackageBattle},
     };
 }

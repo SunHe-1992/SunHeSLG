@@ -9,7 +9,7 @@ namespace PackageBattle
     {
         public GTextField txt_HP;
         public GTextField txt_HPMAX;
-        public GProgressBar pgsBar;
+        public UI_ProgressBar1 pgsBar;
         public const string URL = "ui://fstosj6igenvp";
 
         public static UI_HPComp CreateInstance()
@@ -23,7 +23,7 @@ namespace PackageBattle
 
             txt_HP = (GTextField)GetChild("txt_HP");
             txt_HPMAX = (GTextField)GetChild("txt_HPMAX");
-            pgsBar = (GProgressBar)GetChild("pgsBar");
+            pgsBar = (UI_ProgressBar1)GetChild("pgsBar");
         }
     }
 }

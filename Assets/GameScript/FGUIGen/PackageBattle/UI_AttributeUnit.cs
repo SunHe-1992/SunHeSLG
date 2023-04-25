@@ -11,7 +11,7 @@ namespace PackageBattle
         public Controller ctrl_bar;
         public GTextField txt_attrName;
         public GTextField txt_attrValue;
-        public GProgressBar pgsBar;
+        public UI_ProgressBar1 pgsBar;
         public const string URL = "ui://fstosj6iscq5b";
 
         public static UI_AttributeUnit CreateInstance()
@@ -27,7 +27,7 @@ namespace PackageBattle
             ctrl_bar = GetController("ctrl_bar");
             txt_attrName = (GTextField)GetChild("txt_attrName");
             txt_attrValue = (GTextField)GetChild("txt_attrValue");
-            pgsBar = (GProgressBar)GetChild("pgsBar");
+            pgsBar = (UI_ProgressBar1)GetChild("pgsBar");
         }
     }
 }

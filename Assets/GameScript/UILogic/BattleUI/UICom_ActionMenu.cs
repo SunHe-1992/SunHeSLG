@@ -70,6 +70,12 @@ public partial class UIPage_BattleMain : FUIBase
             BLogic.Inst.selectedPawn.ActionWait();
             HideActionMenu();
         }
+        else if (orderStr == strAttack)
+        {
+            //show combat predict
+            HideActionMenu();
+            FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
+        }
 
     }
     void ActionMenu_cancel()

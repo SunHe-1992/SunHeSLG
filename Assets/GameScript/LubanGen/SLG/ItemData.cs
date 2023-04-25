@@ -23,6 +23,7 @@ public sealed partial class ItemData :  Bright.Config.BeanBase
         { if(!_json["Notes"].IsString) { throw new SerializationException(); }  Notes = _json["Notes"]; }
         { if(!_json["JPName"].IsString) { throw new SerializationException(); }  JPName = _json["JPName"]; }
         { if(!_json["ItemType"].IsNumber) { throw new SerializationException(); }  ItemType = (SLG.ItemType)_json["ItemType"].AsInt; }
+        { if(!_json["Magical"].IsBoolean) { throw new SerializationException(); }  Magical = _json["Magical"]; }
         { if(!_json["Might"].IsNumber) { throw new SerializationException(); }  Might = _json["Might"]; }
         { if(!_json["Hit"].IsNumber) { throw new SerializationException(); }  Hit = _json["Hit"]; }
         { if(!_json["Critical"].IsNumber) { throw new SerializationException(); }  Critical = _json["Critical"]; }
@@ -40,13 +41,14 @@ public sealed partial class ItemData :  Bright.Config.BeanBase
         PostInit();
     }
 
-    public ItemData(int ID, string Name, string Notes, string JPName, SLG.ItemType ItemType, int Might, int Hit, int Critical, int Weight, int Avoid, int Dodge, System.Collections.Generic.List<int> Range, SLG.WeaponRank Rank, int Uses, int Price, int StaffEXP, string Description, System.Collections.Generic.List<string> EquipSkills, System.Collections.Generic.List<string> PassiveSkills ) 
+    public ItemData(int ID, string Name, string Notes, string JPName, SLG.ItemType ItemType, bool Magical, int Might, int Hit, int Critical, int Weight, int Avoid, int Dodge, System.Collections.Generic.List<int> Range, SLG.WeaponRank Rank, int Uses, int Price, int StaffEXP, string Description, System.Collections.Generic.List<string> EquipSkills, System.Collections.Generic.List<string> PassiveSkills ) 
     {
         this.ID = ID;
         this.Name = Name;
         this.Notes = Notes;
         this.JPName = JPName;
         this.ItemType = ItemType;
+        this.Magical = Magical;
         this.Might = Might;
         this.Hit = Hit;
         this.Critical = Critical;
@@ -86,6 +88,7 @@ public sealed partial class ItemData :  Bright.Config.BeanBase
     /// Type
     /// </summary>
     public SLG.ItemType ItemType { get; private set; }
+    public bool Magical { get; private set; }
     /// <summary>
     /// Might
     /// </summary>
@@ -163,6 +166,7 @@ public sealed partial class ItemData :  Bright.Config.BeanBase
         + "Notes:" + Notes + ","
         + "JPName:" + JPName + ","
         + "ItemType:" + ItemType + ","
+        + "Magical:" + Magical + ","
         + "Might:" + Might + ","
         + "Hit:" + Hit + ","
         + "Critical:" + Critical + ","

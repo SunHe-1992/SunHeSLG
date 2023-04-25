@@ -197,6 +197,9 @@ namespace SunHeTBS
             p.moveType = moveType;
             p.Init();
             AddPawn(p);
+
+            var weapon1 = new Weapon(1002);
+            p.InsertItem(weapon1);
         }
         #endregion
 

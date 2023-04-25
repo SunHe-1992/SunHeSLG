@@ -74,8 +74,13 @@ namespace SunHeTBS
             classCfg = ConfigManager.table.Class.Get(ClassId);
             if (classCfg != null)
             {
-
+                if (classCfg.ClassType == ClassType.Flying)
+                    this.moveType = PawnMoveType.Flier;
+                else
+                    this.moveType = PawnMoveType.Ground;
             }
+
+            GetAttribute();
         }
         public override string ToString()
         {
@@ -109,9 +114,12 @@ namespace SunHeTBS
 
         #region Attribute for test
         public PawnMoveType moveType = PawnMoveType.Ground;
-        public int move_points = 4;
-        public int atk_range_max = 2;
-        public int atk_range_min = 1;
+        public int GetMovement()
+        {
+            if (this.attrCache != null)
+                return attrCache.Mov;
+            return 4;
+        }
 
         /// <summary>
         /// pawn will cost extra move points in certain tiles
@@ -135,16 +143,32 @@ namespace SunHeTBS
         }
         public int GetAtkRangeMax()
         {
-            //todo check this pawn has attack ability 
-            return atk_range_max;
+            //check this pawn has attack ability 
+            if (IsArmed())
+            {
+                return equippedWeapon.rangeMax;
+            }
+            else return 0;
         }
         public int GetAtkRangeMin()
         {
-            return atk_range_min;
+            if (IsArmed())
+            {
+                return equippedWeapon.rangeMin;
+            }
+            else return 0;
         }
         public bool IsFlier()
         {
             return this.moveType == PawnMoveType.Flier;
+        }
+        /// <summary>
+        /// equipped with a weapon/staff
+        /// </summary>
+        /// <returns></returns>
+        public bool IsArmed()
+        {
+            return this.equippedWeapon != null;
         }
         #endregion
 
@@ -166,7 +190,7 @@ namespace SunHeTBS
             var map = TBSMapService.Inst.map;
             moveTileIds = new HashSet<int>();
             destTileIds = new List<int>();
-            HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.move_points, this.IsExtraMoveCost(), this.IsPassFoe(), this.IsFlier());
+            HashSet<TileEntity> walkableTiles = map.WalkableTiles(this.curPosition, this.GetMovement(), this.IsExtraMoveCost(), this.IsPassFoe(), this.IsFlier());
             //show blue planes in walkable tiles
             foreach (var tile in walkableTiles)
             {
@@ -403,6 +427,9 @@ namespace SunHeTBS
         #endregion
 
         #region Attribute
+        /// <summary>
+        /// self attr included: character basic attr/cap fix,class basic attr/capfix,
+        /// </summary>
         BasicAttribute attrCache;
         BasicAttribute attrCapTotal;
         BasicAttribute attrFloor;
@@ -431,7 +458,217 @@ namespace SunHeTBS
 
             return this.attrCache;
         }
+        CombatAttribute combatAttr;
+        public CombatAttribute GetCombatAttr()
+        {
+            if (combatAttr == null)
+            {
+                combatAttr = new CombatAttribute();
+                CalculateCombatAttr();
+            }
+            return combatAttr;
+        }
+        public void CalculateCombatAttr()
+        {
+            GetCombatAttr();
+            CalculateAtk();
+            CalculateAtkSpd();
+            CalculateHit();
+            CalculateAvo();
+            CalculateCrit();
+            CalculateDodge();
+            CalculateStaffHit();
+            CalculateStaffAvo();
+            CalculateDefence();
+            CalculateResistance();
+        }
+        public void CalculateCombatAttr(Pawn foe)
+        {
+            CalculateCombatAttr();
+            var foeAttr = foe.GetCombatAttr();
+            combatAttr.DisplayedCrit -= foeAttr.Dodge;
+            combatAttr.DisplayedHit -= foeAttr.Avoid;
+            combatAttr.DisplayedStaffHit -= foeAttr.StaffAvo;
+            if (IsArmed())
+            {
+                if (IsMagicAtk())
+                {
+                    combatAttr.DisplayedDamage = combatAttr.MagAtk - foeAttr.Resistance;
+                }
+                else
+                {
+                    combatAttr.DisplayedDamage = combatAttr.PhAtk - foeAttr.Defence;
+                }
+            }
+            combatAttr.ReviseDisplayValues();
+        }
+        void CalculateAtk()
+        {
+            if (this.IsArmed() == false)
+            {
+                combatAttr.MagAtk = 0;
+                combatAttr.PhAtk = 0;
+                combatAttr.DisplayedDamage = 0;
+                return;
+            }
+            else
+            {
+                var weaponCfg = equippedWeapon.itemCfg;
+                int weaponMt = weaponCfg.Might;
+                int atk = weaponMt;
+                if (weaponCfg.Magical)
+                {
+                    atk += attrCache.Mag;
+                    combatAttr.MagAtk = atk;
+                    combatAttr.PhAtk = 0;
+                }
+                else
+                {
+                    atk += attrCache.Str;
+                    combatAttr.PhAtk = atk;
+                    combatAttr.MagAtk = 0;
+                }
+            }
+        }
 
+        void CalculateAtkSpd()
+        {
+            int spdBurden = 0;
+            if (IsArmed())
+            {
+                if (equippedWeapon.itemCfg.Weight > attrCache.Bld)
+                {
+                    spdBurden = equippedWeapon.itemCfg.Weight - attrCache.Bld;
+                }
+            }
+            int atkspd = attrCache.Spd - spdBurden;
+            combatAttr.AttackSpeed = atkspd;
+        }
+
+        void CalculateHit()
+        {
+            if (IsArmed())
+            {
+                int weaponHit = equippedWeapon.itemCfg.Hit;
+                int hit = weaponHit + attrCache.Dex * 2 + attrCache.Luk / 2;
+                combatAttr.DisplayedHit = hit;
+                combatAttr.Hit = hit;
+            }
+            else
+            {
+                combatAttr.Hit = 0;
+                combatAttr.DisplayedHit = 0;
+            }
+        }
+        void CalculateAvo()
+        {
+            int avo = 0;
+            int avo_weapon = 0;
+            if (IsArmed())
+            {
+                avo_weapon = equippedWeapon.itemCfg.Avoid;
+            }
+            avo += avo_weapon + combatAttr.AttackSpeed * 2 + attrCache.Luk / 2;
+            //todo  terrian effect
+            combatAttr.Avoid = avo;
+        }
+        void CalculateCrit()
+        {
+            if (IsArmed())
+            {
+                int weaponCrit = equippedWeapon.itemCfg.Critical;
+                int crit = weaponCrit + attrCache.Dex / 2;
+                combatAttr.CriticalRate = crit;
+                combatAttr.DisplayedCrit = crit;
+            }
+            else
+            {
+                combatAttr.CriticalRate = 0;
+                combatAttr.DisplayedCrit = 0;
+            }
+        }
+        void CalculateDodge()
+        {
+            int dodge = 0;
+            int weaponDdg = 0;
+            if (IsArmed())
+            {
+                weaponDdg = equippedWeapon.itemCfg.Dodge;
+            }
+            dodge += weaponDdg;
+            dodge += attrCache.Luk;
+            combatAttr.Dodge = dodge;
+        }
+        void CalculateStaffHit()
+        {
+            if (IsArmed() && equippedWeapon.itemCfg.ItemType == ItemType.Staff)
+            {
+                int staffHit = equippedWeapon.itemCfg.Hit + attrCache.Mag + attrCache.Dex;
+                combatAttr.StaffHit = staffHit;
+            }
+            else
+            {
+                combatAttr.StaffHit = 0;
+            }
+        }
+        void CalculateStaffAvo()
+        {
+            int staffAvo = (attrCache.Res * 3 + attrCache.Luk) / 2;
+            combatAttr.StaffAvo = staffAvo;
+        }
+        void CalculateDefence()
+        {
+            int def = attrCache.Def;
+            combatAttr.Defence = def;
+        }
+        void CalculateResistance()
+        {
+            int res = attrCache.Res;
+            combatAttr.Resistance = res;
+        }
+        #endregion
+
+        #region Item and Weapon Inventory
+        public List<Item> itemList = new List<Item>();
+        /// <summary>
+        /// weapon/staff
+        /// </summary>
+        public Weapon equippedWeapon = null;
+        public void InsertItem(Item item)
+        {
+            itemList.Add(item);
+            if (item is Weapon && equippedWeapon == null)
+            {
+                var wep = item as Weapon;
+                if (CanEquipWeapon(wep))
+                    EquipAWeapon(wep);
+            }
+        }
+        public void RemoveItem(int sid)
+        {
+            if (equippedWeapon?.sid == sid)
+            {
+                equippedWeapon = null;
+            }
+            itemList.RemoveAll(item => item.sid == sid);
+        }
+        public bool CanEquipWeapon(Weapon weapon)
+        {
+            //todo
+            return true;
+        }
+        public void EquipAWeapon(Weapon weapon)
+        {
+            this.equippedWeapon = weapon;
+        }
+        public bool IsMagicAtk()
+        {
+            if (!IsArmed())
+                return false;
+            if (equippedWeapon.itemCfg.ItemType == ItemType.Tome)
+                return true;
+            return equippedWeapon.itemCfg.Magical;
+        }
         #endregion
     }
 }

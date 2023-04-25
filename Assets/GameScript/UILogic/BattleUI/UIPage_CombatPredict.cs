@@ -2,22 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FairyGUI;
-using PackageDebug;
+using PackageBattle;
 using UnityEngine;
 using UniFramework.Event;
-
-public class UIPage_Sample : FUIBase
+using SunHeTBS;
+public class UIPage_CombatPredict : FUIBase
 {
 
-    UI_SamplePage ui;
+    UI_CombatPredict ui;
     protected override void OnInit()
     {
         base.OnInit();
-        ui = this.contentPane as UI_SamplePage;
+        ui = this.contentPane as UI_CombatPredict;
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
-        ui.btn_ok.onClick.Set(BtnOKClick);
-        //ui.btn_close.onClick.Set(OnBtnClose);
+        this.ui.btn_close.onClick.Set(OnBtnClose);
     }
     protected override void OnShown()
     {
@@ -37,16 +36,13 @@ public class UIPage_Sample : FUIBase
         base.OnHide();
 
     }
-    void BtnOKClick()
-    {
-        FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
-        FUIManager.Inst.HideUI(this);
-    }
+
 
     void RefreshContent()
     {
-
-
+        var p = BLogic.Inst.selectedPawn;
+        p.CalculateCombatAttr(p);
+        var attr = p.GetCombatAttr();
     }
     void OnBtnClose()
     {

@@ -83,6 +83,7 @@ namespace SunHeTBS
         /// Range
         /// </summary>
         Rng = 6,
+        MAXVALUE = 7,
     }
 
     /// <summary>
@@ -214,6 +215,52 @@ namespace SunHeTBS
 
     }
 
+    public class CombatAttribute
+    {
+        public CombatAttribute()
+        {
+
+        }
+        public int PhAtk;
+        public int MagAtk;
+        public int Hit;
+        /// <summary>
+        /// avoid foe's hit
+        /// </summary>
+        public int Avoid;
+        public int CriticalRate;
+        /// <summary>
+        /// dodge foe's critical
+        /// </summary>
+        public int Dodge;
+        public int AttackSpeed;
+
+        public int StaffHit;
+        public int StaffAvo;
+        public int Defence;
+        public int Resistance;
+
+        public int DisplayedCrit;
+        public int DisplayedHit;
+        public int DisplayedStaffHit;
+        public int DisplayedDamage;
+        public void ReviseDisplayValues()
+        {
+            if (DisplayedDamage < 0)
+                DisplayedDamage = 0;
+            DisplayedCrit = ReviseRates(DisplayedCrit);
+            DisplayedHit = ReviseRates(DisplayedHit);
+            DisplayedStaffHit = ReviseRates(DisplayedStaffHit);
+        }
+        int ReviseRates(int value)
+        {
+            if (value > 100)
+                value = 100;
+            if (value < 0)
+                value = 0;
+            return value;
+        }
+    }
     public static class AttrCalculator
     {
 
