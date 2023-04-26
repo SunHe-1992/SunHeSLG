@@ -138,7 +138,7 @@ namespace SunHeTBS
         /// <returns></returns>
         public bool IsPassFoe()
         {
-            //todo check skill
+            //todo check skill can pass foe tiles
             return false;
         }
         public int GetAtkRangeMax()
@@ -157,6 +157,35 @@ namespace SunHeTBS
                 return equippedWeapon.rangeMin;
             }
             else return 0;
+        }
+        /// <summary>
+        /// get min and max atk range ,in possible weapons in my inventory
+        /// </summary>
+        /// <returns></returns>
+        public int[] GetPossibleAtkRange()
+        {
+            int[] rangeArray = new int[2] { 0, 0 };
+            int nearRange = int.MaxValue;
+            int longRange = 0;
+            foreach (var wp in this.itemList)
+            {
+                if (wp is Weapon && CanEquipWeapon(wp as Weapon))
+                {
+                    List<int> rangeList = wp.itemCfg.Range;
+                    foreach (int rng in rangeList)
+                    {
+                        if (rng < nearRange) nearRange = rng;
+                        if (rng > longRange) longRange = rng;
+                    }
+                }
+            }
+            if (nearRange == int.MaxValue && longRange == 0)
+            {
+                return null;
+            }
+            rangeArray[0] = nearRange;
+            rangeArray[1] = longRange;
+            return rangeArray;
         }
         public bool IsFlier()
         {
@@ -204,14 +233,23 @@ namespace SunHeTBS
         /// <summary>
         /// key=range,value=tile ids
         /// </summary>
-        Dictionary<int, HashSet<int>> rangeTileDic;
+        public Dictionary<int, HashSet<int>> rangeTileDic;
+        /// <summary>
+        /// save tile ids for every attack range
+        /// </summary>
         public void CalculateRangeArea()
         {
-            var map = TBSMapService.Inst.map;
-
             rangeTileDic = new Dictionary<int, HashSet<int>>();
-            int rangeMax = this.GetAtkRangeMax();
-            int rangeMin = this.GetAtkRangeMin();
+            int[] rngArray = GetPossibleAtkRange();
+            if (rngArray == null)
+            {
+                return;
+            }
+            CalculateRangeArea(rngArray[0], rngArray[1]);
+        }
+        public void CalculateRangeArea(int rangeMin, int rangeMax)
+        {
+            var map = TBSMapService.Inst.map;
             foreach (int tileId in moveTileIds)//for every movable tile
             {
                 var centerTile = map.GetTileFromDic(tileId);
@@ -357,11 +395,23 @@ namespace SunHeTBS
             conveyPawns = 0;
             atkPawns = 0;
             //find foes again
-            List<TileEntity> atkTiles = GetInRangePosOneTile(this.GetAtkRangeMin(), this.GetAtkRangeMax(), curPosition);
+            int[] range = GetPossibleAtkRange();
+            List<TileEntity> atkTiles = null;
             HashSet<int> tileHash = new HashSet<int>();
-            foreach (var tile in atkTiles)
+            if (range != null)//find tiles in possible attack range
             {
-                tileHash.Add(tile.tileId);
+                atkTiles = GetInRangePosOneTile(range[0], range[1], curPosition);
+                foreach (var tile in atkTiles)
+                {
+                    tileHash.Add(tile.tileId);
+                }
+            }
+            else //find neighbor tiles 
+            {
+                var curTile = TBSMapService.Inst.map.Tile(this.curPosition);
+                atkTiles = TBSMapService.Inst.map.GetNeighbors(curTile);
+                foreach (var tile in atkTiles)
+                    tileHash.Add(tile.tileId);
             }
             var pawnList = BLogic.Inst.GetPawnsOnTiles(tileHash);
             List<Pawn> foeList = pawnList.FindAll(p => { return PawnCampTool.CampsHostile(this.camp, p.camp); });
@@ -669,6 +719,117 @@ namespace SunHeTBS
                 return true;
             return equippedWeapon.itemCfg.Magical;
         }
+        /// <summary>
+        /// get weapon count that has attack target, standing on cur tile
+        /// </summary>
+        /// <returns></returns>
+        public List<Weapon> GetPossibleWeaponCount()
+        {
+            List<Weapon> wepList = new List<Weapon>();
+            //find all foes inside this max range
+            foreach (var item in itemList)
+            {
+                if (item is Weapon)
+                {
+                    var wep = item as Weapon;
+                    var foeList = GetFoesInWeaponRange(wep);
+                    if (foeList.Count > 0)
+                    {
+                        wepList.Add(wep);
+                    }
+                }
+            }
+            return wepList;
+        }
+        public HashSet<int> GetPossibleAttackTile()
+        {
+            HashSet<int> idHash = new HashSet<int>();
+            foreach (var item in itemList)
+            {
+                if (item is Weapon)
+                {
+                    var wep = item as Weapon;
+                    var hash = GetTileIdInWeaponRange(wep);
+                    foreach (int id in hash)
+                        idHash.Add(id);
+                }
+            }
+            return idHash;
+        }
+        /// <summary>
+        /// tile ids in this weapon's attack range,in current tile
+        /// </summary>
+        /// <param name="wep"></param>
+        /// <returns></returns>
+        public HashSet<int> GetTileIdInWeaponRange(Weapon wep)
+        {
+            HashSet<int> tileIdHash = new HashSet<int>();
+
+            List<int> range = wep.itemCfg.Range;
+            int rangeMin = 0;
+            int rangeMax = 0;
+            if (range.Count == 1)
+            {
+                rangeMin = range[0];
+                rangeMax = range[0];
+            }
+            else if (range.Count == 2)
+            {
+                rangeMin = range[0];
+                rangeMax = range[1];
+            }
+            var map = TBSMapService.Inst.map;
+
+            var centerTile = map.GetTileFromDic(TilePosId());
+
+            for (int m = -rangeMax; m <= rangeMax; m++)
+            {
+                int rangeN = rangeMax - Mathf.Abs(m);
+                for (int n = -rangeN; n <= rangeN; n++) //m,n loop the diamond shape around centerPos
+                {
+                    int tileRange = Mathf.Abs(m) + Mathf.Abs(n);
+                    if (rangeMin > 0 && tileRange < rangeMin)//consider min range
+                        continue;
+
+                    // m,n is the pos
+                    int targetTileId = map.XY2TileId(centerTile.Position.x + m, centerTile.Position.y + n);
+                    if (!tileIdHash.Contains(targetTileId))
+                    {
+                        if (map.GetTileFromDic(targetTileId) != null)
+                            tileIdHash.Add(targetTileId);
+                    }
+                }
+            }
+
+            return tileIdHash;
+        }
+        /// <summary>
+        /// get attackable foes with this weapon
+        /// </summary>
+        /// <param name="wep"></param>
+        /// <returns></returns>
+        public List<Pawn> GetFoesInWeaponRange(Weapon wep)
+        {
+            List<Pawn> foeList = new List<Pawn>();
+            if (CanEquipWeapon(wep))
+            {
+                HashSet<int> tileHash = GetTileIdInWeaponRange(wep);
+                var pawnList = BLogic.Inst.GetPawnsOnTiles(tileHash);
+                foreach (var pawn in pawnList)
+                {
+                    if (IsMyFoe(pawn))
+                    {
+                        foeList.Add(pawn);
+                    }
+                }
+            }
+            return foeList;
+        }
         #endregion
+
+        public bool IsMyFoe(Pawn other)
+        {
+            return PawnCampTool.CampsHostile(this.camp, other.camp);
+        }
     }
 }

@@ -55,6 +55,19 @@ namespace SunHeTBS
                 yield return findTile;
             }
         }
+        public List<TileEntity> GetNeighbors(INode node)
+        {
+            List<TileEntity> tileList = new List<TileEntity>();
+            for (int i = 0; i < NeighbourArray.Length; i++)
+            {
+                var pos = node.Position + NeighbourArray[i];
+                int tileId = XY2TileId(pos);
+                if (TileDic.ContainsKey(tileId) == false)//filter invalid tileIds
+                    continue;
+                tileList.Add(TileDic[tileId]);
+            }
+            return tileList;
+        }
         public static readonly Vector3Int[] NeighbourArray = new Vector3Int[]
         {
             new Vector3Int(0,1,0),

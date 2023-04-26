@@ -93,9 +93,14 @@ namespace SunHeTBS
                 SpawnCoverPlaneBlue(pos, tile.topHeight);
             }
 
-            int atkRangeMax = p.GetAtkRangeMax();
-            int atkRangeMin = p.GetAtkRangeMin();
-            var atkTileIdList = p.GetTileIdsInRange(atkRangeMin, atkRangeMax);
+            List<int> atkTileIdList = new List<int>();
+            if (p.rangeTileDic != null)
+            {
+                foreach (var hash in p.rangeTileDic.Values)
+                {
+                    atkTileIdList.AddRange(hash);
+                }
+            }
 
             //show red planes in attackable tiles, walkable tiles excluded
             foreach (int tileId in atkTileIdList)
@@ -110,17 +115,18 @@ namespace SunHeTBS
             }
         }
         /// <summary>
-        /// on given tile, show pawn's attackable tiles in red
+        /// on given tile, show pawn's possible attackable tiles in red
         /// </summary>
         /// <param name="p"></param>
         /// <param name="tile"></param>
         public void ShowPawnCoverPlanesOneTile(Pawn p, Vector3Int tempPos)
         {
-            var tileList = p.GetInRangePosOneTile(p.GetAtkRangeMin(), p.GetAtkRangeMax(), tempPos);
+            var idHash = p.GetPossibleAttackTile();
 
             //show red planes in attackable tiles 
-            foreach (var tile in tileList)
+            foreach (int id in idHash)
             {
+                var tile = map.GetTileFromDic(id);
                 var pos = map.WorldPosition(tile);
                 SpawnCoverPlaneRed(pos, tile.topHeight);
             }
