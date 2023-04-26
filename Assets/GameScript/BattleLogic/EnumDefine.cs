@@ -40,21 +40,53 @@ namespace SunHeTBS
         /// </summary>
         None,
         /// <summary>
-        /// +30 avo
+        /// avo+30, move_cost 2
         /// </summary>
         Avoid,
+        /// <summary>
+        /// avo+30,heal/trun 10HP,unbreakable,move_cost 2
+        /// </summary>
+        Fort,
+        /// <summary>
+        /// avo+30,heal/trun 10HP,unbreakable
+        /// </summary>
+        Protection,
+        /// <summary>
+        /// avo-30, move_cost 2
+        /// </summary>
+        Shoal,
+        /// <summary>
+        /// Inficts Mov -3 when ending turn on tile.
+        /// </summary>
+        Quicksand,
+        /// <summary>
+        /// Ally Def/Res -20; Foe Def/Res +20
+        /// </summary>
+        Miasma,
         /// <summary>
         /// heal/turn+10
         /// </summary>
         Healing,
         /// <summary>
-        ///  +30 Avo, heal/turn+10
+        /// Def/Res +3,move_cost 2
         /// </summary>
-        Protection,
+        Pillars,
+        /// <summary>
+        /// Unbreakable,move_cost 2
+        /// </summary>
+        Vines,
+        /// <summary>
+        /// Damage/Turn -10,move_cost 3
+        /// </summary>
+        Flames,
         /// <summary>
         /// Mov+2
         /// </summary>
         Frost,
+        /// <summary>
+        /// avo+30
+        /// </summary>
+        Fog,
     }
     /// <summary>
     /// tile pass type

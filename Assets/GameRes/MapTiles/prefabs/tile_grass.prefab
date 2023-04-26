@@ -186,7 +186,7 @@ MonoBehaviour:
   passType: 0
   extraMovePrice: 1
   effectType: 1
-  tileName: Wood
+  tileName: Grass
 --- !u!1001 &3821424032862726711
 PrefabInstance:
   m_ObjectHideFlags: 0
