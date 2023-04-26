@@ -186,7 +186,7 @@ namespace SunHeTBS
                 Debugger.LogError($"map tile {p.ToString()} already contains pawn!");
             }
         }
-        public void AddTestPawn(PawnCamp camp, Vector3Int pos, PawnMoveType moveType)
+        public void AddTestPawn(PawnCamp camp, Vector3Int pos, PawnMoveType moveType, List<int> weaponList)
         {
             Pawn p = new Pawn();
             p.camp = camp;
@@ -197,9 +197,10 @@ namespace SunHeTBS
             p.moveType = moveType;
             p.Init();
             AddPawn(p);
-
-            var weapon1 = new Weapon(1002);
-            p.InsertItem(weapon1);
+            foreach (int wpId in weaponList)
+            {
+                p.InsertItem(new Weapon(wpId));
+            }
         }
         #endregion
 
@@ -219,9 +220,9 @@ namespace SunHeTBS
         public void PostInitProcess()
         {
             //test
-            AddTestPawn(PawnCamp.Player, new Vector3Int(2, 2), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Player, new Vector3Int(2, 2), PawnMoveType.Ground, new List<int>() { 1002, 1007 });
             //AddTestPawn(PawnCamp.Player, new Vector3Int(4, 5), PawnMoveType.Ground);
-            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 2), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 2), PawnMoveType.Ground, new List<int>() { 1002 });
             //AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground);
 
 
