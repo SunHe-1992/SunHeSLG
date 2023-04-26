@@ -138,6 +138,7 @@ namespace SunHeTBS
                 tile.extraPassPrice = tdj.cost;
                 tile.effectType = (EffectType)tdj.effect;
                 TileDic[tileId] = tile;
+                tile.name = tdj.name;
             }
 
         }

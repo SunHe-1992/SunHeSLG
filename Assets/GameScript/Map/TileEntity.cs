@@ -54,6 +54,7 @@ namespace SunHeTBS
 
         }
 
+        public string name;
     }
 
 }

@@ -25,6 +25,9 @@ public partial class UIPage_BattleMain : FUIBase
             curPawnSid = pointedPawn.sequenceId;
             ShowPawnPreview(pointedPawn);
         }
+
+        //show tile info
+        ShowTileInfo();
     }
     void ShowPawnPreview(Pawn p)
     {
@@ -45,5 +48,79 @@ public partial class UIPage_BattleMain : FUIBase
         btmBar.AU_mov.txt_attrName.text = "Mov";
         btmBar.AU_res.txt_attrName.text = "Res";
         btmBar.AU_spd.txt_attrName.text = "Spd";
+    }
+
+
+    void ShowTileInfo()
+    {
+        var cursorPos = BLogic.Inst.cursorPos;
+        TileEntity curTile = TBSMapService.Inst.map.Tile(cursorPos);
+        if (curTile != null)
+        {
+            DisplayTileInfo(curTile);
+        }
+        else
+            HideTileInfo();
+    }
+    void DisplayTileInfo(TileEntity tile)
+    {
+        ui.tileInfoComp.visible = true;
+        var tiComp = ui.tileInfoComp;
+        tiComp.txt_tileName.text = tile.name;
+
+        if (tile.passType == TilePassType.Passable)
+        {
+            tiComp.lbl_passible.visible = false;
+        }
+        else
+        {
+            tiComp.lbl_passible.visible = true;
+            if (tile.passType == TilePassType.FliersOnly)
+                tiComp.lbl_passible.title = "FliersOnly";
+            else if (tile.passType == TilePassType.Impassable)
+                tiComp.lbl_passible.title = "Impassable";
+        }
+        string effStr = UIService.TileEffToString((int)tile.effectType);
+        if (string.IsNullOrEmpty(effStr))
+        {
+            tiComp.lbl_effect.visible = false;
+        }
+        else
+        {
+            tiComp.lbl_effect.visible = true;
+            tiComp.lbl_effect.title = effStr;
+        }
+        bool haveSklIcons = false; //todo  skl icons display
+        if (haveSklIcons)
+        {
+            tiComp.lbl_skl.visible = true;
+            tiComp.ctrl_showEffects.selectedIndex = 0;
+        }
+        else
+        {
+            tiComp.lbl_skl.visible = false;
+            tiComp.ctrl_showEffects.selectedIndex = 1;
+        }
+        List<GComponent> lblList = new List<GComponent>()
+        {
+            tiComp.lbl_passible,tiComp.lbl_effect,tiComp.lbl_skl,
+        };
+
+        float lblHeight = 30;
+        float lblY = 65;
+        int visibleCount = 0;
+        for (int i = 0; i < lblList.Count; i++)
+        {
+            var comp = lblList[i];
+            if (comp.visible)
+            {
+                visibleCount++;
+                comp.y = lblY + lblHeight * (visibleCount - 1);
+            }
+        }
+    }
+    void HideTileInfo()
+    {
+        ui.tileInfoComp.visible = false;
     }
 }

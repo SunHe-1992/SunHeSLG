@@ -440,5 +440,70 @@
         "气功"
       ]
     ]
+  },
+  {
+    "ID": "HealOnTurn",
+    "Lans": [
+      [
+        "EN",
+        "Heal/Turn"
+      ],
+      [
+        "zh-CN",
+        "每回合回复"
+      ]
+    ]
+  },
+  {
+    "ID": "DamageOnTurn",
+    "Lans": [
+      [
+        "EN",
+        "Take Damage/Turn"
+      ],
+      [
+        "zh-CN",
+        "每回合受伤"
+      ]
+    ]
+  },
+  {
+    "ID": "Unbreakable",
+    "Lans": [
+      [
+        "EN",
+        "Unbreakable"
+      ],
+      [
+        "zh-CN",
+        "免疫击破"
+      ]
+    ]
+  },
+  {
+    "ID": "DefResFoe",
+    "Lans": [
+      [
+        "EN",
+        "Def/Res for Foe"
+      ],
+      [
+        "zh-CN",
+        "敌方防御/魔防"
+      ]
+    ]
+  },
+  {
+    "ID": "DefResAlly",
+    "Lans": [
+      [
+        "EN",
+        "Def/Res for Ally"
+      ],
+      [
+        "zh-CN",
+        "友方防御/魔防"
+      ]
+    ]
   }
 ]

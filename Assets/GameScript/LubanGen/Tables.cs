@@ -18,6 +18,7 @@ public sealed partial class Tables
     public SLG.Character Character {get; }
     public SLG.Item Item {get; }
     public SLG.Class Class {get; }
+    public SLG.TileEffect TileEffect {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -32,6 +33,8 @@ public sealed partial class Tables
         tables.Add("SLG.Item", Item);
         Class = new SLG.Class(loader("slg_class")); 
         tables.Add("SLG.Class", Class);
+        TileEffect = new SLG.TileEffect(loader("slg_tileeffect")); 
+        tables.Add("SLG.TileEffect", TileEffect);
         PostInit();
 
         TbConst.Resolve(tables); 
@@ -39,6 +42,7 @@ public sealed partial class Tables
         Character.Resolve(tables); 
         Item.Resolve(tables); 
         Class.Resolve(tables); 
+        TileEffect.Resolve(tables); 
         PostResolve();
     }
 
@@ -49,6 +53,7 @@ public sealed partial class Tables
         Character.TranslateText(translator); 
         Item.TranslateText(translator); 
         Class.TranslateText(translator); 
+        TileEffect.TranslateText(translator); 
     }
     
     partial void PostInit();

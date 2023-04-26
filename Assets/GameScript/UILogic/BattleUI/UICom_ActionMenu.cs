@@ -74,6 +74,7 @@ public partial class UIPage_BattleMain : FUIBase
         {
             //show combat predict
             HideActionMenu();
+
             FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
         }
 

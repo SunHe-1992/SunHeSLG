@@ -244,6 +244,11 @@ namespace SunHeTBS
         public int DisplayedHit;
         public int DisplayedStaffHit;
         public int DisplayedDamage;
+
+        public int HealOnTurn;
+        public int DamageOnTurn;
+        public int MoveChange;
+        public bool Unbreakable;
         public void ReviseDisplayValues()
         {
             if (DisplayedDamage < 0)
@@ -260,6 +265,8 @@ namespace SunHeTBS
                 value = 0;
             return value;
         }
+      
+
     }
     public static class AttrCalculator
     {

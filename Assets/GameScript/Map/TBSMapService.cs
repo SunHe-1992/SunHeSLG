@@ -195,6 +195,33 @@ namespace SunHeTBS
             }
         }
         #endregion
+
+        /// <summary>
+        /// get tileEffect attr
+        /// </summary>
+        /// <param name="tileEff"></param>
+        /// <param name="isFoe"></param>
+        /// <returns></returns>
+        public CombatAttribute GetTileEffectAttr(EffectType tileEff, bool isFoe)
+        {
+            if (tileEff == 0)
+                return null;
+
+            var cfg = ConfigManager.table.TileEffect.Get((int)tileEff);
+            CombatAttribute attr = new CombatAttribute();
+            attr.Avoid += cfg.Avoid;
+            if (isFoe)
+            {
+                attr.Defence += cfg.DefFoe;
+                attr.Resistance += cfg.ResFoe;
+            }
+            else
+            {
+                attr.Defence += cfg.DefAlly;
+                attr.Resistance += cfg.ResAlly;
+            }
+            return attr;
+        }
     }
 
 }

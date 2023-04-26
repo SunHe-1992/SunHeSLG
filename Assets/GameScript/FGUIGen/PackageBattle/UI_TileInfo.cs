@@ -9,7 +9,10 @@ namespace PackageBattle
     {
         public Controller ctrl_showEffects;
         public GTextField txt_tileName;
-        public GTextField txt_effect;
+        public GLabel lbl_passible;
+        public GLabel lbl_effect;
+        public GLabel lbl_skl;
+        public GList list_sklIcons;
         public const string URL = "ui://fstosj6iscq5h";
 
         public static UI_TileInfo CreateInstance()
@@ -23,7 +26,10 @@ namespace PackageBattle
 
             ctrl_showEffects = GetController("ctrl_showEffects");
             txt_tileName = (GTextField)GetChild("txt_tileName");
-            txt_effect = (GTextField)GetChild("txt_effect");
+            lbl_passible = (GLabel)GetChild("lbl_passible");
+            lbl_effect = (GLabel)GetChild("lbl_effect");
+            lbl_skl = (GLabel)GetChild("lbl_skl");
+            list_sklIcons = (GList)GetChild("list_sklIcons");
         }
     }
 }

@@ -10,6 +10,8 @@ public class UIPage_CombatPredict : FUIBase
 {
 
     UI_CombatPredict ui;
+    public static int leftPawnSid = 0;
+    public static int rightPawnSid = 0;
     protected override void OnInit()
     {
         base.OnInit();
