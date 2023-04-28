@@ -72,6 +72,7 @@ public partial class UIPage_BattleMain : FUIBase
         ui.tileInfoComp.visible = false;
         ui.phaseCom.visible = false;
         ui.actionCom.visible = false;
+        ui.inventoryCom.visible = false;
     }
     #region battle map input control
 
@@ -125,81 +126,7 @@ public partial class UIPage_BattleMain : FUIBase
             UIConfirmAction?.Invoke();
         else
             BLogic.Inst.OnClickConfirm();
-        var pointedPawn = BLogic.Inst.pointedPawn;
-        var selectedPawn = BLogic.Inst.selectedPawn;
-        var gameState = BLogic.Inst.GetGamePlayState();
-        //if (gameState == GamePlayState.PlayerControl)
-        //{
-        //    bool openMenu = false;
-        //    if (pointedPawn == null)
-        //    {
-        //        openMenu = true;
-        //    }
-        //    if (selectedPawn == null && pointedPawn != null)//click confirm on a pawn
-        //    {
-        //        if (pointedPawn.camp == PawnCamp.Player)//player's pawn
-        //        {
-        //            if (pointedPawn.actionEnd == false)//move player's pawn
-        //            {
 
-        //            }
-        //            else
-        //            {
-        //                openMenu = true;
-        //            }
-        //        }
-        //        else if (pointedPawn.camp == PawnCamp.Villain)//todo toggle enemy's attack range
-        //        {
-
-        //        }
-        //    }
-
-        //    if (openMenu)
-        //    {
-        //        //open menu
-        //        ShowActionMenu(null);
-        //    }
-        //}
-
-        //else
-        //if (gameState == GamePlayState.SelectingMoveDest)
-        //{
-        //    //situation 1: cursor is out of walkable area, do nothing,  play alert sound
-        //    //situation 2: cursor is inside walkable area,pawn move
-        //    //situation 3: cursor is under a enemy pawn ,show combat predict
-        //    //situation 4: cursor is under a ally pawn and ready to heal this ally,show combat predict (heal)
-        //    var cursorPos = BLogic.Inst.cursorPos;
-        //    int cursorTileId = TBSMapService.Inst.GetTileId(cursorPos);
-        //    if (pointedPawn == null)//confirm on empty tile
-        //    {
-        //        if (selectedPawn.moveTileIds.Contains(cursorTileId))//walk to this tile
-        //        {
-        //            Debugger.Log($"walk to tile {cursorPos}");
-        //            BLogic.Inst.PawnStartMove(selectedPawn, cursorTileId);
-        //        }
-        //        else //alert sound
-        //        {
-
-        //        }
-        //    }
-        //    else //confirm on a pawn
-        //    {
-        //        bool canMoveToCursor = true;
-        //        if (false == selectedPawn.moveTileIds.Contains(cursorTileId))
-        //        {
-        //            canMoveToCursor = false;
-        //        }
-        //        if (pointedPawn.camp == PawnCamp.Player || pointedPawn.camp == PawnCamp.PlayerAlly)
-        //        {
-        //            //todo can heal pointedPawn ?
-        //        }
-        //    }
-        //}
-
-        //else if (gameState == GamePlayState.UIActionMenu)
-        //{
-        //    ClickConfirmOnActionMenu();
-        //}
     }
 
     void OnClickCancel(IEventMessage msg)
@@ -208,42 +135,7 @@ public partial class UIPage_BattleMain : FUIBase
             UICancelAction?.Invoke();
         else
             BLogic.Inst.OnClickCancel();
-        //return; 
-        //var gameState = BLogic.Inst.GetGamePlayState();
-        //var selectedPawn = BLogic.Inst.selectedPawn;
-        //if (gameState == GamePlayState.SelectingMoveDest)
-        //{
-        //    //click cancel on path selecting, cursor relocate to seletedPawn's pos
-        //    if (selectedPawn != null)
-        //    {
-        //        selectedPawn.tempPos = selectedPawn.curPosition;
-        //        BLogic.Inst.CursorInputMoveTo(selectedPawn.curPosition);
-        //        BLogic.Inst.SetNextGamePlayState(GamePlayState.PlayerControl);
-        //        BattleDriver.Inst.MoveCursorObj();
-        //        BLogic.Inst.selectedPawn = null;
-        //        TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
-        //    }
-        //}
-        //else if (gameState == GamePlayState.UIActionMenu)
-        //{
-        //    if (ui.actionCom.visible)
-        //    {
 
-        //        if (selectedPawn != null)
-        //        {
-        //            //todo check sub UI first: combatPredictUI/weaponSelectUI/pawnItemUI/TradeUI/TradeSelectPawnUI/
-        //            //pawn model relocate to real pos, show move/atk planes
-
-        //            focusedList = null;
-        //            ui.actionCom.visible = false;
-        //            selectedPawn.tempPos = selectedPawn.curPosition;
-        //            selectedPawn.ResetPosition();
-        //            BLogic.Inst.SetNextGamePlayState(GamePlayState.SelectingMoveDest);
-        //            BattleDriver.Inst.MoveCursorObj();
-        //            TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
-        //        }
-        //    }
-        //}
     }
     #endregion
 

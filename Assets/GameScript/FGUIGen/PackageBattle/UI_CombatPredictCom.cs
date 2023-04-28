@@ -9,7 +9,7 @@ namespace PackageBattle
     {
         public Controller ctrl_color;
         public Controller ctrl_showDir;
-        public GComponent weaponCom;
+        public UI_ItemComp weaponCom;
         public GButton btn_prev;
         public GButton btn_next;
         public UI_Label2 lbl_dmg;
@@ -30,7 +30,7 @@ namespace PackageBattle
 
             ctrl_color = GetController("ctrl_color");
             ctrl_showDir = GetController("ctrl_showDir");
-            weaponCom = (GComponent)GetChild("weaponCom");
+            weaponCom = (UI_ItemComp)GetChild("weaponCom");
             btn_prev = (GButton)GetChild("btn_prev");
             btn_next = (GButton)GetChild("btn_next");
             lbl_dmg = (UI_Label2)GetChild("lbl_dmg");

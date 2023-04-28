@@ -1,5 +1,7 @@
 using UniFramework.Singleton;
 using SunHeTBS;
+using PackageShared;
+using PackageBattle;
 public class UIService : ISingleton
 {
     public static UIService Inst { get; private set; }
@@ -97,4 +99,17 @@ public class UIService : ISingleton
             str += Translator.GetStr("Unbreakable") + ",";
         return str.Substring(0, str.Length - 1);
     }
+
+    public void RefreshItemDetail(int itemId, UI_WeaponStats com)
+    {
+        var itemCfg = ConfigManager.table.Item.GetOrDefault(itemId);
+        if (itemCfg == null)
+        {
+            return;
+        }
+        com.txt_des.text = itemCfg.Description;
+
+
+    }
+
 }

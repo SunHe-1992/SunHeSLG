@@ -3,17 +3,17 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace PackageShared
+namespace PackageBattle
 {
     public partial class UI_ItemComp : GComponent
     {
         public GTextField txt_name;
         public UI_ItemIcon iconCom;
-        public const string URL = "ui://9bv6j664g0n5hu";
+        public const string URL = "ui://fstosj6ig0n5hu";
 
         public static UI_ItemComp CreateInstance()
         {
-            return (UI_ItemComp)UIPackage.CreateObject("PackageShared", "ItemComp");
+            return (UI_ItemComp)UIPackage.CreateObject("PackageBattle", "ItemComp");
         }
 
         public override void ConstructFromXML(XML xml)

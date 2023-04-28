@@ -9,18 +9,18 @@ namespace SunHeTBS
         public static int itemSequence;
         public int sid;
         public int itemId;
-        public ItemData itemCfg;
         public int usedTimes = 0;
-
+        public ItemData itemCfg;
         public Item(int itemId)
         {
             var cfg = ConfigManager.table.Item.Get(itemId);
             if (cfg != null)
             {
+                itemCfg = cfg;
                 itemSequence++;
                 this.sid = itemSequence;
                 usedTimes = 0;
-                this.itemCfg = cfg;
+                this.itemId = itemId;
             }
         }
     }
@@ -28,13 +28,12 @@ namespace SunHeTBS
     {
         public int forgeLevel;
         public int engraveId;
-
         public Weapon(int itemId) : base(itemId)
         {
             forgeLevel = 0;
             engraveId = 0;
-
-            List<int> rangeCfg = this.itemCfg.Range;
+            var cfg = ConfigManager.table.Item.Get(itemId);
+            List<int> rangeCfg = cfg.Range;
             if (rangeCfg != null)
             {
                 if (rangeCfg.Count == 1)

@@ -3,16 +3,16 @@
 using FairyGUI;
 using FairyGUI.Utils;
 
-namespace PackageShared
+namespace PackageBattle
 {
     public partial class UI_ItemIcon : GComponent
     {
         public GLoader iconLoader;
-        public const string URL = "ui://9bv6j664g0n5hv";
+        public const string URL = "ui://fstosj6ig0n5hv";
 
         public static UI_ItemIcon CreateInstance()
         {
-            return (UI_ItemIcon)UIPackage.CreateObject("PackageShared", "ItemIcon");
+            return (UI_ItemIcon)UIPackage.CreateObject("PackageBattle", "ItemIcon");
         }
 
         public override void ConstructFromXML(XML xml)

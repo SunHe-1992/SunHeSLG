@@ -169,13 +169,13 @@ namespace SunHeTBS
             int longRange = 0;
             foreach (var wp in this.itemList)
             {
-                if (wp is Weapon && CanEquipWeapon(wp as Weapon))
+                if (wp is Weapon)
                 {
-                    List<int> rangeList = wp.itemCfg.Range;
-                    foreach (int rng in rangeList)
+                    var wep = wp as Weapon;
+                    if (CanEquipWeapon(wep))
                     {
-                        if (rng < nearRange) nearRange = rng;
-                        if (rng > longRange) longRange = rng;
+                        if (wep.rangeMin < nearRange) nearRange = wep.rangeMin;
+                        if (wep.rangeMax > longRange) longRange = wep.rangeMax;
                     }
                 }
             }
@@ -420,7 +420,7 @@ namespace SunHeTBS
             var neighbours = BLogic.Inst.GetAdjacentPawns(this);
             foreach (var pawn in neighbours)
             {
-                if (pawn.camp == this.camp)
+                if (pawn.camp == this.camp && pawn.sequenceId != this.sequenceId)
                     tradablePawns++;
             }
         }
@@ -563,10 +563,9 @@ namespace SunHeTBS
             }
             else
             {
-                var weaponCfg = equippedWeapon.itemCfg;
-                int weaponMt = weaponCfg.Might;
+                int weaponMt = equippedWeapon.itemCfg.Might;
                 int atk = weaponMt;
-                if (weaponCfg.Magical)
+                if (equippedWeapon.itemCfg.Magical)
                 {
                     atk += attrCache.Mag;
                     combatAttr.MagAtk = atk;
@@ -691,7 +690,7 @@ namespace SunHeTBS
             {
                 var wep = item as Weapon;
                 if (CanEquipWeapon(wep))
-                    EquipAWeapon(wep);
+                    EquipWeapon(wep);
             }
         }
         public void RemoveItem(int sid)
@@ -707,9 +706,28 @@ namespace SunHeTBS
             //todo
             return true;
         }
-        public void EquipAWeapon(Weapon weapon)
+        public void EquipWeapon(Weapon weapon)
         {
             this.equippedWeapon = weapon;
+        }
+        public void EquipWeapon(int sid)
+        {
+            var wep = GetWeapon(sid);
+            if (wep != null)
+            {
+                EquipWeapon(wep);
+            }
+        }
+        public Weapon GetWeapon(int sid)
+        {
+            foreach (var item in itemList)
+            {
+                if (item.sid == sid)
+                {
+                    return item as Weapon;
+                }
+            }
+            return null;
         }
         public bool IsMagicAtk()
         {

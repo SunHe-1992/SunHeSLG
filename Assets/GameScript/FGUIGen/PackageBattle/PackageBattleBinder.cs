@@ -10,6 +10,8 @@ namespace PackageBattle
         {
             UIObjectFactory.SetPackageItemExtension(UI_BattlePrepare.URL, typeof(UI_BattlePrepare));
             UIObjectFactory.SetPackageItemExtension(UI_PhaseComp.URL, typeof(UI_PhaseComp));
+            UIObjectFactory.SetPackageItemExtension(UI_ItemComp.URL, typeof(UI_ItemComp));
+            UIObjectFactory.SetPackageItemExtension(UI_ItemIcon.URL, typeof(UI_ItemIcon));
             UIObjectFactory.SetPackageItemExtension(UI_CombatPredict.URL, typeof(UI_CombatPredict));
             UIObjectFactory.SetPackageItemExtension(UI_CombatPredictCom.URL, typeof(UI_CombatPredictCom));
             UIObjectFactory.SetPackageItemExtension(UI_Label2.URL, typeof(UI_Label2));
@@ -28,6 +30,10 @@ namespace PackageBattle
             UIObjectFactory.SetPackageItemExtension(UI_ProgressBar1.URL, typeof(UI_ProgressBar1));
             UIObjectFactory.SetPackageItemExtension(UI_PawnNameComp.URL, typeof(UI_PawnNameComp));
             UIObjectFactory.SetPackageItemExtension(UI_TileInfo.URL, typeof(UI_TileInfo));
+            UIObjectFactory.SetPackageItemExtension(UI_WeaponStats.URL, typeof(UI_WeaponStats));
+            UIObjectFactory.SetPackageItemExtension(UI_StatsComItem.URL, typeof(UI_StatsComItem));
+            UIObjectFactory.SetPackageItemExtension(UI_BagItemComp.URL, typeof(UI_BagItemComp));
+            UIObjectFactory.SetPackageItemExtension(UI_ItemInventoryComp.URL, typeof(UI_ItemInventoryComp));
         }
     }
 }
