@@ -46,7 +46,7 @@ public class UIPage_UnitUI : FUIBase
         basicAttr = pawn.GetAttribute();
         pdCom.list_BasicStats.numItems = 7;
 
-        //combat stats
+        //todo combat stats
 
         SetUIStatsCom(pdCom.stat_build, "Bld", basicAttr.Bld.ToString());
         //sp display

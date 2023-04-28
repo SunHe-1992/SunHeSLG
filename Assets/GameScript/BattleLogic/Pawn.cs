@@ -81,6 +81,8 @@ namespace SunHeTBS
             }
 
             GetAttribute();
+            GetCombatAttr();
+            this.HP = this.attrCache.HPMax;
         }
         public override string ToString()
         {
@@ -849,5 +851,14 @@ namespace SunHeTBS
         {
             return PawnCampTool.CampsHostile(this.camp, other.camp);
         }
+
+        #region HP manage
+        private int _hp;
+        public int HP
+        {
+            get { return _hp; }
+            set { _hp = value; }
+        }
+        #endregion
     }
 }

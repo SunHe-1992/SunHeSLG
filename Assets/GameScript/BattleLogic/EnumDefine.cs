@@ -130,7 +130,7 @@ namespace SunHeTBS
         }
         public static bool CampsFriend(PawnCamp campA, PawnCamp campB)
         {
-            return friendDic[campA][(int)campB] == false;
+            return friendDic[campA][(int)campB] == true;
         }
     }
 

@@ -204,6 +204,15 @@ namespace SunHeTBS
         }
         #endregion
 
+        #region Select pawns
+        public TargetSelector targetSelector;
+        public List<Pawn> SelectFoes(int rangeMin, int rangeMax)
+        {
+            var list = targetSelector.SelectTargetFoes(this.pawnList, selectedPawn.camp, selectedPawn.curPosition, rangeMin, rangeMax);
+            return list;
+        }
+        #endregion
+
         public void ResetBattleState()
         {
             pawnList.Clear();
@@ -223,7 +232,7 @@ namespace SunHeTBS
             AddTestPawn(PawnCamp.Player, new Vector3Int(2, 2), PawnMoveType.Ground, new List<int>() { 1002, 1007 });
             //AddTestPawn(PawnCamp.Player, new Vector3Int(4, 5), PawnMoveType.Ground);
             AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 2), PawnMoveType.Ground, new List<int>() { 1002 });
-            //AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground);
+            AddTestPawn(PawnCamp.Villain, new Vector3Int(4, 1), PawnMoveType.Ground, new List<int>() { 1002 });
 
 
             InitPlayerPosition();
@@ -267,6 +276,7 @@ namespace SunHeTBS
         }
         public void OnCreate(object createParam)
         {
+            targetSelector = new TargetSelector();
         }
 
         public void OnUpdate()
@@ -489,6 +499,11 @@ namespace SunHeTBS
                 BattleDriver.Inst.MoveCursorObj();
             }
 
+        }
+        public void CursorMoveToTargetPawn(Pawn targetPawn)
+        {
+            this.cursorPos = targetPawn.curPosition;
+            BattleDriver.Inst.MoveCursorObj();
         }
         public void OnMouseClick(Vector3 pos)
         {

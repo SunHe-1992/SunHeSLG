@@ -21,14 +21,18 @@ public partial class UIPage_BattleMain : FUIBase
 
         this.focusedList = ui.inventoryCom.list_inventory;
         this.UIConfirmAction = OnInventoryConfirm;
-        this.UICancelAction = HideInventoryCom;
+        this.UICancelAction = BackToActionMenu;
     }
 
 
-    private void HideInventoryCom()
+    private void BackToActionMenu()
     {
         ui.inventoryCom.visible = false;
         ShowActionMenu(null);
+    }
+    private void HideInventoryCom()
+    {
+        ui.inventoryCom.visible = false;
     }
 
     List<Item> inventoryItemList = null;
@@ -84,7 +88,7 @@ public partial class UIPage_BattleMain : FUIBase
 
         this.focusedList = ui.inventoryCom.list_inventory;
         this.UIConfirmAction = OnWeaponSelectConfirm;
-        this.UICancelAction = HideInventoryCom;
+        this.UICancelAction = BackToActionMenu;
     }
     void ShowWeaponSelectContent()
     {

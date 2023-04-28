@@ -48,6 +48,9 @@ public partial class UIPage_BattleMain : FUIBase
         btmBar.AU_mov.txt_attrName.text = "Mov";
         btmBar.AU_res.txt_attrName.text = "Res";
         btmBar.AU_spd.txt_attrName.text = "Spd";
+        btmBar.txt_hp1.text = "" + p.HP;
+
+        btmBar.txt_hp2.text = "" + attr.HPMax;
     }
 
 

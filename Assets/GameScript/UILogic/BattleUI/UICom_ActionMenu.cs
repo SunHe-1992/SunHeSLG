@@ -80,17 +80,15 @@ public partial class UIPage_BattleMain : FUIBase
             int weaponCount = weaponList.Count;
             if (weaponCount == 1) //go to foe selecting
             {
-
+                FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
             }
             else if (weaponCount > 1) //show weapon select UI
             {
+                HideActionMenu();
                 OpenWeaponSelect();
             }
-
-
             //todo  after weapon selected, show [Map target foe select]
             //todo  after Foe selected,show [combat predic ui]
-            //FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
         }
         else if (orderStr == strItems)
         {
