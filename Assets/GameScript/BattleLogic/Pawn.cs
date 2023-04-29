@@ -543,13 +543,17 @@ namespace SunHeTBS
             combatAttr.DisplayedStaffHit -= foeAttr.StaffAvo;
             if (IsArmed())
             {
-                if (IsMagicAtk())
+                if (IsPhDmg())
                 {
                     combatAttr.DisplayedDamage = combatAttr.MagAtk - foeAttr.Resistance;
                 }
-                else
+                else if (IsMagDmg())
                 {
                     combatAttr.DisplayedDamage = combatAttr.PhAtk - foeAttr.Defence;
+                }
+                else if (IsPnDmg())
+                {
+                    combatAttr.DisplayedDamage = combatAttr.PnAtk;
                 }
             }
             combatAttr.ReviseDisplayValues();
@@ -567,17 +571,24 @@ namespace SunHeTBS
             {
                 int weaponMt = equippedWeapon.itemCfg.Might;
                 int atk = weaponMt;
-                if (equippedWeapon.itemCfg.Magical)
+                var dmgType = equippedWeapon.itemCfg.DmgType;
+                combatAttr.PnAtk = 0;
+                combatAttr.PhAtk = 0;
+                combatAttr.MagAtk = 0;
+
+                if (dmgType == DamageType.PH)
                 {
                     atk += attrCache.Mag;
                     combatAttr.MagAtk = atk;
-                    combatAttr.PhAtk = 0;
                 }
-                else
+                else if (dmgType == DamageType.MAG)
                 {
                     atk += attrCache.Str;
                     combatAttr.PhAtk = atk;
-                    combatAttr.MagAtk = 0;
+                }
+                else if (dmgType == DamageType.PN)
+                {
+                    combatAttr.PnAtk = atk;
                 }
             }
         }
@@ -731,14 +742,25 @@ namespace SunHeTBS
             }
             return null;
         }
-        public bool IsMagicAtk()
+        public DamageType GetDamageType()
         {
             if (!IsArmed())
-                return false;
-            if (equippedWeapon.itemCfg.ItemType == ItemType.Tome)
-                return true;
-            return equippedWeapon.itemCfg.Magical;
+                return DamageType.NONE;
+            return equippedWeapon.itemCfg.DmgType;
         }
+        public bool IsPhDmg()
+        {
+            return GetDamageType() == DamageType.PH;
+        }
+        public bool IsMagDmg()
+        {
+            return GetDamageType() == DamageType.MAG;
+        }
+        public bool IsPnDmg()
+        {
+            return GetDamageType() == DamageType.PN;
+        }
+
         /// <summary>
         /// get weapon count that has attack target, standing on cur tile
         /// </summary>

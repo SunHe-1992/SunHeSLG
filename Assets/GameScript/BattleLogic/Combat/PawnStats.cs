@@ -223,6 +223,7 @@ namespace SunHeTBS
         }
         public int PhAtk;
         public int MagAtk;
+        public int PnAtk;
         public int Hit;
         /// <summary>
         /// avoid foe's hit

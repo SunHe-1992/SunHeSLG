@@ -37,6 +37,7 @@ public partial class UIPage_BattleMain : FUIBase
 
         var btmBar = ui.bottomBar;
         var attr = p.GetAttribute();
+        btmBar.txt_hp1.text = "" + p.HP;
         btmBar.txt_hp2.text = attr.HPMax + "";
         btmBar.txt_class.text = "?class";
 
@@ -48,11 +49,9 @@ public partial class UIPage_BattleMain : FUIBase
         btmBar.AU_mov.txt_attrName.text = "Mov";
         btmBar.AU_res.txt_attrName.text = "Res";
         btmBar.AU_spd.txt_attrName.text = "Spd";
-        btmBar.txt_hp1.text = "" + p.HP;
-
-        btmBar.txt_hp2.text = "" + attr.HPMax;
     }
 
+    #region Tile info display
 
     void ShowTileInfo()
     {
@@ -125,5 +124,6 @@ public partial class UIPage_BattleMain : FUIBase
     void HideTileInfo()
     {
         ui.tileInfoComp.visible = false;
-    }
+    } 
+    #endregion
 }

@@ -45,7 +45,6 @@ namespace SunHeTBS
             foreach (Pawn p in pList)
             {
                 int dist = mapInst.Distance(p.curPosition, pos);
-
                 if (dist <= rangeMax && dist >= rangeMin)//in range
                 {
                     if (PawnCampTool.CampsHostile(speller, p.camp))//is friend

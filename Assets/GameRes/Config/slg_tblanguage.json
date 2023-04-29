@@ -505,5 +505,31 @@
         "友方防御/魔防"
       ]
     ]
+  },
+  {
+    "ID": "FliersOnly",
+    "Lans": [
+      [
+        "EN",
+        "FliersOnly"
+      ],
+      [
+        "zh-CN",
+        "仅飞行单位"
+      ]
+    ]
+  },
+  {
+    "ID": "Impassable",
+    "Lans": [
+      [
+        "EN",
+        "Impassable"
+      ],
+      [
+        "zh-CN",
+        "不可逾越"
+      ]
+    ]
   }
 ]

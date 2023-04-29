@@ -10,6 +10,7 @@ namespace PackageBattle
         public Controller ctrl_color;
         public Controller ctrl_showDir;
         public UI_ItemComp weaponCom;
+        public GTextField txt_name;
         public GButton btn_prev;
         public GButton btn_next;
         public UI_Label2 lbl_dmg;
@@ -31,6 +32,7 @@ namespace PackageBattle
             ctrl_color = GetController("ctrl_color");
             ctrl_showDir = GetController("ctrl_showDir");
             weaponCom = (UI_ItemComp)GetChild("weaponCom");
+            txt_name = (GTextField)GetChild("txt_name");
             btn_prev = (GButton)GetChild("btn_prev");
             btn_next = (GButton)GetChild("btn_next");
             lbl_dmg = (UI_Label2)GetChild("lbl_dmg");

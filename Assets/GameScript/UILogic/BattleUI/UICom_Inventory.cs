@@ -81,7 +81,7 @@ public partial class UIPage_BattleMain : FUIBase
     /// <summary>
     /// action menu: attack,weapon select
     /// </summary>
-    private void OpenWeaponSelect()
+    private void OpenWeaponSelect(IEventMessage msg)
     {
         ui.inventoryCom.visible = true;
         ShowWeaponSelectContent();
@@ -149,8 +149,8 @@ public partial class UIPage_BattleMain : FUIBase
         var sPawn = BLogic.Inst.selectedPawn;
         //equip this weapon
         sPawn.EquipWeapon(wepSid);
-        FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
-        HideInventoryCom();
+        CloseUI();
+        FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict, null, "WeaponMenu");
     }
     #endregion
 }

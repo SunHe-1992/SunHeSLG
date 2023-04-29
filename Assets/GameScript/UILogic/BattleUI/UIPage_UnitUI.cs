@@ -24,6 +24,8 @@ public class UIPage_UnitUI : FUIBase
     {
         base.OnShown();
         InputReceiver.SwitchInputToUI();
+        UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
+
     }
 
 
@@ -36,6 +38,8 @@ public class UIPage_UnitUI : FUIBase
     protected override void OnHide()
     {
         base.OnHide();
+        UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
+
     }
     BasicAttribute basicAttr;
     void RefreshContent()
@@ -92,6 +96,11 @@ public class UIPage_UnitUI : FUIBase
         FUIManager.Inst.HideUI(this);
         InputReceiver.SwitchInputToMap();
         FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
+
+    }
+    void OnClickCancel(IEventMessage msg)
+    {
+        OnBtnBack();
 
     }
 }

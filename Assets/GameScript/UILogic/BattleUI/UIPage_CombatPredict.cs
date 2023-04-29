@@ -26,25 +26,31 @@ public class UIPage_CombatPredict : FUIBase
         InputReceiver.SwitchInputToUI();
 
         UniEvent.AddListener(GameEventDefine.InputAxis, OnInputAxis);
-
+        UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
 
         OnWeaponChanged();
-        SelectNextPawn();
+        AutoSelectPawn();
     }
 
-
+    string backToPhase;
     public override void Refresh(object param)
     {
         base.Refresh(param);
-
+        if (param != null)
+            backToPhase = param.ToString();
     }
     protected override void OnHide()
     {
         base.OnHide();
         UniEvent.RemoveListener(GameEventDefine.InputAxis, OnInputAxis);
+        UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
 
     }
-
+    void OnClickCancel(IEventMessage msg)
+    {
+        if (this.isTop)
+            OnBtnClose();
+    }
 
     /// <summary>
     /// refresh on target pawn/weapon changed
@@ -52,19 +58,104 @@ public class UIPage_CombatPredict : FUIBase
     void RefreshContent()
     {
         //show combat predict content
-        var p = BLogic.Inst.selectedPawn;
-        p.CalculateCombatAttr(p);
-        //var attr = p.GetCombatAttr();
+        var playerPawn = BLogic.Inst.selectedPawn;
+        RefreshPawnInfo(playerPawn, targetPawn, ui.comLeft);
+        RefreshPawnInfo(targetPawn, playerPawn, ui.comRight);
+    }
+    void RefreshPawnInfo(Pawn self, Pawn targetPawn, UI_CombatPredictCom uiCom)
+    {
+        string pawnName = Translator.GetStr(self.charCfg.CharName);
+        uiCom.txt_name.text = pawnName;
+        RefreshWeaponCom(uiCom.weaponCom, self);
+        uiCom.txt_hp.text = "" + self.HP;
 
+        var selfAttr = self.GetCombatAttr();
+        var targetAttr = targetPawn.GetCombatAttr();
+
+        int showHit = selfAttr.Hit - targetAttr.Avoid;
+        showHit = FixValue(showHit);
+        int showCrit = selfAttr.CriticalRate - targetAttr.Dodge;
+        showCrit = FixValue(showCrit);
+        //pawn atk type  ph/mag/pn
+        var dmgType = self.GetDamageType();
+        string dmgName = Translator.GetStr(dmgType.ToString());
+        int showDmg = PredictAttackDamage(self, targetPawn);
+        FillLabel(uiCom.lbl_hit, "Hit", $"{showHit} %");
+        FillLabel(uiCom.lbl_crit, "Crit", $"{showCrit} %");
+        FillLabel(uiCom.lbl_dmg, dmgName, showDmg.ToString());
+
+    }
+    /// <summary>
+    /// once attack damage
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="defender"></param>
+    /// <returns></returns>
+    int PredictAttackDamage(Pawn attacker, Pawn defender)
+    {
+        int dmg = 0;
+        var dmgType = attacker.GetDamageType();
+        var atkerAttr = attacker.GetCombatAttr();
+        var deferAttr = defender.GetCombatAttr();
+        switch (dmgType)
+        {
+            case cfg.SLG.DamageType.PH:
+                dmg = atkerAttr.PhAtk - deferAttr.Defence;
+                break;
+            case cfg.SLG.DamageType.MAG:
+                dmg = atkerAttr.MagAtk - deferAttr.Resistance;
+                break;
+            case cfg.SLG.DamageType.PN:
+                dmg = atkerAttr.PnAtk;
+                break;
+        }
+        if (dmg < 0) dmg = 0;
+        return dmg;
+    }
+    int FixValue(int value)
+    {
+        if (value < 0)
+            value = 0;
+        if (value > 100)
+            value = 100;
+        return value;
+    }
+    void RefreshWeaponCom(UI_ItemComp com, Pawn pawn)
+    {
+
+    }
+    void FillLabel(UI_Label2 lbl, string name, string valueStr)
+    {
+        lbl.txt_value.text = valueStr;
+        lbl.title = name;
     }
     void OnBtnClose()
     {
         FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel, OnBattlePanelOpen);
+    }
+    void OnBattlePanelOpen(FUIBase fui)
+    {
+        Debugger.Log("combat predict on btn close = " + backToPhase);
+        if (backToPhase == "AttackMenu")
+        {
+            UniEvent.SendMessage(GameEventDefine.ShowActionMenu);
+        }
+        else if (backToPhase == "WeaponMenu")
+        {
+            UniEvent.SendMessage(GameEventDefine.ShowWeaponSelectUI);
+        }
+        else if (backToPhase == "TileSelect")
+        {
+
+        }
+        backToPhase = null;
     }
 
     List<Pawn> targetList;
     int curTargetIdx;
     int targetPawnSid = 0;
+    Pawn targetPawn;
     void OnWeaponChanged()
     {
         var pawn = BLogic.Inst.selectedPawn;
@@ -72,16 +163,17 @@ public class UIPage_CombatPredict : FUIBase
 
     }
 
-    void OnTargetPawnChanged(Pawn targetPawn)
+    void OnTargetPawnChanged(Pawn _pawn)
     {
-        if (targetPawn == null) return;
+        if (_pawn == null) return;
         var logicInst = BLogic.Inst;
-        logicInst.CursorMoveToTargetPawn(targetPawn);
+        logicInst.CursorMoveToTargetPawn(_pawn);
 
-        if (targetPawnSid != targetPawn.sequenceId)
+        if (targetPawnSid != _pawn.sequenceId)
         {
-            targetPawnSid = targetPawn.sequenceId;
+            targetPawnSid = _pawn.sequenceId;
             // refresh on target pawn changed
+            targetPawn = _pawn;
             RefreshContent();
         }
     }

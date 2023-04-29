@@ -74,21 +74,23 @@ public partial class UIPage_BattleMain : FUIBase
         {
             //show combat predict
             HideActionMenu();
-            //todo  if there are multiple weapons to select, show [weapon select UI]
+            //if there are multiple weapons to select, show [weapon select UI]
             var sPawn = BLogic.Inst.selectedPawn;
             var weaponList = sPawn.GetPossibleWeaponCount();
             int weaponCount = weaponList.Count;
             if (weaponCount == 1) //go to foe selecting
             {
-                FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict);
+                CloseUI();
+                sPawn.EquipWeapon(weaponList[0]);
+                FUIManager.Inst.ShowUI<UIPage_CombatPredict>(FUIDef.FWindow.CombatPredict, null, "AttackMenu");
             }
             else if (weaponCount > 1) //show weapon select UI
             {
                 HideActionMenu();
-                OpenWeaponSelect();
+                OpenWeaponSelect(null);
             }
-            //todo  after weapon selected, show [Map target foe select]
-            //todo  after Foe selected,show [combat predic ui]
+            //after weapon selected, show [Map target foe select]
+            //after Foe selected,show [combat predic ui]
         }
         else if (orderStr == strItems)
         {

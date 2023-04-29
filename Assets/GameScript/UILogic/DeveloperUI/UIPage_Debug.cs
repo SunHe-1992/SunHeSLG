@@ -58,7 +58,7 @@ public class UIPage_Debug : FUIBase
     void BtnGotoBattle()
     {
         BattleManager.StartLocalBattle();
-
+        OnBtnClose();
     }
 
 

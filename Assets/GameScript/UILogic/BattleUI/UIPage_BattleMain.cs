@@ -32,11 +32,13 @@ public partial class UIPage_BattleMain : FUIBase
         UniEvent.AddListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
         UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
         UniEvent.AddListener(GameEventDefine.CursorPointToPawn, OnPointToPawn);
+        UniEvent.AddListener(GameEventDefine.ShowWeaponSelectUI, OpenWeaponSelect);
 
         //test  instant switch to map pawn control
         InputReceiver.Inst.inputComp.SwitchCurrentActionMap("Player");
         focusedList = null;
         HideUIComp();
+        OnPointToPawn(null);
     }
 
 
@@ -57,7 +59,11 @@ public partial class UIPage_BattleMain : FUIBase
         UniEvent.RemoveListener(GameEventDefine.ShowActionMenu, ShowActionMenu);
         UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
         UniEvent.RemoveListener(GameEventDefine.CursorPointToPawn, OnPointToPawn);
+        UniEvent.RemoveListener(GameEventDefine.ShowWeaponSelectUI, OpenWeaponSelect);
 
+        UICancelAction = null;
+        UIConfirmAction = null;
+        this.focusedList = null;
     }
 
 
@@ -67,8 +73,8 @@ public partial class UIPage_BattleMain : FUIBase
     }
     void HideUIComp()
     {
-        ui.bottomBar.visible = false;
-        ui.nameBar.visible = false;
+        //ui.bottomBar.visible = false;
+        //ui.nameBar.visible = false;
         ui.tileInfoComp.visible = false;
         ui.phaseCom.visible = false;
         ui.actionCom.visible = false;
@@ -123,8 +129,11 @@ public partial class UIPage_BattleMain : FUIBase
     void OnClickConfirm(IEventMessage msg)
     {
         if (InputReceiver.InputInUI)
-            UIConfirmAction?.Invoke();
-        else
+        {
+            if (this.isTop)
+                UIConfirmAction?.Invoke();
+        }
+        if (InputReceiver.InputInUI == false)
             BLogic.Inst.OnClickConfirm();
 
     }
@@ -132,8 +141,11 @@ public partial class UIPage_BattleMain : FUIBase
     void OnClickCancel(IEventMessage msg)
     {
         if (InputReceiver.InputInUI)
-            UICancelAction?.Invoke();
-        else
+            if (this.isTop)
+            {
+                UICancelAction?.Invoke();
+            }
+        if (InputReceiver.InputInUI == false)
             BLogic.Inst.OnClickCancel();
 
     }
@@ -164,7 +176,6 @@ public partial class UIPage_BattleMain : FUIBase
 
     void ShowSelectPawn(IEventMessage msg)
     {
-        HideUIComp();
 
     }
 
@@ -206,5 +217,9 @@ public partial class UIPage_BattleMain : FUIBase
             FUIManager.Inst.HideUI(this);
             FUIManager.Inst.ShowUI<UIPage_UnitUI>(FUIDef.FWindow.UnitUI, null);
         }
+    }
+    private void CloseUI()
+    {
+        FUIManager.Inst.HideUI(this);
     }
 }
