@@ -79,39 +79,13 @@ public class UIPage_CombatPredict : FUIBase
         //pawn atk type  ph/mag/pn
         var dmgType = self.GetDamageType();
         string dmgName = Translator.GetStr(dmgType.ToString());
-        int showDmg = PredictAttackDamage(self, targetPawn);
+        int showDmg = AttrCalculator.PredictDamage(self, targetPawn);
         FillLabel(uiCom.lbl_hit, "Hit", $"{showHit} %");
         FillLabel(uiCom.lbl_crit, "Crit", $"{showCrit} %");
         FillLabel(uiCom.lbl_dmg, dmgName, showDmg.ToString());
 
     }
-    /// <summary>
-    /// once attack damage
-    /// </summary>
-    /// <param name="attacker"></param>
-    /// <param name="defender"></param>
-    /// <returns></returns>
-    int PredictAttackDamage(Pawn attacker, Pawn defender)
-    {
-        int dmg = 0;
-        var dmgType = attacker.GetDamageType();
-        var atkerAttr = attacker.GetCombatAttr();
-        var deferAttr = defender.GetCombatAttr();
-        switch (dmgType)
-        {
-            case cfg.SLG.DamageType.PH:
-                dmg = atkerAttr.PhAtk - deferAttr.Defence;
-                break;
-            case cfg.SLG.DamageType.MAG:
-                dmg = atkerAttr.MagAtk - deferAttr.Resistance;
-                break;
-            case cfg.SLG.DamageType.PN:
-                dmg = atkerAttr.PnAtk;
-                break;
-        }
-        if (dmg < 0) dmg = 0;
-        return dmg;
-    }
+
     int FixValue(int value)
     {
         if (value < 0)

@@ -201,6 +201,7 @@ namespace SunHeTBS
             {
                 p.InsertItem(new Weapon(wpId));
             }
+            p.CalculateCombatAttr();
         }
         #endregion
 

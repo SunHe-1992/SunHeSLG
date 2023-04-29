@@ -16,9 +16,9 @@ namespace cfg.SLG
         Bow = 3,
         Dagger = 4,
         Tome = 5,
-        Staff = 6,
+        Special = 6,
         Arts = 7,
-        Special = 8,
+        Staff = 8,
         Item = 9,
     }
 }

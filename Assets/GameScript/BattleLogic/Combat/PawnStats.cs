@@ -83,7 +83,11 @@ namespace SunHeTBS
         /// Range
         /// </summary>
         Rng = 6,
-        MAXVALUE = 7,
+        /// <summary>
+        /// penetrating attack
+        /// </summary>
+        PnAtk = 7,
+        MAXVALUE = 8,
     }
 
     /// <summary>
@@ -126,9 +130,11 @@ namespace SunHeTBS
             this.Str += config.Str;
             this.Mag += config.Mag;
             this.Dex += config.Dex;
+            this.Def += config.Def;
             this.Res += config.Res;
             this.Luk += config.Luk;
             this.Bld += config.Bld;
+            this.Spd += config.Spd;
         }
         public int GetAttr(BasicStats bsType)
         {
@@ -266,11 +272,63 @@ namespace SunHeTBS
                 value = 0;
             return value;
         }
-      
+        public int GetAttr(CombatStats stat)
+        {
+            int value = 0;
+            switch (stat)
+            {
+                case CombatStats.Avo: value = this.Avoid; break;
+                case CombatStats.Crit: value = this.CriticalRate; break;
+                case CombatStats.Ddg: value = this.Dodge; break;
+                case CombatStats.Hit: value = this.Hit; break;
+                case CombatStats.MagAtk: value = this.MagAtk; break;
+                case CombatStats.PhAtk: value = this.PhAtk; break;
+                case CombatStats.PnAtk: value = this.PnAtk; break;
+            }
+            return value;
+        }
 
     }
     public static class AttrCalculator
     {
+        /// <summary>
+        /// once attack damage
+        /// </summary>
+        /// <param name="attacker"></param>
+        /// <param name="defender"></param>
+        /// <returns></returns>
+        public static int PredictDamage(Pawn attacker, Pawn defender)
+        {
+            int dmg = 0;
+            var dmgType = attacker.GetDamageType();
+            var atkerAttr = attacker.GetCombatAttr();
+            var deferAttr = defender.GetCombatAttr();
+            switch (dmgType)
+            {
+                case cfg.SLG.DamageType.PH:
+                    dmg = atkerAttr.PhAtk - deferAttr.Defence;
+                    break;
+                case cfg.SLG.DamageType.MAG:
+                    dmg = atkerAttr.MagAtk - deferAttr.Resistance;
+                    break;
+                case cfg.SLG.DamageType.PN:
+                    dmg = atkerAttr.PnAtk;
+                    break;
+            }
+            if (dmg < 0) dmg = 0;
+            return dmg;
+        }
+    }
 
+    public static class BattleTools
+    {
+        public static bool IsWeaponType(ItemType type)
+        {
+            return type <= ItemType.Arts && type >= ItemType.Sword;
+        }
+        public static bool IsStaffType(ItemType type)
+        {
+            return type == ItemType.Staff;
+        }
     }
 }

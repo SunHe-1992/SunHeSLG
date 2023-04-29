@@ -37,7 +37,7 @@ namespace cfg.SLG
         /// <summary>
         /// 杖
         /// </summary>
-        Staff = 6,
+        Special = 6,
         /// <summary>
         /// 体术
         /// </summary>
@@ -45,6 +45,6 @@ namespace cfg.SLG
         /// <summary>
         /// 特殊
         /// </summary>
-        Special = 8,
+        Staff = 8,
     }
 }

@@ -146,7 +146,7 @@ namespace SunHeTBS
         public int GetAtkRangeMax()
         {
             //check this pawn has attack ability 
-            if (IsArmed())
+            if (HoldingWeaponOrStaff())
             {
                 return equippedWeapon.rangeMax;
             }
@@ -154,7 +154,7 @@ namespace SunHeTBS
         }
         public int GetAtkRangeMin()
         {
-            if (IsArmed())
+            if (HoldingWeaponOrStaff())
             {
                 return equippedWeapon.rangeMin;
             }
@@ -197,9 +197,29 @@ namespace SunHeTBS
         /// equipped with a weapon/staff
         /// </summary>
         /// <returns></returns>
-        public bool IsArmed()
+        public bool HoldingWeaponOrStaff()
         {
             return this.equippedWeapon != null;
+        }
+        /// <summary>
+        /// equipped with a weapon
+        /// </summary>
+        /// <returns></returns>
+        public bool HoldingWeapon()
+        {
+            if (this.equippedWeapon != null)
+            {
+                return BattleTools.IsWeaponType(equippedWeapon.itemCfg.ItemType);
+            }
+            return false;
+        }
+        public bool HoldingStaff()
+        {
+            if (this.equippedWeapon != null)
+            {
+                return BattleTools.IsStaffType(equippedWeapon.itemCfg.ItemType);
+            }
+            return false;
         }
         #endregion
 
@@ -515,13 +535,13 @@ namespace SunHeTBS
         {
             if (combatAttr == null)
             {
-                combatAttr = new CombatAttribute();
                 CalculateCombatAttr();
             }
             return combatAttr;
         }
         public void CalculateCombatAttr()
         {
+            combatAttr = new CombatAttribute();
             GetCombatAttr();
             CalculateAtk();
             CalculateAtkSpd();
@@ -541,7 +561,7 @@ namespace SunHeTBS
             combatAttr.DisplayedCrit -= foeAttr.Dodge;
             combatAttr.DisplayedHit -= foeAttr.Avoid;
             combatAttr.DisplayedStaffHit -= foeAttr.StaffAvo;
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 if (IsPhDmg())
                 {
@@ -560,7 +580,7 @@ namespace SunHeTBS
         }
         void CalculateAtk()
         {
-            if (this.IsArmed() == false)
+            if (this.HoldingWeapon() == false)
             {
                 combatAttr.MagAtk = 0;
                 combatAttr.PhAtk = 0;
@@ -576,12 +596,12 @@ namespace SunHeTBS
                 combatAttr.PhAtk = 0;
                 combatAttr.MagAtk = 0;
 
-                if (dmgType == DamageType.PH)
+                if (dmgType == DamageType.MAG)
                 {
                     atk += attrCache.Mag;
                     combatAttr.MagAtk = atk;
                 }
-                else if (dmgType == DamageType.MAG)
+                else if (dmgType == DamageType.PH)
                 {
                     atk += attrCache.Str;
                     combatAttr.PhAtk = atk;
@@ -596,7 +616,7 @@ namespace SunHeTBS
         void CalculateAtkSpd()
         {
             int spdBurden = 0;
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 if (equippedWeapon.itemCfg.Weight > attrCache.Bld)
                 {
@@ -609,7 +629,7 @@ namespace SunHeTBS
 
         void CalculateHit()
         {
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 int weaponHit = equippedWeapon.itemCfg.Hit;
                 int hit = weaponHit + attrCache.Dex * 2 + attrCache.Luk / 2;
@@ -626,7 +646,7 @@ namespace SunHeTBS
         {
             int avo = 0;
             int avo_weapon = 0;
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 avo_weapon = equippedWeapon.itemCfg.Avoid;
             }
@@ -636,7 +656,7 @@ namespace SunHeTBS
         }
         void CalculateCrit()
         {
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 int weaponCrit = equippedWeapon.itemCfg.Critical;
                 int crit = weaponCrit + attrCache.Dex / 2;
@@ -653,7 +673,7 @@ namespace SunHeTBS
         {
             int dodge = 0;
             int weaponDdg = 0;
-            if (IsArmed())
+            if (HoldingWeapon())
             {
                 weaponDdg = equippedWeapon.itemCfg.Dodge;
             }
@@ -663,7 +683,7 @@ namespace SunHeTBS
         }
         void CalculateStaffHit()
         {
-            if (IsArmed() && equippedWeapon.itemCfg.ItemType == ItemType.Staff)
+            if (HoldingStaff())
             {
                 int staffHit = equippedWeapon.itemCfg.Hit + attrCache.Mag + attrCache.Dex;
                 combatAttr.StaffHit = staffHit;
@@ -687,6 +707,24 @@ namespace SunHeTBS
         {
             int res = attrCache.Res;
             combatAttr.Resistance = res;
+        }
+        /// <summary>
+        /// attack value based on weapon damage type
+        /// </summary>
+        /// <returns></returns>
+        public int GetAttackValue()
+        {
+            int atkValue = 0;
+            if (this.HoldingWeapon())
+            {
+                switch (GetDamageType())
+                {
+                    case DamageType.PH: atkValue = combatAttr.PhAtk; break;
+                    case DamageType.MAG: atkValue = combatAttr.MagAtk; break;
+                    case DamageType.PN: atkValue = combatAttr.PnAtk; break;
+                }
+            }
+            return atkValue;
         }
         #endregion
 
@@ -721,6 +759,8 @@ namespace SunHeTBS
         }
         public void EquipWeapon(Weapon weapon)
         {
+            Debugger.Log("EquipWeapon " + weapon.ToString());
+
             this.equippedWeapon = weapon;
         }
         public void EquipWeapon(int sid)
@@ -744,7 +784,7 @@ namespace SunHeTBS
         }
         public DamageType GetDamageType()
         {
-            if (!IsArmed())
+            if (!HoldingWeapon())
                 return DamageType.NONE;
             return equippedWeapon.itemCfg.DmgType;
         }

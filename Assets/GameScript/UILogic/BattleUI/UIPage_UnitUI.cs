@@ -17,8 +17,17 @@ public class UIPage_UnitUI : FUIBase
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.pawn_detail.list_BasicStats.itemRenderer = BasicStatsListRender;
-
+        ui.pawn_detail.list_combatStats.itemRenderer = CombatStatsListRenderer;
         ui.btn_close.onClick.Set(OnBtnBack);
+
+        basicStatList = new List<BasicStats>()
+        { BasicStats.Str, BasicStats.Mag,
+         BasicStats.Dex,BasicStats.Spd,
+            BasicStats.Def,BasicStats.Res,
+            BasicStats.Luk};
+        combatStatList = new List<CombatStats>()
+        { CombatStats.PhAtk, CombatStats.Hit, CombatStats.Avo,
+       CombatStats.Crit,CombatStats.Ddg };
     }
     protected override void OnShown()
     {
@@ -39,18 +48,22 @@ public class UIPage_UnitUI : FUIBase
     {
         base.OnHide();
         UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
+        this.basicAttr = null;
+        this.combatAttr = null;
 
     }
     BasicAttribute basicAttr;
+    CombatAttribute combatAttr;
     void RefreshContent()
     {
         var pdCom = ui.pawn_detail;
         var pawn = BLogic.Inst.pointedPawn;
         //base stats
         basicAttr = pawn.GetAttribute();
+        combatAttr = pawn.GetCombatAttr();
         pdCom.list_BasicStats.numItems = 7;
-
-        //todo combat stats
+        //combat stats
+        pdCom.list_combatStats.numItems = 5;
 
         SetUIStatsCom(pdCom.stat_build, "Bld", basicAttr.Bld.ToString());
         //sp display
@@ -59,7 +72,7 @@ public class UIPage_UnitUI : FUIBase
         SetUIAttrUnit(pdCom.levelCom, "Level", "???");
 
         pdCom.stat_HP.txt_HPMAX.text = $"/{basicAttr.HPMax}";
-        pdCom.stat_HP.txt_HP.text = "??";
+        pdCom.stat_HP.txt_HP.text = pawn.HP.ToString();
 
         pdCom.txt_class.text = pawn.classCfg.Name;
         pdCom.txt_pawnName.text = pawn.charCfg.CharName;
@@ -68,10 +81,13 @@ public class UIPage_UnitUI : FUIBase
     }
 
     //BasicStats
-
+    List<BasicStats> basicStatList;
+    List<CombatStats> combatStatList;
     void BasicStatsListRender(int index, GObject obj)
     {
-        BasicStats statType = (BasicStats)(index + 1);
+        BasicStats statType = basicStatList[index];
+
+
         int attrValue = basicAttr.GetAttr(statType);
         var mItem = obj as UI_StatsCom;
 
@@ -79,6 +95,40 @@ public class UIPage_UnitUI : FUIBase
 
         mItem.txt_attrName.text = statType.ToString();
         mItem.txt_attrValue.text = "" + attrValue;
+    }
+    void CombatStatsListRenderer(int index, GObject obj)
+    {
+        CombatStats cStats = combatStatList[index];
+        int attrValue = combatAttr.GetAttr(cStats);
+        string attrStr = attrValue + "";
+        string attrName = cStats.ToString();
+        var pawn = BLogic.Inst.pointedPawn;
+        if (cStats == CombatStats.Hit && pawn.HoldingWeapon() == false)
+        {
+            attrStr = "--";
+        }
+
+        if (cStats == CombatStats.PhAtk)
+        {
+            if (pawn.HoldingWeapon() == false)
+            {
+                attrStr = "--";
+            }
+            else
+            {
+                attrValue = pawn.GetAttackValue();
+                attrStr = attrValue + "";
+
+                attrStr = attrValue + "";
+                cfg.SLG.DamageType dmgType = pawn.GetDamageType();
+                Debugger.Log($"test: atkvalue={attrStr} dmgType={dmgType}");
+                attrName = Translator.GetStr(dmgType.ToString());
+            }
+        }
+        var mItem = obj as UI_StatsCom;
+        mItem.ctrl_arrow.selectedIndex = 0;
+        mItem.txt_attrName.text = attrName;
+        mItem.txt_attrValue.text = attrStr;
     }
     void SetUIStatsCom(UI_StatsCom com, string name, string valueStr)
     {
