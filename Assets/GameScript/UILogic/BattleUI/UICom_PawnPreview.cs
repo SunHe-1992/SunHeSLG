@@ -10,20 +10,32 @@ using SunHeTBS;
 using UniFramework.Event;
 public partial class UIPage_BattleMain : FUIBase
 {
-    int curPawnSid = 0;
+    int previewPawnSid = 0;
     void OnPointToPawn(IEventMessage msg)
     {
         var pointedPawn = BLogic.Inst.pointedPawn;
+        var selectedPawn = BLogic.Inst.selectedPawn;
         if (pointedPawn == null)
         {
-            ui.bottomBar.visible = false;
-            ui.nameBar.visible = false;
-            curPawnSid = 0;
+            if (selectedPawn == null)//no pawn to preview hide ui
+            {
+                ui.bottomBar.visible = false;
+                ui.nameBar.visible = false;
+                previewPawnSid = 0;
+            }
+            else //preview selected pawn info
+            {
+                previewPawnSid = selectedPawn.sequenceId;
+                ShowPawnPreview(selectedPawn);
+            }
         }
         else
         {
-            curPawnSid = pointedPawn.sequenceId;
-            ShowPawnPreview(pointedPawn);
+            if (previewPawnSid != pointedPawn.sequenceId)
+            {
+                previewPawnSid = pointedPawn.sequenceId;
+                ShowPawnPreview(pointedPawn);
+            }
         }
 
         //show tile info
@@ -34,23 +46,56 @@ public partial class UIPage_BattleMain : FUIBase
         ui.bottomBar.visible = true;
         ui.nameBar.visible = true;
         ui.nameBar.txt_name.text = p.charCfg.CharName;
-
+        int colorIdx = 0;
+        switch (p.camp)
+        {
+            case PawnCamp.Player: colorIdx = 0; break;
+            case PawnCamp.Villain:
+            case PawnCamp.Neutral: colorIdx = 1; break;
+            case PawnCamp.PlayerAlly: colorIdx = 2; break;
+        }
+        ui.bottomBar.ctrl_color.selectedIndex = colorIdx;
         var btmBar = ui.bottomBar;
         var attr = p.GetAttribute();
         btmBar.txt_hp1.text = "" + p.HP;
         btmBar.txt_hp2.text = attr.HPMax + "";
-        btmBar.txt_class.text = "?class";
+        btmBar.txt_class.text = p.classCfg.Name;
 
-        btmBar.AU_atk.txt_attrName.text = "PhAtk";
-        btmBar.AU_avo.txt_attrName.text = "Avo";
-        btmBar.AU_def.txt_attrName.text = "Def";
-        btmBar.AU_hit.txt_attrName.text = "Hit";
-        //btmBar.AU_level.txt_attrName.text = "Level";
-        btmBar.AU_mov.txt_attrName.text = "Mov";
-        btmBar.AU_res.txt_attrName.text = "Res";
-        btmBar.AU_spd.txt_attrName.text = "Spd";
+        var combatAttr = p.GetCombatAttr();
+        SetUIAttrUnit(btmBar.AU_avo, "Avo", combatAttr.Avoid + "");
+        SetUIAttrUnit(btmBar.AU_def, "Def", combatAttr.Defence + "");
+        SetUIAttrUnit(btmBar.AU_res, "Res", combatAttr.Resistance + "");
+        SetUIAttrUnit(btmBar.AU_spd, "Spd", combatAttr.AttackSpeed + "");
+        SetUIAttrUnit(btmBar.AU_mov, "Mov", attr.Mov + "");
+
+        if (p.HoldingWeapon())
+        {
+            var damageType = p.GetDamageType();
+            switch (damageType)
+            {
+                case cfg.SLG.DamageType.PH:
+                    SetUIAttrUnit(btmBar.AU_atk, "PhAtk", combatAttr.PhAtk + "");
+                    break;
+                case cfg.SLG.DamageType.MAG:
+                    SetUIAttrUnit(btmBar.AU_atk, "MagAtk", combatAttr.MagAtk + "");
+                    break;
+                case cfg.SLG.DamageType.PN:
+                    SetUIAttrUnit(btmBar.AU_atk, "PnAtk", combatAttr.PnAtk + "");
+                    break;
+            }
+        }
+        else //no weapon
+        {
+            SetUIAttrUnit(btmBar.AU_hit, "Hit", "--");
+            SetUIAttrUnit(btmBar.AU_atk, "Atk", "--");
+        }
+
     }
-
+    void SetUIAttrUnit(UI_AttributeUnit com, string attrName, string attrValue)
+    {
+        com.txt_attrName.text = attrName;
+        com.txt_attrValue.text = attrValue;
+    }
     #region Tile info display
 
     void ShowTileInfo()
@@ -124,6 +169,6 @@ public partial class UIPage_BattleMain : FUIBase
     void HideTileInfo()
     {
         ui.tileInfoComp.visible = false;
-    } 
+    }
     #endregion
 }

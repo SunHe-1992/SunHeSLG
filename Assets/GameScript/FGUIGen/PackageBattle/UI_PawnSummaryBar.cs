@@ -7,6 +7,7 @@ namespace PackageBattle
 {
     public partial class UI_PawnSummaryBar : GComponent
     {
+        public Controller ctrl_color;
         public GTextField txt_hp1;
         public GTextField txt_hp2;
         public GTextField txt_class;
@@ -30,6 +31,7 @@ namespace PackageBattle
         {
             base.ConstructFromXML(xml);
 
+            ctrl_color = GetController("ctrl_color");
             txt_hp1 = (GTextField)GetChild("txt_hp1");
             txt_hp2 = (GTextField)GetChild("txt_hp2");
             txt_class = (GTextField)GetChild("txt_class");
