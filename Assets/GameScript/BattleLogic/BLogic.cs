@@ -792,6 +792,71 @@ namespace SunHeTBS
                 pawn.ResetPosition();
             }
         }
+
+        #region Combat Rules
+        static readonly int FollowUpSpeedDiff = 4;
+        public List<StrikeInfo> ArrangeStrikeList(Pawn attacker, Pawn defender)
+        {
+            bool vantageEff = defender.IsTriggerVantage();
+            bool alacrityEffect = attacker.IsTriggerAlacrity();
+            int attackerSpd = attacker.GetCombatAttr().AttackSpeed;
+            int defenderSpd = defender.GetCombatAttr().AttackSpeed;
+            bool attackerFollowUp = (attackerSpd - defenderSpd) > FollowUpSpeedDiff;
+            bool defenderFollowUp = (defenderSpd - attackerSpd) > FollowUpSpeedDiff;
+            List<StrikeInfo> strikeList = new List<StrikeInfo>();
+            //int attackerSid = attacker.sequenceId;
+            //int defenderSid = defender.sequenceId;
+
+            //todo chain attack from attacker
+
+            if (vantageEff)//defender's vantage eff: BABA
+            {
+                strikeList.Add(new StrikeInfo(1));
+                strikeList.Add(new StrikeInfo(0));
+                if (defenderFollowUp)
+                    strikeList.Add(new StrikeInfo(1));
+                if (attackerFollowUp)
+                    strikeList.Add(new StrikeInfo(0));
+            }
+            else if (alacrityEffect)//attacker's alacrity eff:AABB
+            {
+                strikeList.Add(new StrikeInfo(0));
+                if (attackerFollowUp)
+                    strikeList.Add(new StrikeInfo(0));
+                strikeList.Add(new StrikeInfo(1));
+                if (defenderFollowUp)
+                    strikeList.Add(new StrikeInfo(1));
+            }
+            else //normal attack:ABAB
+            {
+                strikeList.Add(new StrikeInfo(0));
+                strikeList.Add(new StrikeInfo(1));
+                if (attackerFollowUp)
+                    strikeList.Add(new StrikeInfo(0));
+                if (defenderFollowUp)
+                    strikeList.Add(new StrikeInfo(1));
+            }
+            return strikeList;
+        }
+        #endregion
+
+    }
+
+    public class StrikeInfo
+    {
+        public StrikeResult result = StrikeResult.Miss;
+        public StrikeType sType;
+        public int attackerSid = 0;
+        /// <summary>
+        /// 0=attacker 1=defender
+        /// </summary>
+        public int id = 0;
+        public StrikeInfo(int _id)
+        {
+            id = _id;
+        }
+        public int attackerHPChange;
+        public int defenderHPChange;
     }
 }
 

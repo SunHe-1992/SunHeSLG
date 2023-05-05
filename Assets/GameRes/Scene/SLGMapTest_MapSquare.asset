@@ -2715,3 +2715,123 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+  - TilePos: {x: -4, y: 0, z: 4}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 2
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -4, y: 0, z: 2}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 3
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -3, y: 0, z: 2}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 3
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -3, y: 0, z: 5}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 4
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -3, y: 0, z: 6}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 4
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -3, y: 0, z: 7}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 4
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -4, y: 0, z: 7}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 4
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -6, y: 0, z: 6}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 5
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -6, y: 0, z: 5}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 5
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -2, y: 0, z: 3}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 6
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -5, y: 0, z: 0}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 7
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - TilePos: {x: -5, y: 0, z: 1}
+    Id: b39188f43b6da70429f0f7980411d442
+    MovableArea: 7
+    SideHeight:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0

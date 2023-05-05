@@ -1,0 +1,15 @@
+[
+  {
+    "ID": 101,
+    "SkillName": "NormalAttack",
+    "AttackMultiplier": 1,
+    "AttackCount": 1,
+    "RangeMin": 0,
+    "RangeMax": 0,
+    "Weapon": [],
+    "AllowVantage": true,
+    "AllowFollowUp": true,
+    "AllowAlacrity": true,
+    "AllowCounter": true
+  }
+]

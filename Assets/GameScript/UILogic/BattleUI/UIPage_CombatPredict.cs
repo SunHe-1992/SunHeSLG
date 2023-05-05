@@ -27,6 +27,7 @@ public class UIPage_CombatPredict : FUIBase
 
         UniEvent.AddListener(GameEventDefine.InputAxis, OnInputAxis);
         UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
+        UniEvent.AddListener(GameEventDefine.ClickConfirm, OnClickConfirm);
 
         OnWeaponChanged();
         AutoSelectPawn();
@@ -44,6 +45,7 @@ public class UIPage_CombatPredict : FUIBase
         base.OnHide();
         UniEvent.RemoveListener(GameEventDefine.InputAxis, OnInputAxis);
         UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
+        UniEvent.RemoveListener(GameEventDefine.ClickConfirm, OnClickConfirm);
 
     }
     void OnClickCancel(IEventMessage msg)
@@ -202,5 +204,11 @@ public class UIPage_CombatPredict : FUIBase
             SelectNextPawn();
         else
             SelectPrevPawn();
+    }
+
+    void OnClickConfirm(IEventMessage msg)
+    {
+        BLogic.Inst.selectedPawn.StartNormalAttack(targetPawn);
+        //FUIManager.Inst.ShowUI<UIPage_CombatPanel>(FUIDef.FWindow.CombatPanel);
     }
 }

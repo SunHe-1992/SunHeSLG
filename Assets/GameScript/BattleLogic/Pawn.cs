@@ -83,6 +83,7 @@ namespace SunHeTBS
             GetAttribute();
             GetCombatAttr();
             this.HP = this.attrCache.HPMax;
+            InitSkills();
         }
         public override string ToString()
         {
@@ -921,6 +922,116 @@ namespace SunHeTBS
             get { return _hp; }
             set { _hp = value; }
         }
+        /// <summary>
+        /// when hp decreased to 0,cost a life gem and fill HP
+        /// </summary>
+        public int LifeGem = 0;
         #endregion
+
+        #region combat strike effect
+        public bool IsTriggerVantage()
+        {
+            return false;
+        }
+        public bool IsTriggerSmash()
+        {
+            return false;
+        }
+        public bool IsTriggerAlacrity()
+        {
+            return false;
+        }
+        public bool IsBraveWeapon()
+        {
+            return false;
+        }
+        #endregion
+
+
+        #region skills
+        List<ActiveSkill> skillList;
+        ActiveSkill normalAtkSkill;
+        public void InitSkills()
+        {
+            skillList = new List<ActiveSkill>();
+            normalAtkSkill = new ActiveSkill(101, this);//normal attack : default added
+            skillList.Add(normalAtkSkill);
+        }
+        public int CalculateDamage(Pawn target, ActiveSkill skill)
+        {
+            float damage = 0;
+            int weaponMt = equippedWeapon.itemCfg.Might;
+            float atkMul = skill.skillCfg.AttackMultiplier;
+            int atk = weaponMt;
+            int def = 0;
+            var dmgType = GetDamageType();
+            var targetAttr = target.GetCombatAttr();
+            if (dmgType == DamageType.PH)
+            {
+                atk += combatAttr.PhAtk;
+                def = targetAttr.Defence;
+            }
+            else if (dmgType == DamageType.MAG)
+            {
+                atk += combatAttr.MagAtk;
+                def = targetAttr.Resistance;
+            }
+            else if (dmgType == DamageType.PN)
+            {
+
+            }
+            damage = atk * atkMul - def;
+            //weaponMt * atkMul;
+            return (int)damage;
+        }
+        #endregion
+
+        #region Normal Attack
+        public void StartNormalAttack(Pawn target)
+        {
+            var strikeList = BLogic.Inst.ArrangeStrikeList(this, target);
+            foreach (StrikeInfo strike in strikeList)
+            {
+                if (strike.id == 0)
+                    ProcessNormalAttack(target, strike);
+                else if (strike.id == 1)
+                    target.ProcessNormalAttack(this, strike);
+            }
+        }
+        public void ProcessNormalAttack(Pawn target, StrikeInfo sInfo)
+        {
+            if (normalAtkSkill != null)
+            {
+                normalAtkSkill.StartCast(target, sInfo);
+            }
+        }
+
+        public void TakeDamage(int dmgValue)
+        {
+            this.HP -= dmgValue;
+            CheckHPValue();
+        }
+        void CheckHPValue()
+        {
+            if (this.HP >= this.attrCache.HPMax)
+            {
+                this.HP = this.attrCache.HPMax;
+            }
+            if (this.HP <= 0)
+            {
+                if (LifeGem > 0)
+                {
+                    LifeGem--;
+                    this.HP = this.attrCache.HPMax;
+                }
+                else //todo death
+                {
+
+                }
+            }
+        }
     }
+
+    #endregion
 }
+

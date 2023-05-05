@@ -111,7 +111,18 @@ namespace SunHeTBS
         Ground = 0,
         Flier = 1,
     }
-
+    public enum StrikeResult : int
+    {
+        Miss,
+        Hit,
+        Critical,
+    }
+    public enum StrikeType : int
+    {
+        Strike,
+        Counter,
+        FollowUp,
+    }
 
     public static class PawnCampTool
     {

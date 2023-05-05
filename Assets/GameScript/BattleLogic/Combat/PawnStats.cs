@@ -287,7 +287,18 @@ namespace SunHeTBS
             }
             return value;
         }
+        public int GetDefByDmgType(DamageType dmgType)
+        {
+            int value = 0;
+            switch (dmgType)
+            {
+                case DamageType.PH: value = this.Defence; break;
+                case DamageType.MAG: value = this.Resistance; break;
+                    //case DamageType.PN: break;
 
+            }
+            return value;
+        }
     }
     public static class AttrCalculator
     {
