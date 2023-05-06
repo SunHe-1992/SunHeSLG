@@ -63,7 +63,7 @@ namespace SunHeTBS
             sequenceId = globalSequence;
 
             curState = PawnState.Idle;
-            this.LoadModel();
+
             this.savePos = this.curPosition;
 
             charCfg = ConfigManager.table.Character.Get(CharacterId);
@@ -84,6 +84,8 @@ namespace SunHeTBS
             GetCombatAttr();
             this.HP = this.attrCache.HPMax;
             InitSkills();
+
+            this.LoadModel();
         }
         public override string ToString()
         {
@@ -105,8 +107,10 @@ namespace SunHeTBS
             if (handle.AssetObject != null)
             {
                 var obj = GameObject.Instantiate(handle.AssetObject as GameObject);
-                obj.name = GetObjName();
-                this.controller = obj.AddComponent<PawnController>();
+                obj.name = "model";
+                GameObject pCtrlObj = new GameObject(GetObjName());
+                obj.transform.SetParent(pCtrlObj.transform, false);
+                this.controller = pCtrlObj.AddComponent<PawnController>();
                 this.controller.Initialize(this);
             }
         }
@@ -221,6 +225,14 @@ namespace SunHeTBS
                 return BattleTools.IsStaffType(equippedWeapon.itemCfg.ItemType);
             }
             return false;
+        }
+        public ItemType GetHoldingWeaponType()
+        {
+            if (HoldingWeaponOrStaff())
+            {
+                return this.equippedWeapon.itemCfg.ItemType;
+            }
+            return ItemType.Item;
         }
         #endregion
 
@@ -750,6 +762,8 @@ namespace SunHeTBS
             if (equippedWeapon?.sid == sid)
             {
                 equippedWeapon = null;
+                if (this.controller != null)
+                    this.controller.UpdateWeaponGauge();
             }
             itemList.RemoveAll(item => item.sid == sid);
         }
@@ -763,6 +777,8 @@ namespace SunHeTBS
             Debugger.Log("EquipWeapon " + weapon.ToString());
 
             this.equippedWeapon = weapon;
+            if (this.controller != null)
+                this.controller.UpdateWeaponGauge();
         }
         public void EquipWeapon(int sid)
         {

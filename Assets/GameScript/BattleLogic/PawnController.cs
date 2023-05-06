@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RedBjorn.ProtoTiles;
+using YooAsset;
+
 namespace SunHeTBS
 {
     public class PawnController : MonoBehaviour
@@ -11,6 +13,8 @@ namespace SunHeTBS
         INode nextTile;
         Vector3 destPos;
 
+        HPGaugeController gaugeController;
+        Transform pawnModelTrans;
         public float moveSpeed = 10f;
         const float nearDist = 0.02f;
         // Start is called before the first frame update
@@ -54,7 +58,7 @@ namespace SunHeTBS
                     Vector3 distOffset = destPos - transform.position;
                     transform.position += distOffset.normalized * stepDist;
                     var rotateTo = Quaternion.Euler(0, GetMoveRotation(), 0);
-                    this.transform.rotation = Quaternion.Lerp(transform.rotation, rotateTo, 0.3f);
+                    pawnModelTrans.transform.rotation = Quaternion.Lerp(transform.rotation, rotateTo, 0.3f);
                 }
             }
         }
@@ -67,7 +71,9 @@ namespace SunHeTBS
         public void Initialize(Pawn _pawn)
         {
             m_Pawn = _pawn;
+            this.pawnModelTrans = GameObject.Find("model").transform;
             SetPosition();
+            LoadHpGuageObj();
         }
         public void SetPosition()
         {
@@ -87,9 +93,46 @@ namespace SunHeTBS
         }
         public void StopMove()
         {
-            this.transform.rotation = Quaternion.Euler(0, GetMoveRotation(), 0);
+            pawnModelTrans.transform.rotation = Quaternion.Euler(0, GetMoveRotation(), 0);
             nextTile = null;
             pathQueue = null;
         }
+
+        #region hp gauge
+
+        void LoadHpGuageObj()
+        {
+            if (this.gaugeController == null)
+            {
+                string resPath = $"UIPanel/HPGauge";
+                AssetOperationHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
+                handler.Completed += ModelLoadDone;
+            }
+        }
+        void ModelLoadDone(AssetOperationHandle handle)
+        {
+            if (handle.AssetObject != null)
+            {
+                var obj = GameObject.Instantiate(handle.AssetObject as GameObject);
+                obj.name = $"HPGauge{m_Pawn.sequenceId}";
+                obj.transform.SetParent(this.transform, false);
+                gaugeController = obj.AddComponent<HPGaugeController>();
+                gaugeController.InitGauge(m_Pawn.camp);
+                UpdateHPGauge();
+                UpdateWeaponGauge();
+            }
+        }
+        public void UpdateHPGauge()
+        {
+            if (gaugeController != null)
+            {
+                gaugeController.SetHpValue(m_Pawn.HP, m_Pawn.GetAttribute().HPMax);
+            }
+        }
+        public void UpdateWeaponGauge()
+        {
+            gaugeController.SetWeaponIcons(m_Pawn.GetHoldingWeaponType());
+        }
+        #endregion
     }
 }

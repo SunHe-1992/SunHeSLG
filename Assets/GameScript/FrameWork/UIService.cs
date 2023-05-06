@@ -2,6 +2,11 @@ using UniFramework.Singleton;
 using SunHeTBS;
 using PackageShared;
 using PackageBattle;
+using YooAsset;
+using UnityEngine.UI;
+using UnityEngine;
+using System.Collections.Generic;
+
 public class UIService : ISingleton
 {
     public static UIService Inst { get; private set; }
@@ -111,5 +116,41 @@ public class UIService : ISingleton
 
 
     }
-
+    Dictionary<string, Sprite> spriteCacheDic;
+    public void LoadUnitySprite(string name, Image img)
+    {
+        Sprite sp = TryFindSprite(name);
+        if (sp != null)
+        {
+            img.sprite = sp;
+        }
+        else
+        {
+            var handle = YooAssets.LoadAssetSync<Sprite>(name);
+            handle.Completed += (loadObj) =>
+            {
+                if (loadObj.AssetObject != null)
+                {
+                    sp = loadObj.AssetObject as Sprite;
+                    CacheSprite(name, sp);
+                    img.sprite = sp;
+                }
+            };
+        }
+    }
+    Sprite TryFindSprite(string name)
+    {
+        if (spriteCacheDic == null)
+            spriteCacheDic = new Dictionary<string, Sprite>();
+        if (spriteCacheDic.ContainsKey(name))
+            return spriteCacheDic[name];
+        return null;
+    }
+    void CacheSprite(string name, Sprite sp)
+    {
+        if (spriteCacheDic == null)
+            spriteCacheDic = new Dictionary<string, Sprite>();
+        if (sp != null)
+            spriteCacheDic[name] = sp;
+    }
 }
