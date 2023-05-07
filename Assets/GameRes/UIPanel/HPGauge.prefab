@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 785015128}
   - component: {fileID: 785015129}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1068884219}
   - component: {fileID: 1068884221}
   - component: {fileID: 1068884220}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 1512307371}
   - component: {fileID: 1512307373}
   - component: {fileID: 1512307372}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: weaponImage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 1921808415}
   - component: {fileID: 1921808417}
   - component: {fileID: 1921808416}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7659500139299564384}
   - component: {fileID: 2717701047357820555}
   - component: {fileID: 1668669104358784603}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: weaponImage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 2192736117083653744}
   - component: {fileID: 2094681381129707932}
   - component: {fileID: 6382277590477433219}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HPGauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
