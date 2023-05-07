@@ -130,14 +130,14 @@ public class UIPage_CombatPanel : FUIBase
     void SetUpHpValue(bool isLeft, int hpValue, int hpMax, int hpChange)
     {
         var com = ui.hpbar;
-
+        string hpStr = "" + (hpValue + hpChange);
         if (isLeft)
         {
-            com.HPLeft.text = "" + hpValue;
+            com.HPLeft.text = hpStr;
         }
         else
         {
-            com.HPRight.text = "" + hpValue;
+            com.HPRight.text = hpStr;
         }
         float pctStart = (float)hpValue / hpMax;
         float pctEnd = (float)(hpValue + hpChange) / hpMax;
@@ -153,8 +153,6 @@ public class UIPage_CombatPanel : FUIBase
         if (hpChange != 0)
             sliderBar.TweenValue(pctEnd, hitAnimTime);
         sliderBar.barFade.width = (sliderBar.width - 2) * pctEnd;
-
-        ;
     }
     void OnBtnClose()
     {
