@@ -209,6 +209,7 @@ public class UIPage_CombatPredict : FUIBase
     void OnClickConfirm(IEventMessage msg)
     {
         BLogic.Inst.selectedPawn.StartNormalAttack(targetPawn);
-        //FUIManager.Inst.ShowUI<UIPage_CombatPanel>(FUIDef.FWindow.CombatPanel);
+        FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_CombatPanel>(FUIDef.FWindow.CombatPanel);
     }
 }

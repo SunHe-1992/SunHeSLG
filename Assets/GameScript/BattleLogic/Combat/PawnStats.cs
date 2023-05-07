@@ -329,6 +329,32 @@ namespace SunHeTBS
             if (dmg < 0) dmg = 0;
             return dmg;
         }
+        public static int PredictHit(Pawn attacker, Pawn defender)
+        {
+            int hit = 0;
+            var attr1 = attacker.GetCombatAttr();
+            var attr2 = defender.GetCombatAttr();
+            hit = attr1.Hit - attr2.Avoid;
+            hit = FixValue(hit);
+            return hit;
+        }
+        public static int PredictCrit(Pawn attacker, Pawn defender)
+        {
+            int crit = 0;
+            var attr1 = attacker.GetCombatAttr();
+            var attr2 = defender.GetCombatAttr();
+            crit = attr1.CriticalRate - attr2.Dodge;
+            crit = FixValue(crit);
+            return crit;
+        }
+        static int FixValue(int value)
+        {
+            if (value < 0)
+                value = 0;
+            if (value > 100)
+                value = 100;
+            return value;
+        }
     }
 
     public static class BattleTools

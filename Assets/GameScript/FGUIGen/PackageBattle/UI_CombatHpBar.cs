@@ -8,6 +8,7 @@ namespace PackageBattle
     public partial class UI_CombatHpBar : GProgressBar
     {
         public Controller color;
+        public GGraph barFade;
         public const string URL = "ui://fstosj6itjjs19";
 
         public static UI_CombatHpBar CreateInstance()
@@ -20,6 +21,7 @@ namespace PackageBattle
             base.ConstructFromXML(xml);
 
             color = GetController("color");
+            barFade = (GGraph)GetChild("barFade");
         }
     }
 }

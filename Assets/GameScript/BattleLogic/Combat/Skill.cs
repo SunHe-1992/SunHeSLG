@@ -43,14 +43,29 @@ namespace SunHeTBS
         {
             strikeInfo = sInfo;
             TargetRole = target;
-
-            if (HitCheck() == false)//miss
+            for (int i = 0; i < skillCfg.AttackCount; i++)
             {
-                strikeInfo.result = StrikeResult.Miss;
-                return;
+                sInfo.attackerSid = CasterPawn.sequenceId;
+                sInfo.defenderSid = TargetRole.sequenceId;
+                if (HitCheck() == false)//miss
+                {
+                    strikeInfo.result = StrikeResult.Miss;
+                    return;
+                }
+                else
+                {
+                    bool isCrit = CritCheck();
+                    if (isCrit)
+                        strikeInfo.result = StrikeResult.Critical;
+                    else
+                        strikeInfo.result = StrikeResult.Hit;
+                    SkillTakeEffect(isCrit);
+                }
+                if (target.combat_interrupt || CasterPawn.combat_interrupt)
+                {
+                    break;
+                }
             }
-            bool isCrit = CritCheck();
-            SkillTakeEffect(isCrit);
         }
         void SkillTakeEffect(bool isCrit)
         {
@@ -65,6 +80,10 @@ namespace SunHeTBS
             if (isCrit)
                 dmg = dmg * 3;
             strikeInfo.defenderHPChange = -dmg;
+            strikeInfo.attackerHP = CasterPawn.HP;
+            strikeInfo.attackerHPMax = CasterPawn.GetAttribute().HPMax;
+            strikeInfo.defenderHP = TargetRole.HP;
+            strikeInfo.defenderHPMax = TargetRole.GetAttribute().HPMax;
             this.TargetRole.TakeDamage(dmg);
         }
         bool HitCheck()

@@ -1021,7 +1021,10 @@ namespace SunHeTBS
                 normalAtkSkill.StartCast(target, sInfo);
             }
         }
-
+        /// <summary>
+        /// interrupt combat if true
+        /// </summary>
+        public bool combat_interrupt = false;
         public void TakeDamage(int dmgValue)
         {
             this.HP -= dmgValue;
@@ -1042,8 +1045,8 @@ namespace SunHeTBS
                 }
                 else //todo death
                 {
-
                 }
+                combat_interrupt = true;
             }
         }
     }

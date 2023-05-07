@@ -203,6 +203,14 @@ namespace SunHeTBS
             }
             p.CalculateCombatAttr();
         }
+        public Pawn GetPawnBySid(int sid)
+        {
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.sequenceId == sid) return pawn;
+            }
+            return null;
+        }
         #endregion
 
         #region Select pawns
@@ -795,6 +803,7 @@ namespace SunHeTBS
 
         #region Combat Rules
         static readonly int FollowUpSpeedDiff = 4;
+        public List<StrikeInfo> strikeList;
         public List<StrikeInfo> ArrangeStrikeList(Pawn attacker, Pawn defender)
         {
             bool vantageEff = defender.IsTriggerVantage();
@@ -803,7 +812,7 @@ namespace SunHeTBS
             int defenderSpd = defender.GetCombatAttr().AttackSpeed;
             bool attackerFollowUp = (attackerSpd - defenderSpd) > FollowUpSpeedDiff;
             bool defenderFollowUp = (defenderSpd - attackerSpd) > FollowUpSpeedDiff;
-            List<StrikeInfo> strikeList = new List<StrikeInfo>();
+            strikeList = new List<StrikeInfo>();
             //int attackerSid = attacker.sequenceId;
             //int defenderSid = defender.sequenceId;
 
@@ -839,14 +848,18 @@ namespace SunHeTBS
             return strikeList;
         }
         #endregion
-
     }
 
     public class StrikeInfo
     {
         public StrikeResult result = StrikeResult.Miss;
         public StrikeType sType;
-        public int attackerSid = 0;
+        public int attackerSid;
+        public int defenderSid;
+        public int attackerHP;
+        public int attackerHPMax;
+        public int defenderHP;
+        public int defenderHPMax;
         /// <summary>
         /// 0=attacker 1=defender
         /// </summary>
