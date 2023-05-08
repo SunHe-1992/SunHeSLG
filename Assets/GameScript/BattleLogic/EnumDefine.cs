@@ -42,51 +42,51 @@ namespace SunHeTBS
         /// <summary>
         /// avo+30, move_cost 2
         /// </summary>
-        Avoid,
+        Avoid = 1,
         /// <summary>
         /// avo+30,heal/trun 10HP,unbreakable,move_cost 2
         /// </summary>
-        Fort,
+        Fort = 2,
         /// <summary>
         /// avo+30,heal/trun 10HP,unbreakable
         /// </summary>
-        Protection,
+        Protection = 3,
         /// <summary>
         /// avo-30, move_cost 2
         /// </summary>
-        Shoal,
+        Shoal = 4,
         /// <summary>
         /// Inficts Mov -3 when ending turn on tile.
         /// </summary>
-        Quicksand,
+        Quicksand = 5,
         /// <summary>
         /// Ally Def/Res -20; Foe Def/Res +20
         /// </summary>
-        Miasma,
+        Miasma = 6,
         /// <summary>
         /// heal/turn+10
         /// </summary>
-        Healing,
+        Healing = 7,
         /// <summary>
         /// Def/Res +3,move_cost 2
         /// </summary>
-        Pillars,
+        Pillars = 8,
         /// <summary>
         /// Unbreakable,move_cost 2
         /// </summary>
-        Vines,
+        Vines = 9,
         /// <summary>
         /// Damage/Turn -10,move_cost 3
         /// </summary>
-        Flames,
+        Flames = 10,
         /// <summary>
         /// Mov+2
         /// </summary>
-        Frost,
+        Frost = 11,
         /// <summary>
         /// avo+30
         /// </summary>
-        Fog,
+        Fog = 12,
     }
     /// <summary>
     /// tile pass type
@@ -142,6 +142,10 @@ namespace SunHeTBS
         public static bool CampsFriend(PawnCamp campA, PawnCamp campB)
         {
             return friendDic[campA][(int)campB] == true;
+        }
+        public static bool IsFoe(PawnCamp camp)
+        {
+            return camp == PawnCamp.Villain || camp == PawnCamp.Neutral;
         }
     }
 

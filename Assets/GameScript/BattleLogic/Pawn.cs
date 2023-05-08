@@ -52,8 +52,13 @@ namespace SunHeTBS
         /// id in Class
         /// </summary>
         public int ClassId;
-        public BasicAttribute charAttr;
+        /// <summary>
+        /// character's config data
+        /// </summary>
         public cfg.SLG.CharacterData charCfg;
+        /// <summary>
+        /// class's config data
+        /// </summary>
         public cfg.SLG.ClassData classCfg;
         #endregion
 
@@ -124,7 +129,12 @@ namespace SunHeTBS
         public int GetMovement()
         {
             if (this.attrCache != null)
-                return attrCache.Mov;
+            {
+                int move = 0;
+                move += attrCache.Mov;
+                move += tileAttr.MoveChange;
+                return move;
+            }
             return 4;
         }
 
@@ -365,6 +375,14 @@ namespace SunHeTBS
             }
             return tileList;
         }
+        public EffectType GetTileEffect()
+        {
+            var map = TBSMapService.Inst.map;
+            var tile = map.Tile(this.curPosition);
+            if (tile != null)
+                return tile.effectType;
+            return EffectType.None;
+        }
         #endregion
 
         #region Pawn move functions
@@ -393,6 +411,7 @@ namespace SunHeTBS
             controller.StopMove();
             moveDestTile = moveTileList[moveTileList.Count - 1] as TileEntity;
             this.curPosition = moveDestTile.Position;
+            CalculateCombatAttr();
         }
         public void ResetPosition()
         {
@@ -507,17 +526,29 @@ namespace SunHeTBS
                 rangeTileDic = null;
                 destTileIds = null;
                 this.EndAction();
+                CalculateCombatAttr();
             }
         }
         #endregion
 
         #region Attribute
         /// <summary>
-        /// self attr included: character basic attr/cap fix,class basic attr/capfix,
+        /// character's attr (grow with level up)
+        /// </summary>
+        public BasicAttribute charAttr;
+        /// <summary>
+        /// pawn's summed attr,capped by attrCapTotal
         /// </summary>
         BasicAttribute attrCache;
+        /// <summary>
+        /// attr cap,based on character and class
+        /// </summary>
         BasicAttribute attrCapTotal;
+        /// <summary>
+        /// attr should not be lower than floor attr
+        /// </summary>
         BasicAttribute attrFloor;
+
         public BasicAttribute GetAttribute()
         {
             //todo calculate attrs: buff,skill
@@ -544,6 +575,10 @@ namespace SunHeTBS
             return this.attrCache;
         }
         CombatAttribute combatAttr;
+        /// <summary>
+        /// current position map tile attr
+        /// </summary>
+        CombatAttribute tileAttr;
         public CombatAttribute GetCombatAttr()
         {
             if (combatAttr == null)
@@ -552,10 +587,15 @@ namespace SunHeTBS
             }
             return combatAttr;
         }
+        void CalculateTileEffectAttr()
+        {
+            bool isFoe = PawnCampTool.IsFoe(this.camp);
+            tileAttr = TBSMapService.Inst.GetTileEffectAttr(GetTileEffect(), isFoe);
+        }
         public void CalculateCombatAttr()
         {
+            CalculateTileEffectAttr();
             combatAttr = new CombatAttribute();
-            GetCombatAttr();
             CalculateAtk();
             CalculateAtkSpd();
             CalculateHit();
@@ -664,7 +704,8 @@ namespace SunHeTBS
                 avo_weapon = equippedWeapon.itemCfg.Avoid;
             }
             avo += avo_weapon + combatAttr.AttackSpeed * 2 + attrCache.Luk / 2;
-            //todo  terrian effect
+            //tile effect
+            avo += tileAttr.Avoid;
             combatAttr.Avoid = avo;
         }
         void CalculateCrit()
@@ -714,11 +755,13 @@ namespace SunHeTBS
         void CalculateDefence()
         {
             int def = attrCache.Def;
+            def += tileAttr.Defence;
             combatAttr.Defence = def;
         }
         void CalculateResistance()
         {
             int res = attrCache.Res;
+            res += tileAttr.Resistance;
             combatAttr.Resistance = res;
         }
         /// <summary>

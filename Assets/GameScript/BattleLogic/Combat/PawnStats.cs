@@ -299,6 +299,30 @@ namespace SunHeTBS
             }
             return value;
         }
+        public CombatAttribute Clone()
+        {
+            CombatAttribute clone = new CombatAttribute();
+            clone.PhAtk = this.PhAtk;
+            clone.MagAtk = this.MagAtk;
+            clone.PnAtk = this.PnAtk;
+            clone.Hit = this.Hit;
+            clone.Avoid = this.Avoid;
+            clone.CriticalRate = this.CriticalRate;
+            clone.Dodge = this.Dodge;
+            clone.AttackSpeed = this.AttackSpeed;
+            clone.StaffHit = this.StaffHit;
+            clone.StaffAvo = this.StaffAvo;
+            clone.Defence = this.Defence;
+            clone.Resistance = this.Resistance;
+            clone.DisplayedCrit = this.DisplayedCrit;
+            clone.DisplayedHit = this.DisplayedHit;
+            clone.DisplayedStaffHit = this.DisplayedStaffHit;
+            clone.DisplayedDamage = this.DisplayedDamage;
+            clone.HealOnTurn = this.HealOnTurn;
+            clone.DamageOnTurn = this.DamageOnTurn;
+            clone.MoveChange = this.MoveChange;
+            return clone;
+        }
     }
     public static class AttrCalculator
     {

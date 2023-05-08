@@ -202,31 +202,49 @@ namespace SunHeTBS
         }
         #endregion
 
+        private Dictionary<EffectType, CombatAttribute> tileEffAttrDic;
+        private Dictionary<EffectType, CombatAttribute> tileEffAttrDicFoe;
         /// <summary>
-        /// get tileEffect attr
+        ///  tile's effect
         /// </summary>
         /// <param name="tileEff"></param>
         /// <param name="isFoe"></param>
         /// <returns></returns>
         public CombatAttribute GetTileEffectAttr(EffectType tileEff, bool isFoe)
         {
-            if (tileEff == 0)
-                return null;
+            if (tileEffAttrDic == null)
+            {
+                tileEffAttrDic = new Dictionary<EffectType, CombatAttribute>();
+                tileEffAttrDicFoe = new Dictionary<EffectType, CombatAttribute>();
+                tileEffAttrDic[EffectType.None] = new CombatAttribute();
+                tileEffAttrDicFoe[EffectType.None] = new CombatAttribute();
 
-            var cfg = ConfigManager.table.TileEffect.Get((int)tileEff);
-            CombatAttribute attr = new CombatAttribute();
-            attr.Avoid += cfg.Avoid;
+
+                for (int i = (int)EffectType.Avoid; i <= (int)EffectType.Fog; i++)
+                {
+                    var cfg = ConfigManager.table.TileEffect.Get(i);
+                    CombatAttribute attr = new CombatAttribute();
+                    attr.Avoid += cfg.Avoid;
+                    attr.HealOnTurn = cfg.Heal;
+                    attr.DamageOnTurn = cfg.Damage;
+                    attr.Unbreakable = cfg.UnBreakable;
+                    attr.MoveChange = cfg.Mov;
+
+                    CombatAttribute attrFoe = attr.Clone();
+                    attrFoe.Defence += cfg.DefFoe;
+                    attrFoe.Resistance += cfg.ResFoe;
+
+                    attr.Defence += cfg.DefAlly;
+                    attr.Resistance += cfg.ResAlly;
+
+                    tileEffAttrDic[(EffectType)i] = attr;
+                    tileEffAttrDicFoe[(EffectType)i] = attrFoe;
+                }
+            }
             if (isFoe)
-            {
-                attr.Defence += cfg.DefFoe;
-                attr.Resistance += cfg.ResFoe;
-            }
+                return tileEffAttrDicFoe[tileEff];
             else
-            {
-                attr.Defence += cfg.DefAlly;
-                attr.Resistance += cfg.ResAlly;
-            }
-            return attr;
+                return tileEffAttrDic[tileEff];
         }
     }
 
