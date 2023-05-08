@@ -622,6 +622,15 @@ namespace SunHeTBS
             TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
             InputReceiver.SwitchInputToMap();
         }
+        public void BattleUIToMap()
+        {
+            InputReceiver.SwitchInputToMap();
+            this.pCtrlState = PlayerControlState.TileSelect;
+            this.gameState = GamePlayState.PlayerControl;
+            this.CheckPhaseSwitch();
+            //todo check 2nd move
+            selectedPawn.ActionWait();
+        }
 
         #region Phase and Turn switch
         public int BattleTurn = 0;

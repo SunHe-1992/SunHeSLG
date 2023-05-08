@@ -92,7 +92,7 @@ public class UIPage_CombatPanel : FUIBase
 
         //    SetUpHpValue(info, atkerIsLeft);
 
-        //    Debugger.Log($"step {step} attacker {attacker} hp {info.attackerHP}/{info.attackerHPMax} hpChange={info.attackerHPChange}");
+        //    Debugger.Log($"step {step} attacker {attacker} hp {info.attackerHP}/{info.attackerHPMax} hpChange={info.attackerHPChange}"); 
         //    Debugger.Log($"step {step} defender {defender} hp {info.defenderHP}/{info.defenderHPMax} hpChange={info.defenderHPChange}");
         //    step++;
         //}
@@ -157,5 +157,9 @@ public class UIPage_CombatPanel : FUIBase
     void OnBtnClose()
     {
         FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_BattleMain>(FUIDef.FWindow.BattlePanel);
+        //hide combat panel ui, and go on: exp ui,level up ui,
+        //back to map control show pawn preview ui
+        BLogic.Inst.BattleUIToMap();
     }
 }
