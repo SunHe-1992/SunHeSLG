@@ -94,7 +94,7 @@ namespace SunHeTBS
         }
         public override string ToString()
         {
-            return $"Pawn camp={camp} pos={curPosition} posId={TilePosId()} model={modelName}";
+            return $"Pawn sid={this.sequenceId} Camp:{camp} model={modelName}";
         }
 
         public void LoadModel()
@@ -382,6 +382,21 @@ namespace SunHeTBS
             if (tile != null)
                 return tile.effectType;
             return EffectType.None;
+        }
+        /// <summary>
+        /// check if this pos is in my attack range
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public bool CheckTileInRange(Vector3Int pos)
+        {
+            int posId = TBSMapService.Inst.GetTileId(pos);
+            foreach (var posHash in rangeTileDic.Values)
+            {
+                if (posHash.Contains(posId))
+                    return true;
+            }
+            return false;
         }
         #endregion
 
@@ -1056,6 +1071,8 @@ namespace SunHeTBS
                 else if (strike.id == 1)
                     target.ProcessNormalAttack(this, strike);
             }
+            this.OnCombatEnd();
+            target.OnCombatEnd();
         }
         public void ProcessNormalAttack(Pawn target, StrikeInfo sInfo)
         {
@@ -1064,6 +1081,11 @@ namespace SunHeTBS
                 normalAtkSkill.StartCast(target, sInfo);
             }
         }
+        public void OnCombatEnd()
+        {
+            combat_interrupt = false;
+        }
+
         /// <summary>
         /// interrupt combat if true
         /// </summary>
@@ -1091,6 +1113,13 @@ namespace SunHeTBS
                 }
                 combat_interrupt = true;
             }
+        }
+        /// <summary>
+        /// when new turn starts
+        /// </summary>
+        public void OnBattleTurnAdd()
+        {
+            //release Break debuff
         }
     }
 

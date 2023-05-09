@@ -258,10 +258,182 @@ namespace SunHeTBS
             //todo
         }
         #endregion
+        #region Cursor Path Management
 
+        /// <summary>
+        /// current cursor pos,controlled by player
+        /// </summary>
+        public Vector3Int cursorPos;
+        /// <summary>
+        /// cursor path stack,current cursor pos is not included
+        /// </summary>
+        public Stack<Vector3Int> cursorStack = new Stack<Vector3Int>();
+        /// <summary>
+        /// modify cursor obj color,check cursor stack
+        /// </summary>
+        /// <param name="newPos"></param>
+        void OnCursorPosChange(Vector3Int oldPos, Vector3Int newPos)
+        {
+            #region set cursor obj color and arrow visible
+            bool pawnSelected = pCtrlState == PlayerControlState.PawnSelected;
+
+            //check if a pawn standing on this pos, if yes:return this function
+            var cursorTile = TBSMapService.Inst.map.Tile(newPos);
+            Pawn pointPawn = GetPawnOnTile(cursorTile);
+            bool noPointAtPawn = pointPawn == null;
+
+            bool cursorColorRed = false;
+            bool showArrow = false;
+            bool selectedPawnArmed = selectedPawn != null && selectedPawn.HoldingWeapon();
+            bool cursorInWalkableTile = false;
+            if (pawnSelected == false)//no pawn is selected
+            {
+                if (noPointAtPawn)
+                {
+                    showArrow = false;
+                    cursorColorRed = false;
+                }
+                else
+                {
+                    showArrow = true;
+                    cursorColorRed = false;
+                }
+            }
+            else
+            {
+                if (noPointAtPawn)
+                {
+                    showArrow = false;
+                    //1. check if new pos is inside walkable area
+                    int posId = TBSMapService.Inst.GetTileId(newPos);
+                    if (selectedPawn != null && selectedPawn.moveTileIds.Contains(posId))
+                    {
+                        cursorColorRed = false;
+                        cursorInWalkableTile = true;
+                    }
+                    else
+                        cursorColorRed = true;
+                }
+                else
+                {
+                    if (pointPawn.sequenceId == selectedPawn.sequenceId)//cursor at self
+                    {
+                        showArrow = true;
+                        cursorColorRed = false;
+                    }
+                    else
+                    {
+                        bool targetInMyRange = selectedPawn.CheckTileInRange(newPos);
+                        if (PawnCampTool.IsFoe(pointPawn.camp))
+                        {
+                            if (selectedPawnArmed && targetInMyRange)
+                            {
+                                showArrow = true;
+                                cursorColorRed = false;
+                            }
+                            else
+                            {
+                                showArrow = true;
+                                cursorColorRed = true;
+                            }
+                        }
+                        else //point at ally
+                        {
+                            showArrow = true;
+                            cursorColorRed = true;
+                        }
+                    }
+                }
+            }
+            BattleDriver.Inst.CursorShowArrow(showArrow);
+            if (cursorColorRed)
+                BattleDriver.Inst.SetCursorRed();
+            else
+                BattleDriver.Inst.SetCursorWhite();
+            #endregion
+
+            #region logic check path cost and path finding
+            //2. check if new pos appended to cursorStack, move point is enough
+            //if yes , only push pos to stack
+            //if no , do pathfinding again and save result to stack
+            if (selectedPawn != null)
+            {
+                bool backToOldPos = false;
+                int count = 0;
+                foreach (var pos in cursorStack)
+                {
+                    count++;
+                    if (newPos.Equals(pos))
+                    {
+                        backToOldPos = true;
+                        break;
+                    }
+                }
+                if (backToOldPos)
+                    for (int i = 0; i < count; i++)
+                    {
+                        cursorStack.Pop();
+                    }
+                if (false == backToOldPos)//cursor moves back
+                {
+                    if (cursorInWalkableTile)//if cursor is outside walkable tiles,ignore this
+                    {
+                        cursorStack.Push(newPos);
+                        int pathCost = CheckCursorStackMovable();
+                        Debugger.Log($"cost={pathCost} ");
+                        if (pathCost <= selectedPawn.GetMovement())//accept this path
+                        {
+                        }
+                        else//redo path finding
+                        {
+                            cursorStack.Clear();
+                            TileEntity startTile = TBSMapService.Inst.map.GetTileFromDic(selectedPawn.TilePosId());
+                            TileEntity toTile = TBSMapService.Inst.map.Tile(cursorPos);
+                            List<INode> nodeList = NodePathFinder.Path(TBSMapService.Inst.map, startTile, toTile, selectedPawn.IsExtraMoveCost(), selectedPawn.IsPassFoe(), selectedPawn.IsFlier());
+                            if (nodeList.Count > 0)
+                                for (int i = 0; i < nodeList.Count; i++)//save nodes to stack
+                                {
+                                    INode node = nodeList[i];
+                                    cursorStack.Push(node.Position);
+                                }
+                        }
+                    }
+                }
+            }
+
+            Debugger.Log("cursor stack count  = " + cursorStack.Count);
+            #endregion
+        }
+        int CheckCursorStackMovable()
+        {
+            List<Vector3Int> posList = new List<Vector3Int>(cursorStack);
+            List<INode> nodes = new List<INode>();
+            foreach (Vector3Int pos in posList)
+            {
+                var tile = TBSMapService.Inst.map.Tile(pos);
+                nodes.Add(tile);
+            }
+            bool extraMoveCost = selectedPawn.IsExtraMoveCost();
+            return NodePathFinder.EstimatePathCost(nodes, TBSMapService.Inst.map, extraMoveCost);
+        }
+        bool PosInWalkableTile(Vector3Int pos)
+        {
+            if (selectedPawn == null || selectedPawn.moveTileIds == null)
+                return false;
+            int posId = TBSMapService.Inst.GetTileId(pos);
+            return selectedPawn.moveTileIds.Contains(posId);
+        }
+        /// <summary>
+        /// when cancel pawn destination select
+        /// </summary>
+        void ClearCursorStack()
+        {
+            cursorStack.Clear();
+            TBSMapService.Inst.UnspawnAllPathHint();
+        }
+        #endregion
         #region cursor select pawn
 
-        public Vector3Int cursorPos;
         /// <summary>
         /// pawn under cursor
         /// </summary>
@@ -322,15 +494,23 @@ namespace SunHeTBS
 
         #region Pawn Move
         Pawn movingPawn = null;
+
+        /// <summary>
+        /// when select a pawn's destination, confirmed and check what to do on this tile
+        /// </summary>
         private void PawnTempMove()
         {
             int cursorTileId = TBSMapService.Inst.GetTileId(cursorPos);
-            if (pointedPawn == null)
+            if (pointedPawn == null)//select a tile that no one standing on it,pawn move to this tile
             {
                 if (selectedPawn.moveTileIds.Contains(cursorTileId))
                 {
                     PawnStartMove(selectedPawn, cursorTileId);
                 }
+            }
+            else //select a pawn,if is a foe check attack ,if is a ally check heal
+            {
+                Debugger.Log($"PawnTempMove selected {pointedPawn}");
             }
         }
         public void PawnStartMove(Pawn p, int tileId)
@@ -401,6 +581,7 @@ namespace SunHeTBS
             TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
             InputReceiver.SwitchInputToMap();
             selectedPawn = null;
+            ClearCursorStack();
         }
         #endregion
 
@@ -490,6 +671,7 @@ namespace SunHeTBS
         /// <param name="newPos"></param>
         void ChangeCursorPos(Vector3Int newPos)
         {
+            Vector3Int oldCursorPos = cursorPos;
             cursorPos = newPos;
 
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
@@ -501,8 +683,23 @@ namespace SunHeTBS
             {
                 pointedPawn = null;
             }
+            if (gameState == GamePlayState.PlayerControl)
+            {
+                if (pCtrlState == PlayerControlState.TileSelect || pCtrlState == PlayerControlState.PawnSelected)
+                {
+                    OnCursorPosChange(oldCursorPos, newPos);
+                    //refresh cursor hint objs
+                    if (cursorStack.Count > 0)
+                    {
+                        List<Vector3Int> posList = new List<Vector3Int>(cursorStack);
+                        if (PosInWalkableTile(cursorPos))
+                            posList.Add(cursorPos);
+                        TBSMapService.Inst.ReGeneratePathHintObj(posList);
+                    }
+                }
+            }
             UniEvent.SendMessage(GameEventDefine.CursorPointToPawn);
-            var cursorObj = BattleDriver.Inst.CursorObj;
+            var cursorObj = BattleDriver.Inst.cursorCtrl;
             if (cursorObj != null)
             {
                 BattleDriver.Inst.MoveCursorObj();
@@ -516,17 +713,17 @@ namespace SunHeTBS
         }
         public void OnMouseClick(Vector3 pos)
         {
-            if (gameState == GamePlayState.PlayerControl)
-            {
-                if (pCtrlState == PlayerControlState.TileSelect)
-                {
-                    var clickTile = TBSMapService.Inst.map.Tile(pos);
-                    if (clickTile != null)
-                    {
-                        CursorInputMoveTo(clickTile.Position);//set pointedPawn
-                    }
-                }
-            }
+            //if (gameState == GamePlayState.PlayerControl)
+            //{
+            //    if (pCtrlState == PlayerControlState.TileSelect)
+            //    {
+            //        var clickTile = TBSMapService.Inst.map.Tile(pos);
+            //        if (clickTile != null)
+            //        {
+            //            CursorInputMoveTo(clickTile.Position);//set pointedPawn
+            //        }
+            //    }
+            //}
         }
 
 
@@ -548,6 +745,8 @@ namespace SunHeTBS
                                 if (pointedPawn.actionEnd == false)//move player's pawn
                                 {
                                     selectedPawn = pointedPawn;
+                                    cursorStack.Clear();
+                                    cursorStack.Push(cursorPos);
                                     SetPlayerCtrlState(PlayerControlState.PawnSelected);
                                 }
                             }
@@ -607,6 +806,7 @@ namespace SunHeTBS
                     BattleDriver.Inst.MoveCursorObj();
                     TBSMapService.Inst.ShowPawnCoverPlanes(selectedPawn);
                     selectedPawn = null;
+                    ClearCursorStack();
                     InputReceiver.SwitchInputToMap();
                     break;
             }
@@ -685,6 +885,7 @@ namespace SunHeTBS
                 InputReceiver.SwitchInputToMap();
                 SetNextGamePlayState(GamePlayState.PlayerControl);
                 OnBattleTurnAdd();
+                ClearCursorStack();
                 ChangeCursorPos(cursorPos);
                 RefreshCoverPlanes();
             }
@@ -703,7 +904,10 @@ namespace SunHeTBS
         void OnBattleTurnAdd()
         {
             BattleTurn++;
-
+            foreach (var pawn in this.pawnList)
+            {
+                pawn.OnBattleTurnAdd();
+            }
         }
         public void CheckPhaseSwitch()
         {

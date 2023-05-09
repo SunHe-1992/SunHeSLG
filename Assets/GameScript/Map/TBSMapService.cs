@@ -183,6 +183,44 @@ namespace SunHeTBS
         }
         #endregion
 
+        #region Path hint obj management
+        Transform PathHintTrans = null;
+        List<SpawnHandle> pathHintHandlers = new List<SpawnHandle>();
+        private void SpawnPathHintObj(Vector3Int pos)
+        {
+            if (PathHintTrans == null)
+            {
+                PathHintTrans = new GameObject("PathHintTrans").transform;
+                PathHintTrans.position = Vector3.zero;
+            }
+            Vector3 worldPos = new Vector3();
+            worldPos.x = pos.x;
+            worldPos.z = pos.y;
+            var spawner = BattleDriver.UniSpawner;
+            var spHandle = spawner.SpawnAsync("Gizmos/PathHint", PathHintTrans, worldPos, Quaternion.identity);
+            pathHintHandlers.Add(spHandle);
+        }
+        public void ReGeneratePathHintObj(List<Vector3Int> posList)
+        {
+            UnspawnAllPathHint();
+            foreach (var pos in posList)
+            {
+                SpawnPathHintObj(pos);
+            }
+        }
+        public void UnspawnAllPathHint()
+        {
+            if (pathHintHandlers != null)
+            {
+                for (int i = pathHintHandlers.Count - 1; i >= 0; i--)
+                {
+                    pathHintHandlers[i].Restore();
+                    pathHintHandlers.RemoveAt(i);
+                }
+            }
+        }
+        #endregion
+
         public int GetTileId(Vector3Int pos)
         {
             if (map != null)

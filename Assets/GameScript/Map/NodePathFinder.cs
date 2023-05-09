@@ -142,6 +142,24 @@ namespace SunHeTBS
         }
 
         #endregion
+
+        /// <summary>
+        /// calculate total move cost step by step,by given path nodes
+        /// </summary>
+        /// <param name="pathList"></param>
+        /// <returns></returns>
+        public static int EstimatePathCost(List<INode> nodeList, IMapNode map, bool extraPrice)
+        {
+            int cost = 0;
+            if (nodeList.Count == 0)
+                return cost;
+
+            for (int i = 1; i < nodeList.Count; i++)
+            {
+                cost += map.Distance(nodeList[i - 1], nodeList[i], extraPrice);
+            }
+            return cost;
+        }
     }
 
 }

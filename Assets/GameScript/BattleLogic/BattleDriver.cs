@@ -226,10 +226,9 @@ namespace SunHeTBS
         {
             //load arrow cursor object
             var arrowHandle = YooAssets.LoadAssetSync("Effect/Signs/arrowSign", typeof(GameObject));
-            CursorObj = GameObject.Instantiate(arrowHandle.AssetObject as GameObject);
-            CursorObj.name = "CursorObj";
-
-
+            var obj = GameObject.Instantiate(arrowHandle.AssetObject as GameObject);
+            obj.name = "CursorObj";
+            cursorCtrl = obj.AddComponent<CursorControl>();
 
             SwitchDriveState(BattleDriveState.STATE_IN_BATTLE);
 
@@ -284,7 +283,7 @@ namespace SunHeTBS
         #endregion
 
         #region manage Game objects and pooling
-        public GameObject CursorObj;
+        public CursorControl cursorCtrl;
         /// <summary>
         /// UniPooling's spawner
         /// </summary>
@@ -295,7 +294,7 @@ namespace SunHeTBS
         /// </summary>
         public void MoveCursorObj()
         {
-            if (CursorObj)
+            if (cursorCtrl)
             {
                 Vector3 pos = TBSMapService.Inst.map.WorldPosition(logicInst.cursorPos);
                 var tile = TBSMapService.Inst.map.Tile(logicInst.cursorPos);
@@ -304,9 +303,21 @@ namespace SunHeTBS
                 {
                     topHeight = tile.topHeight;
                 }
-                CursorObj.transform.position = pos + new Vector3(0, topHeight, 0);
+                cursorCtrl.transform.position = pos + new Vector3(0, topHeight, 0);
                 TBSMapService.Inst.mapCamera.SetTargetTilePos(pos);
             }
+        }
+        public void SetCursorRed()
+        {
+            cursorCtrl.ChangeRed();
+        }
+        public void SetCursorWhite()
+        {
+            cursorCtrl.ChangeWhite();
+        }
+        public void CursorShowArrow(bool isshow)
+        {
+            cursorCtrl.ShowHideArrow(isshow);
         }
         #endregion
     }
