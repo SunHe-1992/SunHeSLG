@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Machine;
@@ -18,7 +18,7 @@ internal class FsmUpdateVersion : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("获取最新的资源版本 !");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("fetching new resource version");
 		UniModule.StartCoroutine(GetStaticVersion());
 	}
 	void IStateNode.OnUpdate()

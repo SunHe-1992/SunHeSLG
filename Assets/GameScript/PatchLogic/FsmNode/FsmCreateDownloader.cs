@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Machine;
@@ -18,7 +18,7 @@ public class FsmCreateDownloader : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("创建补丁下载器！");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("create patch downloader！");
 		UniModule.StartCoroutine(CreateDownloader());
 	}
 	void IStateNode.OnUpdate()

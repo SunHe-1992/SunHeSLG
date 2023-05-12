@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UniFramework.Machine;
 using UniFramework.Module;
@@ -17,7 +17,7 @@ public class FsmDownloadFiles : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("开始下载补丁文件！");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("start downloading patch files！");
 		UniModule.StartCoroutine(BeginDownload());
 	}
 	void IStateNode.OnUpdate()

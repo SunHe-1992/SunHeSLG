@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Machine;
@@ -18,7 +18,7 @@ public class FsmUpdateManifest : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("更新资源清单！");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("update resource manifest");
 		UniModule.StartCoroutine(UpdateManifest());
 	}
 	void IStateNode.OnUpdate()

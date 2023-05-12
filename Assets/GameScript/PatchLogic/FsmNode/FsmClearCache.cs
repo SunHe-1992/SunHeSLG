@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniFramework.Machine;
@@ -16,7 +16,7 @@ internal class FsmClearCache : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("清理未使用的缓存文件！");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("clear unused cache files");
 		var package = YooAsset.YooAssets.GetAssetsPackage("DefaultPackage");
 		var operation = package.ClearUnusedCacheFilesAsync();
 		operation.Completed += Operation_Completed;

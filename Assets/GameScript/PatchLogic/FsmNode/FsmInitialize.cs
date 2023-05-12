@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +20,7 @@ internal class FsmInitialize : IStateNode
 	}
 	void IStateNode.OnEnter()
 	{
-		PatchEventDefine.PatchStatesChange.SendEventMessage("初始化资源包！");
+		PatchEventDefine.PatchStatesChange.SendEventMessage("init asset package！");
 		UniModule.StartCoroutine(InitPackage());
 	}
 	void IStateNode.OnUpdate()

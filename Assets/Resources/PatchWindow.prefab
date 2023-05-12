@@ -626,7 +626,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u8D44\u6E90\u66F4\u65B0"
+  m_Text: YooAsset Update
 --- !u!1 &5787501567641161552
 GameObject:
   m_ObjectHideFlags: 0
