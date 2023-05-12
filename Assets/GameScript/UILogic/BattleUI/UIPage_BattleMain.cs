@@ -178,31 +178,35 @@ public partial class UIPage_BattleMain : FUIBase
     {
 
     }
-
+    bool showDebug = false;
     protected override void OnUpdate()
     {
         base.OnUpdate();
-#if UNITY_EDITOR
-        var state = BLogic.Inst.GetGamePlayState();
-        string debugStr = "";
-        string turnStr = $"Turn={BLogic.Inst.BattleTurn} {BLogic.Inst.curCamp} Phase\n";
-        debugStr += turnStr;
-        debugStr += UIService.ChangeGreen($"GameState = {state}\n");
-        debugStr += UIService.ChangeGreen($"player control state = {BLogic.Inst.pCtrlState}\n");
-        string input = InputReceiver.InputInUI ? "UI" : "MAP";
-        debugStr += UIService.ChangeGreen($"input mode = {input}\n");
 
-        var selectedPawn = BLogic.Inst.selectedPawn;
-        if (selectedPawn != null)
-            debugStr += $"selectedPawn={selectedPawn}\n";
-        else
-            debugStr += $"selectedPawn=null\n";
-        var pointedPawn = BLogic.Inst.pointedPawn;
-        if (pointedPawn != null)
-            debugStr += $"pointedPawn={pointedPawn}\n";
-        else
-            debugStr += $"pointedPawn=null\n";
-        ui.txt_logicState.text = debugStr;
+#if UNITY_EDITOR
+        if (showDebug)
+        {
+            var state = BLogic.Inst.GetGamePlayState();
+            string debugStr = "";
+            string turnStr = $"Turn={BLogic.Inst.BattleTurn} {BLogic.Inst.curCamp} Phase\n";
+            debugStr += turnStr;
+            debugStr += UIService.ChangeGreen($"GameState = {state}\n");
+            debugStr += UIService.ChangeGreen($"player control state = {BLogic.Inst.pCtrlState}\n");
+            string input = InputReceiver.InputInUI ? "UI" : "MAP";
+            debugStr += UIService.ChangeGreen($"input mode = {input}\n");
+
+            var selectedPawn = BLogic.Inst.selectedPawn;
+            if (selectedPawn != null)
+                debugStr += $"selectedPawn={selectedPawn}\n";
+            else
+                debugStr += $"selectedPawn=null\n";
+            var pointedPawn = BLogic.Inst.pointedPawn;
+            if (pointedPawn != null)
+                debugStr += $"pointedPawn={pointedPawn}\n";
+            else
+                debugStr += $"pointedPawn=null\n";
+            ui.txt_logicState.text = debugStr;
+        }
 #endif
     }
 
