@@ -498,7 +498,7 @@ namespace SunHeTBS
         /// <summary>
         /// when select a pawn's destination, confirmed and check what to do on this tile
         /// </summary>
-        private void PawnTempMove()
+        private void PawnConfirmMove()
         {
             int cursorTileId = TBSMapService.Inst.GetTileId(cursorPos);
             if (pointedPawn == null)//select a tile that no one standing on it,pawn move to this tile
@@ -512,6 +512,7 @@ namespace SunHeTBS
             {
                 Debugger.Log($"PawnTempMove selected {pointedPawn}");
             }
+            TBSMapService.Inst.UnspawnAllPathHint();
         }
         public void PawnStartMove(Pawn p, int tileId)
         {
@@ -766,10 +767,13 @@ namespace SunHeTBS
                             {
                                 ShowActionMenu();
                             }
-                            else if (selectedPawn.camp == PawnCamp.Player)//player's pawn
+                            else
                             {
-                                //goto pos
-                                PawnTempMove();
+                                if (selectedPawn.camp == PawnCamp.Player)//player's pawn
+                                {
+                                    //goto pos
+                                    PawnConfirmMove();
+                                }
                             }
                         }
                     }
