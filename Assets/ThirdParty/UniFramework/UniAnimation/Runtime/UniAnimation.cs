@@ -55,7 +55,7 @@ namespace UniFramework.Animation
 			set
 			{
 				_animatePhysics = value;
-				_animator.updateMode = _animatePhysics ? AnimatorUpdateMode.AnimatePhysics : AnimatorUpdateMode.Normal;
+				_animator.updateMode = _animatePhysics ? AnimatorUpdateMode.Fixed : AnimatorUpdateMode.Normal;
 			}
 		}
 
@@ -63,7 +63,7 @@ namespace UniFramework.Animation
 		public void Awake()
 		{
 			_animator = GetComponent<Animator>();
-			_animator.updateMode = _animatePhysics ? AnimatorUpdateMode.AnimatePhysics : AnimatorUpdateMode.Normal;
+			_animator.updateMode = _animatePhysics ? AnimatorUpdateMode.Fixed : AnimatorUpdateMode.Normal;
 
 			_animPlayable = new AnimPlayable();
 			_animPlayable.Create(_animator);
