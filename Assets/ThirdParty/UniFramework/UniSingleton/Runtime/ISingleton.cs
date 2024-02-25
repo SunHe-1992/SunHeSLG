@@ -1,4 +1,4 @@
-
+﻿
 namespace UniFramework.Singleton
 {
     public interface ISingleton
@@ -17,10 +17,5 @@ namespace UniFramework.Singleton
         /// 销毁单例
         /// </summary>
         void OnDestroy();
-
-        /// <summary>
-        /// 
-        /// </summary>
-        void OnFixedUpdate();
     }
 }

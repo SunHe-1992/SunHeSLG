@@ -102,12 +102,12 @@ namespace SunHeTBS
             if (this.controller == null)
             {
                 string resPath = $"Pawns/{modelName}";
-                AssetOperationHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
+                AssetHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
                 handler.Completed += ModelLoadDone;
 
             }
         }
-        void ModelLoadDone(AssetOperationHandle handle)
+        void ModelLoadDone(AssetHandle handle)
         {
             if (handle.AssetObject != null)
             {

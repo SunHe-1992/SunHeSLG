@@ -1,16 +1,12 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace UniFramework.Singleton
 {
-	internal class UniSingletonDriver : MonoBehaviour
-	{
-		void Update()
-		{
-			UniSingleton.Update();
-		}
-        void FixedUpdate()
+    internal class UniSingletonDriver : MonoBehaviour
+    {
+        void Update()
         {
-			UniSingleton.FixedUpdate();
+            UniSingleton.Update();
         }
     }
 }

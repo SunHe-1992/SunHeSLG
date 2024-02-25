@@ -56,10 +56,6 @@ namespace SunHeTBS
         public void OnDestroy()
         {
         }
-        public void OnFixedUpdate()
-        {
-            ChangeDriveState();
-        }
 
         float deltaTime = 0;
         // Update is called once per frame
@@ -71,6 +67,7 @@ namespace SunHeTBS
             }
             deltaTime = Time.deltaTime;
             OnBattleFrameUpdate(deltaTime);
+            ChangeDriveState();
         }
 
         private void OnBattleFrameUpdate(float deltaTime)
@@ -174,7 +171,7 @@ namespace SunHeTBS
         string mapName = "SLGMapTest";
         private void OnEnterLoadSceneState()
         {
-            SceneOperationHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
+            SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
             handle.Completed += (scene) =>
             {
                 //hide EditorGizmos

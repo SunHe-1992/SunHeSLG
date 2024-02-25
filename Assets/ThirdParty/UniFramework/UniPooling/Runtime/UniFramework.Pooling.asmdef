@@ -1,0 +1,16 @@
+{
+    "name": "UniFramework.Pooling",
+    "rootNamespace": "",
+    "references": [
+        "GUID:72294b168c81d1a48a5ef4a2e9f87d98"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

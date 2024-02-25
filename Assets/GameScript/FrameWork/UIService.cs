@@ -24,10 +24,7 @@ public class UIService : ISingleton
 
     }
 
-    public void OnFixedUpdate()
-    {
 
-    }
 
     public void OnUpdate()
     {

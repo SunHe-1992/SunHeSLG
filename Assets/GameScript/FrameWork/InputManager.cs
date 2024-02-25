@@ -27,9 +27,7 @@ namespace SunHeTBS
         public void OnDestroy()
         {
         }
-        public void OnFixedUpdate()
-        {
-        }
+
 
         /// <summary>
         /// last axis input time stamp (milli seconds)

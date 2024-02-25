@@ -25,9 +25,6 @@ public class ConfigManager : ISingleton
     {
         table = null;
     }
-    public void OnFixedUpdate()
-    {
-    }
     /// <summary>
     /// 
     /// </summary>
@@ -105,7 +102,7 @@ public class ConfigManager : ISingleton
 
         string tableDataFile = $"Config/{name}";
 
-        AssetOperationHandle assetOperationHandle;
+        AssetHandle assetOperationHandle;
 
         assetOperationHandle = YooAssets.LoadAssetSync<TextAsset>(tableDataFile);
 

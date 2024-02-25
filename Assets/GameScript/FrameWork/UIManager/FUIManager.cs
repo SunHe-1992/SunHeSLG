@@ -560,7 +560,6 @@ public class FUIManager : ISingleton
                 unityaction();
         });
     }
-
     #endregion
 
     /// <summary>
@@ -995,7 +994,7 @@ public class FUIManager : ISingleton
 
     }
 
-    Dictionary<string, UnityEngine.Object> allLoadInfos; //下载到的所有数据
+    Dictionary<string, UnityEngine.Object> allLoadInfos = new Dictionary<string, UnityEngine.Object>(); //下载到的所有数据
 
     //加载完这个包
     Dictionary<string, int> loadingNum = null;
@@ -1099,7 +1098,7 @@ public class FUIManager : ISingleton
         else
         {
 
-            AssetOperationHandle assetOperationHandle;
+            AssetHandle assetOperationHandle;
             assetOperationHandle = YooAssets.LoadAssetSync<TObject>(name);
 
 

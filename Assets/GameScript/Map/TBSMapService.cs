@@ -26,9 +26,6 @@ namespace SunHeTBS
         public void OnDestroy()
         {
         }
-        public void OnFixedUpdate()
-        {
-        }
 
         public MapEntity map;
 

@@ -10,13 +10,29 @@ namespace UnityEngine
             node.SetOnUpdate((result) => { obj.alpha = result; });
             return node;
         }
-        public static FloatTween TweenAlphaTo(this CanvasGroup obj, float duration, float to)
-		{
-            return TweenAlpha(obj, duration, obj.alpha, to);
-		}
-        public static FloatTween TweenAlphaFrom(this CanvasGroup obj, float duration, float from)
-		{
-            return TweenAlpha(obj, duration, from, obj.alpha);
+        public static FloatTween TweenAlphaTo(this CanvasGroup obj, float duration, float to, bool setRuntimeValue = true)
+        {
+            FloatTween node = TweenAlpha(obj, duration, obj.alpha, to);
+            if (setRuntimeValue)
+            {
+                node.SetOnBegin(() =>
+                {
+                    node.SetValueFrom(obj.alpha);
+                });
+            }
+            return node;
+        }
+        public static FloatTween TweenAlphaFrom(this CanvasGroup obj, float duration, float from, bool setRuntimeValue = true)
+        {
+            FloatTween node = TweenAlpha(obj, duration, from, obj.alpha);
+            if (setRuntimeValue)
+            {
+                node.SetOnBegin(() =>
+                {
+                    node.SetValueTo(obj.alpha);
+                });
+            }
+            return node;
         }
     }
 }

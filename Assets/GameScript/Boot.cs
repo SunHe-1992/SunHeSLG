@@ -1,6 +1,7 @@
-using UnityEngine;
+using System.Collections;
 using UniFramework.Event;
 using UniFramework.Module;
+using UnityEngine;
 using YooAsset;
 
 public class Boot : MonoBehaviour
@@ -17,9 +18,12 @@ public class Boot : MonoBehaviour
         Application.targetFrameRate = 60;
         Application.runInBackground = true;
     }
-    void Start()
+    IEnumerator Start()
     {
         GamePlayMode = PlayMode;
+
+        // 游戏管理器
+        GameManager.Instance.Behaviour = this;
 
         // 初始化事件系统
         UniEvent.Initalize();
@@ -32,10 +36,14 @@ public class Boot : MonoBehaviour
         YooAssets.Initialize();
         YooAssets.SetOperationSystemMaxTimeSlice(30);
 
-        // 创建补丁管理器
-        UniModule.CreateModule<PatchManager>();
-
         // 开始补丁更新流程
-        PatchManager.Instance.Run(PlayMode);
+        PatchOperation operation = new PatchOperation("DefaultPackage", EDefaultBuildPipeline.BuiltinBuildPipeline.ToString(), PlayMode);
+        YooAssets.StartOperation(operation);
+        yield return operation;
+
+       
+
+        // 切换到主页面场景
+        SceneEventDefine.ChangeToHomeScene.SendEventMessage();
     }
 }

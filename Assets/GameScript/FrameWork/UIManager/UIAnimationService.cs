@@ -25,9 +25,7 @@ public class UIAnimationService : ISingleton
     public void OnDestroy()
     {
     }
-    public void OnFixedUpdate()
-    {
-    }
+
     int windowType = (int)OpenUIAnimationType.NoAnimation;
 
     Vector2 Vector2 = new Vector2(1, 1);

@@ -147,6 +147,13 @@
         },
         {
             "Address": "",
+            "AssetPath": "Assets/GameRes/Gizmos/PathHint.prefab",
+            "AssetTags": [],
+            "BundleID": 4,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
             "AssetPath": "Assets/GameRes/MapData/SLGMapTest.json",
             "AssetTags": [],
             "BundleID": 5,
@@ -154,9 +161,16 @@
         },
         {
             "Address": "",
-            "AssetPath": "Assets/GameArt/ShaderVariants/MyShaderVariants.shadervariants",
+            "AssetPath": "Assets/GameRes/UIPanel/HPGauge.prefab",
             "AssetTags": [],
             "BundleID": 6,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameArt/ShaderVariants/MyShaderVariants.shadervariants",
+            "AssetTags": [],
+            "BundleID": 7,
             "DependIDs": []
         },
         {
@@ -165,7 +179,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 7,
+            "BundleID": 8,
             "DependIDs": []
         },
         {
@@ -174,7 +188,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 7,
+            "BundleID": 8,
             "DependIDs": []
         },
         {
@@ -183,7 +197,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 8,
+            "BundleID": 9,
             "DependIDs": []
         },
         {
@@ -192,7 +206,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -201,7 +215,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -210,7 +224,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -219,7 +233,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -228,7 +242,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -237,7 +251,7 @@
             "AssetTags": [
                 "scene"
             ],
-            "BundleID": 9,
+            "BundleID": 10,
             "DependIDs": []
         },
         {
@@ -246,7 +260,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 10,
+            "BundleID": 11,
             "DependIDs": []
         },
         {
@@ -255,7 +269,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 11,
+            "BundleID": 12,
             "DependIDs": []
         },
         {
@@ -264,7 +278,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 12,
+            "BundleID": 13,
             "DependIDs": []
         },
         {
@@ -273,7 +287,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 13,
+            "BundleID": 14,
             "DependIDs": []
         },
         {
@@ -282,7 +296,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 14,
+            "BundleID": 15,
             "DependIDs": []
         },
         {
@@ -291,7 +305,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 15,
+            "BundleID": 16,
             "DependIDs": []
         },
         {
@@ -300,7 +314,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 16,
+            "BundleID": 17,
             "DependIDs": []
         },
         {
@@ -309,7 +323,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 17,
+            "BundleID": 18,
             "DependIDs": []
         },
         {
@@ -318,7 +332,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 18,
+            "BundleID": 19,
             "DependIDs": []
         },
         {
@@ -327,7 +341,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 19,
+            "BundleID": 20,
             "DependIDs": []
         },
         {
@@ -336,7 +350,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 20,
+            "BundleID": 21,
             "DependIDs": []
         },
         {
@@ -345,7 +359,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 21,
+            "BundleID": 22,
             "DependIDs": []
         },
         {
@@ -354,7 +368,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 22,
+            "BundleID": 23,
             "DependIDs": []
         },
         {
@@ -363,7 +377,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 23,
+            "BundleID": 24,
             "DependIDs": []
         },
         {
@@ -372,7 +386,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 24,
+            "BundleID": 25,
             "DependIDs": []
         },
         {
@@ -381,7 +395,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 25,
+            "BundleID": 26,
             "DependIDs": []
         },
         {
@@ -390,7 +404,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 26,
+            "BundleID": 27,
             "DependIDs": []
         },
         {
@@ -399,7 +413,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 27,
+            "BundleID": 28,
             "DependIDs": []
         },
         {
@@ -408,7 +422,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 28,
+            "BundleID": 29,
             "DependIDs": []
         },
         {
@@ -417,7 +431,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 29,
+            "BundleID": 30,
             "DependIDs": []
         },
         {
@@ -426,7 +440,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 30,
+            "BundleID": 31,
             "DependIDs": []
         },
         {
@@ -435,7 +449,7 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 31,
+            "BundleID": 32,
             "DependIDs": []
         },
         {
@@ -444,7 +458,214 @@
             "AssetTags": [
                 "fgui"
             ],
-            "BundleID": 32,
+            "BundleID": 33,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/bar_blue.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 34,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/bar_green.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 35,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/bar_red.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 36,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/bar_white.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 37,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 38,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar1.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 39,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar2.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 40,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar3.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 41,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar4.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 42,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/HealthBar_enmey.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 43,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconArts.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 44,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconAxe.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 45,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconBow.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 46,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconDagger.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 47,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconForbid.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 48,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconLance.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 49,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconSpecial.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 50,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconStaff.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 51,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconSword.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 52,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/iconTome.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 53,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/MeasureBg.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 54,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/MeasureProgress.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 55,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/UISprite/RechargeProgress.png",
+            "AssetTags": [
+                "fgui"
+            ],
+            "BundleID": 56,
             "DependIDs": []
         },
         {
@@ -453,7 +674,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 33,
+            "BundleID": 57,
             "DependIDs": []
         },
         {
@@ -462,7 +683,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 34,
+            "BundleID": 58,
             "DependIDs": []
         },
         {
@@ -471,7 +692,16 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 35,
+            "BundleID": 59,
+            "DependIDs": []
+        },
+        {
+            "Address": "",
+            "AssetPath": "Assets/GameRes/Config/slg_skill.json",
+            "AssetTags": [
+                "config"
+            ],
+            "BundleID": 60,
             "DependIDs": []
         },
         {
@@ -480,7 +710,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 36,
+            "BundleID": 61,
             "DependIDs": []
         },
         {
@@ -489,7 +719,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 37,
+            "BundleID": 62,
             "DependIDs": []
         },
         {
@@ -498,7 +728,7 @@
             "AssetTags": [
                 "config"
             ],
-            "BundleID": 38,
+            "BundleID": 63,
             "DependIDs": []
         },
         {
@@ -507,7 +737,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 39,
+            "BundleID": 64,
             "DependIDs": []
         },
         {
@@ -516,7 +746,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 40,
+            "BundleID": 65,
             "DependIDs": []
         },
         {
@@ -525,7 +755,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 41,
+            "BundleID": 66,
             "DependIDs": []
         },
         {
@@ -534,7 +764,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 42,
+            "BundleID": 67,
             "DependIDs": []
         },
         {
@@ -543,7 +773,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 43,
+            "BundleID": 68,
             "DependIDs": []
         },
         {
@@ -552,7 +782,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 44,
+            "BundleID": 69,
             "DependIDs": []
         },
         {
@@ -561,7 +791,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 45,
+            "BundleID": 70,
             "DependIDs": []
         },
         {
@@ -570,7 +800,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 46,
+            "BundleID": 71,
             "DependIDs": []
         },
         {
@@ -579,7 +809,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 47,
+            "BundleID": 72,
             "DependIDs": []
         },
         {
@@ -588,7 +818,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 48,
+            "BundleID": 73,
             "DependIDs": []
         },
         {
@@ -597,7 +827,7 @@
             "AssetTags": [
                 "Pawn"
             ],
-            "BundleID": 49,
+            "BundleID": 74,
             "DependIDs": []
         }
     ],
@@ -654,6 +884,16 @@
         },
         {
             "BundleName": "assets_gameres_mapdata_slgmaptest.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uipanel.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,
@@ -985,6 +1225,282 @@
             "ReferenceIDs": []
         },
         {
+            "BundleName": "assets_gameres_uisprite_bar_blue.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_bar_green.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_bar_red.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_bar_white.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar1.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar2.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar3.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar4.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_healthbar_enmey.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconarts.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconaxe.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconbow.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_icondagger.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconforbid.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconlance.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconspecial.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconstaff.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_iconsword.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_icontome.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_measurebg.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_measureprogress.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_uisprite_rechargeprogress.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "fgui"
+            ],
+            "ReferenceIDs": []
+        },
+        {
             "BundleName": "assets_gameres_config_slg_character.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
@@ -1010,6 +1526,18 @@
         },
         {
             "BundleName": "assets_gameres_config_slg_item.bundle",
+            "FileHash": "00000000000000000000000000000000",
+            "FileCRC": "00000000",
+            "FileSize": 0,
+            "IsRawFile": false,
+            "LoadMethod": 0,
+            "Tags": [
+                "config"
+            ],
+            "ReferenceIDs": []
+        },
+        {
+            "BundleName": "assets_gameres_config_slg_skill.bundle",
             "FileHash": "00000000000000000000000000000000",
             "FileCRC": "00000000",
             "FileSize": 0,

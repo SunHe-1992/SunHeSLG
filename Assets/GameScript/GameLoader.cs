@@ -7,7 +7,7 @@ using UniFramework.Singleton;
 using UniFramework.Animation;
 using UniFramework.Pooling;
 using UniFramework.Tween;
-using UniFramework.Window;
+//using UniFramework.Window;
 using YooAsset;
 using SunHeTBS;
 public class GameLoader : MonoBehaviour
@@ -52,8 +52,8 @@ public class GameLoader : MonoBehaviour
         BindFGUI.BindAll();//fairy code bind 
         LoadData();//load json configs
 
-        LoadFontRes();
         FUIManager.ReSetBundle();//FUIManager initialize
+        LoadFontRes();
 
     }
 

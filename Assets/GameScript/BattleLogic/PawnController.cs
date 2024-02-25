@@ -105,11 +105,11 @@ namespace SunHeTBS
             if (this.gaugeController == null)
             {
                 string resPath = $"UIPanel/HPGauge";
-                AssetOperationHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
+                AssetHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
                 handler.Completed += ModelLoadDone;
             }
         }
-        void ModelLoadDone(AssetOperationHandle handle)
+        void ModelLoadDone(AssetHandle handle)
         {
             if (handle.AssetObject != null)
             {

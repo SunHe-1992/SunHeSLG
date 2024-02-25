@@ -472,10 +472,6 @@ namespace SunHeTBS
             pointedPawn = null;
             ResetBattleState();
         }
-        public void OnFixedUpdate()
-        {
-
-        }
         #endregion
 
         public void OnEnterMovieTime()

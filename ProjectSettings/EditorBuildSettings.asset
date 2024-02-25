@@ -12,3 +12,4 @@ EditorBuildSettings:
     path: Assets/GameRes/Scene/SLGMapTest.unity
     guid: 11050ae0c27ad3244bb80028705c056a
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
