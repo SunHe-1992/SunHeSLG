@@ -11,6 +11,7 @@ namespace PackageDebug
         public GButton btn_test;
         public GButton btn_slg;
         public GButton btn_close;
+        public GButton btn_monopoly;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -26,6 +27,7 @@ namespace PackageDebug
             btn_test = (GButton)GetChild("btn_test");
             btn_slg = (GButton)GetChild("btn_slg");
             btn_close = (GButton)GetChild("btn_close");
+            btn_monopoly = (GButton)GetChild("btn_monopoly");
         }
     }
 }

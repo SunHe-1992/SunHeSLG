@@ -23,6 +23,7 @@ public class UIPage_Debug : FUIBase
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_slg.onClick.Set(BtnGotoBattle);
         ui.btn_close.onClick.Set(OnBtnClose);
+        ui.btn_monopoly.onClick.Set(BtnMonopoly);
     }
     protected override void OnShown()
     {
@@ -70,6 +71,10 @@ public class UIPage_Debug : FUIBase
     void OnBtnClose()
     {
         FUIManager.Inst.HideUI(this);
+    }
+    void BtnMonopoly()
+    {
+
     }
 
 }
