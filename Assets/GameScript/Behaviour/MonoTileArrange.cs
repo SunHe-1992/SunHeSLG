@@ -16,8 +16,8 @@ public class MonoTileArrange : MonoBehaviour
     float halfFullWidth;
     float boardRadius;
     public GameObject obj;
-    List<MonoTIleController> tileObjList;
-    List<MonoTIleController> tileObjList_corner;
+    List<MonoTileController> tileObjList;
+    List<MonoTileController> tileObjList_corner;
 
     float tile_interval = 0.03f;
     // Start is called before the first frame update
@@ -33,11 +33,11 @@ public class MonoTileArrange : MonoBehaviour
     }
     public void CopyTiles()
     {
-        tileObjList = new List<MonoTIleController>();
+        tileObjList = new List<MonoTileController>();
         for (int i = 0; i < 36; i++)
         {
             var newObj = GameObject.Instantiate(obj);
-            var mTile = newObj.AddComponent<MonoTIleController>();
+            var mTile = newObj.AddComponent<MonoTileController>();
             tileObjList.Add(mTile);
             newObj.transform.parent = this.transform;
             newObj.name = "tile" + i;
@@ -82,7 +82,7 @@ public class MonoTileArrange : MonoBehaviour
             Vector3 posOffset = zposList[i];
             for (int j = 0; j < 9; j++)
             {
-                MonoTIleController tileObj = tileObjList[idx];
+                MonoTileController tileObj = tileObjList[idx];
                 float xpos = xposList[j];
                 Vector3 pos = Vector3.zero;
                 switch (i)
@@ -107,12 +107,12 @@ public class MonoTileArrange : MonoBehaviour
         cornerPosList.Add(tileObjList[17].transform.localPosition + new Vector3(0, 0, cornerOffset));
         cornerPosList.Add(tileObjList[26].transform.localPosition + new Vector3(-cornerOffset, 0, 0));
 
-        tileObjList_corner = new List<MonoTIleController>();
+        tileObjList_corner = new List<MonoTileController>();
         for (int i = 0; i < 4; i++)
         {
             var newObj = GameObject.Instantiate(obj);
             newObj.SetActive(true);
-            var mTile = newObj.AddComponent<MonoTIleController>();
+            var mTile = newObj.AddComponent<MonoTileController>();
             tileObjList_corner.Add(mTile);
             newObj.transform.parent = this.transform;
             newObj.name = "cornerTile" + i;
