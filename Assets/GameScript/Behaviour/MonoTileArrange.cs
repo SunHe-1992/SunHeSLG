@@ -31,7 +31,7 @@ public class MonoTileArrange : MonoBehaviour
     {
 
     }
-    public void CopyTiles()
+    public void GenerateTiles()
     {
         tileObjList = new List<MonoTileController>();
         for (int i = 0; i < 36; i++)
@@ -143,13 +143,19 @@ public class MonoTileArrange : MonoBehaviour
             tileObjList[i + 27].Index = i + 31;
         }
 
-        foreach (var tileObj in tileObjList)
+    }
+
+    public List<MonoTileController> GetAllTiles()
+    {
+        List<MonoTileController> list = new List<MonoTileController>();
+        list.AddRange(tileObjList);
+        list.AddRange(tileObjList_corner);
+        foreach (var tileObj in list) //make all index reverse
         {
+            tileObj.Index = 39 - tileObj.Index;
             tileObj.SetCanvasText();
         }
-        foreach (var tileObj in tileObjList_corner)
-        {
-            tileObj.SetCanvasText();
-        }
+        list.Sort((a, b) => { return a.Index.CompareTo(b.Index); });
+        return list;
     }
 }

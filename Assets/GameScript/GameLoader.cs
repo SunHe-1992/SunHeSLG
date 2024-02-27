@@ -39,14 +39,17 @@ public class GameLoader : MonoBehaviour
         UniTween.Initalize();
 
         SunHeTBS.BattleDriver.UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
-        //init Uni singletons 
+        //init Uni singletons
+        /*fire emblem demo */
         BattleDriver.Init();
         BLogic.Init();
+        TBSMapService.Init();
+
+        MonopolyDriver.Init();
+        FUIManager.Init();
         ConfigManager.Init();
         InputManager.Init();
-        FUIManager.Init();
         UIAnimationService.Init();
-        TBSMapService.Init();
         UIService.Init();
 
         BindFGUI.BindAll();//fairy code bind 

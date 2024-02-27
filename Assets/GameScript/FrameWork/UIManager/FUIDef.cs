@@ -13,6 +13,7 @@ public class FUIDef
         UnitUI,
         CombatPredict,
         CombatPanel,
+        MonopolyMain,
     }
     /// <summary>
     /// package names
@@ -22,6 +23,7 @@ public class FUIDef
         PackageDebug,
         PackageShared,
         PackageBattle,
+        PackageMonopoly,
     }
     /// <summary>
     /// dic : key=window name, value=package name
@@ -35,5 +37,6 @@ public class FUIDef
         {FWindow.UnitUI, FPackage.PackageBattle},
         {FWindow.CombatPredict, FPackage.PackageBattle},
         {FWindow.CombatPanel, FPackage.PackageBattle},
+        {FWindow.MonopolyMain, FPackage.PackageMonopoly},
     };
 }

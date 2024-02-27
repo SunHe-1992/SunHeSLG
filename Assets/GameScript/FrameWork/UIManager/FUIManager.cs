@@ -512,7 +512,6 @@ public class FUIManager : ISingleton
         FUIBase win = cmd.window;
         win.packageName = package.ToString();
         win.compName = cmd.windowType.ToString();
-
         IncPackageReference(win.packageName);
         if (isPackageLoaded(win.packageName))
         {
@@ -1055,7 +1054,7 @@ public class FUIManager : ISingleton
         if (allLoadInfos == null)
             allLoadInfos = new Dictionary<string, UnityEngine.Object>();
         allLoadInfos[callBack.customParam2] = callBack.CacheBackObj;
-
+        Debugger.Log($"allLoadInfos insert asset {callBack.customParam2}");
         var packageNameShow = (string)callBack.customParam;
 
         loadingNum[packageNameShow] = loadingNum[packageNameShow] - 1;
@@ -1099,6 +1098,7 @@ public class FUIManager : ISingleton
         {
 
             AssetHandle assetOperationHandle;
+            Debugger.Log($"1102 load {name}");
             assetOperationHandle = YooAssets.LoadAssetSync<TObject>(name);
 
 

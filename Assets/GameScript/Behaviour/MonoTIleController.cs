@@ -9,9 +9,25 @@ public class MonoTileController : MonoBehaviour
 
     Transform cube;
     public int Index = 0;
+    TextMeshProUGUI text1;
+    TextMeshProUGUI text2;
+    TextMeshProUGUI text3;
+    private void Awake()
+    {
+        FindChildren();
+    }
+    void FindChildren()
+    {
+        if (cube == null)
+        {
+            text1 = this.transform.Find("Canvas/Text1").GetComponent<TextMeshProUGUI>();
+            text2 = this.transform.Find("Canvas/Text2").GetComponent<TextMeshProUGUI>();
+            text3 = this.transform.Find("Canvas/Text3").GetComponent<TextMeshProUGUI>();
+            cube = this.transform.Find("Cube");
+        }
+    }
     private void Start()
     {
-        cube = this.transform.Find("Cube");
 
     }
     public void SetCubeSize()
@@ -37,10 +53,7 @@ public class MonoTileController : MonoBehaviour
     }
     public void SetCanvasText()
     {
-        TextMeshProUGUI text1 = this.transform.Find("Canvas/Text1").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI text2 = this.transform.Find("Canvas/Text2").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI text3 = this.transform.Find("Canvas/Text3").GetComponent<TextMeshProUGUI>();
-
+        FindChildren();
         text1.text = "" + Index;
         text2.text = "";
         text3.text = "";

@@ -74,7 +74,8 @@ public class UIPage_Debug : FUIBase
     }
     void BtnMonopoly()
     {
-
+        MonopolyDriver.Inst.StartTest();
+        OnBtnClose();
     }
 
 }
