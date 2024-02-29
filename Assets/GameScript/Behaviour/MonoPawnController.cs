@@ -7,17 +7,17 @@ public class MonoPawnController : MonoBehaviour
 
     Animator animator;
     Transform ModelFather;
-
     public void PerformJump(Vector3 from, Vector3 to, float time)
     {
         moveDest = to;
         moveSpeed = 1 / time;
         moveTime = time;
         moveVect = to - from;
+        //Debug.Break();
         this.transform.position = from;
         ModelFather = transform.Find("ModelFather");
         animator = ModelFather.GetComponent<Animator>();
-        animator.Play("PawnJump");
+        animator.Play("PawnJump", -1, 0);
         isJumping = true;
     }
 
@@ -43,6 +43,7 @@ public class MonoPawnController : MonoBehaviour
         {
             moveTime = 0;
             isJumping = false;
+            //this.transform.position = moveDest;
         }
         else
         {

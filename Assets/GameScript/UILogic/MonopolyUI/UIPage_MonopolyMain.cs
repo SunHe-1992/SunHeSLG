@@ -52,10 +52,25 @@ public class UIPage_MonopolyMain : FUIBase
     }
     void BtnTest()
     {
-
     }
     void BtnJump()
     {
-        MonopolyMapController.inst.TestJump();
+        if (MonopolyMapController.inst.playingAnim == false)
+            MLogic.Inst.RollDice();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+#if UNITY_EDITOR
+        RefreshHudInfo();
+#endif
+    }
+    void RefreshHudInfo()
+    {
+        var logic = MLogic.Inst;
+        string hudMsg = $"curIndex={logic.currentTileIndex}\nlastIndex={logic.lastTileIndex} \nDiceValue={logic.diceValue}";
+
+        ui.txt_hud.text = hudMsg;
     }
 }

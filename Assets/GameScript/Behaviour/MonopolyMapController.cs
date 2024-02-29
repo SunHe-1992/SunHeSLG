@@ -4,17 +4,46 @@ using UnityEngine;
 
 public class MonopolyMapController : MonoBehaviour
 {
+    public static MonopolyMapController inst;
     public MonoPawnController pawnCtrl;
     public MonoTileArrange tileArrange;
-    public static MonopolyMapController inst;
+    public MonoDiceController DiceCtrl;
 
-    List<MonoTileController> tilesList;
+    //key=Index, value=tile controller
+    static int tileIndexMax = MLogic.tileIndexMax;
+    static int tileCount = MLogic.tileCount;
+    Dictionary<int, MonoTileController> tilesList;
+
+    //convert any int value to index range: 0-39
+    public int GetThisId(int id)
+    {
+        id = (id + 1) % tileCount - 1;
+        if (id < 0)
+        {
+            return tileCount + id;
+        }
+        else if (id < tileIndexMax)
+            return id;
+        else
+            return (id - tileIndexMax);
+    }
+
+    public MonoTileController GetTileById(int id)
+    {
+        id = GetThisId(id);
+        if (tilesList.ContainsKey(id))
+            return tilesList[id];
+        else return null;
+    }
     private void Awake()
     {
         inst = this;
-        pawnCtrl = GameObject.Find("MonoPawn").GetComponent<MonoPawnController>();
-        tileArrange = GameObject.Find("MonoTileGroup").GetComponent<MonoTileArrange>();
-
+        if (pawnCtrl == null)
+        {
+            pawnCtrl = GameObject.Find("MonoPawn").GetComponent<MonoPawnController>();
+            tileArrange = GameObject.Find("MonoTileGroup").GetComponent<MonoTileArrange>();
+            DiceCtrl = GameObject.Find("MonoDice").GetComponent<MonoDiceController>();
+        }
     }
     private void OnDestroy()
     {
@@ -26,8 +55,13 @@ public class MonopolyMapController : MonoBehaviour
         tileArrange.GenerateTiles();
         tileArrange.ArrangeTiles();
 
-        tilesList = tileArrange.GetAllTiles();
-
+        var tempList = tileArrange.GetAllTiles();
+        tilesList = new Dictionary<int, MonoTileController>();
+        foreach (var tile in tempList)
+        {
+            tilesList[tile.Index] = tile;
+        }
+        ResetPawnPosition();
     }
 
     // Update is called once per frame
@@ -35,19 +69,53 @@ public class MonopolyMapController : MonoBehaviour
     {
 
     }
-    int countJump = 0;
-    public void TestJump()
+
+    readonly float diceAnimDuration = 0.26f;
+    readonly float jumpAnimDuration = 0.26f;
+    public bool playingAnim = false;
+    int lastIndex = 0;
+    int currIndex = 0;
+    int step = 0;
+    public void PlayDiceAnim(int value)
     {
-        if (countJump + 1 >= tilesList.Count)
+        lastIndex = MLogic.Inst.lastTileIndex;
+        currIndex = MLogic.Inst.currentTileIndex;
+        step = CalculateStep(lastIndex, currIndex);
+        Debugger.LogError($"PlayDiceAnim from {lastIndex}=>{currIndex}");
+        playingAnim = true;
+        DiceCtrl.PlayDiceAnim(value);
+        StartCoroutine(PerformJump());
+    }
+    IEnumerator PerformJump()
+    {
+        //wait for dice
+        yield return new WaitForSeconds(diceAnimDuration);
+        //jump step by step
+        for (int i = 0; i < step; i++)
         {
-            countJump = 0;
+            int fromId = GetThisId(lastIndex + i);
+            int toId = GetThisId(lastIndex + i + 1);
+            Vector3 from = GetTileById(GetThisId(lastIndex + i)).transform.position;
+            Vector3 to = GetTileById(GetThisId(lastIndex + i + 1)).transform.position;
+            Debugger.LogError($"start jump from {fromId} => {toId}");
+            pawnCtrl.PerformJump(from, to, jumpAnimDuration);
+            yield return new WaitForSeconds(jumpAnimDuration);
         }
-        if (countJump + 1 < tilesList.Count)
+        yield return null;
+        playingAnim = false;
+    }
+    public void ResetPawnPosition()
+    {
+        Vector3 to = tilesList[MLogic.Inst.currentTileIndex].transform.position;
+        pawnCtrl.transform.position = to;
+    }
+    int CalculateStep(int fromIdx, int toIdx)
+    {
+        if (toIdx >= fromIdx)
+            return toIdx - fromIdx;
+        else
         {
-            Vector3 from = tilesList[countJump].transform.position;
-            Vector3 to = tilesList[countJump + 1].transform.position;
-            pawnCtrl.PerformJump(from, to, 0.25f);
-            countJump++;
+            return (tileCount - fromIdx) + (toIdx);
         }
     }
 }

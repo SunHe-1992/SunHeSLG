@@ -206,6 +206,7 @@ namespace SunHeTBS
         private void OnEnterInBattleState()
         {
             FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
+            MLogic.Inst.MapSceneLoaded();
         }
 
 

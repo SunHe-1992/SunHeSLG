@@ -85,6 +85,14 @@ MonoBehaviour:
         FilterRuleName: CollectAll
         AssetTags: 
         UserData: 
+      - CollectPath: Assets/GameRes/Zololgo/FlatPoly Board Game Assets/Prefabs
+        CollectorGUID: 3cdd9f2c4d18ac344ade03beb178cf9e
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
     - GroupName: shader
       GroupDesc: 
       AssetTags: 
