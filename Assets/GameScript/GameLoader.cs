@@ -103,12 +103,23 @@ public class GameLoader : MonoBehaviour
         DynamicFont fontHeiti = new DynamicFont(fontNameStr, loadFontObj);
         FontManager.RegisterFont(fontHeiti, fontNameStr);
 
-        needDoneAllNum = 2;
+        //preload ui packages
+        List<FUIDef.FPackage> packageList = new List<FUIDef.FPackage>()
+        {
+            FUIDef.FPackage.PackageShared,
+            FUIDef.FPackage.PackageDebug,
+            FUIDef.FPackage.CommonPackage,
+            FUIDef.FPackage.CommonButton,
 
-        FUIManager.Inst.IncPackageReference("PackageShared");
-        FUIManager.Inst.PreAddPackage(FUIDef.FPackage.PackageShared.ToString(), loadCommonDone);
-        FUIManager.Inst.IncPackageReference("PackageDebug");
-        FUIManager.Inst.PreAddPackage(FUIDef.FPackage.PackageDebug.ToString(), loadCommonDone);
+        };
+        needDoneAllNum = packageList.Count;
+
+        foreach (var package in packageList)
+        {
+            FUIManager.Inst.IncPackageReference(package.ToString());
+            FUIManager.Inst.PreAddPackage(package.ToString(), loadCommonDone);
+        }
+
     }
 
     void loadCommonDone()

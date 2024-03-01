@@ -7,6 +7,8 @@ public static class BindFGUI
     /// </summary>
     public static void BindAll()
     {
+        CommonButton.CommonButtonBinder.BindAll();
+        CommonPackage.CommonPackageBinder.BindAll();
         PackageDebug.PackageDebugBinder.BindAll();
         PackageBattle.PackageBattleBinder.BindAll();
         PackageShared.PackageSharedBinder.BindAll();

@@ -13,6 +13,7 @@ namespace PackageDebug
         public GButton btn_close;
         public GButton btn_monopoly;
         public GButton btn_addDice50;
+        public GButton btn_addGold100;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -30,6 +31,7 @@ namespace PackageDebug
             btn_close = (GButton)GetChild("btn_close");
             btn_monopoly = (GButton)GetChild("btn_monopoly");
             btn_addDice50 = (GButton)GetChild("btn_addDice50");
+            btn_addGold100 = (GButton)GetChild("btn_addGold100");
         }
     }
 }

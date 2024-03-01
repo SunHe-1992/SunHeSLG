@@ -6,7 +6,7 @@ using YooAsset;
 using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
-
+using FairyGUI;
 public class UIService : ISingleton
 {
     public static UIService Inst { get; private set; }
@@ -114,7 +114,7 @@ public class UIService : ISingleton
 
     }
     Dictionary<string, Sprite> spriteCacheDic;
-    public void LoadUnitySprite(string name, Image img)
+    public void LoadUnitySprite(string name, UnityEngine.UI.Image img)
     {
         Sprite sp = TryFindSprite(name);
         if (sp != null)
@@ -149,5 +149,25 @@ public class UIService : ISingleton
             spriteCacheDic = new Dictionary<string, Sprite>();
         if (sp != null)
             spriteCacheDic[name] = sp;
+    }
+
+    /// <summary>
+    /// long number format to K,M
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns></returns>
+    public string FormatNumber(long number)
+    {
+        if (Mathf.Abs(number) >= 1000000)
+            return (number / 1000000d).ToString("F2") + "M";
+        else if (Mathf.Abs(number) >= 1000)
+            return (number / 1000d).ToString("F2") + "K";
+        else
+            return number.ToString();
+    }
+    public void RefereshMoneyPointTxt(GTextField txtField)
+    {
+        string msg = FormatNumber(MonoPlayer.GetGoldAmount());
+        txtField.text = msg;
     }
 }

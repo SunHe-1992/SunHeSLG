@@ -7,6 +7,7 @@ namespace PackageMonopoly
 {
     public partial class UI_MonopolyMain : GComponent
     {
+        public GComponent topBar;
         public GButton btn_Test;
         public GButton btn_RollDice;
         public GTextField txt_hud;
@@ -23,6 +24,7 @@ namespace PackageMonopoly
         {
             base.ConstructFromXML(xml);
 
+            topBar = (GComponent)GetChild("topBar");
             btn_Test = (GButton)GetChild("btn_Test");
             btn_RollDice = (GButton)GetChild("btn_RollDice");
             txt_hud = (GTextField)GetChild("txt_hud");

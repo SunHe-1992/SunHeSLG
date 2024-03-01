@@ -7,6 +7,7 @@ using PackageMonopoly;
 using UnityEngine;
 using UniFramework.Event;
 using SunHeTBS;
+using CommonPackage;
 public class UIPage_MonopolyMain : FUIBase
 {
 
@@ -26,6 +27,7 @@ public class UIPage_MonopolyMain : FUIBase
     {
         base.OnShown();
         UniEvent.AddListener(GameEventDefine.DICE_COUNT_CHANGED, OnDiceCountChanged);
+        UniEvent.AddListener(GameEventDefine.POINTS_CHANGED, RefreshTopBar);
     }
 
 
@@ -39,6 +41,7 @@ public class UIPage_MonopolyMain : FUIBase
     {
         base.OnHide();
         UniEvent.RemoveListener(GameEventDefine.DICE_COUNT_CHANGED, OnDiceCountChanged);
+        UniEvent.RemoveListener(GameEventDefine.POINTS_CHANGED, RefreshTopBar);
 
     }
 
@@ -53,6 +56,7 @@ public class UIPage_MonopolyMain : FUIBase
         CheckDiceFactor();
         RefreshDiceComp();
 
+        RefreshTopBar(null);
     }
     void OnBtnClose()
     {
@@ -184,6 +188,15 @@ public class UIPage_MonopolyMain : FUIBase
         }
 
         RefreshDiceComp();
+    }
+    #endregion
+
+    #region top bar
+    void RefreshTopBar(IEventMessage msg)
+    {
+        //refresh gold amount
+        var topBarCom = ui.topBar as UI_TopbarCom;
+        UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num);
     }
     #endregion
 }

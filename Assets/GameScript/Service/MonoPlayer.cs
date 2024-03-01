@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniFramework.Event;
+using SunHeTBS;
 public static class MonoPlayer
 {
     public static UserDetail UserDetail; //玩家的所有信息
@@ -10,6 +11,11 @@ public static class MonoPlayer
     {
         //init user detail info
         GenerateTestUserDetail();
+        pointDic = new Dictionary<PointEnum, long>();
+        foreach (var pt in UserDetail.points)
+        {
+            pointDic[(PointEnum)pt.PointType] = pt.PointValue;
+        }
     }
 
     //debug function
@@ -23,6 +29,36 @@ public static class MonoPlayer
         UserDetail.points.Add(new UserPoint(PointEnum.Gem, 8888));
 
     }
+    #region Point management
+
+    static Dictionary<PointEnum, long> pointDic;
+    public static long GetPointAmount(PointEnum ptType)
+    {
+        if (pointDic.ContainsKey(ptType))
+            return pointDic[ptType];
+        else
+            return 0;
+    }
+    public static long GetGoldAmount()
+    {
+        return GetPointAmount(PointEnum.Gold);
+    }
+
+    public static void UpdatePointAmount(PointEnum ptType, long changeValue)
+    {
+        if (pointDic.ContainsKey(ptType))
+        {
+            pointDic[ptType] += changeValue;
+        }
+        if (changeValue != 0)
+            UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
+        return;
+    }
+    public static void UpdateGoldAmount(long changeValue)
+    {
+        UpdatePointAmount(PointEnum.Gold, changeValue);
+    }
+    #endregion
 }
 public class UserDetail
 {

@@ -24,6 +24,8 @@ public class FUIDef
         PackageShared,
         PackageBattle,
         PackageMonopoly,
+        CommonPackage,
+        CommonButton,
     }
     /// <summary>
     /// dic : key=window name, value=package name
