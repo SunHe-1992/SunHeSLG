@@ -6,7 +6,7 @@ using PackageDebug;
 using PackageMonopoly;
 using UnityEngine;
 using UniFramework.Event;
-
+using SunHeTBS;
 public class UIPage_MonopolyMain : FUIBase
 {
 
@@ -19,12 +19,13 @@ public class UIPage_MonopolyMain : FUIBase
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
 
         ui.btn_Test.onClick.Set(BtnTest);
-        ui.btn_Jump.onClick.Set(BtnJump);
+        ui.btn_RollDice.onClick.Set(BtnRollDice);
+        ui.compFactor.onClick.Set(OnBtnDiceFactor);
     }
     protected override void OnShown()
     {
         base.OnShown();
-
+        UniEvent.AddListener(GameEventDefine.DICE_COUNT_CHANGED, OnDiceCountChanged);
     }
 
 
@@ -37,13 +38,20 @@ public class UIPage_MonopolyMain : FUIBase
     protected override void OnHide()
     {
         base.OnHide();
+        UniEvent.RemoveListener(GameEventDefine.DICE_COUNT_CHANGED, OnDiceCountChanged);
 
     }
 
 
     void RefreshContent()
     {
-
+        if (MonoPlayer.diceFactor == 0)//first time enter this ui, make the dice factor at least 1
+        {
+            currentFactorIndex = 0;
+            OnBtnDiceFactor();
+        }
+        CheckDiceFactor();
+        RefreshDiceComp();
 
     }
     void OnBtnClose()
@@ -53,11 +61,7 @@ public class UIPage_MonopolyMain : FUIBase
     void BtnTest()
     {
     }
-    void BtnJump()
-    {
-        if (MonopolyMapController.inst.playingAnim == false)
-            MLogic.Inst.RollDice();
-    }
+
 
     protected override void OnUpdate()
     {
@@ -65,6 +69,7 @@ public class UIPage_MonopolyMain : FUIBase
 #if UNITY_EDITOR
         RefreshHudInfo();
 #endif
+        RefreshRollDiceBtn();
     }
     void RefreshHudInfo()
     {
@@ -73,4 +78,112 @@ public class UIPage_MonopolyMain : FUIBase
 
         ui.txt_hud.text = hudMsg;
     }
+    #region roll dice button comps
+    void BtnRollDice()
+    {
+        if (MonoPlayer.UserDetail.diceCount <= 0)
+        {
+            //no dice to roll
+            Debugger.Log("no dice to roll");
+            return;
+        }
+        if (MonopolyMapController.inst.playingAnim == false)
+            MLogic.Inst.RollDice(MonoPlayer.diceFactor);
+    }
+
+    /// <summary>
+    /// show info : roll dice btn,dice factor,dice count
+    /// </summary>
+    void RefreshDiceComp()
+    {
+        ui.diceBar.max = 40;
+        int diceCount = MonoPlayer.UserDetail.diceCount;
+        ui.diceBar.value = diceCount;
+
+        ui.compFactor.title = "×" + MonoPlayer.diceFactor;
+        ui.compFactor.ctrl_color.selectedIndex = diceFactorColor;
+
+    }
+
+    List<int> diceFactorList = new List<int>() { 1, 2, 5, 10, 20, 50, 100 };
+    int diceFactorColor = 0;
+
+    void RefreshRollDiceBtn()
+    {
+        ui.btn_RollDice.enabled = MonopolyMapController.inst.playingAnim == false;
+    }
+
+    void OnDiceCountChanged(IEventMessage msg)
+    {
+        RefreshDiceFactorAfterJump();
+        RefreshDiceComp();
+    }
+
+
+    int maxFactorIndex = 0;
+    int currentFactorIndex = 0;
+    void CheckDiceFactor()
+    {
+        int diceCount = MonoPlayer.UserDetail.diceCount;
+        for (int i = diceFactorList.Count - 1; i >= 0; i--)
+        {
+            if (diceCount >= diceFactorList[i])
+            {
+                maxFactorIndex = i;
+                break;
+            }
+        }
+    }
+    /// <summary>
+    /// btn: toggle all available dice factors
+    /// </summary>
+    void OnBtnDiceFactor()
+    {
+        CheckDiceFactor();
+        int diceCount = MonoPlayer.UserDetail.diceCount;
+        bool findBiggerFactor = false;
+        for (int i = currentFactorIndex + 1; i <= maxFactorIndex; i++)
+        {
+            if (diceCount >= diceFactorList[i])
+            {
+                currentFactorIndex = i;
+                MonoPlayer.diceFactor = diceFactorList[i];
+                findBiggerFactor = true;
+                break;
+            }
+        }
+        if (findBiggerFactor == false)
+        {
+            currentFactorIndex = 0;
+            MonoPlayer.diceFactor = diceFactorList[0];
+        }
+
+        RefreshDiceComp();
+    }
+    /// <summary>
+    /// try to find a lower dice factor than current
+    /// </summary>
+    void RefreshDiceFactorAfterJump()
+    {
+        int diceCount = MonoPlayer.UserDetail.diceCount;
+        bool findFactor = false;
+        for (int i = currentFactorIndex; i >= 0; i--)
+        {
+            if (diceCount >= diceFactorList[i])
+            {
+                currentFactorIndex = i;
+                MonoPlayer.diceFactor = diceFactorList[i];
+                findFactor = true;
+                break;
+            }
+        }
+        if (findFactor == false)
+        {
+            currentFactorIndex = 0;
+            MonoPlayer.diceFactor = diceFactorList[0];
+        }
+
+        RefreshDiceComp();
+    }
+    #endregion
 }

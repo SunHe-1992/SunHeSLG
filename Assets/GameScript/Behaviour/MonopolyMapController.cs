@@ -97,7 +97,7 @@ public class MonopolyMapController : MonoBehaviour
             int toId = GetThisId(lastIndex + i + 1);
             Vector3 from = GetTileById(GetThisId(lastIndex + i)).transform.position;
             Vector3 to = GetTileById(GetThisId(lastIndex + i + 1)).transform.position;
-            Debugger.LogError($"start jump from {fromId} => {toId}");
+            //Debugger.LogError($"start jump from {fromId} => {toId}");
             pawnCtrl.PerformJump(from, to, jumpAnimDuration);
             yield return new WaitForSeconds(jumpAnimDuration);
         }

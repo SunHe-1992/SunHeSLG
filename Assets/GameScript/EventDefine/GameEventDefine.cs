@@ -23,6 +23,10 @@ namespace SunHeTBS
         public static int ShowWeaponSelectUI = GenID(0, 9);
 
         #endregion
+
+        #region Monopoly game events
+        public static int DICE_COUNT_CHANGED = GenID(1, 1);
+        #endregion
     }
 
 }

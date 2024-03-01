@@ -4,7 +4,7 @@ using UnityEngine;
 using UniFramework.Singleton;
 using UniFramework.Event;
 using System.Linq;
-
+using SunHeTBS;
 public class MLogic : ISingleton
 {
     public static readonly int tileCount = 40;
@@ -39,13 +39,17 @@ public class MLogic : ISingleton
 
     public int diceValue = 0;
 
-    public void RollDice()
+    public void RollDice(int diceFactor)
     {
+        //random dice value
         diceValue = Random.Range(1, 7);
+        MonoPlayer.UserDetail.diceCount -= diceFactor;
         //Debugger.Log($"roll dice value={diceValue}");
         lastTileIndex = currentTileIndex;
         PawnMoveForward(diceValue);
         mapCtrl.PlayDiceAnim(diceValue);
+
+        UniEvent.SendMessage(GameEventDefine.DICE_COUNT_CHANGED);
     }
 
     public static void Init()

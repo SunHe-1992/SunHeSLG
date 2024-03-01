@@ -24,6 +24,7 @@ public class UIPage_Debug : FUIBase
         ui.btn_slg.onClick.Set(BtnGotoBattle);
         ui.btn_close.onClick.Set(OnBtnClose);
         ui.btn_monopoly.onClick.Set(BtnMonopoly);
+        ui.btn_addDice50.onClick.Set(BtnAddDice);
     }
     protected override void OnShown()
     {
@@ -77,5 +78,10 @@ public class UIPage_Debug : FUIBase
         MonopolyDriver.Inst.StartTest();
         OnBtnClose();
     }
-
+    void BtnAddDice()
+    {
+        MonoPlayer.UserDetail.diceCount += 50;
+        UniEvent.SendMessage(GameEventDefine.DICE_COUNT_CHANGED);
+        OnBtnClose();
+    }
 }
