@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using YooAsset;
 using cfg.SLG;
+using cfg;
 namespace SunHeTBS
 {
 
@@ -55,11 +56,11 @@ namespace SunHeTBS
         /// <summary>
         /// character's config data
         /// </summary>
-        public cfg.SLG.CharacterData charCfg;
+        public cfg.CharacterData charCfg;
         /// <summary>
         /// class's config data
         /// </summary>
-        public cfg.SLG.ClassData classCfg;
+        public cfg.ClassData classCfg;
         #endregion
 
         public void Init()

@@ -8,6 +8,7 @@ using UnityEngine;
 using UniFramework.Event;
 using SunHeTBS;
 using CommonPackage;
+using cfg;
 using cfg.MONO;
 public class UIPage_Construction : FUIBase
 {

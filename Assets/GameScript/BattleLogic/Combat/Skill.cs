@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using cfg.SLG;
+using cfg;
 namespace SunHeTBS
 {
     public abstract class SkillBase
