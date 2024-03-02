@@ -124,6 +124,10 @@ public class MonoTileArrange : MonoBehaviour
         tileObjList_corner[1].Index = 10;
         tileObjList_corner[2].Index = 20;
         tileObjList_corner[3].Index = 30;
+        foreach (var tileObj in tileObjList_corner)
+        {
+            tileObj.isCornerTile = true;
+        }
 
         //tileObjList total count 36
         for (int i = 0; i < 9; i++)//index: 1-10

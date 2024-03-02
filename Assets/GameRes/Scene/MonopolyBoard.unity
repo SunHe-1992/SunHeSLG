@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee7801d297a34e4b89c48fad3c7ef40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monoCam: {fileID: 963194229}
   pawnCtrl: {fileID: 1691063495176046395}
   tileArrange: {fileID: 374945749}
   DiceCtrl: {fileID: 1455512319}
@@ -441,8 +442,9 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MonopolyCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,13 +517,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43745425, y: 0.35134864, z: -0.15013997, w: 0.81403065}
-  m_LocalPosition: {x: -6.3, y: 10.23, z: -5.46}
+  m_LocalRotation: {x: 0.51108867, y: 0.33590427, z: -0.18208858, w: 0.76993537}
+  m_LocalPosition: {x: -6.3, y: 10, z: -5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 54.856, y: 49.953, z: 6.279}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506a39ad77065464d84b0d8705dd5fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 5
+  smoothSpeed: 0.1
 --- !u!1001 &1455512317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -658,13 +675,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7470170546242408558, guid: c3f52aa267dd1674c9362e5620073c1f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1528343350}
   m_SourcePrefab: {fileID: 100100000, guid: c3f52aa267dd1674c9362e5620073c1f, type: 3}
 --- !u!1 &1528343349 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7470170546242408558, guid: c3f52aa267dd1674c9362e5620073c1f, type: 3}
   m_PrefabInstance: {fileID: 1528343348}
   m_PrefabAsset: {fileID: 0}
+--- !u!111 &1528343350
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528343349}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e0562b1134197e4428812de45ff0b93c, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e0562b1134197e4428812de45ff0b93c, type: 2}
+  - {fileID: 7400000, guid: 4fe9cc079b23dbb47b21f239e64473e4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1529859160
 GameObject:
   m_ObjectHideFlags: 0

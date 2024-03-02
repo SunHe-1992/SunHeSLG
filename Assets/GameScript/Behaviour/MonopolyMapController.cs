@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonopolyMapController : MonoBehaviour
 {
+    public MonopolyCamera monoCam;
     public static MonopolyMapController inst;
     public MonoPawnController pawnCtrl;
     public MonoTileArrange tileArrange;
@@ -38,12 +39,7 @@ public class MonopolyMapController : MonoBehaviour
     private void Awake()
     {
         inst = this;
-        if (pawnCtrl == null)
-        {
-            pawnCtrl = GameObject.Find("MonoPawn").GetComponent<MonoPawnController>();
-            tileArrange = GameObject.Find("MonoTileGroup").GetComponent<MonoTileArrange>();
-            DiceCtrl = GameObject.Find("MonoDice").GetComponent<MonoDiceController>();
-        }
+
     }
     private void OnDestroy()
     {
@@ -52,6 +48,11 @@ public class MonopolyMapController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pawnCtrl = GameObject.Find("MonoPawn").GetComponent<MonoPawnController>();
+        tileArrange = GameObject.Find("MonoTileGroup").GetComponent<MonoTileArrange>();
+        DiceCtrl = GameObject.Find("MonoDice").GetComponent<MonoDiceController>();
+        monoCam = GameObject.Find("MonopolyCamera").GetComponent<MonopolyCamera>();
+
         tileArrange.GenerateTiles();
         tileArrange.ArrangeTiles();
 
@@ -67,11 +68,15 @@ public class MonopolyMapController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (pawnCtrl != null && monoCam != null && monoCam.target == null)
+        {
+            monoCam.target = pawnCtrl.transform;
+        }
     }
 
     readonly float diceAnimDuration = 0.26f;
     readonly float jumpAnimDuration = 0.26f;
+    [HideInInspector]
     public bool playingAnim = false;
     int lastIndex = 0;
     int currIndex = 0;
@@ -95,11 +100,14 @@ public class MonopolyMapController : MonoBehaviour
         {
             int fromId = GetThisId(lastIndex + i);
             int toId = GetThisId(lastIndex + i + 1);
-            Vector3 from = GetTileById(GetThisId(lastIndex + i)).transform.position;
-            Vector3 to = GetTileById(GetThisId(lastIndex + i + 1)).transform.position;
+            var tile1 = GetTileById(GetThisId(lastIndex + i));
+            var tile2 = GetTileById(GetThisId(lastIndex + i + 1));
+            Vector3 from = tile1.transform.position;
+            Vector3 to = tile2.transform.position;
             //Debugger.LogError($"start jump from {fromId} => {toId}");
             pawnCtrl.PerformJump(from, to, jumpAnimDuration);
             yield return new WaitForSeconds(jumpAnimDuration);
+            tile2.PlayShakeAnim();
         }
         yield return null;
         playingAnim = false;

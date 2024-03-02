@@ -6,7 +6,7 @@ public class MonoTileController : MonoBehaviour
 {
     public float cubeHeight = 1;
     public float cubeWidth = 1;
-
+    public bool isCornerTile = false;
     Transform cube;
     public int Index = 0;
     TextMeshProUGUI text1;
@@ -20,9 +20,9 @@ public class MonoTileController : MonoBehaviour
     {
         if (cube == null)
         {
-            text1 = this.transform.Find("Canvas/Text1").GetComponent<TextMeshProUGUI>();
-            text2 = this.transform.Find("Canvas/Text2").GetComponent<TextMeshProUGUI>();
-            text3 = this.transform.Find("Canvas/Text3").GetComponent<TextMeshProUGUI>();
+            text1 = this.transform.Find("Cube/Canvas/Text1").GetComponent<TextMeshProUGUI>();
+            text2 = this.transform.Find("Cube/Canvas/Text2").GetComponent<TextMeshProUGUI>();
+            text3 = this.transform.Find("Cube/Canvas/Text3").GetComponent<TextMeshProUGUI>();
             cube = this.transform.Find("Cube");
         }
     }
@@ -57,5 +57,13 @@ public class MonoTileController : MonoBehaviour
         text1.text = "" + Index;
         text2.text = "";
         text3.text = "";
+    }
+    public void PlayShakeAnim()
+    {
+        Animation anim = this.transform.GetComponent<Animation>();
+        string animName = isCornerTile ? "TileShakeAnim_Corner" : "TileShakeAnim";
+        AnimationClip clip = anim.GetClip(animName);
+        if (clip != null)
+            anim.Play(animName);
     }
 }
