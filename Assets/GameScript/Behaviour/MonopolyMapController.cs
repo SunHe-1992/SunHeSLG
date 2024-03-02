@@ -81,7 +81,7 @@ public class MonopolyMapController : MonoBehaviour
         lastIndex = MLogic.Inst.lastTileIndex;
         currIndex = MLogic.Inst.currentTileIndex;
         step = CalculateStep(lastIndex, currIndex);
-        Debugger.LogError($"PlayDiceAnim from {lastIndex}=>{currIndex}");
+        Debugger.Log($"PlayDiceAnim from {lastIndex}=>{currIndex}");
         playingAnim = true;
         DiceCtrl.PlayDiceAnim(value);
         StartCoroutine(PerformJump());

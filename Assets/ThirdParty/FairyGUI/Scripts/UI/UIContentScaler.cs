@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace FairyGUI
 {
@@ -42,12 +42,12 @@ namespace FairyGUI
         /// <summary>
         /// 
         /// </summary>
-        public int designResolutionX = 1280;
+        public int designResolutionX = 720;
 
         /// <summary>
         /// 
         /// </summary>
-        public int designResolutionY = 720;
+        public int designResolutionY = 1280;
 
         /// <summary>
         /// 

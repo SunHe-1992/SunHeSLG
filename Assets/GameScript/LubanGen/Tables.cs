@@ -20,6 +20,8 @@ public sealed partial class Tables
     public SLG.Class Class {get; }
     public SLG.TileEffect TileEffect {get; }
     public SLG.Skill Skill {get; }
+    public MONO.TbChapter TbChapter {get; }
+    public MONO.TbBuilding TbBuilding {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -38,6 +40,10 @@ public sealed partial class Tables
         tables.Add("SLG.TileEffect", TileEffect);
         Skill = new SLG.Skill(loader("slg_skill")); 
         tables.Add("SLG.Skill", Skill);
+        TbChapter = new MONO.TbChapter(loader("mono_tbchapter")); 
+        tables.Add("MONO.TbChapter", TbChapter);
+        TbBuilding = new MONO.TbBuilding(loader("mono_tbbuilding")); 
+        tables.Add("MONO.TbBuilding", TbBuilding);
         PostInit();
 
         TbConst.Resolve(tables); 
@@ -47,6 +53,8 @@ public sealed partial class Tables
         Class.Resolve(tables); 
         TileEffect.Resolve(tables); 
         Skill.Resolve(tables); 
+        TbChapter.Resolve(tables); 
+        TbBuilding.Resolve(tables); 
         PostResolve();
     }
 
@@ -59,6 +67,8 @@ public sealed partial class Tables
         Class.TranslateText(translator); 
         TileEffect.TranslateText(translator); 
         Skill.TranslateText(translator); 
+        TbChapter.TranslateText(translator); 
+        TbBuilding.TranslateText(translator); 
     }
     
     partial void PostInit();

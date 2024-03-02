@@ -1,0 +1,242 @@
+[
+  {
+    "ID": 1,
+    "Name": "Coffee shop",
+    "Level": 0,
+    "price": 500,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land1"
+  },
+  {
+    "ID": 1,
+    "Name": "",
+    "Level": 1,
+    "price": 700,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land2"
+  },
+  {
+    "ID": 1,
+    "Name": "",
+    "Level": 2,
+    "price": 900,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land3"
+  },
+  {
+    "ID": 1,
+    "Name": "",
+    "Level": 3,
+    "price": 1100,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land4"
+  },
+  {
+    "ID": 1,
+    "Name": "",
+    "Level": 4,
+    "price": 1300,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 1,
+    "Name": "",
+    "Level": 5,
+    "price": 1500,
+    "isMax": true,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 2,
+    "Name": "Supermarket",
+    "Level": 0,
+    "price": 600,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land1"
+  },
+  {
+    "ID": 2,
+    "Name": "",
+    "Level": 1,
+    "price": 800,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land2"
+  },
+  {
+    "ID": 2,
+    "Name": "",
+    "Level": 2,
+    "price": 1000,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land3"
+  },
+  {
+    "ID": 2,
+    "Name": "",
+    "Level": 3,
+    "price": 1200,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land4"
+  },
+  {
+    "ID": 2,
+    "Name": "",
+    "Level": 4,
+    "price": 1400,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 2,
+    "Name": "",
+    "Level": 5,
+    "price": 1600,
+    "isMax": true,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 3,
+    "Name": "Baber Shop",
+    "Level": 0,
+    "price": 700,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land1"
+  },
+  {
+    "ID": 3,
+    "Name": "",
+    "Level": 1,
+    "price": 900,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land2"
+  },
+  {
+    "ID": 3,
+    "Name": "",
+    "Level": 2,
+    "price": 1100,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land3"
+  },
+  {
+    "ID": 3,
+    "Name": "",
+    "Level": 3,
+    "price": 1300,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land4"
+  },
+  {
+    "ID": 3,
+    "Name": "",
+    "Level": 4,
+    "price": 1500,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 3,
+    "Name": "",
+    "Level": 5,
+    "price": 1700,
+    "isMax": true,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 4,
+    "Name": "Pharmacy",
+    "Level": 0,
+    "price": 800,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land1"
+  },
+  {
+    "ID": 4,
+    "Name": "",
+    "Level": 1,
+    "price": 1000,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land2"
+  },
+  {
+    "ID": 4,
+    "Name": "",
+    "Level": 2,
+    "price": 1200,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land3"
+  },
+  {
+    "ID": 4,
+    "Name": "",
+    "Level": 3,
+    "price": 1400,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land4"
+  },
+  {
+    "ID": 4,
+    "Name": "",
+    "Level": 4,
+    "price": 1600,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 4,
+    "Name": "",
+    "Level": 5,
+    "price": 1800,
+    "isMax": true,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 5,
+    "Name": "Car repair shop",
+    "Level": 0,
+    "price": 950,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land1"
+  },
+  {
+    "ID": 5,
+    "Name": "",
+    "Level": 1,
+    "price": 1150,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land2"
+  },
+  {
+    "ID": 5,
+    "Name": "",
+    "Level": 2,
+    "price": 1350,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land3"
+  },
+  {
+    "ID": 5,
+    "Name": "",
+    "Level": 3,
+    "price": 1550,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land4"
+  },
+  {
+    "ID": 5,
+    "Name": "",
+    "Level": 4,
+    "price": 1750,
+    "isMax": false,
+    "Image": "ui://PackageMonopoly/land5"
+  },
+  {
+    "ID": 5,
+    "Name": "",
+    "Level": 5,
+    "price": 1950,
+    "isMax": true,
+    "Image": "ui://PackageMonopoly/land5"
+  }
+]

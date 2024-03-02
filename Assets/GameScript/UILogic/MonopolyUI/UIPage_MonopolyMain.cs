@@ -19,7 +19,7 @@ public class UIPage_MonopolyMain : FUIBase
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
 
-        ui.btn_Test.onClick.Set(BtnTest);
+        ui.btn_Construction.onClick.Set(BtnConstruction);
         ui.btn_RollDice.onClick.Set(BtnRollDice);
         ui.compFactor.onClick.Set(OnBtnDiceFactor);
     }
@@ -62,8 +62,10 @@ public class UIPage_MonopolyMain : FUIBase
     {
         FUIManager.Inst.HideUI(this);
     }
-    void BtnTest()
+    void BtnConstruction()
     {
+        FUIManager.Inst.ShowUI<UIPage_Construction>(FUIDef.FWindow.Construction);
+        FUIManager.Inst.HideUI(this);
     }
 
 
@@ -194,9 +196,7 @@ public class UIPage_MonopolyMain : FUIBase
     #region top bar
     void RefreshTopBar(IEventMessage msg)
     {
-        //refresh gold amount
-        var topBarCom = ui.topBar as UI_TopbarCom;
-        UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num);
+        UIService.Inst.RefreshTopBar(this.ui.topBar);
     }
     #endregion
 }

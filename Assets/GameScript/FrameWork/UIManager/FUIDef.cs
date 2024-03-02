@@ -14,6 +14,7 @@ public class FUIDef
         CombatPredict,
         CombatPanel,
         MonopolyMain,
+        Construction,
     }
     /// <summary>
     /// package names
@@ -40,5 +41,6 @@ public class FUIDef
         {FWindow.CombatPredict, FPackage.PackageBattle},
         {FWindow.CombatPanel, FPackage.PackageBattle},
         {FWindow.MonopolyMain, FPackage.PackageMonopoly},
+        {FWindow.Construction, FPackage.PackageMonopoly},
     };
 }

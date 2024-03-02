@@ -47,6 +47,7 @@ public class GameLoader : MonoBehaviour
         //monopoly game singletons
         MonopolyDriver.Init();
         MLogic.Init();
+        LocalServer.Init();
 
         //framework
         FUIManager.Init();

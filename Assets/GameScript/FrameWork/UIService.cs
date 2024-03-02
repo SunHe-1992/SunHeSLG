@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using FairyGUI;
+using PackageMonopoly;
+using CommonPackage;
+using CommonButton;
 public class UIService : ISingleton
 {
     public static UIService Inst { get; private set; }
@@ -169,5 +172,16 @@ public class UIService : ISingleton
     {
         string msg = FormatNumber(MonoPlayer.GetGoldAmount());
         txtField.text = msg;
+    }
+
+    public void RefreshTopBar(GComponent topBar)
+    {
+        var topBarCom = topBar as UI_TopbarCom;
+        if (topBarCom != null)
+        {
+            UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num); //gold amount
+            topBarCom.head.txt_lvName.text = MonoPlayer.UserDetail.userName;//user name
+            topBarCom.head.txt_UID.text = "ID: " + MonoPlayer.UserDetail.userId;//user id
+        }
     }
 }
