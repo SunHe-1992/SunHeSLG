@@ -22,6 +22,7 @@ public class UIPage_MonopolyMain : FUIBase
         ui.btn_Construction.onClick.Set(BtnConstruction);
         ui.btn_RollDice.onClick.Set(BtnRollDice);
         ui.compFactor.onClick.Set(OnBtnDiceFactor);
+        ui.btn_test.onClick.Set(OnBtnTest);
     }
     protected override void OnShown()
     {
@@ -199,4 +200,10 @@ public class UIPage_MonopolyMain : FUIBase
         UIService.Inst.RefreshTopBar(this.ui.topBar);
     }
     #endregion
+
+    void OnBtnTest()
+    {
+        MonoPlayer.UpdateGoldAmount(1000);
+        UIService.Inst.ShowMoneyAnim(1000);
+    }
 }

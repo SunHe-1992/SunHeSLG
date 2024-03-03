@@ -1,0 +1,362 @@
+[
+  {
+    "ID": 0,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 1,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 104,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "COMMUNITY CHEST"
+  },
+  {
+    "ID": 2,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 3,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 101,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "INCOME TAX"
+  },
+  {
+    "ID": 4,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 102,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "RAILROAD"
+  },
+  {
+    "ID": 5,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 6,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 105,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "CHANCE"
+  },
+  {
+    "ID": 7,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 8,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 9,
+    "isCorner": true,
+    "triggerOnPass": true,
+    "eventId": 0,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "JUST VISITING"
+  },
+  {
+    "ID": 10,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 11,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "ELECTRIC COMPANY"
+  },
+  {
+    "ID": 12,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 13,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 14,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 102,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "RAILROAD"
+  },
+  {
+    "ID": 15,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 16,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 104,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "COMMUNITY CHEST"
+  },
+  {
+    "ID": 17,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 18,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 19,
+    "isCorner": true,
+    "triggerOnPass": true,
+    "eventId": 0,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "FREE PARKING"
+  },
+  {
+    "ID": 20,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 21,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 105,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "CHANCE"
+  },
+  {
+    "ID": 22,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 23,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 24,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 102,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "RAILROAD"
+  },
+  {
+    "ID": 25,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 26,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 27,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "WATER WORKS"
+  },
+  {
+    "ID": 28,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 29,
+    "isCorner": true,
+    "triggerOnPass": true,
+    "eventId": 103,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "GO TO JAIL"
+  },
+  {
+    "ID": 30,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 31,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 32,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "COMMUNITY CHEST"
+  },
+  {
+    "ID": 33,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 34,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 102,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "RAILROAD"
+  },
+  {
+    "ID": 35,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 105,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "CHANCE"
+  },
+  {
+    "ID": 36,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 37,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 101,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "LUXURY TAX"
+  },
+  {
+    "ID": 38,
+    "isCorner": false,
+    "triggerOnPass": false,
+    "eventId": 100,
+    "eventParam1": 1,
+    "eventParam2": 0,
+    "tileTitle": "AVENUE"
+  },
+  {
+    "ID": 39,
+    "isCorner": true,
+    "triggerOnPass": true,
+    "eventId": 100,
+    "eventParam1": 10,
+    "eventParam2": 0,
+    "tileTitle": "GO"
+  }
+]

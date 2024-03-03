@@ -88,6 +88,7 @@ public class UIPage_Debug : FUIBase
     void BtnAddGold()
     {
         MonoPlayer.UpdateGoldAmount(10000);
+        UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
     }
 
 }

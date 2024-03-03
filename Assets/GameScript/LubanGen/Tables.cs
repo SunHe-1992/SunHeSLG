@@ -23,6 +23,8 @@ public partial class Tables
     public SLG.Skill Skill {get; }
     public MONO.TbChapter TbChapter {get; }
     public MONO.TbBuilding TbBuilding {get; }
+    public MONO.TbMapConfig TbMapConfig {get; }
+    public MONO.TbMapEvent TbMapEvent {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -35,6 +37,8 @@ public partial class Tables
         Skill = new SLG.Skill(loader("slg_skill"));
         TbChapter = new MONO.TbChapter(loader("mono_tbchapter"));
         TbBuilding = new MONO.TbBuilding(loader("mono_tbbuilding"));
+        TbMapConfig = new MONO.TbMapConfig(loader("mono_tbmapconfig"));
+        TbMapEvent = new MONO.TbMapEvent(loader("mono_tbmapevent"));
         ResolveRef();
     }
     
@@ -49,6 +53,8 @@ public partial class Tables
         Skill.ResolveRef(this);
         TbChapter.ResolveRef(this);
         TbBuilding.ResolveRef(this);
+        TbMapConfig.ResolveRef(this);
+        TbMapEvent.ResolveRef(this);
     }
 }
 

@@ -62,7 +62,7 @@ public class MonopolyMapController : MonoBehaviour
         {
             tilesList[tile.Index] = tile;
         }
-        ResetPawnPosition();
+
     }
 
     // Update is called once per frame
@@ -108,6 +108,7 @@ public class MonopolyMapController : MonoBehaviour
             pawnCtrl.PerformJump(from, to, jumpAnimDuration);
             yield return new WaitForSeconds(jumpAnimDuration);
             tile2.PlayShakeAnim();
+            tile2.PlayTileEventEffect();
         }
         yield return null;
         playingAnim = false;
@@ -124,6 +125,33 @@ public class MonopolyMapController : MonoBehaviour
         else
         {
             return (tileCount - fromIdx) + (toIdx);
+        }
+    }
+    /// <summary>
+    /// after data/scene loaded, initialize the objects
+    /// </summary>
+    public void RefreshTiles()
+    {
+        ResetPawnPosition();
+        for (int i = 0; i < tileCount; i++)
+        {
+            //MonoTile mTileData = MLogic.Inst.tileDic[i];
+            MonoTileController tileCtrl = GetTileById(i);
+            tileCtrl.SetConfigData();
+        }
+    }
+
+    /// <summary>
+    /// save the infomation for playing event effect
+    /// </summary>
+    /// <param name="tileId"></param>
+    /// <param name="param1"></param>
+    public void SaveTileEventParamInTileCtrl(int tileId, long param1)
+    {
+        var tileCtrl = GetTileById(tileId);
+        if (tileCtrl != null)
+        {
+            tileCtrl.saveData = param1;
         }
     }
 }

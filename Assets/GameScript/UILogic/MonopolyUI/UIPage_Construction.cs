@@ -108,7 +108,7 @@ public class UIPage_Construction : FUIBase
             obj.txt_price.text = "";
         else
         {
-            obj.txt_price.text = "" + lvCfg.Price;
+            obj.txt_price.text = "" + lvCfg.Price * cptCfg.PriceMultiplier;
         }
         //dot item: set level
         obj.dotItem.ctrl_tier.selectedIndex = buildingLevel;
@@ -126,7 +126,7 @@ public class UIPage_Construction : FUIBase
         {
             return;
         }
-        bool isAfford = MonoPlayer.IsAffordGold(bdCfg.Price);
+        bool isAfford = MonoPlayer.IsAffordGold(bdCfg.Price * cptCfg.PriceMultiplier);
         if (isAfford)
         {
             //if money is enough,request upgrade

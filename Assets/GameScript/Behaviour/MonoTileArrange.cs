@@ -157,7 +157,6 @@ public class MonoTileArrange : MonoBehaviour
         foreach (var tileObj in list) //make all index reverse
         {
             tileObj.Index = 39 - tileObj.Index;
-            tileObj.SetCanvasText();
         }
         list.Sort((a, b) => { return a.Index.CompareTo(b.Index); });
         return list;

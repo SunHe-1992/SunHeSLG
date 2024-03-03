@@ -32,7 +32,7 @@ public static class MonoPlayer
         UserDetail = new UserDetail();
         UserDetail.userId = 123;
         UserDetail.userName = "TestUser";
-        UserDetail.IndexOnMap = 1;
+        UserDetail.IndexOnMap = 39;
         UserDetail.currentChapter = 1001;
         UserDetail.diceCount = 12;
         UserDetail.points.Add(new UserPoint(PointEnum.Gold, 3323));
@@ -72,8 +72,6 @@ public static class MonoPlayer
         {
             pointDic[ptType] += changeValue;
         }
-        if (changeValue != 0)
-            UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
         return;
     }
     public static void UpdateGoldAmount(long changeValue)

@@ -13,6 +13,7 @@ namespace PackageMonopoly
         public GTextField txt_hud;
         public UI_DiceFactor compFactor;
         public GProgressBar diceBar;
+        public GButton btn_test;
         public const string URL = "ui://dxvwggiwr35z0";
 
         public static UI_MonopolyMain CreateInstance()
@@ -30,6 +31,7 @@ namespace PackageMonopoly
             txt_hud = (GTextField)GetChild("txt_hud");
             compFactor = (UI_DiceFactor)GetChild("compFactor");
             diceBar = (GProgressBar)GetChild("diceBar");
+            btn_test = (GButton)GetChild("btn_test");
         }
     }
 }

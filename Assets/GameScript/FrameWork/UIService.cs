@@ -184,4 +184,10 @@ public class UIService : ISingleton
             topBarCom.head.txt_UID.text = "ID: " + MonoPlayer.UserDetail.userId;//user id
         }
     }
+
+    public void ShowMoneyAnim(long moneyValue)
+    {
+        if (moneyValue == 0) return;
+        FUIManager.Inst.ShowUI<UIPage_HintPage>(FUIDef.FWindow.HintPage, null, moneyValue);
+    }
 }

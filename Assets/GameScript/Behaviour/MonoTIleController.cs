@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using cfg;
 public class MonoTileController : MonoBehaviour
 {
     public float cubeHeight = 1;
@@ -12,6 +13,9 @@ public class MonoTileController : MonoBehaviour
     TextMeshProUGUI text1;
     TextMeshProUGUI text2;
     TextMeshProUGUI text3;
+
+    cfg.MapConfig cfgData;
+    public long saveData;
     private void Awake()
     {
         FindChildren();
@@ -54,7 +58,7 @@ public class MonoTileController : MonoBehaviour
     public void SetCanvasText()
     {
         FindChildren();
-        text1.text = "" + Index;
+        text1.text = "" + cfgData.TileTitle;
         text2.text = "";
         text3.text = "";
     }
@@ -65,5 +69,17 @@ public class MonoTileController : MonoBehaviour
         AnimationClip clip = anim.GetClip(animName);
         if (clip != null)
             anim.Play(animName);
+    }
+    public void SetConfigData()
+    {
+        cfgData = ConfigManager.table.TbMapConfig.Get(Index);
+        SetCanvasText();
+    }
+    public void PlayTileEventEffect()
+    {
+        if (MLogic.Inst.triggerTileIdList.Contains(this.Index))
+        {
+            UIService.Inst.ShowMoneyAnim(saveData);
+        }
     }
 }
