@@ -11,6 +11,10 @@ namespace PackageMonopoly
             UIObjectFactory.SetPackageItemExtension(UI_Construction.URL, typeof(UI_Construction));
             UIObjectFactory.SetPackageItemExtension(UI_BuildingItem.URL, typeof(UI_BuildingItem));
             UIObjectFactory.SetPackageItemExtension(UI_DotItem.URL, typeof(UI_DotItem));
+            UIObjectFactory.SetPackageItemExtension(UI_BankHeist.URL, typeof(UI_BankHeist));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultItem.URL, typeof(UI_VaultItem));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultIcon.URL, typeof(UI_VaultIcon));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultBar.URL, typeof(UI_VaultBar));
             UIObjectFactory.SetPackageItemExtension(UI_MonopolyMain.URL, typeof(UI_MonopolyMain));
             UIObjectFactory.SetPackageItemExtension(UI_DiceFactor.URL, typeof(UI_DiceFactor));
         }

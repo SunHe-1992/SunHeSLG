@@ -16,6 +16,7 @@ public class FUIDef
         MonopolyMain,
         Construction,
         HintPage,
+        BankHeist,
     }
     /// <summary>
     /// package names
@@ -44,5 +45,6 @@ public class FUIDef
         {FWindow.MonopolyMain, FPackage.PackageMonopoly},
         {FWindow.Construction, FPackage.PackageMonopoly},
         {FWindow.HintPage, FPackage.PackageShared},
+        {FWindow.BankHeist, FPackage.PackageMonopoly},
     };
 }

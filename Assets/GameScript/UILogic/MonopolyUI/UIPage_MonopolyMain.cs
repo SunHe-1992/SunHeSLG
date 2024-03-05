@@ -203,7 +203,7 @@ public class UIPage_MonopolyMain : FUIBase
 
     void OnBtnTest()
     {
-        MonoPlayer.UpdateGoldAmount(1000);
-        UIService.Inst.ShowMoneyAnim(1000);
+        FUIManager.Inst.ShowUI<UIPage_BankHeist>(FUIDef.FWindow.BankHeist);
+
     }
 }
