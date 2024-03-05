@@ -137,7 +137,17 @@ public class UIPage_BankHeist : FUIBase
         openedSlotHash.Add(index);
         openedSlotId[index] = tokenId;
         RefreshList();
-
+        CheckGameFinished();
+    }
+    void CheckGameFinished()
+    {
         //todo calculate if this mini game is finished
+
+        //key=tokenId, value=count
+        Dictionary<int, int> tokenCountDic = new Dictionary<int, int>();
+        foreach (int tokenId in openedSlotId.Values)
+        {
+            tokenCountDic[tokenId]++;
+        }
     }
 }
