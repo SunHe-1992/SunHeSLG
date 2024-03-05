@@ -52,13 +52,11 @@ public class MLogic : ISingleton
     }
 
     public int diceValue = 0;
-    public int diceFactor = 0;
 
     public void RollDice(int _diceFactor)
     {
-        diceFactor = _diceFactor;
         //random dice value
-        diceValue = 1;//Random.Range(1, 7);
+        diceValue = Random.Range(1, 7);
         MonoPlayer.UserDetail.diceCount -= _diceFactor;
         //Debugger.Log($"roll dice value={diceValue}");
         lastTileIndex = currentTileIndex;
@@ -117,19 +115,23 @@ public class MLogic : ISingleton
     }
     void HandleAddMoney(int eventId, float param1, int param2, int tileId)
     {
-        long amount = diceFactor * chapterCfg.PriceBase;
+        long amount = MonoPlayer.diceFactor * chapterCfg.PriceBase;
         MonoPlayer.UpdateGoldAmount(amount);
         mapCtrl.SaveTileEventParamInTileCtrl(tileId, amount);
     }
     void HandleCostMoney(int eventId, float param1, int param2, int tileId)
     {
-        long amount = diceFactor * chapterCfg.PriceBase;
+        long amount = MonoPlayer.diceFactor * chapterCfg.PriceBase;
         MonoPlayer.UpdateGoldAmount(-amount);
         mapCtrl.SaveTileEventParamInTileCtrl(tileId, -amount);
     }
-    void HandleBankHeist(int eventId, float param1, int param2, int tileId)
+    public void HandleBankHeist(int eventId, float param1, int param2, int tileId)
     {
-        //todo
+        // set up datas for bank heists
+        MonopolyService.Inst.SetUpBankHeistData();
+        FUIManager.Inst.HideUI(FUIDef.FWindow.MonopolyMain);
+        FUIManager.Inst.ShowUI<UIPage_BankHeist>(FUIDef.FWindow.BankHeist);
+
     }
     void HandleJail(int eventId, float param1, int param2, int tileId)
     {

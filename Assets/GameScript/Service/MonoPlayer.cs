@@ -6,7 +6,7 @@ using SunHeTBS;
 public static class MonoPlayer
 {
     public static UserDetail UserDetail; //玩家的所有信息
-    public static int diceFactor = 0;
+    public static int diceFactor = 1;
     public static void SetUserDetail()
     {
         //init user detail info

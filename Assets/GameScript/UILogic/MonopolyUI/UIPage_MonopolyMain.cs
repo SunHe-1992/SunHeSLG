@@ -29,6 +29,7 @@ public class UIPage_MonopolyMain : FUIBase
         base.OnShown();
         UniEvent.AddListener(GameEventDefine.DICE_COUNT_CHANGED, OnDiceCountChanged);
         UniEvent.AddListener(GameEventDefine.POINTS_CHANGED, RefreshTopBar);
+        OnDiceCountChanged(null);
     }
 
 
@@ -203,7 +204,6 @@ public class UIPage_MonopolyMain : FUIBase
 
     void OnBtnTest()
     {
-        FUIManager.Inst.ShowUI<UIPage_BankHeist>(FUIDef.FWindow.BankHeist);
-
+        MLogic.Inst.HandleBankHeist(0,0,0,0);
     }
 }
