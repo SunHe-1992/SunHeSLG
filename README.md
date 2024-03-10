@@ -5,3 +5,6 @@ manage excel config data with luban https://github.com/focus-creative-games/luba
 UI framework is based on fairyGUI https://github.com/fairygui/FairyGUI-unity
 
 Check Wiki of this repo for Docs 
+
+github repo page:
+https://github.com/SunHe-1992/SunHeSLG
