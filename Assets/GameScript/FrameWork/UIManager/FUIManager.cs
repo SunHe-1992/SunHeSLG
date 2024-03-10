@@ -702,22 +702,22 @@ public class FUIManager : ISingleton
             }
         }
 
-        foreach (var win in windowsDic.Values)
-        {
-            if (win != null && win.isShowing)
-            {
-                if (hasTip)
-                {
-                    GRoot.inst.GetChildIndex(win);
-                    GRoot.inst.SetChildIndex(win, GRoot.inst.numChildren - 1);
-                }
-                else
-                {
-                    GRoot.inst.BringToFront(win);
-                }
-                break;
-            }
-        }
+        //foreach (var win in windowsDic.Values)
+        //{
+        //    if (win != null && win.isShowing)
+        //    {
+        //        if (hasTip)
+        //        {
+        //            GRoot.inst.GetChildIndex(win);
+        //            GRoot.inst.SetChildIndex(win, GRoot.inst.numChildren - 1);
+        //        }
+        //        else
+        //        {
+        //            GRoot.inst.BringToFront(win);
+        //        }
+        //        break;
+        //    }
+        //}
     }
 
     private void PushToStack(FUIBase window, FUIDef.FWindow winType)

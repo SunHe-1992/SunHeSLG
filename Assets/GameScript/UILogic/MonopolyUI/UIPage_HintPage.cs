@@ -40,6 +40,7 @@ public class UIPage_HintPage : FUIBase
     {
         if (ui.numberComp.anim1.playing)
             return;
+        this.ui.numberComp.title = "";
         if (dataQueue.Count > 0)
         {
             long moneyValue = dataQueue.Dequeue();
@@ -49,10 +50,19 @@ public class UIPage_HintPage : FUIBase
             else
                 moneyStr = "+" + moneyStr;
             this.ui.numberComp.title = moneyStr;
-            ui.numberComp.anim1.Play(MoneyPlayCallback);
+            //ui.numberComp.anim1.Play(MoneyPlayCallback);
+            PlayNumberCompFly();
+            ui.gold_fly.Play(MoneyPlayCallback);
         }
         else
             MoneyAnimPlayEnd();
+    }
+    void PlayNumberCompFly()
+    {
+        Vector2 flyDest = new Vector2(GRoot.inst.width * 0.573f, GRoot.inst.height * 0.0594f);
+        ui.numberComp.SetXY(GRoot.inst.width / 2, GRoot.inst.height / 2);
+        var tween = ui.numberComp.TweenMove(flyDest, ui.gold_fly.totalDuration);
+        tween.SetEase(EaseType.Linear);
     }
     void MoneyPlayCallback()
     {
@@ -61,7 +71,7 @@ public class UIPage_HintPage : FUIBase
     void MoneyAnimPlayEnd()
     {
         UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
-        OnBtnClose();
+        //OnBtnClose();
     }
     void OnBtnClose()
     {

@@ -17,6 +17,8 @@ public class UIPage_BankHeist : FUIBase
 
     //store opened slot index
     HashSet<int> openedSlotHash;
+    Dictionary<int, long> rewardDic;
+    bool gameFinished = false;
     int GetOpenedCount()
     {
         return openedSlotHash.Count;
@@ -31,12 +33,14 @@ public class UIPage_BankHeist : FUIBase
         { ui.bar1,ui.bar2,ui.bar3};
 
         ui.list_vault.itemRenderer = ItemListRenderer;
+        rewardDic = new Dictionary<int, long>();
     }
     protected override void OnShown()
     {
         base.OnShown();
         openedSlotId = new Dictionary<int, int>();
         openedSlotHash = new HashSet<int>();
+        gameFinished = false;
     }
 
 
@@ -75,15 +79,14 @@ public class UIPage_BankHeist : FUIBase
     }
     void RefreshOneRewards(int index, long moneyBase)
     {
-        //index = 1,2,3
+        //index = 0,1,2
         UI_VaultBar barItem = uI_VaultBars[index];
         //reward money = moneyBase * diceFactor * chapterPriceBase
         int diceFactor = MonoPlayer.diceFactor;
         long chapterPriceBase = MLogic.Inst.chapterCfg.PriceBase;
         long money = moneyBase * diceFactor * chapterPriceBase;
         barItem.txt_des.text = "$" + money;
-
-
+        rewardDic[index] = money;
         var gameData = MonopolyService.Inst.gameBankHeist;
         int thisRewardOpenedSum = 0;
         for (int i = 0; i < GetOpenedCount(); i++)
@@ -131,6 +134,8 @@ public class UIPage_BankHeist : FUIBase
     }
     void VaultItemOnClick(EventContext ec)
     {
+        if (gameFinished)
+            return;
         int index = (int)(ec.sender as GComponent).data;
         var gameData = MonopolyService.Inst.gameBankHeist;
         int tokenId = gameData.tokenList[GetOpenedCount()];
@@ -141,13 +146,41 @@ public class UIPage_BankHeist : FUIBase
     }
     void CheckGameFinished()
     {
-        //todo calculate if this mini game is finished
+        //calculate if this mini game is finished
 
         //key=tokenId, value=count
         Dictionary<int, int> tokenCountDic = new Dictionary<int, int>();
         foreach (int tokenId in openedSlotId.Values)
         {
+            if (tokenCountDic.ContainsKey(tokenId) == false)
+                tokenCountDic.Add(tokenId, 0);
             tokenCountDic[tokenId]++;
         }
+        bool finished = false;
+        int finish_tokenId = 0;
+        foreach (var pair in tokenCountDic)
+        {
+            if (pair.Value >= 3)
+            {
+                finished = true;
+                finish_tokenId = pair.Key;
+                break;
+            }
+        }
+        if (finished)
+        {
+            gameFinished = true;
+            //Debug.Log($"bank heist finished token ID = {finish_tokenId}");
+            var rewardBar = uI_VaultBars[finish_tokenId];
+            //play anim
+            rewardBar.anim_shake.Play(CloseUI);
+            long moneyReward = rewardDic[finish_tokenId];
+            MonoPlayer.UpdateGoldAmount(moneyReward);
+            UIService.Inst.ShowMoneyAnim(moneyReward);
+        }
+    }
+    void CloseUI()
+    {
+        GoBackToMainPage();
     }
 }

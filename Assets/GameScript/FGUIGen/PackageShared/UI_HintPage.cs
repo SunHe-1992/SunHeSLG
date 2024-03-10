@@ -8,6 +8,7 @@ namespace PackageShared
     public partial class UI_HintPage : GComponent
     {
         public UI_NumberItem numberComp;
+        public Transition gold_fly;
         public const string URL = "ui://9bv6j664mnvhib";
 
         public static UI_HintPage CreateInstance()
@@ -20,6 +21,7 @@ namespace PackageShared
             base.ConstructFromXML(xml);
 
             numberComp = (UI_NumberItem)GetChild("numberComp");
+            gold_fly = GetTransition("gold_fly");
         }
     }
 }

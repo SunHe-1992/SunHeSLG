@@ -59,7 +59,7 @@ public class MonopolyService : ISingleton
         }
         int GetRandomToken()
         {
-            return Random.Range(1, 3);
+            return Random.Range(0, 3);
         }
 
 

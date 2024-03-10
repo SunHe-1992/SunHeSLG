@@ -12,6 +12,7 @@ namespace PackageMonopoly
         public UI_VaultIcon item2;
         public UI_VaultIcon item3;
         public GTextField txt_des;
+        public Transition anim_shake;
         public const string URL = "ui://dxvwggiwlhbz19";
 
         public static UI_VaultBar CreateInstance()
@@ -28,6 +29,7 @@ namespace PackageMonopoly
             item2 = (UI_VaultIcon)GetChild("item2");
             item3 = (UI_VaultIcon)GetChild("item3");
             txt_des = (GTextField)GetChild("txt_des");
+            anim_shake = GetTransition("anim_shake");
         }
     }
 }
