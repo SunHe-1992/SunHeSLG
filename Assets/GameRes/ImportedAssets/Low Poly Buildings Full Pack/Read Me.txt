@@ -1,0 +1,29 @@
+Hello and thank you for purchasing Low Poly Buildings Full Package.
+
+There are 128 fbx files all made to prefabs.
+Lightmaps are generated on import. No colliders are placed or generated. 
+Not any prefab is set to static. If you wish, you can select the fbx files 
+and on the inspector under import settings click Generate Colliders. 
+I havent done that because for more efficient scene some might want to 
+hand place box colliders.
+
+This pack contains packages: 
+
+-Low Poly Buildings 
+-Low Poly Buildings Part 2 
+-Low Poly Buildings Paris 
+-Low Poly Buildings City 
+-Low Poly Buildings Suburb 
+-Low Poly Vehicles
+
+-Also includes characters vehicles and environment assets 
+
+They are all available separately in the Unity Asset Store. So they all have
+individual example scenes on the folder.
+
+Update 1.1
+- Update City and 3 new buildings added
+- Low Poly Characters - Citizen Man added
+
+For questions you can contact me at:
+a.kolmonen@gmail.com

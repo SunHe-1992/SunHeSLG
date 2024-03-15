@@ -539,6 +539,7 @@ MonoBehaviour:
   target: {fileID: 0}
   distance: 5
   smoothSpeed: 0.1
+  dragSpeed: 0.1
 --- !u!1001 &1455512317
 PrefabInstance:
   m_ObjectHideFlags: 0

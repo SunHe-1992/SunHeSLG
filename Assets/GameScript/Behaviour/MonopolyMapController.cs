@@ -62,16 +62,16 @@ public class MonopolyMapController : MonoBehaviour
         {
             tilesList[tile.Index] = tile;
         }
-
+        if (pawnCtrl != null && monoCam != null && monoCam.target == null)
+        {
+            monoCam.target = pawnCtrl.transform;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pawnCtrl != null && monoCam != null && monoCam.target == null)
-        {
-            monoCam.target = pawnCtrl.transform;
-        }
+
     }
 
     readonly float diceAnimDuration = 0.26f;
@@ -90,6 +90,7 @@ public class MonopolyMapController : MonoBehaviour
         playingAnim = true;
         DiceCtrl.PlayDiceAnim(value);
         StartCoroutine(PerformJump());
+        monoCam.SetCameraFollowing();
     }
     IEnumerator PerformJump()
     {
@@ -112,6 +113,7 @@ public class MonopolyMapController : MonoBehaviour
         }
         yield return null;
         playingAnim = false;
+        monoCam.SetCameraFreeMove();
     }
     public void ResetPawnPosition()
     {

@@ -10,6 +10,8 @@ using SunHeTBS;
 using CommonPackage;
 using cfg;
 using cfg.MONO;
+using YooAsset;
+using UnityEngine.SceneManagement;
 public class UIPage_Construction : FUIBase
 {
 
@@ -82,10 +84,17 @@ public class UIPage_Construction : FUIBase
             //todo: if all buildings in this chapter are max level, change to next chapter
         }
     }
+    string mapName = "MonopolyBoard";
     void OnBtnClose()
     {
-        FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
-        FUIManager.Inst.HideUI(this);
+        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
+        handle.Completed += (scene) =>
+        {
+            FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
+            FUIManager.Inst.HideUI(this);
+        };
+
+
     }
 
     void BuildingListRenderer(int index, GObject go)

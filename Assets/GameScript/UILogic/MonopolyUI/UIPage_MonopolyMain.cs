@@ -8,6 +8,8 @@ using UnityEngine;
 using UniFramework.Event;
 using SunHeTBS;
 using CommonPackage;
+using YooAsset;
+using UnityEngine.SceneManagement;
 public class UIPage_MonopolyMain : FUIBase
 {
 
@@ -66,8 +68,12 @@ public class UIPage_MonopolyMain : FUIBase
     }
     void BtnConstruction()
     {
-        FUIManager.Inst.ShowUI<UIPage_Construction>(FUIDef.FWindow.Construction);
-        FUIManager.Inst.HideUI(this);
+        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/MonoBuildingMap", LoadSceneMode.Additive);
+        handle.Completed += (scene) =>
+        {
+            FUIManager.Inst.ShowUI<UIPage_Construction>(FUIDef.FWindow.Construction);
+            FUIManager.Inst.HideUI(this);
+        };
     }
 
 
@@ -204,6 +210,6 @@ public class UIPage_MonopolyMain : FUIBase
 
     void OnBtnTest()
     {
-        MLogic.Inst.HandleBankHeist(0,0,0,0);
+        MLogic.Inst.HandleBankHeist(0, 0, 0, 0);
     }
 }
