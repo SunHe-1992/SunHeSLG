@@ -55,6 +55,15 @@ public class UIPage_Construction : FUIBase
     void RefreshOnChanged(IEventMessage msg)
     {
         RefreshContent();
+
+    }
+    void RefreshMapBuildings()
+    {
+        var mapCtrl = MonoBuildingMapController.Inst;
+        if (mapCtrl != null)
+        {
+            mapCtrl.RefreshBuildingsVisible();
+        }
     }
     int currentLevelSum = 0;
     int totalLevelSum = 0;
@@ -83,6 +92,8 @@ public class UIPage_Construction : FUIBase
         {
             //todo: if all buildings in this chapter are max level, change to next chapter
         }
+
+        RefreshMapBuildings();
     }
     string mapName = "MonopolyBoard";
     void OnBtnClose()

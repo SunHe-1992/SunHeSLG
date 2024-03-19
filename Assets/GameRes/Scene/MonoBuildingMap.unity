@@ -4725,6 +4725,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012165035240, guid: 2ceaa4a4299e5ef4e8f34e1ed22f9d21, type: 3}
   m_PrefabInstance: {fileID: 982933751}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &983459661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 983459663}
+  - component: {fileID: 983459662}
+  m_Layer: 0
+  m_Name: BuildingMapCtrl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &983459662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983459661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10af57167fbefa49b1c2c9fac438d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &983459663
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983459661}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &999934831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9488,6 +9532,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House6
       objectReference: {fileID: 0}
+    - target: {fileID: 2689435251481082153, guid: f3efe59bc6603544facfd5c6fb5fd8d6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9184509444453877911, guid: f3efe59bc6603544facfd5c6fb5fd8d6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1020.46
@@ -9775,3 +9823,4 @@ SceneRoots:
   - {fileID: 7821635648900515712}
   - {fileID: 4571537022605209188}
   - {fileID: 4399202686626305819}
+  - {fileID: 983459663}

@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2107079352999433973}
+  - component: {fileID: 4234453257087747389}
   m_Layer: 0
   m_Name: House3
   m_TagString: Untagged
@@ -65,6 +66,25 @@ Transform:
   - {fileID: 8397496478158037392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4234453257087747389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8603888370965995484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b343f08d95bd2744dad59576a61128bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objLv1: {fileID: 4625889685115667147}
+  objLv2: {fileID: 3948092646441273591}
+  objLv3: {fileID: 0}
+  objLv4: {fileID: 0}
+  objLv5: {fileID: 0}
+  objLv6: {fileID: 0}
+  level: 4
 --- !u!1001 &3947964557895357265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +143,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000013394042462, guid: 1442b5d2b051a0b40b3a99df44778d27, type: 3}
   m_PrefabInstance: {fileID: 3947964557895357265}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3948092646441273591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010931608486, guid: 1442b5d2b051a0b40b3a99df44778d27, type: 3}
+  m_PrefabInstance: {fileID: 3947964557895357265}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4625754999455054381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,6 +193,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0190bc606c8711448a1889cec2a51cc, type: 3}
+--- !u!1 &4625889685115667147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000010992318694, guid: d0190bc606c8711448a1889cec2a51cc, type: 3}
+  m_PrefabInstance: {fileID: 4625754999455054381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4629645806522501277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010100798128, guid: d0190bc606c8711448a1889cec2a51cc, type: 3}

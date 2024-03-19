@@ -37,11 +37,11 @@ public static class MonoPlayer
         UserDetail.diceCount = 12;
         UserDetail.points.Add(new UserPoint(PointEnum.Gold, 3323));
         UserDetail.points.Add(new UserPoint(PointEnum.Gem, 8888));
-        UserDetail.buildings.Add(new BuildingDetail(1, 2));
+        UserDetail.buildings.Add(new BuildingDetail(1, 0));
         UserDetail.buildings.Add(new BuildingDetail(2, 0));
-        UserDetail.buildings.Add(new BuildingDetail(3, 1));
-        UserDetail.buildings.Add(new BuildingDetail(4, 3));
-        UserDetail.buildings.Add(new BuildingDetail(5, 5));
+        UserDetail.buildings.Add(new BuildingDetail(3, 0));
+        UserDetail.buildings.Add(new BuildingDetail(4, 0));
+        UserDetail.buildings.Add(new BuildingDetail(5, 0));
     }
     #region Point management
 

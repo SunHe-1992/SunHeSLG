@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9184509444453877911}
+  - component: {fileID: 7545635799817020212}
   m_Layer: 0
   m_Name: House6
   m_TagString: Untagged
@@ -24,14 +25,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2689435251481082153}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -7.57, y: 0.094, z: -20.2}
   m_LocalScale: {x: 100.00003, y: 100, z: 100.00003}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2815912427305712115}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &7545635799817020212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2689435251481082153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b343f08d95bd2744dad59576a61128bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objLv1: {fileID: 2815912427305936339}
+  objLv2: {fileID: 0}
+  objLv3: {fileID: 0}
+  objLv4: {fileID: 0}
+  objLv5: {fileID: 0}
+  objLv6: {fileID: 0}
+  level: 4
 --- !u!1001 &6081065410283265098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104,5 +124,10 @@ PrefabInstance:
 --- !u!4 &2815912427305712115 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8318264697060287929, guid: 481c8f6737ca1e945bce27972243cc57, type: 3}
+  m_PrefabInstance: {fileID: 6081065410283265098}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2815912427305936339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8318264697060391321, guid: 481c8f6737ca1e945bce27972243cc57, type: 3}
   m_PrefabInstance: {fileID: 6081065410283265098}
   m_PrefabAsset: {fileID: 0}
