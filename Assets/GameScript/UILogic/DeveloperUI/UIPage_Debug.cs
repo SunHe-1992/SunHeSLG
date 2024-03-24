@@ -26,6 +26,9 @@ public class UIPage_Debug : FUIBase
         ui.btn_monopoly.onClick.Set(BtnMonopoly);
         ui.btn_addDice50.onClick.Set(BtnAddDice);
         ui.btn_addGold100.onClick.Set(BtnAddGold);
+        ui.btn_bank.onClick.Set(BtnBank);
+        ui.btn_slot.onClick.Set(BtnSlotGame);
+
     }
     protected override void OnShown()
     {
@@ -83,12 +86,20 @@ public class UIPage_Debug : FUIBase
     {
         MonoPlayer.UserDetail.diceCount += 50;
         UniEvent.SendMessage(GameEventDefine.DICE_COUNT_CHANGED);
-        OnBtnClose();
     }
     void BtnAddGold()
     {
         MonoPlayer.UpdateGoldAmount(10000);
         UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
     }
-
+    void BtnBank()
+    {
+        OnBtnClose();
+        MLogic.Inst.HandleBankHeist(0, 0, 0, 0);
+    }
+    void BtnSlotGame()
+    {
+        OnBtnClose();
+        MLogic.Inst.HandleSlogGame(0, 0, 0, 0);
+    }
 }

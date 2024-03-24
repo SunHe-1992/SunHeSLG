@@ -6,16 +6,16 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 1,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 104,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "COMMUNITY CHEST"
+    "tileTitle": "EARN"
   },
   {
     "ID": 2,
@@ -24,7 +24,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 3,
@@ -33,7 +33,7 @@
     "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "INCOME TAX"
+    "tileTitle": "TAX"
   },
   {
     "ID": 4,
@@ -42,34 +42,34 @@
     "eventId": 102,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "RAILROAD"
+    "tileTitle": "BANK"
   },
   {
     "ID": 5,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 6,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 105,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "CHANCE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 7,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 103,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "SLOT"
   },
   {
     "ID": 8,
@@ -78,16 +78,16 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 9,
     "isCorner": true,
-    "triggerOnPass": true,
-    "eventId": 0,
+    "triggerOnPass": false,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "JUST VISITING"
+    "tileTitle": "EARN"
   },
   {
     "ID": 10,
@@ -96,7 +96,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 11,
@@ -105,7 +105,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "ELECTRIC COMPANY"
+    "tileTitle": "EARN"
   },
   {
     "ID": 12,
@@ -114,16 +114,16 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 13,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 14,
@@ -132,34 +132,34 @@
     "eventId": 102,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "RAILROAD"
+    "tileTitle": "BANK"
   },
   {
     "ID": 15,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 16,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 104,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "COMMUNITY CHEST"
+    "tileTitle": "EARN"
   },
   {
     "ID": 17,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 103,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "SLOT"
   },
   {
     "ID": 18,
@@ -168,16 +168,16 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 19,
     "isCorner": true,
-    "triggerOnPass": true,
-    "eventId": 0,
+    "triggerOnPass": false,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "FREE PARKING"
+    "tileTitle": "EARN"
   },
   {
     "ID": 20,
@@ -186,16 +186,16 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 21,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 105,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "CHANCE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 22,
@@ -204,7 +204,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 23,
@@ -213,7 +213,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 24,
@@ -222,25 +222,25 @@
     "eventId": 102,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "RAILROAD"
+    "tileTitle": "BANK"
   },
   {
     "ID": 25,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 26,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 27,
@@ -249,25 +249,25 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "WATER WORKS"
+    "tileTitle": "EARN"
   },
   {
     "ID": 28,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 103,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "SLOT"
   },
   {
     "ID": 29,
     "isCorner": true,
-    "triggerOnPass": true,
-    "eventId": 103,
+    "triggerOnPass": false,
+    "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "GO TO JAIL"
+    "tileTitle": "EARN"
   },
   {
     "ID": 30,
@@ -276,7 +276,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 31,
@@ -285,7 +285,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 32,
@@ -294,7 +294,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "COMMUNITY CHEST"
+    "tileTitle": "EARN"
   },
   {
     "ID": 33,
@@ -303,7 +303,7 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 34,
@@ -312,34 +312,34 @@
     "eventId": 102,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "RAILROAD"
+    "tileTitle": "BANK"
   },
   {
     "ID": 35,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 105,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "CHANCE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 36,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 101,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "TAX"
   },
   {
     "ID": 37,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 101,
+    "eventId": 103,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "LUXURY TAX"
+    "tileTitle": "SLOT"
   },
   {
     "ID": 38,
@@ -348,15 +348,15 @@
     "eventId": 100,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "AVENUE"
+    "tileTitle": "EARN"
   },
   {
     "ID": 39,
     "isCorner": true,
     "triggerOnPass": true,
     "eventId": 100,
-    "eventParam1": 10,
+    "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "GO"
+    "tileTitle": "EARN"
   }
 ]

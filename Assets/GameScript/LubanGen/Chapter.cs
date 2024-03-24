@@ -43,7 +43,7 @@ public sealed partial class Chapter : Luban.BeanBase
     /// </summary>
     public readonly long PriceMultiplier;
     /// <summary>
-    /// add to building price
+    /// reward money amount
     /// </summary>
     public readonly long PriceBase;
     public readonly System.Collections.Generic.List<int> BuildingList;

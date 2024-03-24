@@ -67,4 +67,37 @@ public class MonopolyService : ISingleton
     }
     #endregion
 
+
+    #region module: slot mini game
+
+    public void SetUpSlotGameData()
+    {
+        slotGameData = new SlotData();
+        slotGameData.RandomData();
+    }
+    public SlotData slotGameData;
+    public class SlotData
+    {
+        public List<List<int>> slotIdList;
+        readonly int wheelIconCount = 20;
+        public void RandomData()
+        {
+            slotIdList = new List<List<int>>();
+            for (int i = 0; i < 3; i++)
+            {
+                List<int> subList = new List<int>();
+                for (int j = 0; j < wheelIconCount; j++)
+                {
+                    subList.Add(GetRandomSlotNumber());
+                }
+                slotIdList.Add(subList);
+            }
+        }
+        //icon [0,5]
+        int GetRandomSlotNumber()
+        {
+            return Random.Range(0, 5);
+        }
+    }
+    #endregion
 }

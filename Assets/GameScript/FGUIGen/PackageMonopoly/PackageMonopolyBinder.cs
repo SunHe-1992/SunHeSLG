@@ -8,6 +8,9 @@ namespace PackageMonopoly
     {
         public static void BindAll()
         {
+            UIObjectFactory.SetPackageItemExtension(UI_SlotGame.URL, typeof(UI_SlotGame));
+            UIObjectFactory.SetPackageItemExtension(UI_SlotIconCom.URL, typeof(UI_SlotIconCom));
+            UIObjectFactory.SetPackageItemExtension(UI_SlotWheel.URL, typeof(UI_SlotWheel));
             UIObjectFactory.SetPackageItemExtension(UI_Construction.URL, typeof(UI_Construction));
             UIObjectFactory.SetPackageItemExtension(UI_BuildingItem.URL, typeof(UI_BuildingItem));
             UIObjectFactory.SetPackageItemExtension(UI_DotItem.URL, typeof(UI_DotItem));

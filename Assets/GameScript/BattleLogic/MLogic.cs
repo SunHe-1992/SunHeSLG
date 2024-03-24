@@ -23,11 +23,13 @@ public class MLogic : ISingleton
         {
             tileDic[i] = new MonoTile(i);
         }
-
+        UniEvent.AddListener(GameEventDefine.PawnJumpStop, OnJumpStop);
     }
 
     public void OnDestroy()
     {
+        UniEvent.RemoveListener(GameEventDefine.PawnJumpStop, OnJumpStop);
+
     }
 
     public void OnUpdate()
@@ -86,6 +88,9 @@ public class MLogic : ISingleton
             }
         }
         //handle move to new tile with current Tile Index
+    }
+    void OnJumpStop(IEventMessage msg)
+    {
         HandleTileEvents();
     }
     #region tile events
@@ -102,14 +107,15 @@ public class MLogic : ISingleton
     }
     void HandleOneEvent(int eventId, float param1, int param2, int tileId)
     {
+        Debugger.Log($"HandleTileEvents event id = {eventId}");
         switch (eventId)
         {
             case 100: HandleAddMoney(eventId, param1, param2, tileId); break;
             case 101: HandleCostMoney(eventId, param1, param2, tileId); break;
             case 102: HandleBankHeist(eventId, param1, param2, tileId); break;
-            case 103: HandleJail(eventId, param1, param2, tileId); break;
+            case 103: HandleSlogGame(eventId, param1, param2, tileId); break;
             case 104: break;
-            case 105: HandleChanceCard(eventId, param1, param2, tileId); break;
+            case 105: break;
 
         }
     }
@@ -117,13 +123,15 @@ public class MLogic : ISingleton
     {
         long amount = MonoPlayer.diceFactor * chapterCfg.PriceBase;
         MonoPlayer.UpdateGoldAmount(amount);
-        mapCtrl.SaveTileEventParamInTileCtrl(tileId, amount);
+        //mapCtrl.SaveTileEventParamInTileCtrl(tileId, amount);
+        UIService.Inst.ShowMoneyAnim(amount);
     }
     void HandleCostMoney(int eventId, float param1, int param2, int tileId)
     {
         long amount = MonoPlayer.diceFactor * chapterCfg.PriceBase;
         MonoPlayer.UpdateGoldAmount(-amount);
-        mapCtrl.SaveTileEventParamInTileCtrl(tileId, -amount);
+        //mapCtrl.SaveTileEventParamInTileCtrl(tileId, -amount);
+        UIService.Inst.ShowMoneyAnim(-amount);
     }
     public void HandleBankHeist(int eventId, float param1, int param2, int tileId)
     {
@@ -133,13 +141,12 @@ public class MLogic : ISingleton
         FUIManager.Inst.ShowUI<UIPage_BankHeist>(FUIDef.FWindow.BankHeist);
 
     }
-    void HandleJail(int eventId, float param1, int param2, int tileId)
+
+    public void HandleSlogGame(int eventId, float param1, int param2, int tileId)
     {
-        //todo
-    }
-    void HandleChanceCard(int eventId, float param1, int param2, int tileId)
-    {
-        //todo
+        MonopolyService.Inst.SetUpSlotGameData();
+        FUIManager.Inst.HideUI(FUIDef.FWindow.MonopolyMain);
+        FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
     }
     #endregion
 }

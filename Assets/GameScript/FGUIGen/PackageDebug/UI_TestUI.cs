@@ -14,6 +14,8 @@ namespace PackageDebug
         public GButton btn_monopoly;
         public GButton btn_addDice50;
         public GButton btn_addGold100;
+        public GButton btn_bank;
+        public GButton btn_slot;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -32,6 +34,8 @@ namespace PackageDebug
             btn_monopoly = (GButton)GetChild("btn_monopoly");
             btn_addDice50 = (GButton)GetChild("btn_addDice50");
             btn_addGold100 = (GButton)GetChild("btn_addGold100");
+            btn_bank = (GButton)GetChild("btn_bank");
+            btn_slot = (GButton)GetChild("btn_slot");
         }
     }
 }

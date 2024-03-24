@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniFramework.Event;
+using SunHeTBS;
 public class MonopolyMapController : MonoBehaviour
 {
     public MonopolyCamera monoCam;
@@ -114,6 +115,7 @@ public class MonopolyMapController : MonoBehaviour
         yield return null;
         playingAnim = false;
         monoCam.SetCameraFreeMove();
+        UniEvent.SendMessage(GameEventDefine.PawnJumpStop);
     }
     public void ResetPawnPosition()
     {
