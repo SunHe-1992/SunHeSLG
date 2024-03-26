@@ -98,12 +98,14 @@ public class UIPage_Construction : FUIBase
     string mapName = "MonopolyBoard";
     void OnBtnClose()
     {
-        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
-        handle.Completed += (scene) =>
-        {
-            FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
-            FUIManager.Inst.HideUI(this);
-        };
+        MonopolyDriver.Inst.StartTest();
+        FUIManager.Inst.HideUI(this);
+        //SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
+        //handle.Completed += (scene) =>
+        //{
+        //    FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
+        //    MonopolyMapController.inst.FindObjects();
+        //};
 
 
     }

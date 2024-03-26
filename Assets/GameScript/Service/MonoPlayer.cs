@@ -29,6 +29,8 @@ public static class MonoPlayer
     /// </summary>
     static void GenerateTestUserDetail()
     {
+        if (UserDetail != null)
+            return;
         UserDetail = new UserDetail();
         UserDetail.userId = 123;
         UserDetail.userName = "TestUser";

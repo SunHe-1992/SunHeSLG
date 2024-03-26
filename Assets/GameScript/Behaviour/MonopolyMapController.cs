@@ -46,26 +46,47 @@ public class MonopolyMapController : MonoBehaviour
     {
         inst = null;
     }
-    // Start is called before the first frame update
-    void Start()
+    public void FindObjects()
     {
-        pawnCtrl = GameObject.Find("MonoPawn").GetComponent<MonoPawnController>();
-        tileArrange = GameObject.Find("MonoTileGroup").GetComponent<MonoTileArrange>();
-        DiceCtrl = GameObject.Find("MonoDice").GetComponent<MonoDiceController>();
-        monoCam = GameObject.Find("MonopolyCamera").GetComponent<MonopolyCamera>();
+        var objPawn = GameObject.Find("MonoPawn");
+        var objTileArrange = GameObject.Find("MonoTileGroup");
+        var dice = GameObject.Find("MonoDice");
+        var cam = GameObject.Find("MonopolyCamera");
+        pawnCtrl = objPawn.GetComponent<MonoPawnController>();
+        tileArrange = objTileArrange.GetComponent<MonoTileArrange>();
+        DiceCtrl = dice.GetComponent<MonoDiceController>();
+        monoCam = cam.GetComponent<MonopolyCamera>();
 
-        tileArrange.GenerateTiles();
-        tileArrange.ArrangeTiles();
+        //DontDestroyOnLoad(objPawn);
+        //DontDestroyOnLoad(objTileArrange);
+        //DontDestroyOnLoad(dice);
+        //DontDestroyOnLoad(cam);
 
-        var tempList = tileArrange.GetAllTiles();
-        tilesList = new Dictionary<int, MonoTileController>();
-        foreach (var tile in tempList)
+    }
+    private void Start()
+    {
+        GenerateMap();
+    }
+    // Start is called before the first frame update
+    public void GenerateMap()
+    {
+        FindObjects();
+
+        if (tilesList == null)
         {
-            tilesList[tile.Index] = tile;
-        }
-        if (pawnCtrl != null && monoCam != null && monoCam.target == null)
-        {
-            monoCam.target = pawnCtrl.transform;
+            tileArrange.GenerateTiles();
+            tileArrange.ArrangeTiles();
+
+            var tempList = tileArrange.GetAllTiles();
+            tilesList = new Dictionary<int, MonoTileController>();
+            foreach (var tile in tempList)
+            {
+                tilesList[tile.Index] = tile;
+            }
+            if (pawnCtrl != null && monoCam != null && monoCam.target == null)
+            {
+                monoCam.target = pawnCtrl.transform;
+            }
         }
     }
 
@@ -84,6 +105,8 @@ public class MonopolyMapController : MonoBehaviour
     int step = 0;
     public void PlayDiceAnim(int value)
     {
+        if (DiceCtrl == null)
+            FindObjects();
         lastIndex = MLogic.Inst.lastTileIndex;
         currIndex = MLogic.Inst.currentTileIndex;
         step = CalculateStep(lastIndex, currIndex);

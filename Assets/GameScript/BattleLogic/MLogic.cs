@@ -71,6 +71,7 @@ public class MLogic : ISingleton
         mapCtrl.PlayDiceAnim(diceValue);
 
         UniEvent.SendMessage(GameEventDefine.DICE_COUNT_CHANGED);
+        MonoPlayer.UserDetail.IndexOnMap = currentTileIndex;
     }
 
     public static void Init()

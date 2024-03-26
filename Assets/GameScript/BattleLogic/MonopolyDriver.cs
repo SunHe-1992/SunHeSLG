@@ -196,8 +196,8 @@ namespace SunHeTBS
 
         private void OnEnterPreloadResState()
         {
+            //MonopolyMapController.inst.GenerateMap();
             SwitchDriveState(MonoDriveState.STATE_IN_BATTLE);
-
 
         }
 

@@ -68,7 +68,7 @@ public class UIPage_MonopolyMain : FUIBase
     }
     void BtnConstruction()
     {
-        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/MonoBuildingMap", LoadSceneMode.Additive);
+        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/MonoBuildingMap", LoadSceneMode.Single);
         handle.Completed += (scene) =>
         {
             FUIManager.Inst.ShowUI<UIPage_Construction>(FUIDef.FWindow.Construction);
@@ -124,7 +124,8 @@ public class UIPage_MonopolyMain : FUIBase
 
     void RefreshRollDiceBtn()
     {
-        ui.btn_RollDice.enabled = MonopolyMapController.inst.playingAnim == false;
+        if (MonopolyMapController.inst != null)
+            ui.btn_RollDice.enabled = MonopolyMapController.inst.playingAnim == false;
     }
 
     void OnDiceCountChanged(IEventMessage msg)
