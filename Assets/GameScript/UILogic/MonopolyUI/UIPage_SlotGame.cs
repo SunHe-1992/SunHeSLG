@@ -82,7 +82,7 @@ public class UIPage_SlotGame : FUIBase
             var wList = wheelList[i];
             DelayInvoker.Inst.StartCoroutine(PlayScrollAnim(wList, i * 0.5f));
         }
-        DelayInvoker.Inst.DelayInvoke(PlayReward, 5f);
+        DelayInvoker.Inst.DelayInvoke(PlayReward, 4.5f);
     }
 
     IEnumerator PlayScrollAnim(GList glist, float startDelay)
@@ -137,9 +137,13 @@ public class UIPage_SlotGame : FUIBase
 
     void PlayReward()
     {
+        ui.anim_frame.Play(PlayReward2);
+    }
+    void PlayReward2()
+    {
         long amount = MonopolyService.Inst.slotGameData.rewardMoney * MonoPlayer.diceFactor;
-        MonoPlayer.UpdateGoldAmount(amount);
         UIService.Inst.ShowMoneyAnim(amount);
+        MonoPlayer.UpdateGoldAmount(amount);
         GoBackToMainPage();
     }
 }

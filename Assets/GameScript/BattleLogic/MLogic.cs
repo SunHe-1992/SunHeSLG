@@ -55,10 +55,15 @@ public class MLogic : ISingleton
 
     public int diceValue = 0;
 
-    public void RollDice(int _diceFactor)
+    public void RollDice(int _diceFactor, int givenDice = -1)
     {
         //random dice value
-        diceValue = Random.Range(1, 7);
+        if (givenDice >= 0 && givenDice <= 6)
+        {
+            diceValue = givenDice;
+        }
+        else
+            diceValue = Random.Range(1, 7);
         MonoPlayer.UserDetail.diceCount -= _diceFactor;
         //Debugger.Log($"roll dice value={diceValue}");
         lastTileIndex = currentTileIndex;

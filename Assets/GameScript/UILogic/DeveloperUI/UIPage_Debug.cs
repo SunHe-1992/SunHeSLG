@@ -29,6 +29,15 @@ public class UIPage_Debug : FUIBase
         ui.btn_bank.onClick.Set(BtnBank);
         ui.btn_slot.onClick.Set(BtnSlotGame);
 
+        List<GButton> btnList = new List<GButton>()
+        {
+            ui.btn_dice1,ui.btn_dice2,ui.btn_dice3,ui.btn_dice4,ui.btn_dice5,ui.btn_dice6
+        };
+        for (int i = 0; i < btnList.Count; i++)
+        {
+            btnList[i].data = i + 1;
+            btnList[i].onClick.Set(BtnDice);
+        }
     }
     protected override void OnShown()
     {
@@ -101,5 +110,15 @@ public class UIPage_Debug : FUIBase
     {
         OnBtnClose();
         MLogic.Inst.HandleSlogGame(0, 0, 0, 0);
+    }
+
+    void BtnDice(EventContext ec)
+    {
+        int diceValue = (int)(ec.sender as GButton).data;
+        if (MLogic.Inst != null)
+        {
+            MLogic.Inst.RollDice(MonoPlayer.diceFactor, diceValue);
+            OnBtnClose();
+        }
     }
 }

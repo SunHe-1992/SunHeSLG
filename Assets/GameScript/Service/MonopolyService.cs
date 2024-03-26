@@ -83,6 +83,7 @@ public class MonopolyService : ISingleton
         public long rewardMoney = 0;
         readonly int rewardSlot = 6;
         readonly int winRate = 50; //win rate percent
+        public bool gotReward;
         public void RandomData()
         {
             slotIdList = new List<List<int>>();
@@ -98,6 +99,7 @@ public class MonopolyService : ISingleton
             // reward rate 50%
             if (Random.Range(0, 100) < winRate)
             {
+                gotReward = true;
                 //add reward random number
                 int rewardNumber = GetRandomSlotNumber();
                 foreach (var list in slotIdList)
@@ -110,6 +112,7 @@ public class MonopolyService : ISingleton
             }
             else //make sure no reward this time
             {
+                gotReward = false;
                 rewardMoney = 1;
                 slotIdList[0][rewardSlot] = Random.Range(0, 3);
                 slotIdList[1][rewardSlot] = Random.Range(3, 5);
