@@ -66,6 +66,7 @@ public class UIPage_SlotGame : FUIBase
             GList wheel = wheelList[i];
             wheel.SetVirtualAndLoop();
             wheel.numItems = innerList.Count;
+            wheel.scrollPane.SetPosY(0, false);
         }
 
     }
@@ -79,7 +80,6 @@ public class UIPage_SlotGame : FUIBase
         for (int i = 0; i < wheelList.Count; i++)
         {
             var wList = wheelList[i];
-            //wList.scrollPane.ScrollBottom(true);
             DelayInvoker.Inst.StartCoroutine(PlayScrollAnim(wList, i * 0.5f));
         }
         DelayInvoker.Inst.DelayInvoke(PlayReward, 5f);
@@ -107,7 +107,7 @@ public class UIPage_SlotGame : FUIBase
             glist.scrollPane.SetPosY(posY, false);
             yield return null;
         }
-        glist.scrollPane.SetPosY(64f, true);
+        glist.scrollPane.SetPosY(64f * 5, true);
     }
 
     void WheelItemRenderer1(int index, GObject go)
@@ -132,11 +132,12 @@ public class UIPage_SlotGame : FUIBase
     {
         UI_SlotIconCom obj = go as UI_SlotIconCom;
         obj.ctrl_icon.selectedIndex = icon;
+        //obj.txt_number.text = "" + index;
     }
 
     void PlayReward()
     {
-        long amount = 8888;
+        long amount = MonopolyService.Inst.slotGameData.rewardMoney * MonoPlayer.diceFactor;
         MonoPlayer.UpdateGoldAmount(amount);
         UIService.Inst.ShowMoneyAnim(amount);
         GoBackToMainPage();

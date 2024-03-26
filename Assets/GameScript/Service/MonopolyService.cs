@@ -80,6 +80,9 @@ public class MonopolyService : ISingleton
     {
         public List<List<int>> slotIdList;
         readonly int wheelIconCount = 20;
+        public long rewardMoney = 0;
+        readonly int rewardSlot = 6;
+        readonly int winRate = 50; //win rate percent
         public void RandomData()
         {
             slotIdList = new List<List<int>>();
@@ -92,12 +95,41 @@ public class MonopolyService : ISingleton
                 }
                 slotIdList.Add(subList);
             }
+            // reward rate 50%
+            if (Random.Range(0, 100) < winRate)
+            {
+                //add reward random number
+                int rewardNumber = GetRandomSlotNumber();
+                foreach (var list in slotIdList)
+                {
+                    //replace the number
+                    list[rewardSlot] = rewardNumber;
+                }
+                Debugger.Log("force reward id = " + rewardNumber);
+                rewardMoney = rewardDic[rewardNumber];
+            }
+            else //make sure no reward this time
+            {
+                rewardMoney = 1;
+                slotIdList[0][rewardSlot] = Random.Range(0, 3);
+                slotIdList[1][rewardSlot] = Random.Range(3, 5);
+                slotIdList[2][rewardSlot] = Random.Range(3, 5);
+                Debugger.Log("no force reward id ");
+            }
         }
         //icon [0,5]
         int GetRandomSlotNumber()
         {
             return Random.Range(0, 5);
         }
+        Dictionary<int, long> rewardDic = new Dictionary<int, long>()
+        {
+            {0, 10000 },
+            {1, 20000 },
+            {2, 40000 },
+            {3, 80000 },
+            {4, 100000 },
+        };
     }
     #endregion
 }
