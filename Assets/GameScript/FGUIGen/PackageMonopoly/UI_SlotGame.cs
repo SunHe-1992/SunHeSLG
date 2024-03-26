@@ -11,6 +11,7 @@ namespace PackageMonopoly
         public UI_SlotWheel wheel2;
         public UI_SlotWheel wheel3;
         public GButton btn_slot;
+        public Transition anim_frame;
         public const string URL = "ui://dxvwggiw7irf1d";
 
         public static UI_SlotGame CreateInstance()
@@ -26,6 +27,7 @@ namespace PackageMonopoly
             wheel2 = (UI_SlotWheel)GetChild("wheel2");
             wheel3 = (UI_SlotWheel)GetChild("wheel3");
             btn_slot = (GButton)GetChild("btn_slot");
+            anim_frame = GetTransition("anim_frame");
         }
     }
 }
