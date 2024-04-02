@@ -119,8 +119,8 @@ public class MLogic : ISingleton
             case 100: HandleAddMoney(eventId, param1, param2, tileId); break;
             case 101: HandleCostMoney(eventId, param1, param2, tileId); break;
             case 102: HandleBankHeist(eventId, param1, param2, tileId); break;
-            case 103: HandleSlogGame(eventId, param1, param2, tileId); break;
-            case 104: break;
+            case 103: HandleSlotGame(eventId, param1, param2, tileId); break;
+            case 104: HandleFishingGame(eventId, param1, param2, tileId); break;
             case 105: break;
 
         }
@@ -148,11 +148,17 @@ public class MLogic : ISingleton
 
     }
 
-    public void HandleSlogGame(int eventId, float param1, int param2, int tileId)
+    public void HandleSlotGame(int eventId, float param1, int param2, int tileId)
     {
         MonopolyService.Inst.SetUpSlotGameData();
         FUIManager.Inst.HideUI(FUIDef.FWindow.MonopolyMain);
         FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
+    }
+
+    public void HandleFishingGame(int eventId, float param1, int param2, int tileId)
+    {
+        FUIManager.Inst.HideUI(FUIDef.FWindow.MonopolyMain);
+        FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
     }
     #endregion
 }

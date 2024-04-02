@@ -21,10 +21,10 @@
     "ID": 2,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 104,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "EARN"
+    "tileTitle": "FISH"
   },
   {
     "ID": 3,
@@ -93,10 +93,10 @@
     "ID": 10,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 104,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "EARN"
+    "tileTitle": "FISH"
   },
   {
     "ID": 11,
@@ -174,10 +174,10 @@
     "ID": 19,
     "isCorner": true,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 104,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "EARN"
+    "tileTitle": "FISH"
   },
   {
     "ID": 20,
@@ -273,10 +273,10 @@
     "ID": 30,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 104,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "EARN"
+    "tileTitle": "FISH"
   },
   {
     "ID": 31,
@@ -345,10 +345,10 @@
     "ID": 38,
     "isCorner": false,
     "triggerOnPass": false,
-    "eventId": 100,
+    "eventId": 104,
     "eventParam1": 1,
     "eventParam2": 0,
-    "tileTitle": "EARN"
+    "tileTitle": "FISH"
   },
   {
     "ID": 39,

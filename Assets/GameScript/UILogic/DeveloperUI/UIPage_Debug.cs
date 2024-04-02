@@ -28,6 +28,7 @@ public class UIPage_Debug : FUIBase
         ui.btn_addGold100.onClick.Set(BtnAddGold);
         ui.btn_bank.onClick.Set(BtnBank);
         ui.btn_slot.onClick.Set(BtnSlotGame);
+        ui.btn_fishing.onClick.Set(BtnFishingGame);
 
         List<GButton> btnList = new List<GButton>()
         {
@@ -109,7 +110,7 @@ public class UIPage_Debug : FUIBase
     void BtnSlotGame()
     {
         OnBtnClose();
-        MLogic.Inst.HandleSlogGame(0, 0, 0, 0);
+        MLogic.Inst.HandleSlotGame(0, 0, 0, 0);
     }
 
     void BtnDice(EventContext ec)
@@ -120,5 +121,10 @@ public class UIPage_Debug : FUIBase
             MLogic.Inst.RollDice(MonoPlayer.diceFactor, diceValue);
             OnBtnClose();
         }
+    }
+    void BtnFishingGame()
+    {
+        OnBtnClose();
+        MLogic.Inst.HandleFishingGame(0, 0, 0, 0);
     }
 }

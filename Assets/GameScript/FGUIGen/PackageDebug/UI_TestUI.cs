@@ -22,6 +22,7 @@ namespace PackageDebug
         public GButton btn_dice4;
         public GButton btn_dice5;
         public GButton btn_dice6;
+        public GButton btn_fishing;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -48,6 +49,7 @@ namespace PackageDebug
             btn_dice4 = (GButton)GetChild("btn_dice4");
             btn_dice5 = (GButton)GetChild("btn_dice5");
             btn_dice6 = (GButton)GetChild("btn_dice6");
+            btn_fishing = (GButton)GetChild("btn_fishing");
         }
     }
 }
