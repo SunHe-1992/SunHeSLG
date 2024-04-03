@@ -27,6 +27,11 @@ public class UIPage_Fishing : FUIBase
     {
         base.OnShown();
 
+        circleComp.anim_bad.Stop();
+        circleComp.anim_good.Stop();
+        circleComp.anim_excellent.Stop();
+        circleComp.anim_waiting.Stop();
+
         SetStateWait();
         circleComp.anim_waiting.Play(WaitingPlayDone);
     }
