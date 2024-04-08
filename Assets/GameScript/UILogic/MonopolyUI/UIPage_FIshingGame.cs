@@ -160,7 +160,9 @@ public class UIPage_Fishing : FUIBase
             DisplayProgressAnim(addProgress);
             this.state = FishingState.Wait;
             DelayInvoker.Inst.DelayInvoke(ResumeFishing, 0.5f);
+            UIService.Inst.PlaySound("ui://AudioPackage/SkillUp");//play sound SkillUp
         }
+
     }
     void ResumeFishing()
     {

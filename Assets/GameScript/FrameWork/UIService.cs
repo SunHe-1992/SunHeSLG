@@ -190,4 +190,11 @@ public class UIService : ISingleton
         if (moneyValue == 0) return;
         FUIManager.Inst.ShowUI<UIPage_HintPage>(FUIDef.FWindow.HintPage, null, moneyValue);
     }
+
+    public void PlaySound(string soundRes, float volumeScale = 1.0f)
+    {
+        NAudioClip sound = UIPackage.GetItemAssetByURL(soundRes) as NAudioClip;
+        if (sound != null && sound.nativeClip != null)
+            Stage.inst.PlayOneShotSound(sound.nativeClip, volumeScale);
+    }
 }
