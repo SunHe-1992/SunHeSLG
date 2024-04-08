@@ -132,6 +132,11 @@ public class UIPage_Construction : FUIBase
         {
             obj.txt_price.text = "" + lvCfg.Price * cptCfg.PriceMultiplier;
         }
+        string imageName = lv1Cfg.Image;
+        if(buildingLevel>0)
+            imageName = lvCfg.Image;
+        obj.loader_pic.url = imageName;
+        obj.txt_name.text = lv1Cfg.Name;
         //dot item: set level
         obj.dotItem.ctrl_tier.selectedIndex = buildingLevel;
 

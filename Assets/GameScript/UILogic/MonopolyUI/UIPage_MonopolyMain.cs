@@ -211,6 +211,6 @@ public class UIPage_MonopolyMain : FUIBase
 
     void OnBtnTest()
     {
-        MLogic.Inst.HandleBankHeist(0, 0, 0, 0);
+        FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
     }
 }

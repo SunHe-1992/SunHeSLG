@@ -9,7 +9,7 @@
   },
   {
     "ID": 1,
-    "Name": "",
+    "Name": "Coffee shop",
     "Level": 1,
     "price": 700,
     "isMax": false,
@@ -17,7 +17,7 @@
   },
   {
     "ID": 1,
-    "Name": "",
+    "Name": "Coffee shop",
     "Level": 2,
     "price": 900,
     "isMax": false,
@@ -25,7 +25,7 @@
   },
   {
     "ID": 1,
-    "Name": "",
+    "Name": "Coffee shop",
     "Level": 3,
     "price": 1100,
     "isMax": false,
@@ -33,7 +33,7 @@
   },
   {
     "ID": 1,
-    "Name": "",
+    "Name": "Coffee shop",
     "Level": 4,
     "price": 1300,
     "isMax": false,
@@ -41,7 +41,7 @@
   },
   {
     "ID": 1,
-    "Name": "",
+    "Name": "Coffee shop",
     "Level": 5,
     "price": 1500,
     "isMax": true,
@@ -57,7 +57,7 @@
   },
   {
     "ID": 2,
-    "Name": "",
+    "Name": "Supermarket",
     "Level": 1,
     "price": 800,
     "isMax": false,
@@ -65,7 +65,7 @@
   },
   {
     "ID": 2,
-    "Name": "",
+    "Name": "Supermarket",
     "Level": 2,
     "price": 1000,
     "isMax": false,
@@ -73,7 +73,7 @@
   },
   {
     "ID": 2,
-    "Name": "",
+    "Name": "Supermarket",
     "Level": 3,
     "price": 1200,
     "isMax": false,
@@ -81,7 +81,7 @@
   },
   {
     "ID": 2,
-    "Name": "",
+    "Name": "Supermarket",
     "Level": 4,
     "price": 1400,
     "isMax": false,
@@ -89,7 +89,7 @@
   },
   {
     "ID": 2,
-    "Name": "",
+    "Name": "Supermarket",
     "Level": 5,
     "price": 1600,
     "isMax": true,
@@ -105,7 +105,7 @@
   },
   {
     "ID": 3,
-    "Name": "",
+    "Name": "Baber Shop",
     "Level": 1,
     "price": 900,
     "isMax": false,
@@ -113,7 +113,7 @@
   },
   {
     "ID": 3,
-    "Name": "",
+    "Name": "Baber Shop",
     "Level": 2,
     "price": 1100,
     "isMax": false,
@@ -121,7 +121,7 @@
   },
   {
     "ID": 3,
-    "Name": "",
+    "Name": "Baber Shop",
     "Level": 3,
     "price": 1300,
     "isMax": false,
@@ -129,7 +129,7 @@
   },
   {
     "ID": 3,
-    "Name": "",
+    "Name": "Baber Shop",
     "Level": 4,
     "price": 1500,
     "isMax": false,
@@ -137,7 +137,7 @@
   },
   {
     "ID": 3,
-    "Name": "",
+    "Name": "Baber Shop",
     "Level": 5,
     "price": 1700,
     "isMax": true,
@@ -153,7 +153,7 @@
   },
   {
     "ID": 4,
-    "Name": "",
+    "Name": "Pharmacy",
     "Level": 1,
     "price": 1000,
     "isMax": false,
@@ -161,7 +161,7 @@
   },
   {
     "ID": 4,
-    "Name": "",
+    "Name": "Pharmacy",
     "Level": 2,
     "price": 1200,
     "isMax": false,
@@ -169,7 +169,7 @@
   },
   {
     "ID": 4,
-    "Name": "",
+    "Name": "Pharmacy",
     "Level": 3,
     "price": 1400,
     "isMax": false,
@@ -177,7 +177,7 @@
   },
   {
     "ID": 4,
-    "Name": "",
+    "Name": "Pharmacy",
     "Level": 4,
     "price": 1600,
     "isMax": false,
@@ -185,7 +185,7 @@
   },
   {
     "ID": 4,
-    "Name": "",
+    "Name": "Pharmacy",
     "Level": 5,
     "price": 1800,
     "isMax": true,
@@ -201,7 +201,7 @@
   },
   {
     "ID": 5,
-    "Name": "",
+    "Name": "Car repair shop",
     "Level": 1,
     "price": 1150,
     "isMax": false,
@@ -209,7 +209,7 @@
   },
   {
     "ID": 5,
-    "Name": "",
+    "Name": "Car repair shop",
     "Level": 2,
     "price": 1350,
     "isMax": false,
@@ -217,7 +217,7 @@
   },
   {
     "ID": 5,
-    "Name": "",
+    "Name": "Car repair shop",
     "Level": 3,
     "price": 1550,
     "isMax": false,
@@ -225,7 +225,7 @@
   },
   {
     "ID": 5,
-    "Name": "",
+    "Name": "Car repair shop",
     "Level": 4,
     "price": 1750,
     "isMax": false,
@@ -233,7 +233,7 @@
   },
   {
     "ID": 5,
-    "Name": "",
+    "Name": "Car repair shop",
     "Level": 5,
     "price": 1950,
     "isMax": true,

@@ -32,8 +32,8 @@ public static class MonoPlayer
         if (UserDetail != null)
             return;
         UserDetail = new UserDetail();
-        UserDetail.userId = 123;
-        UserDetail.userName = "TestUser";
+        UserDetail.userId = 301410195;
+        UserDetail.userName = "He Sun";
         UserDetail.IndexOnMap = 39;
         UserDetail.currentChapter = 1001;
         UserDetail.diceCount = 12;
