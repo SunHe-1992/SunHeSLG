@@ -170,7 +170,7 @@ public class UIService : ISingleton
     }
     public void RefereshMoneyPointTxt(GTextField txtField)
     {
-        string msg = FormatNumber(MonoPlayer.GetGoldAmount());
+        string msg = FormatNumber(TBSPlayer.GetGoldAmount());
         txtField.text = msg;
     }
 
@@ -180,8 +180,8 @@ public class UIService : ISingleton
         if (topBarCom != null)
         {
             UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num); //gold amount
-            topBarCom.head.txt_lvName.text = MonoPlayer.UserDetail.userName;//user name
-            topBarCom.head.txt_UID.text = "ID: " + MonoPlayer.UserDetail.userId;//user id
+            topBarCom.head.txt_lvName.text = TBSPlayer.UserDetail.userName;//user name
+            topBarCom.head.txt_UID.text = "ID: " + TBSPlayer.UserDetail.userId;//user id
         }
     }
 

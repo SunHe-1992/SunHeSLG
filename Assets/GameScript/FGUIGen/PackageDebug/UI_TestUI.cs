@@ -11,17 +11,8 @@ namespace PackageDebug
         public GButton btn_test;
         public GButton btn_slg;
         public GButton btn_close;
-        public GButton btn_monopoly;
-        public GButton btn_addDice50;
         public GButton btn_addGold100;
-        public GButton btn_bank;
         public GButton btn_slot;
-        public GButton btn_dice1;
-        public GButton btn_dice2;
-        public GButton btn_dice3;
-        public GButton btn_dice4;
-        public GButton btn_dice5;
-        public GButton btn_dice6;
         public GButton btn_fishing;
         public const string URL = "ui://arg2zso7pk0k0";
 
@@ -38,17 +29,8 @@ namespace PackageDebug
             btn_test = (GButton)GetChild("btn_test");
             btn_slg = (GButton)GetChild("btn_slg");
             btn_close = (GButton)GetChild("btn_close");
-            btn_monopoly = (GButton)GetChild("btn_monopoly");
-            btn_addDice50 = (GButton)GetChild("btn_addDice50");
             btn_addGold100 = (GButton)GetChild("btn_addGold100");
-            btn_bank = (GButton)GetChild("btn_bank");
             btn_slot = (GButton)GetChild("btn_slot");
-            btn_dice1 = (GButton)GetChild("btn_dice1");
-            btn_dice2 = (GButton)GetChild("btn_dice2");
-            btn_dice3 = (GButton)GetChild("btn_dice3");
-            btn_dice4 = (GButton)GetChild("btn_dice4");
-            btn_dice5 = (GButton)GetChild("btn_dice5");
-            btn_dice6 = (GButton)GetChild("btn_dice6");
             btn_fishing = (GButton)GetChild("btn_fishing");
         }
     }

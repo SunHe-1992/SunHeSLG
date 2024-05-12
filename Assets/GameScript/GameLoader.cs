@@ -44,11 +44,8 @@ public class GameLoader : MonoBehaviour
         BattleDriver.Init();
         BLogic.Init();
         TBSMapService.Init();
-        //monopoly game singletons
-        MonopolyDriver.Init();
-        MLogic.Init();
         LocalServer.Init();
-        MonopolyService.Init();
+        MinigameService.Init();
 
         //framework
         FUIManager.Init();

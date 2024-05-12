@@ -13,10 +13,7 @@ public class FUIDef
         UnitUI,
         CombatPredict,
         CombatPanel,
-        MonopolyMain,
-        Construction,
         HintPage,
-        BankHeist,
         SlotGame,
         Fishing,
     }
@@ -28,7 +25,7 @@ public class FUIDef
         PackageDebug,
         PackageShared,
         PackageBattle,
-        PackageMonopoly,
+        PackageMinigame,
         CommonPackage,
         CommonButton,
     }
@@ -44,11 +41,8 @@ public class FUIDef
         {FWindow.UnitUI, FPackage.PackageBattle},
         {FWindow.CombatPredict, FPackage.PackageBattle},
         {FWindow.CombatPanel, FPackage.PackageBattle},
-        {FWindow.MonopolyMain, FPackage.PackageMonopoly},
-        {FWindow.Construction, FPackage.PackageMonopoly},
         {FWindow.HintPage, FPackage.PackageShared},
-        {FWindow.BankHeist, FPackage.PackageMonopoly},
-        {FWindow.SlotGame, FPackage.PackageMonopoly},
-        {FWindow.Fishing, FPackage.PackageMonopoly},
+        {FWindow.SlotGame, FPackage.PackageMinigame},
+        {FWindow.Fishing, FPackage.PackageMinigame},
     };
 }

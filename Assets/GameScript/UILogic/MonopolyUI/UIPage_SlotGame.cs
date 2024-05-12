@@ -58,7 +58,7 @@ public class UIPage_SlotGame : FUIBase
 
     void RefreshContent()
     {
-        var outList = MonopolyService.Inst.slotGameData.slotIdList;
+        var outList = MinigameService.Inst.slotGameData.slotIdList;
 
         for (int i = 0; i < wheelList.Count; i++)
         {
@@ -73,7 +73,6 @@ public class UIPage_SlotGame : FUIBase
     void GoBackToMainPage()
     {
         FUIManager.Inst.HideUI(this);
-        FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
     }
     void OnBtnSlot()
     {
@@ -112,19 +111,19 @@ public class UIPage_SlotGame : FUIBase
 
     void WheelItemRenderer1(int index, GObject go)
     {
-        var outList = MonopolyService.Inst.slotGameData.slotIdList;
+        var outList = MinigameService.Inst.slotGameData.slotIdList;
         int icon = outList[0][index];
         WheelItemRenderer(index, go, icon);
     }
     void WheelItemRenderer2(int index, GObject go)
     {
-        var outList = MonopolyService.Inst.slotGameData.slotIdList;
+        var outList = MinigameService.Inst.slotGameData.slotIdList;
         int icon = outList[1][index];
         WheelItemRenderer(index, go, icon);
     }
     void WheelItemRenderer3(int index, GObject go)
     {
-        var outList = MonopolyService.Inst.slotGameData.slotIdList;
+        var outList = MinigameService.Inst.slotGameData.slotIdList;
         int icon = outList[2][index];
         WheelItemRenderer(index, go, icon);
     }
@@ -141,9 +140,9 @@ public class UIPage_SlotGame : FUIBase
     }
     void PlayReward2()
     {
-        long amount = MonopolyService.Inst.slotGameData.rewardMoney * MonoPlayer.diceFactor;
-        UIService.Inst.ShowMoneyAnim(amount);
-        MonoPlayer.UpdateGoldAmount(amount);
-        GoBackToMainPage();
+        //long amount = MinigameService.Inst.slotGameData.rewardMoney;
+        //UIService.Inst.ShowMoneyAnim(amount);
+        //TBSPlayer.UpdateGoldAmount(amount);
+        //GoBackToMainPage();
     }
 }

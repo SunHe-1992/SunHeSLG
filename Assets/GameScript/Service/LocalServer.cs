@@ -25,19 +25,8 @@ public class LocalServer : ISingleton
         Inst = UniSingleton.CreateSingleton<LocalServer>();
     }
 
-    public void RequestBuildingUpgrade(int buildingId)
-    {
-        var buildingData = MonoPlayer.buildingDic[buildingId];
-        //spend money
-        var cfg = ConfigManager.table.TbBuilding.Get(buildingId, buildingData.buildingLevel);
-        CostGold(cfg.Price);
-        buildingData.buildingLevel++;
-
-        UniEvent.SendMessage(GameEventDefine.Building_Changed);
-
-    }
     void CostGold(long cost)
     {
-        MonoPlayer.UpdatePointAmount(PointEnum.Gold, -cost);
+        TBSPlayer.UpdatePointAmount(PointEnum.Gold, -cost);
     }
 }

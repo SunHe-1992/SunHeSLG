@@ -2,9 +2,9 @@
 
 using FairyGUI;
 
-namespace PackageMonopoly
+namespace PackageMinigame
 {
-    public class PackageMonopolyBinder
+    public class PackageMinigameBinder
     {
         public static void BindAll()
         {
@@ -13,8 +13,6 @@ namespace PackageMonopoly
             UIObjectFactory.SetPackageItemExtension(UI_SlotWheel.URL, typeof(UI_SlotWheel));
             UIObjectFactory.SetPackageItemExtension(UI_Fishing.URL, typeof(UI_Fishing));
             UIObjectFactory.SetPackageItemExtension(UI_FishingCircle.URL, typeof(UI_FishingCircle));
-            UIObjectFactory.SetPackageItemExtension(UI_MonopolyMain.URL, typeof(UI_MonopolyMain));
-            UIObjectFactory.SetPackageItemExtension(UI_DiceFactor.URL, typeof(UI_DiceFactor));
         }
     }
 }

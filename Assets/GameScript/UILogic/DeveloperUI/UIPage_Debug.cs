@@ -23,22 +23,11 @@ public class UIPage_Debug : FUIBase
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_slg.onClick.Set(BtnGotoBattle);
         ui.btn_close.onClick.Set(OnBtnClose);
-        ui.btn_monopoly.onClick.Set(BtnMonopoly);
-        ui.btn_addDice50.onClick.Set(BtnAddDice);
         ui.btn_addGold100.onClick.Set(BtnAddGold);
-        ui.btn_bank.onClick.Set(BtnBank);
         ui.btn_slot.onClick.Set(BtnSlotGame);
         ui.btn_fishing.onClick.Set(BtnFishingGame);
 
-        List<GButton> btnList = new List<GButton>()
-        {
-            ui.btn_dice1,ui.btn_dice2,ui.btn_dice3,ui.btn_dice4,ui.btn_dice5,ui.btn_dice6
-        };
-        for (int i = 0; i < btnList.Count; i++)
-        {
-            btnList[i].data = i + 1;
-            btnList[i].onClick.Set(BtnDice);
-        }
+
     }
     protected override void OnShown()
     {
@@ -87,44 +76,25 @@ public class UIPage_Debug : FUIBase
     {
         FUIManager.Inst.HideUI(this);
     }
-    void BtnMonopoly()
-    {
-        MonopolyDriver.Inst.StartTest();
-        OnBtnClose();
-    }
-    void BtnAddDice()
-    {
-        MonoPlayer.UserDetail.diceCount += 50;
-        UniEvent.SendMessage(GameEventDefine.DICE_COUNT_CHANGED);
-    }
+
+
     void BtnAddGold()
     {
-        MonoPlayer.UpdateGoldAmount(10000);
+        TBSPlayer.UpdateGoldAmount(10000);
         UniEvent.SendMessage(GameEventDefine.POINTS_CHANGED);
     }
-    void BtnBank()
-    {
-        OnBtnClose();
-        MLogic.Inst.HandleBankHeist(0, 0, 0, 0);
-    }
+
     void BtnSlotGame()
     {
         OnBtnClose();
-        MLogic.Inst.HandleSlotGame(0, 0, 0, 0);
+        MinigameService.Inst.SetUpSlotGameData();
+        FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
     }
 
-    void BtnDice(EventContext ec)
-    {
-        int diceValue = (int)(ec.sender as GButton).data;
-        if (MLogic.Inst != null)
-        {
-            MLogic.Inst.RollDice(MonoPlayer.diceFactor, diceValue);
-            OnBtnClose();
-        }
-    }
+
     void BtnFishingGame()
     {
         OnBtnClose();
-        MLogic.Inst.HandleFishingGame(0, 0, 0, 0);
+        FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
     }
 }

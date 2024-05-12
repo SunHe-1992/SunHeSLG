@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace RedBjorn.ProtoTiles
@@ -8,7 +8,7 @@ namespace RedBjorn.ProtoTiles
     {
         public Vector3Int TilePos;
         public string Id;
-        public int MovableArea;
+    public int MovableArea;
         public float[] SideHeight = new float[6] { 0f, 0f, 0f, 0f, 0f, 0f };
     }
 }

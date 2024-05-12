@@ -204,14 +204,13 @@ public class UIPage_Fishing : FUIBase
     {
         this.state = FishingState.Finished;
 
-        long amount = 9999 * MonoPlayer.diceFactor;
+        long amount = 9999;
         UIService.Inst.ShowMoneyAnim(amount);
-        MonoPlayer.UpdateGoldAmount(amount);
+        TBSPlayer.UpdateGoldAmount(amount);
         GoBackToMainPage();
     }
     void GoBackToMainPage()
     {
         FUIManager.Inst.HideUI(this);
-        FUIManager.Inst.ShowUI<UIPage_MonopolyMain>(FUIDef.FWindow.MonopolyMain);
     }
 }
