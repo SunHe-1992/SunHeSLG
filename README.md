@@ -11,17 +11,11 @@ excel config: https://github.com/SunHe-1992/SunHeSLGConfigs
 ## How to play
 entrance scene: Assets/Boot.unity  
 recommended screen resolution 640*1280 (portrait)  
-start by clicking GameMonopoly  
-click Roll Dice button to run the basic gameplay.  
+start by clicking Fire Emblem  
 ### DebugUI
 in game scene, press F1 to open debugUI  
-you could add money / dices, instant start mini games, roll dice with a value you defined.  
-### mini games 
-jump to specific tiles to enter a mini game  
-Bank heist  
+start mini games  
+### mini games   
 SLOT game  
-Fishing game  
-### modules
-building construction: click BUILD button beside the Roll Dice button.  
-cost money to upgrade buildings.  
+Fishing game    
 
