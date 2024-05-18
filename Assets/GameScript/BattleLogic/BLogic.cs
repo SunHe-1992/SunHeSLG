@@ -193,7 +193,7 @@ namespace SunHeTBS
             p.CharacterId = 1000;
             p.ClassId = 1001;
             p.curPosition = pos;
-            p.modelName = "M_AA_001";
+            p.modelName = "SwordMan2D";
             p.moveType = moveType;
             p.Init();
             AddPawn(p);

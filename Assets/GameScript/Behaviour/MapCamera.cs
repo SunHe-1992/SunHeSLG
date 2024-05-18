@@ -19,9 +19,9 @@ cam pos : x =tile , y =10 , z= tile_z -1.5
     void Update()
     {
         var curPos = this.transform.position;
-        this.transform.position = Vector3.Slerp(curPos, targetCamPos, 0.1f);
+        this.transform.position = Vector3.Slerp(curPos, targetCamPos, -10f);
         //float lerpX = Mathf.Lerp(this.transform.rotation.x, camTargetRotateY, 0.1f);
-        this.transform.rotation = Quaternion.Euler(camTargetRotateX, 0, 0);
+        //this.transform.rotation = Quaternion.Euler(camTargetRotateX, 0, 0);
     }
     Vector3 targetTilePos;
     Vector3 targetCamPos;
@@ -29,7 +29,7 @@ cam pos : x =tile , y =10 , z= tile_z -1.5
     public void SetTargetTilePos(Vector3 pos)
     {
         targetTilePos = pos;
-        targetCamPos = new Vector3(pos.x, 10f, pos.z - 1.5f);
+        targetCamPos = pos;// new Vector3(pos.x, 10f, pos.z - 1.5f);
         TrimCamPos();
     }
     Rect mapBorder;

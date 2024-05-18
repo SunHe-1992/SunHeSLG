@@ -13,8 +13,10 @@ public class CursorControl : MonoBehaviour
     }
     void ChangePlaneColor(Color color)
     {
-        var mr = trans_plane.GetComponent<MeshRenderer>();
-        mr.material.color = color;
+        //var mr = trans_plane.GetComponent<MeshRenderer>();
+        //mr.material.color = color;
+        var sr = this.GetComponent<SpriteRenderer>();
+        sr.color = color;
     }
     public void ChangeRed()
     {
@@ -27,6 +29,7 @@ public class CursorControl : MonoBehaviour
 
     public void ShowHideArrow(bool isshow)
     {
-        trans_arrow.gameObject.SetActive(isshow);
+        if (trans_arrow != null)
+            trans_arrow.gameObject.SetActive(isshow);
     }
 }

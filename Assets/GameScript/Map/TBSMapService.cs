@@ -129,9 +129,9 @@ namespace SunHeTBS
             }
         }
         #region cover planes on map
-        public static readonly string str_PlaneBlue = "Gizmos/CoverPlaneBlue";
-        public static readonly string str_PlanePurple = "Gizmos/CoverPlanePurple";
-        public static readonly string str_PlaneRed = "Gizmos/CoverPlaneRed";
+        public static readonly string str_PlaneBlue = "Gizmos/CoverPlaneBlue2D";
+        public static readonly string str_PlanePurple = "Gizmos/CoverPlanePurple2D";
+        public static readonly string str_PlaneRed = "Gizmos/CoverPlaneRed2D";
 
         Transform CoverPlaneTrans = null;
         List<SpawnHandle> spHandleList = new List<SpawnHandle>();

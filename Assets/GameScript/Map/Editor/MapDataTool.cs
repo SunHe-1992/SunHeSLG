@@ -19,6 +19,12 @@ namespace SunHeTBS
         {
             return new Vector3Int(tileId / MapCols, tileId % MapCols);
         }
+
+        static readonly bool use2DLogicMap = true;
+        /// <summary>
+        /// read TilePresetData from MapView/Tiles gameobjects, save to json file
+        /// </summary>
+        [MenuItem("SUNHE/ExportLogicMapData逻辑地图导出json")]
         public static void ExportData()
         {
             /*check tile datas,must be rect map ,xz starts with 0,0*/
@@ -34,22 +40,28 @@ namespace SunHeTBS
                 HashSet<Vector2Int> vectHash = new HashSet<Vector2Int>();
                 for (int i = 0; i < tpdDataList.Length; i++)
                 {
-                    var tileTrans = tilesObj.transform.GetChild(i);
-                    TilePresetData tpd = tileTrans.GetComponent<TilePresetData>();
-                    var pos = tileTrans.transform.position;
+                    TilePresetData tpd = tilesObj.transform.GetChild(i).GetComponent<TilePresetData>();
+                    Vector3 pos = tilesObj.transform.GetChild(i).transform.position;
                     TileData4Json data = new TileData4Json();
                     //position
                     data.x = (int)pos.x;
-                    data.y = (int)pos.z;
+                    if (use2DLogicMap)
+                        data.y = (int)pos.y;
+                    else
+                        data.y = (int)pos.z;
 
 
                     if (data.x >= 0 && data.y >= 0)
                     {
-                        var peakTrans = tileTrans.Find("peakObj");
+                        //表示高度的transform,用处是3d地图覆盖其他特效指示高度
                         float height = 0;
-                        if (peakTrans != null)
+                        if (use2DLogicMap == false)
                         {
-                            height = peakTrans.localPosition.y;
+                            var peakTrans = tilesObj.transform.GetChild(i).Find("peakObj");
+                            if (peakTrans != null)
+                            {
+                                height = peakTrans.localPosition.y;
+                            }
                         }
                         var vect = new Vector2Int(data.x, data.y);
                         if (vectHash.Contains(vect))
@@ -95,7 +107,7 @@ namespace SunHeTBS
                         File.Create(savePath);
                     }
                     System.IO.File.WriteAllText(savePath, jsonStr);
-                    Debug.Log("exported success");
+                    Debug.Log("exported success " + savePath);
                 }
             }
             void ShowEditorWarning(string message)

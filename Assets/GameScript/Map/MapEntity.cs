@@ -175,7 +175,10 @@ namespace SunHeTBS
         /// <returns></returns>
         public Vector3 WorldPosition(Vector3Int vect)
         {
-            return new Vector3(vect.x * TileSize, 0f, vect.y * TileSize);
+            //3D map use (x,z)
+            //return new Vector3(vect.x * TileSize, 0f, vect.y * TileSize);
+            //2D map use (x,y)
+            return new Vector3(vect.x * TileSize, vect.y * TileSize, 0);
         }
         /// <summary>
         /// unity pos -> tile pos

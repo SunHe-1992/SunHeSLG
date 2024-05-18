@@ -17,11 +17,6 @@ namespace SunHeTBS
         Transform pawnModelTrans;
         public float moveSpeed = 10f;
         const float nearDist = 0.02f;
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         // Update is called once per frame
         void Update()
@@ -57,8 +52,10 @@ namespace SunHeTBS
                 {
                     Vector3 distOffset = destPos - transform.position;
                     transform.position += distOffset.normalized * stepDist;
-                    var rotateTo = Quaternion.Euler(0, GetMoveRotation(), 0);
-                    pawnModelTrans.transform.rotation = Quaternion.Lerp(transform.rotation, rotateTo, 0.3f);
+
+                    //2d don't change rotation
+                    //var rotateTo = Quaternion.Euler(0, GetMoveRotation(), 0);
+                    //pawnModelTrans.transform.rotation = Quaternion.Lerp(transform.rotation, rotateTo, 0.3f);
                 }
             }
         }
@@ -93,7 +90,7 @@ namespace SunHeTBS
         }
         public void StopMove()
         {
-            pawnModelTrans.transform.rotation = Quaternion.Euler(0, GetMoveRotation(), 0);
+            //pawnModelTrans.transform.rotation = Quaternion.Euler(0, GetMoveRotation(), 0);
             nextTile = null;
             pathQueue = null;
         }

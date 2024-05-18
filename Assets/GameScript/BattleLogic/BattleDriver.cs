@@ -168,7 +168,7 @@ namespace SunHeTBS
             SwitchDriveState(BattleDriveState.STATE_LOAD_SCENE);
         }
 
-        string mapName = "SLGMapTest";
+        string mapName = "Map2dTest";//"SLGMapTest";
         private void OnEnterLoadSceneState()
         {
             SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
@@ -222,7 +222,7 @@ namespace SunHeTBS
         private void OnEnterLoadMapPrefabState()
         {
             //load arrow cursor object
-            var arrowHandle = YooAssets.LoadAssetSync("Effect/Signs/arrowSign", typeof(GameObject));
+            var arrowHandle = YooAssets.LoadAssetSync("Effect/Signs/CursorObj2D", typeof(GameObject));
             var obj = GameObject.Instantiate(arrowHandle.AssetObject as GameObject);
             obj.name = "CursorObj";
             cursorCtrl = obj.AddComponent<CursorControl>();
@@ -300,7 +300,7 @@ namespace SunHeTBS
                 {
                     topHeight = tile.topHeight;
                 }
-                cursorCtrl.transform.position = pos + new Vector3(0, topHeight, 0);
+                cursorCtrl.transform.position = pos + new Vector3(0, topHeight, 2);
                 TBSMapService.Inst.mapCamera.SetTargetTilePos(pos);
             }
         }

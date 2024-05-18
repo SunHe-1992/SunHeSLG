@@ -41,3 +41,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: New Layer 1
+    uniqueID: 3224522713
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 262095309
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 2505610431
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 1436420573
+    locked: 0
+  - name: Gizmos5
+    uniqueID: 3722909835
+    locked: 0
+  - name: Characters6
+    uniqueID: 227975837
+    locked: 0
+  - name: Cursors
+    uniqueID: 1590674301
+    locked: 0
