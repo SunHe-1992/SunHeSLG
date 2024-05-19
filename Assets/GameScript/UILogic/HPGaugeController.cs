@@ -10,7 +10,7 @@ public class HPGaugeController : MonoBehaviour
     Slider hpSlider;
     Image weaponImage1;
     Image weaponImage2;
-    Camera mapCam;
+    //Camera mapCam;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +28,12 @@ public class HPGaugeController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (mapCam == null)
-            mapCam = TBSMapService.Inst.mapCamera.m_camera;
-        this.transform.rotation = mapCam.transform.rotation;
-    }
+    //void Update()
+    //{
+    //    if (mapCam == null)
+    //        mapCam = TBSMapService.Inst.mapCamera.m_camera;
+    //    this.transform.rotation = mapCam.transform.rotation;
+    //}
     public void InitGauge(PawnCamp camp)
     {
         FindTrans();

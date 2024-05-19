@@ -120,7 +120,7 @@ MonoBehaviour:
         AssetTags: 
         UserData: 
     - GroupName: fgui
-      GroupDesc: User Interface Assets
+      GroupDesc: Fairy User Interface Assets
       AssetTags: fgui
       ActiveRuleName: EnableGroup
       Collectors:

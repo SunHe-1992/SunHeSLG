@@ -138,6 +138,27 @@ public class UIService : ISingleton
             };
         }
     }
+    public Sprite LoadUnitySprite(string name)
+    {
+        Sprite sp = TryFindSprite(name);
+        if (sp != null)
+        {
+            return sp;
+        }
+        else
+        {
+            var handle = YooAssets.LoadAssetSync<Sprite>(name);
+            handle.Completed += (loadObj) =>
+            {
+                if (loadObj.AssetObject != null)
+                {
+                    sp = loadObj.AssetObject as Sprite;
+                    CacheSprite(name, sp);
+                }
+            };
+        }
+        return sp;
+    }
     Sprite TryFindSprite(string name)
     {
         if (spriteCacheDic == null)

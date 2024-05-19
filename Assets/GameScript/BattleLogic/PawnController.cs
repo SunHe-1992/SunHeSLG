@@ -13,7 +13,7 @@ namespace SunHeTBS
         INode nextTile;
         Vector3 destPos;
 
-        HPGaugeController gaugeController;
+        HPGauge2DController gaugeController;
         Transform pawnModelTrans;
         public float moveSpeed = 10f;
         const float nearDist = 0.02f;
@@ -101,7 +101,7 @@ namespace SunHeTBS
         {
             if (this.gaugeController == null)
             {
-                string resPath = $"UIPanel/HPGauge";
+                string resPath = $"UIPanel/HPGauge2D";
                 AssetHandle handler = YooAssets.LoadAssetAsync<GameObject>(resPath);
                 handler.Completed += ModelLoadDone;
             }
@@ -113,7 +113,7 @@ namespace SunHeTBS
                 var obj = GameObject.Instantiate(handle.AssetObject as GameObject);
                 obj.name = $"HPGauge{m_Pawn.sequenceId}";
                 obj.transform.SetParent(this.transform, false);
-                gaugeController = obj.AddComponent<HPGaugeController>();
+                gaugeController = obj.AddComponent<HPGauge2DController>();
                 gaugeController.InitGauge(m_Pawn.camp);
                 UpdateHPGauge();
                 UpdateWeaponGauge();
