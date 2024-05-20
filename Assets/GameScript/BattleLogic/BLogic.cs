@@ -830,6 +830,7 @@ namespace SunHeTBS
             this.CheckPhaseSwitch();
             //todo check 2nd move
             selectedPawn.ActionWait();
+            RefreshHPInStrikeList();
         }
 
         #region Phase and Turn switch
@@ -1016,6 +1017,9 @@ namespace SunHeTBS
 
         #region Combat Rules
         static readonly int FollowUpSpeedDiff = 4;
+        /// <summary>
+        /// 本次战斗结果
+        /// </summary>
         public List<StrikeInfo> strikeList;
         public List<StrikeInfo> ArrangeStrikeList(Pawn attacker, Pawn defender)
         {
@@ -1031,7 +1035,7 @@ namespace SunHeTBS
 
             //todo chain attack from attacker
 
-            if (vantageEff)//defender's vantage eff: BABA
+            if (vantageEff)//defender's vantage eff: BABA 被攻击者 发动埋伏先手攻击
             {
                 strikeList.Add(new StrikeInfo(1));
                 strikeList.Add(new StrikeInfo(0));
@@ -1040,7 +1044,7 @@ namespace SunHeTBS
                 if (attackerFollowUp)
                     strikeList.Add(new StrikeInfo(0));
             }
-            else if (alacrityEffect)//attacker's alacrity eff:AABB
+            else if (alacrityEffect)//attacker's alacrity eff:AABB 攻击者发动速攻 先手追击
             {
                 strikeList.Add(new StrikeInfo(0));
                 if (attackerFollowUp)
@@ -1061,11 +1065,26 @@ namespace SunHeTBS
             return strikeList;
         }
         #endregion
+
+        public void RefreshHPInStrikeList()
+        {
+            HashSet<int> sidHash = new HashSet<int>();
+            foreach (var info in strikeList)
+            {
+                sidHash.Add(info.attackerSid);
+            }
+            foreach (int sid in sidHash)
+            {
+                var pawn = GetPawnBySid(sid);
+                if (pawn != null)
+                    pawn.UpdateHP();
+            }
+        }
     }
 
     public class StrikeInfo
     {
-        public StrikeResult result = StrikeResult.Miss;
+        public StrikeResult result = StrikeResult.None;
         public StrikeType sType;
         public int attackerSid;
         public int defenderSid;

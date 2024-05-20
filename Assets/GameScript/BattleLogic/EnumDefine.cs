@@ -113,6 +113,7 @@ namespace SunHeTBS
     }
     public enum StrikeResult : int
     {
+        None,
         Miss,
         Hit,
         Critical,

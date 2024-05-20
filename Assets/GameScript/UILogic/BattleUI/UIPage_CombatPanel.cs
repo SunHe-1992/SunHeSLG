@@ -100,14 +100,15 @@ public class UIPage_CombatPanel : FUIBase
     void CheckNextAnim()
     {
         if (!this.ui.visible) return;
-        if (sQueue.Count == 0)//
+        //if result is none, this strike is not happened.
+        if (sQueue.Count == 0 || sQueue.Peek().result == StrikeResult.None)
         {
             ui.anim_hide.Play();
             DelayInvoker.Inst.DelayInvoke(OnBtnClose, endWaitTime);
         }
         else
         {
-            var info = sQueue.Dequeue();
+            StrikeInfo info = sQueue.Dequeue();
             bool atkIsLeft = info.attackerSid == leftSid;
             SetUpHpValue(atkIsLeft, info.attackerHP, info.attackerHPMax, info.attackerHPChange);
             SetUpHpValue(!atkIsLeft, info.defenderHP, info.defenderHPMax, info.defenderHPChange);

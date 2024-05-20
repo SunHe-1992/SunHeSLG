@@ -30,14 +30,15 @@ public class HPGauge2DController : MonoBehaviour
     }
     Dictionary<PawnCamp, string> campSpNameDic = new Dictionary<PawnCamp, string>()
     {
-        {PawnCamp.Player, "bar_blue" },
-        {PawnCamp.PlayerAlly, "bar_green1" },
-        {PawnCamp.Villain, "bar_red2" },
-        {PawnCamp.Neutral, "bar_yellow" },
+        {PawnCamp.Player, "UISprite/bar_blue" },
+        {PawnCamp.PlayerAlly, "UISprite/bar_green" },
+        {PawnCamp.Villain, "UISprite/bar_red" },
+        {PawnCamp.Neutral, "UISprite/bar_yellow" },
 
     };
-    void SetUpHpBarColor(PawnCamp camp)
+    public void SetUpCamp(PawnCamp camp)
     {
+        Debugger.LogError("SetUpHpBarColor " + camp.ToString());
         string spName = campSpNameDic[camp];
         HPBar.sprite = UIService.Inst.LoadUnitySprite(spName);
     }
@@ -60,7 +61,7 @@ public class HPGauge2DController : MonoBehaviour
     {
         if (iType != ItemType.Item)
         {
-            string picName = "UISprite/icon_" + iType.ToString();
+            string picName = "UISprite/icon" + iType.ToString();
             weaponImage1.sprite = UIService.Inst.LoadUnitySprite(picName);
             weaponImage1.gameObject.SetActive(true);
         }

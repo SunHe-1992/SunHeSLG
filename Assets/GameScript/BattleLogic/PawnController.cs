@@ -117,6 +117,7 @@ namespace SunHeTBS
                 gaugeController.InitGauge(m_Pawn.camp);
                 UpdateHPGauge();
                 UpdateWeaponGauge();
+                gaugeController.SetUpCamp(this.m_Pawn.camp);
             }
         }
         public void UpdateHPGauge()

@@ -1122,6 +1122,11 @@ namespace SunHeTBS
         {
             //release Break debuff
         }
+        public void UpdateHP()
+        {
+            if (this.controller != null)
+                this.controller.UpdateHPGauge();
+        }
     }
 
     #endregion
