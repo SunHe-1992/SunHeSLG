@@ -672,7 +672,8 @@ namespace SunHeTBS
             cursorPos = newPos;
 
             int tileId = TBSMapService.Inst.GetTileId(cursorPos);
-            if (mapPawnDic.ContainsKey(tileId))//todo cursor points a pawn,show info and move area
+            //cursor points a pawn,show info and move area
+            if (mapPawnDic.ContainsKey(tileId))
             {
                 pointedPawn = mapPawnDic[tileId];
             }
@@ -831,8 +832,34 @@ namespace SunHeTBS
             //todo check 2nd move
             selectedPawn.ActionWait();
             RefreshHPInStrikeList();
-        }
 
+            CheckPawnDeath();
+        }
+        public void CheckPawnDeath()
+        {
+            bool foundDeadPawn = false;
+            foreach (var pawn in pawnList)
+            {
+                if (pawn.deathMark)
+                {
+                    pawn.ProcessDeath();
+                    foundDeadPawn = true;
+                    break;
+                }
+            }
+            if (foundDeadPawn == false)
+                pawnList.RemoveAll(p => { return p.deathMark; });
+        }
+        public void RemovePawn(Pawn p)
+        {
+            if (selectedPawn == p)
+                selectedPawn = null;
+            if (pointedPawn == p)
+                pointedPawn = null;
+            var tileEntity = TBSMapService.Inst.map.Tile(p.curPosition);
+            tileEntity.camp = PawnCamp.Default;
+            pawnList.Remove(p);
+        }
         #region Phase and Turn switch
         public int BattleTurn = 0;
         public PawnCamp curCamp { get; private set; }

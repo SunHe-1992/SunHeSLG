@@ -61,6 +61,9 @@ namespace SunHeTBS
         /// class's config data
         /// </summary>
         public cfg.ClassData classCfg;
+
+        public bool deathMark = false;
+        public bool deathAnimPlayed = false;
         #endregion
 
         public void Init()
@@ -71,7 +74,8 @@ namespace SunHeTBS
             curState = PawnState.Idle;
 
             this.savePos = this.curPosition;
-
+            deathMark = false;
+            deathAnimPlayed = false;
             charCfg = ConfigManager.table.Character.Get(CharacterId);
             if (charCfg != null)
             {
@@ -1109,8 +1113,9 @@ namespace SunHeTBS
                     LifeGem--;
                     this.HP = this.attrCache.HPMax;
                 }
-                else //todo death
+                else //mark to death
                 {
+                    this.deathMark = true;
                 }
                 combat_interrupt = true;
             }
@@ -1126,6 +1131,27 @@ namespace SunHeTBS
         {
             if (this.controller != null)
                 this.controller.UpdateHPGauge();
+        }
+        public void ProcessDeath()
+        {
+            this.controller.PlayDeathAnim();
+            //on death do something;
+
+        }
+        public void ProcessDeath2()
+        {
+            this.Restore();
+        }
+        void Restore()
+        {
+            BLogic.Inst.RemovePawn(this);
+            this.controller.SelfDestroy();
+            this.charCfg = null;
+            this.classCfg = null;
+            this.targetPawn = null;
+            this.targetPawnList = null;
+            this.curState = PawnState.Default;
+            this.sequenceId = 0;
         }
     }
 

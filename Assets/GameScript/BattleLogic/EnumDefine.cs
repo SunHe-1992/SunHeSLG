@@ -131,6 +131,7 @@ namespace SunHeTBS
         {
             //if a tile is default ,it is empty
             /*                            defalut player villian ally   neutral */
+            { PawnCamp.Default,    new bool[]{true, true , true, true , true} },
             { PawnCamp.Player,    new bool[]{true, true , false, true , false} },
             { PawnCamp.Villain,   new bool[]{true, false, true, false, false } },
             { PawnCamp.PlayerAlly,new bool[]{true, true , false ,true , false } },

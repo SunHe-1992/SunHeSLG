@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using YooAsset;
 
 namespace UniFramework.Pooling
@@ -19,6 +19,8 @@ namespace UniFramework.Pooling
         private readonly Quaternion _rotation;
         private ESteps _steps = ESteps.None;
 
+        private bool selfDestroy = false;
+        private float timer = 0f;
         /// <summary>
         /// 实例化的游戏对象
         /// </summary>
@@ -59,6 +61,14 @@ namespace UniFramework.Pooling
         }
         protected override void OnUpdate()
         {
+            if (selfDestroy && _steps == ESteps.Done)
+            {
+                timer -= Time.deltaTime;
+                if (timer < 0f)
+                {
+                    this.Restore();
+                }
+            }
             if (_steps == ESteps.None || _steps == ESteps.Done)
                 return;
 
@@ -107,6 +117,8 @@ namespace UniFramework.Pooling
                 CancelHandle();
                 _pool.Restore(_operation);
                 _operation = null;
+                selfDestroy = false;
+                timer = 0;
             }
         }
 
@@ -121,6 +133,8 @@ namespace UniFramework.Pooling
                 CancelHandle();
                 _pool.Discard(_operation);
                 _operation = null;
+                selfDestroy = false;
+                timer = 0;
             }
         }
 
@@ -146,6 +160,16 @@ namespace UniFramework.Pooling
                 Status = EOperationStatus.Failed;
                 Error = $"User cancelled !";
             }
+        }
+        public void SetSelfDestroy(float _timer)
+        {
+            this.selfDestroy = true;
+            this.timer = _timer;
+        }
+        public void SetNoSelfDestroy()
+        {
+            this.selfDestroy = false;
+            this.timer = 0;
         }
     }
 }

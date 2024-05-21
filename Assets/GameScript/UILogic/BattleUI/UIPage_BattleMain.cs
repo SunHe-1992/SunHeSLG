@@ -178,7 +178,7 @@ public partial class UIPage_BattleMain : FUIBase
     {
 
     }
-    bool showDebug = false;
+    bool showDebug = true;
     protected override void OnUpdate()
     {
         base.OnUpdate();

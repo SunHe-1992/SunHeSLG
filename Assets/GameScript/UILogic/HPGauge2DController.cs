@@ -38,7 +38,7 @@ public class HPGauge2DController : MonoBehaviour
     };
     public void SetUpCamp(PawnCamp camp)
     {
-        Debugger.LogError("SetUpHpBarColor " + camp.ToString());
+        //Debugger.LogError("SetUpHpBarColor " + camp.ToString());
         string spName = campSpNameDic[camp];
         HPBar.sprite = UIService.Inst.LoadUnitySprite(spName);
     }
@@ -74,5 +74,10 @@ public class HPGauge2DController : MonoBehaviour
     public void SetForbidIcon(bool isshow)
     {
         this.forbidIcon.gameObject.SetActive(isshow);
+    }
+
+    public void SelfDestroy()
+    {
+        Destroy(this.gameObject);
     }
 }

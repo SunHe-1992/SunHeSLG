@@ -316,6 +316,26 @@ namespace SunHeTBS
         {
             cursorCtrl.ShowHideArrow(isshow);
         }
+
+        Transform effTrans;
+        public void SpawnEffect(string effectPath, Transform givenTrans, float timer = -1f)
+        {
+            if (effTrans == null)
+            {
+                effTrans = new GameObject("effTrans").transform;
+                effTrans.localPosition = Vector3.zero;
+            }
+            Transform effFather = effTrans;
+            if (givenTrans != null)
+                effFather = givenTrans;
+
+            SpawnHandle handler = UniSpawner.SpawnSync(effectPath, effFather,
+                      effFather.position, Quaternion.identity);
+            if (timer > 0)
+            {
+                handler.SetSelfDestroy(timer);
+            }
+        }
         #endregion
     }
 }

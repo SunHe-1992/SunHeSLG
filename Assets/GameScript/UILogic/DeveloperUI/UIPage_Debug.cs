@@ -49,7 +49,10 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-
+        foreach(var pawn in BLogic.Inst.pawnList)
+        {
+            pawn.controller.PlayDeathAnim();
+        }
     }
 
 

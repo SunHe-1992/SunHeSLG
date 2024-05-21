@@ -15,6 +15,7 @@ namespace SunHeTBS
 
         HPGauge2DController gaugeController;
         Transform pawnModelTrans;
+        Animator ani;
         public float moveSpeed = 10f;
         const float nearDist = 0.02f;
 
@@ -69,6 +70,7 @@ namespace SunHeTBS
         {
             m_Pawn = _pawn;
             this.pawnModelTrans = GameObject.Find("model").transform;
+            ani = pawnModelTrans.GetComponent<Animator>();
             SetPosition();
             LoadHpGuageObj();
         }
@@ -131,6 +133,27 @@ namespace SunHeTBS
         {
             gaugeController.SetWeaponIcons(m_Pawn.GetHoldingWeaponType());
         }
+        public void PlayDeathAnim()
+        {
+            float deathDelay = 0.5f;
+            Debugger.Log("PlayDeathAnim");
+            //ani.Play("Death");//after this anim, call CheckPawnDeath in BLogic.
+            BattleDriver.Inst.SpawnEffect("Effect/PawnDeath/PawnDeath", this.transform, deathDelay);
+
+            DelayInvoker.Inst.DelayInvoke(DelayCallDeath, deathDelay);
+        }
+        void DelayCallDeath()
+        {
+            this.m_Pawn.ProcessDeath2();
+        }
+
         #endregion
+        public void SelfDestroy()
+        {
+            this.gaugeController.SelfDestroy();
+            this.gaugeController = null;
+            this.m_Pawn = null;
+            Destroy(this.gameObject);
+        }
     }
 }
