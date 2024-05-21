@@ -831,6 +831,7 @@ namespace SunHeTBS
             this.CheckPhaseSwitch();
             //todo check 2nd move
             selectedPawn.ActionWait();
+            selectedPawn = null;
             RefreshHPInStrikeList();
 
             CheckPawnDeath();
