@@ -860,6 +860,7 @@ namespace SunHeTBS
             var tileEntity = TBSMapService.Inst.map.Tile(p.curPosition);
             tileEntity.camp = PawnCamp.Default;
             pawnList.Remove(p);
+            mapPawnDic.Remove(p.TilePosId());
         }
         #region Phase and Turn switch
         public int BattleTurn = 0;
