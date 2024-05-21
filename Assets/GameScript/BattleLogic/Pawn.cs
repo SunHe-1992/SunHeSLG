@@ -950,13 +950,12 @@ namespace SunHeTBS
                     if (rangeMin > 0 && tileRange < rangeMin)//consider min range
                         continue;
 
+                    int xPos = centerTile.Position.x + m;
+                    int yPos = centerTile.Position.y + n;
+                    if (!map.PosOnMap(xPos, yPos)) continue;
                     // m,n is the pos
-                    int targetTileId = map.XY2TileId(centerTile.Position.x + m, centerTile.Position.y + n);
-                    if (!tileIdHash.Contains(targetTileId))
-                    {
-                        if (map.GetTileFromDic(targetTileId) != null)
-                            tileIdHash.Add(targetTileId);
-                    }
+                    int targetTileId = map.XY2TileId(xPos, yPos);
+                    tileIdHash.Add(targetTileId);
                 }
             }
 
