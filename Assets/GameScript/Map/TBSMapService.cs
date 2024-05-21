@@ -90,24 +90,20 @@ namespace SunHeTBS
                 SpawnCoverPlaneBlue(pos, tile.topHeight);
             }
 
-            List<int> atkTileIdList = new List<int>();
-            if (p.rangeTileDic != null)
+            foreach (var idHash in p.rangeTileDic.Values)
             {
-                foreach (var hash in p.rangeTileDic.Values)
+                //show red planes in attackable tiles, walkable tiles excluded
+                foreach (int tileId in idHash)
                 {
-                    atkTileIdList.AddRange(hash);
-                }
-            }
-
-            //show red planes in attackable tiles, walkable tiles excluded
-            foreach (int tileId in atkTileIdList)
-            {
-                if (!p.moveTileIds.Contains(tileId))
-                {
-                    var tile = map.GetTileFromDic(tileId);
-                    var pos = map.WorldPosition(tile);
-                    SpawnCoverPlaneRed(pos, tile.topHeight);
-
+                    if (!p.moveTileIds.Contains(tileId))
+                    {
+                        TileEntity tile = map.GetTileFromDic(tileId);
+                        if (tile != null)
+                        {
+                            var pos = map.WorldPosition(tile);
+                            SpawnCoverPlaneRed(pos, tile.topHeight);
+                        }
+                    }
                 }
             }
         }

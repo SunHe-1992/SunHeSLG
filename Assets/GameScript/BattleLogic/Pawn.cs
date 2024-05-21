@@ -309,23 +309,20 @@ namespace SunHeTBS
                     int rangeN = rangeMax - Mathf.Abs(m);
                     for (int n = -rangeN; n <= rangeN; n++) //m,n loop the diamond shape around centerPos
                     {
+                        //if (m == 0 && n == 0) continue;//filter: don't attack self tile
                         int tileRange = Mathf.Abs(m) + Mathf.Abs(n);
                         if (rangeMin > 0 && tileRange < rangeMin)//consider min range
                         {
                             continue;
                         }
+                        int xPos = centerTile.Position.x + m;
+                        int yPos = centerTile.Position.y + n;
+                        if (!TBSMapService.Inst.map.PosOnMap(xPos, yPos))
+                            continue;
                         if (!rangeTileDic.ContainsKey(tileRange))
                             rangeTileDic.Add(tileRange, new HashSet<int>());
-                        var rangeHashSet = rangeTileDic[tileRange];
-                        // m,n is the pos
-                        int targetTileId = map.XY2TileId(centerTile.Position.x + m, centerTile.Position.y + n);
-                        if (!rangeHashSet.Contains(targetTileId))
-                        {
-                            if (map.GetTileFromDic(targetTileId) != null)
-                            {
-                                rangeTileDic[tileRange].Add(targetTileId);
-                            }
-                        }
+                        int targetTileId = map.XY2TileId(xPos, yPos);
+                        rangeTileDic[tileRange].Add(targetTileId);
                     }
                 }
             }

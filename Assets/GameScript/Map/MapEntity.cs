@@ -210,6 +210,26 @@ namespace SunHeTBS
             if (TileDic.ContainsKey(tileId)) return TileDic[tileId];
             return null;
         }
+        public bool TileDicContainsKey(int tileId)
+        {
+            return TileDic.ContainsKey(tileId);
+        }
+        public bool PosOnMapX(int xPos)
+        {
+            return xPos >= 0 && xPos < MapRows;
+        }
+        public bool PosOnMapY(int yPos)
+        {
+            return yPos >= 0 && yPos < MapCols;
+        }
+        public bool PosOnMap(Vector2Int pos)
+        {
+            return PosOnMapX(pos.x) && PosOnMapY(pos.y);
+        }
+        public bool PosOnMap(int x, int y)
+        {
+            return PosOnMapX(x) && PosOnMapY(y);
+        }
         /// <summary>
         /// unity pos -> tile
         /// </summary>
