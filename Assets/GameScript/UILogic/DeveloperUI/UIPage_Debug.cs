@@ -49,10 +49,12 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-        foreach(var pawn in BLogic.Inst.pawnList)
+        var pawnCfg = ConfigManager.table.TbPawn.Get(1);
+        if (pawnCfg != null)
         {
-            pawn.controller.PlayDeathAnim();
+            Debug.Log(pawnCfg.ToString());
         }
+
     }
 
 

@@ -21,6 +21,7 @@ public partial class Tables
     public SLG.Class Class {get; }
     public SLG.TileEffect TileEffect {get; }
     public SLG.Skill Skill {get; }
+    public SLG.TbPawn TbPawn {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -31,6 +32,7 @@ public partial class Tables
         Class = new SLG.Class(loader("slg_class"));
         TileEffect = new SLG.TileEffect(loader("slg_tileeffect"));
         Skill = new SLG.Skill(loader("slg_skill"));
+        TbPawn = new SLG.TbPawn(loader("slg_tbpawn"));
         ResolveRef();
     }
     
@@ -43,6 +45,7 @@ public partial class Tables
         Class.ResolveRef(this);
         TileEffect.ResolveRef(this);
         Skill.ResolveRef(this);
+        TbPawn.ResolveRef(this);
     }
 }
 

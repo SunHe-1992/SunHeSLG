@@ -1,0 +1,41 @@
+[
+  {
+    "ID": 1,
+    "Name": "TestSoilder",
+    "Description": "this is a test pawn.",
+    "ClassID": 1001,
+    "BaseAttr": {
+      "HPMax": 0,
+      "Str": 0,
+      "Mag": 0,
+      "Dex": 0,
+      "Spd": 0,
+      "Def": 0,
+      "Res": 0,
+      "Luk": 0,
+      "Bld": 0
+    },
+    "Growth": {
+      "HPMax": 0,
+      "Str": 0,
+      "Mag": 0,
+      "Dex": 0,
+      "Spd": 0,
+      "Def": 0,
+      "Res": 0,
+      "Luk": 0,
+      "Bld": 0
+    },
+    "Cap": {
+      "HPMax": 0,
+      "Str": 0,
+      "Mag": 0,
+      "Dex": 0,
+      "Spd": 0,
+      "Def": 0,
+      "Res": 0,
+      "Luk": 0,
+      "Bld": 0
+    }
+  }
+]
