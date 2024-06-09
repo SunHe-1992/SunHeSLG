@@ -66,7 +66,13 @@ public class UIPage_Debug : FUIBase
 
     void BtnGotoBattle()
     {
-        BattleManager.StartLocalBattle();
+        //BattleManager.StartLocalBattle();
+        string mapName = "World1";
+        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
+        handle.Completed += (scene) =>
+        {
+            FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
+        };
         OnBtnClose();
     }
 

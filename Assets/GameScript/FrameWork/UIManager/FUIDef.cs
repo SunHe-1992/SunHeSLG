@@ -16,6 +16,7 @@ public class FUIDef
         HintPage,
         SlotGame,
         Fishing,
+        WorldPanel,
     }
     /// <summary>
     /// package names
@@ -44,5 +45,6 @@ public class FUIDef
         {FWindow.HintPage, FPackage.PackageShared},
         {FWindow.SlotGame, FPackage.PackageMinigame},
         {FWindow.Fishing, FPackage.PackageMinigame},
+        {FWindow.WorldPanel, FPackage.PackageBattle},
     };
 }

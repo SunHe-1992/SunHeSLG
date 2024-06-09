@@ -45,7 +45,7 @@ namespace SunHeTBS
             isWindowEditor = Application.platform == RuntimePlatform.WindowsEditor;
             currDriveState = BattleDriveState.STATE_IDLE;
             nextDriveState = BattleDriveState.STATE_IDLE;
-            PawnControllers = new List<PawnController>();
+
         }
 
         public void OnUpdate()
@@ -84,9 +84,7 @@ namespace SunHeTBS
             }
         }
 
-        #region controller list
-        private List<PawnController> PawnControllers = new List<PawnController>();
-        #endregion
+
 
         bool isWindowEditor = false;
 
@@ -164,11 +162,11 @@ namespace SunHeTBS
         private void OnEnterPrepareBattleState()
         {
             logicInst = BLogic.Inst;
-            //todo prepare load config blabla
+            //prepare load config blabla
             SwitchDriveState(BattleDriveState.STATE_LOAD_SCENE);
         }
 
-        string mapName = "Map2dTest";//"SLGMapTest";
+        string mapName = "World1";//"SLGMapTest" "Map2dTest";
         private void OnEnterLoadSceneState()
         {
             SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
@@ -181,7 +179,7 @@ namespace SunHeTBS
                     gizmos.SetActive(false);
                 }
 
-                TBSMapService.Inst.InitMapCamera();
+                //TBSMapService.Inst.InitMapCamera();
                 SwitchDriveState(BattleDriveState.STATE_PRELOAD_RES);
             };
 
@@ -203,13 +201,7 @@ namespace SunHeTBS
             //    MapEntity = new MapEntity(mapSetting, MapView);
             //};
 
-            TBSMapService.Inst.ClearData();
-            var jsonAssetInfo = YooAssets.GetAssetInfo($"MapData/{mapName}");
-            YooAssets.LoadAssetSync(jsonAssetInfo).Completed += (handle) =>
-            {
-                var jStr = handle.AssetObject.ToString();
-                TBSMapService.Inst.LoadJsonData(jStr);
-            };
+
 
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_PREFAB);
         }
@@ -245,14 +237,10 @@ namespace SunHeTBS
         IEnumerator CreateSpawners()
         {
 
-            var op1 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneBlue);
-            yield return op1;
-            var op2 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlanePurple);
-            yield return op2;
-            var op3 = UniSpawner.CreateGameObjectPoolAsync(TBSMapService.str_PlaneRed);
-            yield return op3;
+
 
             SwitchDriveState(BattleDriveState.STATE_LOAD_MAP_DATA);
+            yield return null;
         }
 
         private void OnEnterWaitBattleState()
@@ -262,9 +250,7 @@ namespace SunHeTBS
 
         private void OnEnterInBattleState()
         {
-            logicInst.PostInitProcess();
-            logicInst.Running = true;
-            logicInst.SetNextGamePlayState(GamePlayState.BeforeBattle);
+
         }
 
         private void OnEnterGoNextStageState()
@@ -286,36 +272,6 @@ namespace SunHeTBS
         /// </summary>
         public static Spawner UniSpawner;
 
-        /// <summary>
-        /// cursor obj relocate to BLogic cursorPos
-        /// </summary>
-        public void MoveCursorObj()
-        {
-            if (cursorCtrl)
-            {
-                Vector3 pos = TBSMapService.Inst.map.WorldPosition(logicInst.cursorPos);
-                var tile = TBSMapService.Inst.map.Tile(logicInst.cursorPos);
-                float topHeight = 0f;
-                if (tile != null)
-                {
-                    topHeight = tile.topHeight;
-                }
-                cursorCtrl.transform.position = pos + new Vector3(0, topHeight, 2);
-                TBSMapService.Inst.mapCamera.SetTargetTilePos(pos);
-            }
-        }
-        public void SetCursorRed()
-        {
-            cursorCtrl.ChangeRed();
-        }
-        public void SetCursorWhite()
-        {
-            cursorCtrl.ChangeWhite();
-        }
-        public void CursorShowArrow(bool isshow)
-        {
-            cursorCtrl.ShowHideArrow(isshow);
-        }
 
         Transform effTrans;
         public void SpawnEffect(string effectPath, Transform givenTrans, float timer = -1f)

@@ -25,11 +25,11 @@ TagManager:
   - 
   - 
   - 
+  - Layer 1
+  - Layer 2
+  - Layer 3
   - 
-  - 
-  - 
-  - 
-  - 
+  - pawns
   - 
   - 
   - 
@@ -53,12 +53,12 @@ TagManager:
   - name: New Layer 4
     uniqueID: 1436420573
     locked: 0
-  - name: Gizmos5
+  - name: 
     uniqueID: 3722909835
     locked: 0
-  - name: Characters6
+  - name: 
     uniqueID: 227975837
     locked: 0
-  - name: Cursors
+  - name: 
     uniqueID: 1590674301
     locked: 0

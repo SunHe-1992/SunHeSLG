@@ -43,7 +43,7 @@ public class GameLoader : MonoBehaviour
         /*fire emblem demo */
         BattleDriver.Init();
         BLogic.Init();
-        TBSMapService.Init();
+       
         LocalServer.Init();
         MinigameService.Init();
 

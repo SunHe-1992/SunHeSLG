@@ -79,33 +79,11 @@ namespace SunHeTBS
             //    }
             //}
             #endregion
-            if (Input.GetMouseButtonUp(0))
-            {
-                var groundPos = GroundPosition();
-                //mouse control
-                if (BLogic.Inst != null)
-                    BLogic.Inst.OnMouseClick(groundPos);
-            }
+            
 
         }
 
         public static Camera mapCamera;
-        public static Vector3 GroundPosition()
-        {
-            if (mapCamera == null)
-                if (TBSMapService.Inst?.mapCamera?.m_camera != null)
-                    mapCamera = TBSMapService.Inst.mapCamera.m_camera;
-            if (mapCamera != null)
-            {
-                var plane = new Plane(Vector3.up, Vector3.zero);
-                var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                float enter = 0f;
-                if (plane.Raycast(mouseRay, out enter))
-                {
-                    return mouseRay.GetPoint(enter);
-                }
-            }
-            return Vector3.zero;
-        }
+    
     }
 }
