@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cainos.PixelArtTopDown_Basic
+namespace SunHeTBS
 {
     public class TopDownCharacterController : MonoBehaviour
     {

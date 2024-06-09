@@ -212,5 +212,7 @@ public class UIPage_Fishing : FUIBase
     void GoBackToMainPage()
     {
         FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
+
     }
 }

@@ -17,27 +17,7 @@ public class InputReceiver : MonoBehaviour
     {
         Inst = null;
     }
-    #region TBS gameplay
 
-    public void GameplayConfirmClick(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            //Debug.Log("on confirm click");
-            //Debug.Log("input " + m_Move);
-            UniEvent.SendMessage(GameEventDefine.ClickConfirm);
-        }
-    }
-    public void GameplayCancelClick(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            //Debug.Log("on cancel click");
-            UniEvent.SendMessage(GameEventDefine.ClickCancel);
-        }
-    }
-
-    #endregion
 
     #region axis receive
     private Vector2 m_Move;
@@ -110,20 +90,7 @@ public class InputReceiver : MonoBehaviour
     {
         m_Move = context.ReadValue<Vector2>();
     }
-    public void UIConfirmClick(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            UniEvent.SendMessage(GameEventDefine.ClickConfirm);
-        }
-    }
-    public void UICancelClick(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            UniEvent.SendMessage(GameEventDefine.ClickCancel);
-        }
-    }
+
 
     #endregion
     public static bool InputInUI = true;

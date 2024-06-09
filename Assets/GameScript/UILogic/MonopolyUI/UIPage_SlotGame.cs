@@ -73,6 +73,7 @@ public class UIPage_SlotGame : FUIBase
     void GoBackToMainPage()
     {
         FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
     }
     void OnBtnSlot()
     {
@@ -141,8 +142,10 @@ public class UIPage_SlotGame : FUIBase
     void PlayReward2()
     {
         //long amount = MinigameService.Inst.slotGameData.rewardMoney;
-        //UIService.Inst.ShowMoneyAnim(amount);
-        //TBSPlayer.UpdateGoldAmount(amount);
-        //GoBackToMainPage();
+        long amount = 9999;
+        UIService.Inst.ShowMoneyAnim(amount);
+        TBSPlayer.UpdateGoldAmount(amount);
+        GoBackToMainPage();
+
     }
 }

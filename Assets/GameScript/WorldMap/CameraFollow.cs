@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SUNHESLG
+namespace SunHeTBS
 {
     //let camera follow target
     public class CameraFollow : MonoBehaviour

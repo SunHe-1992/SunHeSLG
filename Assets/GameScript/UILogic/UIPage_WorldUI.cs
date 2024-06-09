@@ -6,7 +6,8 @@ using PackageDebug;
 using UnityEngine;
 using UniFramework.Event;
 using PackageBattle;
-
+using SunHeTBS;
+using static LandMark;
 public class UIPage_WorldUI : FUIBase
 {
 
@@ -18,6 +19,7 @@ public class UIPage_WorldUI : FUIBase
         this.uiShowType = UIShowType.WINDOW;
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.btn_test.onClick.Set(BtnTestClick);
+        ui.btn_minigame.onClick.Set(BtnMiniGame);
     }
     protected override void OnShown()
     {
@@ -57,9 +59,34 @@ public class UIPage_WorldUI : FUIBase
         base.OnUpdate();
 
         RefreshHUD();
+
+        if (BLogic.recentLandMark == null)
+            ui.showMiniGame.selectedIndex = 0;
+        else
+        {
+            ui.showMiniGame.selectedIndex = 1;
+            ui.btn_minigame.text = BLogic.recentLandMark.eventType.ToString();
+        }
     }
     void RefreshHUD()
     {
         ui.txt_hud.text = "";
+    }
+
+    void BtnMiniGame()
+    {
+        var type = BLogic.recentLandMark.eventType;
+        switch (type)
+        {
+            case LandMarkEventType.Fishing:
+                OnBtnClose();
+                FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
+                break;
+            case LandMarkEventType.Slot:
+                MinigameService.Inst.SetUpSlotGameData();
+                OnBtnClose();
+                FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
+                break;
+        }
     }
 }

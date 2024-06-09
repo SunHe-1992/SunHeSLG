@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cainos.PixelArtTopDown_Basic
+namespace SunHeTBS
 {
     //animate the sprite color base on the gradient and time
     public class SpriteColorAnimation : MonoBehaviour
