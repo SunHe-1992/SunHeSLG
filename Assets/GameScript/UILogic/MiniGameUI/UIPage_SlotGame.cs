@@ -6,7 +6,7 @@ using FairyGUI;
 using PackageDebug;
 using UnityEngine;
 using UniFramework.Event;
-using PackageMonopoly;
+using PackageMinigame;
 
 public class UIPage_SlotGame : FUIBase
 {

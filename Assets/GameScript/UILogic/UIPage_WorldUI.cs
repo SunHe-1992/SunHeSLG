@@ -75,18 +75,7 @@ public class UIPage_WorldUI : FUIBase
 
     void BtnMiniGame()
     {
-        var type = BLogic.recentLandMark.eventType;
-        switch (type)
-        {
-            case LandMarkEventType.Fishing:
-                OnBtnClose();
-                FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
-                break;
-            case LandMarkEventType.Slot:
-                MinigameService.Inst.SetUpSlotGameData();
-                OnBtnClose();
-                FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
-                break;
-        }
+        OnBtnClose();
+        BLogic.Inst.StartLandMarkMiniGame();
     }
 }

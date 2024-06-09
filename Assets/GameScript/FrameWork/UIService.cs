@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
 using FairyGUI;
-using PackageMonopoly;
 using CommonPackage;
 using CommonButton;
 public class UIService : ISingleton

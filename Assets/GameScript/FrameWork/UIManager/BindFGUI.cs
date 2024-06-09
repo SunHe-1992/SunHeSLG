@@ -12,6 +12,6 @@ public static class BindFGUI
         PackageDebug.PackageDebugBinder.BindAll();
         PackageBattle.PackageBattleBinder.BindAll();
         PackageShared.PackageSharedBinder.BindAll();
-        PackageMonopoly.PackageMonopolyBinder.BindAll();
+        PackageMinigame.PackageMinigameBinder.BindAll();
     }
 }

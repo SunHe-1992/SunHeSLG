@@ -24,7 +24,7 @@ namespace SunHeTBS
 
         #endregion
 
-        #region Monopoly game events
+        #region mini game events
         public static int DICE_COUNT_CHANGED = GenID(1, 1);
         public static int POINTS_CHANGED = GenID(1, 2);
         public static int Building_Changed = GenID(1, 3);

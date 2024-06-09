@@ -16,6 +16,7 @@ public class FUIDef
         HintPage,
         SlotGame,
         Fishing,
+        BankHeist,
         WorldPanel,
     }
     /// <summary>
@@ -45,6 +46,7 @@ public class FUIDef
         {FWindow.HintPage, FPackage.PackageShared},
         {FWindow.SlotGame, FPackage.PackageMinigame},
         {FWindow.Fishing, FPackage.PackageMinigame},
+        {FWindow.BankHeist, FPackage.PackageMinigame},
         {FWindow.WorldPanel, FPackage.PackageBattle},
     };
 }

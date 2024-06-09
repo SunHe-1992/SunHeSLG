@@ -97,4 +97,42 @@ public class MinigameService : ISingleton
         };
     }
     #endregion
+
+    #region module: bank heist
+
+    public GameBankHeist gameBankHeist { get; set; }
+    public void SetUpBankHeistData()
+    {
+        gameBankHeist = new GameBankHeist();
+        gameBankHeist.RandomData();
+    }
+    public class GameBankHeist
+    {
+        //each slot has a tokenId
+        public List<int> tokenList;
+        public Dictionary<int, long> rewardDic;
+        public void RandomData()
+        {
+            tokenList = new List<int>();
+            for (int i = 0; i < 7; i++)
+            {
+                tokenList.Add(GetRandomToken());
+            }
+
+            rewardDic = new Dictionary<int, long>() {
+                {0, 10000},
+                {1, 20000},
+                {2, 50000},
+            };
+        }
+        int GetRandomToken()
+        {
+            return Random.Range(0, 3);
+        }
+
+
+
+    }
+    #endregion
+
 }

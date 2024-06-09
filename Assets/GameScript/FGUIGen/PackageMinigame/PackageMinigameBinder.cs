@@ -13,6 +13,10 @@ namespace PackageMinigame
             UIObjectFactory.SetPackageItemExtension(UI_SlotWheel.URL, typeof(UI_SlotWheel));
             UIObjectFactory.SetPackageItemExtension(UI_Fishing.URL, typeof(UI_Fishing));
             UIObjectFactory.SetPackageItemExtension(UI_FishingCircle.URL, typeof(UI_FishingCircle));
+            UIObjectFactory.SetPackageItemExtension(UI_BankHeist.URL, typeof(UI_BankHeist));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultBar.URL, typeof(UI_VaultBar));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultIcon.URL, typeof(UI_VaultIcon));
+            UIObjectFactory.SetPackageItemExtension(UI_VaultItem.URL, typeof(UI_VaultItem));
         }
     }
 }

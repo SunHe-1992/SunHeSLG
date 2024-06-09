@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UniFramework.Singleton;
 using UniFramework.Event;
 using SunHeTBS;
+using static LandMark;
 
 namespace SunHeTBS
 {
@@ -19,12 +20,12 @@ namespace SunHeTBS
         public void OnCreate(object createParam)
         {
             UniEvent.AddListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
-            UniEvent.AddListener(GameEventDefine.StartFishing, AskFishing);
-            UniEvent.AddListener(GameEventDefine.StartSlotGame, AskSLotGame);
+
         }
 
         public void OnDestroy()
         {
+            UniEvent.RemoveListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
 
         }
 
@@ -39,11 +40,29 @@ namespace SunHeTBS
         }
         void AskFishing(IEventMessage msg)
         {
-            
+
         }
         void AskSLotGame(IEventMessage msg)
         {
 
+        }
+        public void StartLandMarkMiniGame()
+        {
+            var type = recentLandMark.eventType;
+            switch (type)
+            {
+                case LandMarkEventType.Fishing:
+                    FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
+                    break;
+                case LandMarkEventType.Slot:
+                    MinigameService.Inst.SetUpSlotGameData();
+                    FUIManager.Inst.ShowUI<UIPage_SlotGame>(FUIDef.FWindow.SlotGame);
+                    break;
+                case LandMarkEventType.Harvest:
+                    MinigameService.Inst.SetUpBankHeistData();
+                    FUIManager.Inst.ShowUI<UIPage_BankHeist>(FUIDef.FWindow.BankHeist);
+                    break;
+            }
         }
     }
 }

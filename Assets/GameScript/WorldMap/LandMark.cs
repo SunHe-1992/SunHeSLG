@@ -11,6 +11,7 @@ public class LandMark : MonoBehaviour
         Default,
         Fishing,
         Slot,
+        Harvest,
     }
     PlayerCharacter hero;
     public LandMarkEventType eventType;
