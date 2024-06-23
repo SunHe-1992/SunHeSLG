@@ -1,12 +1,10 @@
 {
-    "name": "FairyGUI.Editor",
+    "name": "FairyGUI",
     "rootNamespace": "",
     "references": [
-        "GUID:182d01874fd0eb44ba83e2cd4c4f87cc"
+        "Unity.TextMeshPro"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

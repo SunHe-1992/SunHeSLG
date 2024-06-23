@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +10,8 @@ namespace FairyGUI
     public class FontManager
     {
         public static Dictionary<string, BaseFont> sFontFactory = new Dictionary<string, BaseFont>();
+
+        static bool _checkTextMeshPro;
 
         /// <summary>
         /// 
@@ -39,7 +41,7 @@ namespace FairyGUI
             foreach (string key in toDelete)
                 sFontFactory.Remove(key);
         }
-        static string defaultFontName = "OPPOSans-M";
+
         /// <summary>
         /// 
         /// </summary>
@@ -57,10 +59,6 @@ namespace FairyGUI
 
             if (sFontFactory.TryGetValue(name, out font))
                 return font;
-            else if(sFontFactory.ContainsKey(defaultFontName))
-            {
-                return sFontFactory[defaultFontName];
-            }
 
             object asset = Resources.Load(name);
             if (asset == null)
@@ -104,7 +102,13 @@ namespace FairyGUI
             else
             {
                 if (asset.GetType().Name.Contains("TMP_FontAsset"))
-                    Debug.LogWarning("To enable TextMeshPro support, add script define symbol: FAIRYGUI_TMPRO");
+                {
+                    if (!_checkTextMeshPro)
+                    {
+                        _checkTextMeshPro = true;
+                        Debug.LogWarning("To enable TextMeshPro support, add script define symbol: FAIRYGUI_TMPRO");
+                    }
+                }
 
                 return Fallback(name);
             }
@@ -146,5 +150,14 @@ namespace FairyGUI
 
             sFontFactory.Clear();
         }
+
+#if UNITY_2019_3_OR_NEWER
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void InitializeOnLoad()
+        {
+            Clear();
+            _checkTextMeshPro = false;
+        }
+#endif
     }
 }

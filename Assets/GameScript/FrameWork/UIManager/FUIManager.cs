@@ -839,14 +839,19 @@ public class FUIManager : ISingleton
 
     void KeyBoardESCClick()
     {
-        var topWin = windowStack.Peek();
-        if (topWin != null)
+        if (windowStack.Count > 0)
         {
-            var winType = (FUIDef.FWindow)topWin.FUIWindowType;
-            if (winType != FUIDef.FWindow.BattlePanel
-            && winType != FUIDef.FWindow.BattlePrepare)
+            var topWin = windowStack.Peek();
+            if (topWin != null)
             {
-                HideUI(topWin);
+                var winType = (FUIDef.FWindow)topWin.FUIWindowType;
+                if (winType != FUIDef.FWindow.BattlePanel
+                && winType != FUIDef.FWindow.BattlePrepare
+                && winType != FUIDef.FWindow.WorldPanel
+                )
+                {
+                    HideUI(topWin);
+                }
             }
         }
     }

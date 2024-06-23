@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using FairyGUI.Utils;
 using UnityEngine;
@@ -3063,21 +3063,5 @@ namespace FairyGUI
             if (i != -1)
                 _selectionController = parent.GetControllerAt(i);
         }
-
-        public void OnInputNext()
-        {
-            int curIdx = selectedIndex + 1;
-            if (curIdx >= _children.Count)
-                curIdx = 0;
-            selectedIndex = curIdx;
-        }
-        public void OnInputPrevious()
-        {
-            int curIdx = selectedIndex - 1;
-            if (curIdx < 0)
-                curIdx = _children.Count - 1;
-            selectedIndex = curIdx;
-        }
-
     }
 }
