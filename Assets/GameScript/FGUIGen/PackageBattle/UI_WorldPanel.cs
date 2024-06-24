@@ -8,10 +8,12 @@ namespace PackageBattle
     public partial class UI_WorldPanel : GComponent
     {
         public Controller showMiniGame;
+        public Controller showNPCBtn;
         public GButton btn_test;
         public GComponent topHead;
         public GTextField txt_hud;
         public GButton btn_minigame;
+        public GButton btn_NPC;
         public const string URL = "ui://fstosj6ipy0fhw";
 
         public static UI_WorldPanel CreateInstance()
@@ -24,10 +26,12 @@ namespace PackageBattle
             base.ConstructFromXML(xml);
 
             showMiniGame = GetController("showMiniGame");
+            showNPCBtn = GetController("showNPCBtn");
             btn_test = (GButton)GetChild("btn_test");
             topHead = (GComponent)GetChild("topHead");
             txt_hud = (GTextField)GetChild("txt_hud");
             btn_minigame = (GButton)GetChild("btn_minigame");
+            btn_NPC = (GButton)GetChild("btn_NPC");
         }
     }
 }

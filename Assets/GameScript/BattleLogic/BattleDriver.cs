@@ -292,6 +292,24 @@ namespace SunHeTBS
                 handler.SetSelfDestroy(timer);
             }
         }
+
+        public void LoadObjInScene()
+        {
+            LoadNPCMarks();
+            BLogic.Inst.InitHeroPawn();
+        }
+
+
+        void LoadNPCMarks()
+        {
+            var npcList = GameObject.FindObjectsOfType<NPCMark>();
+            foreach (var npc in npcList)
+            {
+                BLogic.Inst.CreatePawn(npc);
+            }
+        }
         #endregion
+  
+
     }
 }

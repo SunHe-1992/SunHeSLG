@@ -20,10 +20,9 @@ public sealed partial class PawnData : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
         { if(!_buf["Description"].IsString) { throw new SerializationException(); }  Description = _buf["Description"]; }
-        { if(!_buf["ClassID"].IsNumber) { throw new SerializationException(); }  ClassID = _buf["ClassID"]; }
+        { if(!_buf["triggerDistance"].IsNumber) { throw new SerializationException(); }  TriggerDistance = _buf["triggerDistance"]; }
         { if(!_buf["BaseAttr"].IsObject) { throw new SerializationException(); }  BaseAttr = SLG.BasicStats.DeserializeBasicStats(_buf["BaseAttr"]);  }
-        { if(!_buf["Growth"].IsObject) { throw new SerializationException(); }  Growth = SLG.BasicStats.DeserializeBasicStats(_buf["Growth"]);  }
-        { if(!_buf["Cap"].IsObject) { throw new SerializationException(); }  Cap = SLG.BasicStats.DeserializeBasicStats(_buf["Cap"]);  }
+        { if(!_buf["mapEvent"].IsNumber) { throw new SerializationException(); }  MapEvent = (SLG.PawnMapEvent)_buf["mapEvent"].AsInt; }
     }
 
     public static PawnData DeserializePawnData(JSONNode _buf)
@@ -34,10 +33,15 @@ public sealed partial class PawnData : Luban.BeanBase
     public readonly int ID;
     public readonly string Name;
     public readonly string Description;
-    public readonly int ClassID;
+    /// <summary>
+    /// 大地图碰撞半径
+    /// </summary>
+    public readonly float TriggerDistance;
     public readonly SLG.BasicStats BaseAttr;
-    public readonly SLG.BasicStats Growth;
-    public readonly SLG.BasicStats Cap;
+    /// <summary>
+    /// 地图上做什么
+    /// </summary>
+    public readonly SLG.PawnMapEvent MapEvent;
    
     public const int __ID__ = 1389996146;
     public override int GetTypeId() => __ID__;
@@ -49,8 +53,7 @@ public sealed partial class PawnData : Luban.BeanBase
         
         
         BaseAttr?.ResolveRef(tables);
-        Growth?.ResolveRef(tables);
-        Cap?.ResolveRef(tables);
+        
     }
 
     public override string ToString()
@@ -59,10 +62,9 @@ public sealed partial class PawnData : Luban.BeanBase
         + "ID:" + ID + ","
         + "Name:" + Name + ","
         + "Description:" + Description + ","
-        + "ClassID:" + ClassID + ","
+        + "triggerDistance:" + TriggerDistance + ","
         + "BaseAttr:" + BaseAttr + ","
-        + "Growth:" + Growth + ","
-        + "Cap:" + Cap + ","
+        + "mapEvent:" + MapEvent + ","
         + "}";
     }
 }

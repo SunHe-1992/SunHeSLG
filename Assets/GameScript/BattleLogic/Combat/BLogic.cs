@@ -17,10 +17,11 @@ namespace SunHeTBS
 
         }
         public static LandMark recentLandMark;
+        public static NPCMark recentNPCMark;
         public void OnCreate(object createParam)
         {
             UniEvent.AddListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
-
+            pawnList = new List<Pawn>();
         }
 
         public void OnDestroy()
@@ -64,5 +65,20 @@ namespace SunHeTBS
                     break;
             }
         }
+
+
+        #region Pawn management
+        public List<Pawn> pawnList;
+        public Pawn HeroPawn;
+        public void CreatePawn(NPCMark nm)
+        {
+            pawnList.Add(new Pawn(nm));
+        }
+
+        public void InitHeroPawn()
+        {
+            HeroPawn = new Pawn(1);
+        }
+        #endregion
     }
 }

@@ -1,9 +1,9 @@
 [
   {
     "ID": 1,
-    "Name": "TestSoilder",
-    "Description": "this is a test pawn.",
-    "ClassID": 1001,
+    "Name": "MainHero",
+    "Description": "this is a the hero",
+    "triggerDistance": 0,
     "BaseAttr": {
       "HPMax": 0,
       "Str": 0,
@@ -15,7 +15,14 @@
       "Luk": 0,
       "Bld": 0
     },
-    "Growth": {
+    "mapEvent": 0
+  },
+  {
+    "ID": 2,
+    "Name": "TestSoilder",
+    "Description": "this is a test pawn.",
+    "triggerDistance": 0.8,
+    "BaseAttr": {
       "HPMax": 0,
       "Str": 0,
       "Mag": 0,
@@ -26,16 +33,6 @@
       "Luk": 0,
       "Bld": 0
     },
-    "Cap": {
-      "HPMax": 0,
-      "Str": 0,
-      "Mag": 0,
-      "Dex": 0,
-      "Spd": 0,
-      "Def": 0,
-      "Res": 0,
-      "Luk": 0,
-      "Bld": 0
-    }
+    "mapEvent": 1
   }
 ]

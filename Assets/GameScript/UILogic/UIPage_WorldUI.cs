@@ -20,6 +20,7 @@ public class UIPage_WorldUI : FUIBase
         this.animationType = (int)FUIManager.OpenUIAnimationType.NoAnimation;
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_minigame.onClick.Set(BtnMiniGame);
+        ui.btn_NPC.onClick.Set(BtnNPC);
     }
     protected override void OnShown()
     {
@@ -67,6 +68,13 @@ public class UIPage_WorldUI : FUIBase
             ui.showMiniGame.selectedIndex = 1;
             ui.btn_minigame.text = BLogic.recentLandMark.eventType.ToString();
         }
+        if (BLogic.recentNPCMark == null)
+            ui.showNPCBtn.selectedIndex = 0;
+        else{
+            ui.showNPCBtn.selectedIndex = 1;
+            //BLogic.recentNPCMark.eventType
+            ui.btn_NPC.text = "NPC";
+        }
     }
     void RefreshHUD()
     {
@@ -77,5 +85,20 @@ public class UIPage_WorldUI : FUIBase
     {
         OnBtnClose();
         BLogic.Inst.StartLandMarkMiniGame();
+    }
+    void BtnNPC()
+    {
+        var npcMark = BLogic.recentNPCMark;
+        switch(npcMark._pawn.PawnCfg.MapEvent)
+        {
+            case cfg.SLG.PawnMapEvent.Combat:
+                //go to combat
+                Debug.Log("todo : go to combat");
+                break;
+            case cfg.SLG.PawnMapEvent.Store:
+                //store npc show dialogue window
+                Debug.Log("todo : go to merchant dialogue");
+                break;
+        }
     }
 }

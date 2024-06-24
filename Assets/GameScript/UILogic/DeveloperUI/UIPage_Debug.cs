@@ -71,6 +71,7 @@ public class UIPage_Debug : FUIBase
         SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
         handle.Completed += (scene) =>
         {
+            BattleDriver.Inst.LoadObjInScene();
             FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
         };
         OnBtnClose();
