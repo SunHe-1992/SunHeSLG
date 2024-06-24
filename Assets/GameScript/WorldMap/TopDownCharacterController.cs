@@ -9,7 +9,7 @@ namespace SunHeTBS
         public float speed;
 
         private Animator animator;
-
+        bool faceRight = true;
         private void Start()
         {
             animator = GetComponent<Animator>();
@@ -20,39 +20,49 @@ namespace SunHeTBS
         {
 
             Vector2 dir = Vector2.zero;
-            SRFlip(false);
+            float moveH = Input.GetAxis("Horizontal");
+            float moveV = Input.GetAxis("Vertical");
+
             if (Input.GetKey(KeyCode.A))
             {
                 dir.x = -1;
-                animator.SetInteger("Direction", 3);
             }
             else if (Input.GetKey(KeyCode.D))
             {
                 dir.x = 1;
-                animator.SetInteger("Direction", 2);
-                SRFlip(true);
             }
 
             if (Input.GetKey(KeyCode.W))
             {
                 dir.y = 1;
-                animator.SetInteger("Direction", 1);
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 dir.y = -1;
-                animator.SetInteger("Direction", 0);
             }
 
+            if (Input.GetKey(KeyCode.J))
+            {
+                animator.SetTrigger("attack");
+            }
             dir.Normalize();
-            animator.SetBool("IsMoving", dir.magnitude > 0);
+            float speed = 0;
+            if (dir.magnitude > 0)
+                speed = 1;
+            animator.SetFloat("speed", speed);
+            //animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;
+
+            faceRight = dir.x > 0;
+
+            if (dir.x != 0)
+                SRFlip();
         }
-        void SRFlip(bool flip)
+        void SRFlip()
         {
             var sr = this.GetComponent<SpriteRenderer>();
-            sr.flipX = flip;
+            sr.flipX = faceRight == false;
         }
     }
 }
