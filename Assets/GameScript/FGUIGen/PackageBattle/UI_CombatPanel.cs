@@ -7,11 +7,18 @@ namespace PackageBattle
 {
     public partial class UI_CombatPanel : GComponent
     {
-        public UI_PawnWeaponCom weaponLeft;
-        public UI_PawnWeaponCom weaponRight;
-        public UI_CombatBar infoLeft;
-        public UI_CombatBar infoRight;
-        public UI_CombatBar1 hpbar;
+        public GLoader bg;
+        public UI_RPGStatsCom stat0;
+        public UI_RPGStatsCom stat1;
+        public UI_RPGStatsCom stat2;
+        public UI_RPGStatsCom stat3;
+        public GList actionList;
+        public GTextField txt_turn;
+        public UI_ActionMenuComp actionCom;
+        public UI_VillianStatsCom villian0;
+        public UI_VillianStatsCom villian1;
+        public UI_VillianStatsCom villian2;
+        public UI_VillianStatsCom villian3;
         public Transition anim_hide;
         public const string URL = "ui://fstosj6itjjs15";
 
@@ -24,11 +31,18 @@ namespace PackageBattle
         {
             base.ConstructFromXML(xml);
 
-            weaponLeft = (UI_PawnWeaponCom)GetChild("weaponLeft");
-            weaponRight = (UI_PawnWeaponCom)GetChild("weaponRight");
-            infoLeft = (UI_CombatBar)GetChild("infoLeft");
-            infoRight = (UI_CombatBar)GetChild("infoRight");
-            hpbar = (UI_CombatBar1)GetChild("hpbar");
+            bg = (GLoader)GetChild("bg");
+            stat0 = (UI_RPGStatsCom)GetChild("stat0");
+            stat1 = (UI_RPGStatsCom)GetChild("stat1");
+            stat2 = (UI_RPGStatsCom)GetChild("stat2");
+            stat3 = (UI_RPGStatsCom)GetChild("stat3");
+            actionList = (GList)GetChild("actionList");
+            txt_turn = (GTextField)GetChild("txt_turn");
+            actionCom = (UI_ActionMenuComp)GetChild("actionCom");
+            villian0 = (UI_VillianStatsCom)GetChild("villian0");
+            villian1 = (UI_VillianStatsCom)GetChild("villian1");
+            villian2 = (UI_VillianStatsCom)GetChild("villian2");
+            villian3 = (UI_VillianStatsCom)GetChild("villian3");
             anim_hide = GetTransition("anim_hide");
         }
     }

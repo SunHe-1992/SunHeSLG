@@ -18,14 +18,15 @@ public sealed partial class BasicStats : Luban.BeanBase
     public BasicStats(JSONNode _buf) 
     {
         { if(!_buf["HPMax"].IsNumber) { throw new SerializationException(); }  HPMax = _buf["HPMax"]; }
-        { if(!_buf["Str"].IsNumber) { throw new SerializationException(); }  Str = _buf["Str"]; }
-        { if(!_buf["Mag"].IsNumber) { throw new SerializationException(); }  Mag = _buf["Mag"]; }
-        { if(!_buf["Dex"].IsNumber) { throw new SerializationException(); }  Dex = _buf["Dex"]; }
-        { if(!_buf["Spd"].IsNumber) { throw new SerializationException(); }  Spd = _buf["Spd"]; }
-        { if(!_buf["Def"].IsNumber) { throw new SerializationException(); }  Def = _buf["Def"]; }
-        { if(!_buf["Res"].IsNumber) { throw new SerializationException(); }  Res = _buf["Res"]; }
-        { if(!_buf["Luk"].IsNumber) { throw new SerializationException(); }  Luk = _buf["Luk"]; }
-        { if(!_buf["Bld"].IsNumber) { throw new SerializationException(); }  Bld = _buf["Bld"]; }
+        { if(!_buf["SPMax"].IsNumber) { throw new SerializationException(); }  SPMax = _buf["SPMax"]; }
+        { if(!_buf["Patk"].IsNumber) { throw new SerializationException(); }  Patk = _buf["Patk"]; }
+        { if(!_buf["Pdef"].IsNumber) { throw new SerializationException(); }  Pdef = _buf["Pdef"]; }
+        { if(!_buf["Eatk"].IsNumber) { throw new SerializationException(); }  Eatk = _buf["Eatk"]; }
+        { if(!_buf["Edef"].IsNumber) { throw new SerializationException(); }  Edef = _buf["Edef"]; }
+        { if(!_buf["Accuracy"].IsNumber) { throw new SerializationException(); }  Accuracy = _buf["Accuracy"]; }
+        { if(!_buf["Speed"].IsNumber) { throw new SerializationException(); }  Speed = _buf["Speed"]; }
+        { if(!_buf["Critical"].IsNumber) { throw new SerializationException(); }  Critical = _buf["Critical"]; }
+        { if(!_buf["Evasion"].IsNumber) { throw new SerializationException(); }  Evasion = _buf["Evasion"]; }
     }
 
     public static BasicStats DeserializeBasicStats(JSONNode _buf)
@@ -33,42 +34,40 @@ public sealed partial class BasicStats : Luban.BeanBase
         return new SLG.BasicStats(_buf);
     }
 
-    /// <summary>
-    /// HP
-    /// </summary>
     public readonly int HPMax;
+    public readonly int SPMax;
     /// <summary>
-    /// Strength
+    /// 物理攻击力
     /// </summary>
-    public readonly int Str;
+    public readonly int Patk;
     /// <summary>
-    /// Magic
+    /// 物理防御力
     /// </summary>
-    public readonly int Mag;
+    public readonly int Pdef;
     /// <summary>
-    /// Dexterity
+    /// 元素攻击力
     /// </summary>
-    public readonly int Dex;
+    public readonly int Eatk;
     /// <summary>
-    /// Speed
+    /// 元素防御力
     /// </summary>
-    public readonly int Spd;
+    public readonly int Edef;
     /// <summary>
-    /// Defence
+    /// 准确率
     /// </summary>
-    public readonly int Def;
+    public readonly int Accuracy;
     /// <summary>
-    /// Resistance
+    /// 速度
     /// </summary>
-    public readonly int Res;
+    public readonly int Speed;
     /// <summary>
-    /// Luck
+    /// 暴击率
     /// </summary>
-    public readonly int Luk;
+    public readonly int Critical;
     /// <summary>
-    /// Build
+    /// 回避率
     /// </summary>
-    public readonly int Bld;
+    public readonly int Evasion;
    
     public const int __ID__ = 542478865;
     public override int GetTypeId() => __ID__;
@@ -84,20 +83,22 @@ public sealed partial class BasicStats : Luban.BeanBase
         
         
         
+        
     }
 
     public override string ToString()
     {
         return "{ "
         + "HPMax:" + HPMax + ","
-        + "Str:" + Str + ","
-        + "Mag:" + Mag + ","
-        + "Dex:" + Dex + ","
-        + "Spd:" + Spd + ","
-        + "Def:" + Def + ","
-        + "Res:" + Res + ","
-        + "Luk:" + Luk + ","
-        + "Bld:" + Bld + ","
+        + "SPMax:" + SPMax + ","
+        + "Patk:" + Patk + ","
+        + "Pdef:" + Pdef + ","
+        + "Eatk:" + Eatk + ","
+        + "Edef:" + Edef + ","
+        + "Accuracy:" + Accuracy + ","
+        + "Speed:" + Speed + ","
+        + "Critical:" + Critical + ","
+        + "Evasion:" + Evasion + ","
         + "}";
     }
 }

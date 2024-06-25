@@ -13,39 +13,36 @@ using SimpleJSON;
 
 namespace cfg
 {
-public sealed partial class ItemData : Luban.BeanBase
+public sealed partial class AttrData : Luban.BeanBase
 {
-    public ItemData(JSONNode _buf) 
+    public AttrData(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
-        { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
+        { if(!_buf["BaseAttr"].IsObject) { throw new SerializationException(); }  BaseAttr = SLG.BasicStats.DeserializeBasicStats(_buf["BaseAttr"]);  }
     }
 
-    public static ItemData DeserializeItemData(JSONNode _buf)
+    public static AttrData DeserializeAttrData(JSONNode _buf)
     {
-        return new ItemData(_buf);
+        return new AttrData(_buf);
     }
 
     public readonly int ID;
-    /// <summary>
-    /// Name
-    /// </summary>
-    public readonly string Name;
+    public readonly SLG.BasicStats BaseAttr;
    
-    public const int __ID__ = 1241678205;
+    public const int __ID__ = 618152283;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
         
-        
+        BaseAttr?.ResolveRef(tables);
     }
 
     public override string ToString()
     {
         return "{ "
         + "ID:" + ID + ","
-        + "Name:" + Name + ","
+        + "BaseAttr:" + BaseAttr + ","
         + "}";
     }
 }

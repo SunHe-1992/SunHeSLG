@@ -1,0 +1,92 @@
+[
+  {
+    "ID": 1,
+    "BaseAttr": {
+      "HPMax": 200,
+      "SPMax": 50,
+      "Patk": 80,
+      "Pdef": 70,
+      "Eatk": 20,
+      "Edef": 40,
+      "Accuracy": 75,
+      "Speed": 60,
+      "Critical": 20,
+      "Evasion": 25
+    }
+  },
+  {
+    "ID": 2,
+    "BaseAttr": {
+      "HPMax": 120,
+      "SPMax": 180,
+      "Patk": 30,
+      "Pdef": 20,
+      "Eatk": 90,
+      "Edef": 70,
+      "Accuracy": 60,
+      "Speed": 50,
+      "Critical": 10,
+      "Evasion": 20
+    }
+  },
+  {
+    "ID": 3,
+    "BaseAttr": {
+      "HPMax": 150,
+      "SPMax": 70,
+      "Patk": 60,
+      "Pdef": 50,
+      "Eatk": 40,
+      "Edef": 40,
+      "Accuracy": 85,
+      "Speed": 90,
+      "Critical": 30,
+      "Evasion": 40
+    }
+  },
+  {
+    "ID": 4,
+    "BaseAttr": {
+      "HPMax": 130,
+      "SPMax": 150,
+      "Patk": 40,
+      "Pdef": 40,
+      "Eatk": 70,
+      "Edef": 80,
+      "Accuracy": 65,
+      "Speed": 55,
+      "Critical": 15,
+      "Evasion": 30
+    }
+  },
+  {
+    "ID": 5,
+    "BaseAttr": {
+      "HPMax": 170,
+      "SPMax": 100,
+      "Patk": 70,
+      "Pdef": 60,
+      "Eatk": 50,
+      "Edef": 50,
+      "Accuracy": 80,
+      "Speed": 80,
+      "Critical": 25,
+      "Evasion": 35
+    }
+  },
+  {
+    "ID": 6,
+    "BaseAttr": {
+      "HPMax": 140,
+      "SPMax": 120,
+      "Patk": 50,
+      "Pdef": 40,
+      "Eatk": 60,
+      "Edef": 60,
+      "Accuracy": 70,
+      "Speed": 65,
+      "Critical": 20,
+      "Evasion": 30
+    }
+  }
+]

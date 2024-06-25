@@ -21,7 +21,7 @@ namespace SunHeTBS
         public void OnCreate(object createParam)
         {
             UniEvent.AddListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
-            pawnList = new List<Pawn>();
+
         }
 
         public void OnDestroy()
@@ -68,16 +68,83 @@ namespace SunHeTBS
 
 
         #region Pawn management
-        public List<Pawn> pawnList;
+        public List<Pawn> mapPawnList = new List<Pawn>();
+        public List<Pawn> teamPawnList = new List<Pawn>();
+        public List<Pawn> villianPawnList = new List<Pawn>();
         public Pawn HeroPawn;
         public void CreatePawn(NPCMark nm)
         {
-            pawnList.Add(new Pawn(nm));
+            if (mapPawnList == null)
+                mapPawnList = new List<Pawn>();
+            mapPawnList.Add(new Pawn(nm));
         }
 
         public void InitHeroPawn()
         {
-            HeroPawn = new Pawn(1);
+            HeroPawn = new Pawn(1, RPGSide.Player);
+        }
+        public void AddTestTeamPawns()
+        {
+            if (teamPawnList == null)
+                teamPawnList = new List<Pawn>();
+            for (int i = 1; i < 5; i++)
+            {
+                teamPawnList.Add(new Pawn(i, RPGSide.Player));
+            }
+        }
+        public void AddVillianPawns()
+        {
+            if (villianPawnList == null)
+                villianPawnList = new List<Pawn>();
+            for (int i = 1; i < 5; i++)
+            {
+                villianPawnList.Add(new Pawn(i, RPGSide.Villian));
+            }
+        }
+        #endregion
+        public void StartCombat()
+        {
+
+            InitHeroPawn();
+            AddTestTeamPawns();
+            AddVillianPawns();
+            StartTurn();
+        }
+        #region Combat turns management 对局管理
+
+        public int currentTurn = 0;
+
+
+        public void StartTurn()
+        {
+            currentTurn++;
+            SortActionPawnList();
+            actionPawnIndex = 0;
+        }
+        /// <summary>
+        /// index for actionPawnList
+        /// </summary>
+        public int actionPawnIndex = 0;
+        //sort 排序 本局所有pawn 按照speed 从高到低排序
+        public List<Pawn> actionPawnList = new List<Pawn>();
+        void SortActionPawnList()
+        {
+            actionPawnList.AddRange(teamPawnList);
+            actionPawnList.AddRange(villianPawnList);
+            actionPawnList.Sort(ActionPawnSorter);
+        }
+        int ActionPawnSorter(Pawn p1, Pawn p2)
+        {
+            int spd1 = p1.GetAttr().Speed;
+            int spd2 = p2.GetAttr().Speed;
+            if (spd1 != spd2)
+            {
+                return spd2.CompareTo(spd1);
+            }
+            else //速度相同按照sid
+            {
+                return p1.seqId.CompareTo(p2.seqId);
+            }
         }
         #endregion
     }

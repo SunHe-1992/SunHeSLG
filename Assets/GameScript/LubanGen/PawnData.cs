@@ -21,7 +21,7 @@ public sealed partial class PawnData : Luban.BeanBase
         { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
         { if(!_buf["Description"].IsString) { throw new SerializationException(); }  Description = _buf["Description"]; }
         { if(!_buf["triggerDistance"].IsNumber) { throw new SerializationException(); }  TriggerDistance = _buf["triggerDistance"]; }
-        { if(!_buf["BaseAttr"].IsObject) { throw new SerializationException(); }  BaseAttr = SLG.BasicStats.DeserializeBasicStats(_buf["BaseAttr"]);  }
+        { if(!_buf["baseAttrId"].IsNumber) { throw new SerializationException(); }  BaseAttrId = _buf["baseAttrId"]; }
         { if(!_buf["mapEvent"].IsNumber) { throw new SerializationException(); }  MapEvent = (SLG.PawnMapEvent)_buf["mapEvent"].AsInt; }
     }
 
@@ -37,7 +37,10 @@ public sealed partial class PawnData : Luban.BeanBase
     /// 大地图碰撞半径
     /// </summary>
     public readonly float TriggerDistance;
-    public readonly SLG.BasicStats BaseAttr;
+    /// <summary>
+    /// Attribute表里面找
+    /// </summary>
+    public readonly int BaseAttrId;
     /// <summary>
     /// 地图上做什么
     /// </summary>
@@ -52,7 +55,7 @@ public sealed partial class PawnData : Luban.BeanBase
         
         
         
-        BaseAttr?.ResolveRef(tables);
+        
         
     }
 
@@ -63,7 +66,7 @@ public sealed partial class PawnData : Luban.BeanBase
         + "Name:" + Name + ","
         + "Description:" + Description + ","
         + "triggerDistance:" + TriggerDistance + ","
-        + "BaseAttr:" + BaseAttr + ","
+        + "baseAttrId:" + BaseAttrId + ","
         + "mapEvent:" + MapEvent + ","
         + "}";
     }

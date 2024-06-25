@@ -35,11 +35,12 @@ namespace PackageBattle
             UIObjectFactory.SetPackageItemExtension(UI_StatsComItem.URL, typeof(UI_StatsComItem));
             UIObjectFactory.SetPackageItemExtension(UI_BagItemComp.URL, typeof(UI_BagItemComp));
             UIObjectFactory.SetPackageItemExtension(UI_CombatPanel.URL, typeof(UI_CombatPanel));
-            UIObjectFactory.SetPackageItemExtension(UI_PawnWeaponCom.URL, typeof(UI_PawnWeaponCom));
-            UIObjectFactory.SetPackageItemExtension(UI_CombatBar.URL, typeof(UI_CombatBar));
-            UIObjectFactory.SetPackageItemExtension(UI_CombatBar1.URL, typeof(UI_CombatBar1));
             UIObjectFactory.SetPackageItemExtension(UI_CombatHpBar.URL, typeof(UI_CombatHpBar));
             UIObjectFactory.SetPackageItemExtension(UI_ItemInventoryComp.URL, typeof(UI_ItemInventoryComp));
+            UIObjectFactory.SetPackageItemExtension(UI_RPGStatsBar.URL, typeof(UI_RPGStatsBar));
+            UIObjectFactory.SetPackageItemExtension(UI_RPGStatsCom.URL, typeof(UI_RPGStatsCom));
+            UIObjectFactory.SetPackageItemExtension(UI_RPGPawnBlock.URL, typeof(UI_RPGPawnBlock));
+            UIObjectFactory.SetPackageItemExtension(UI_VillianStatsCom.URL, typeof(UI_VillianStatsCom));
         }
     }
 }

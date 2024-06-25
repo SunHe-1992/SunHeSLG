@@ -20,12 +20,6 @@ public sealed partial class ClassData : Luban.BeanBase
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
         { if(!_buf["Description"].IsString) { throw new SerializationException(); }  Description = _buf["Description"]; }
-        { if(!_buf["ClassType"].IsNumber) { throw new SerializationException(); }  ClassType = (SLG.ClassType)_buf["ClassType"].AsInt; }
-        { if(!_buf["FemaleOnly"].IsBoolean) { throw new SerializationException(); }  FemaleOnly = _buf["FemaleOnly"]; }
-        { if(!_buf["Movement"].IsNumber) { throw new SerializationException(); }  Movement = _buf["Movement"]; }
-        { if(!_buf["BaseAttr"].IsObject) { throw new SerializationException(); }  BaseAttr = SLG.BasicStats.DeserializeBasicStats(_buf["BaseAttr"]);  }
-        { if(!_buf["Growth"].IsObject) { throw new SerializationException(); }  Growth = SLG.BasicStats.DeserializeBasicStats(_buf["Growth"]);  }
-        { if(!_buf["Cap"].IsObject) { throw new SerializationException(); }  Cap = SLG.BasicStats.DeserializeBasicStats(_buf["Cap"]);  }
     }
 
     public static ClassData DeserializeClassData(JSONNode _buf)
@@ -36,12 +30,6 @@ public sealed partial class ClassData : Luban.BeanBase
     public readonly int ID;
     public readonly string Name;
     public readonly string Description;
-    public readonly SLG.ClassType ClassType;
-    public readonly bool FemaleOnly;
-    public readonly int Movement;
-    public readonly SLG.BasicStats BaseAttr;
-    public readonly SLG.BasicStats Growth;
-    public readonly SLG.BasicStats Cap;
    
     public const int __ID__ = 1993781538;
     public override int GetTypeId() => __ID__;
@@ -51,12 +39,6 @@ public sealed partial class ClassData : Luban.BeanBase
         
         
         
-        
-        
-        
-        BaseAttr?.ResolveRef(tables);
-        Growth?.ResolveRef(tables);
-        Cap?.ResolveRef(tables);
     }
 
     public override string ToString()
@@ -65,12 +47,6 @@ public sealed partial class ClassData : Luban.BeanBase
         + "ID:" + ID + ","
         + "Name:" + Name + ","
         + "Description:" + Description + ","
-        + "ClassType:" + ClassType + ","
-        + "FemaleOnly:" + FemaleOnly + ","
-        + "Movement:" + Movement + ","
-        + "BaseAttr:" + BaseAttr + ","
-        + "Growth:" + Growth + ","
-        + "Cap:" + Cap + ","
         + "}";
     }
 }

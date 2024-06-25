@@ -32705,6 +32705,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5326910603510742518, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
+      propertyPath: triggerDistance
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657039842853882884, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
+      propertyPath: m_Size.x
+      value: 0.46216208
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657039842853882884, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1016887
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657039842853882884, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.016327828
+      objectReference: {fileID: 0}
+    - target: {fileID: 7657039842853882884, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.03634292
+      objectReference: {fileID: 0}
     - target: {fileID: 8293062668461441290, guid: 211ffa3e1bbecf349ab78549eb7881a6, type: 3}
       propertyPath: m_Name
       value: EnemyTest1

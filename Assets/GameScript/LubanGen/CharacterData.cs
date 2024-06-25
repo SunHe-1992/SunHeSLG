@@ -21,9 +21,6 @@ public sealed partial class CharacterData : Luban.BeanBase
         { if(!_buf["CharName"].IsString) { throw new SerializationException(); }  CharName = _buf["CharName"]; }
         { if(!_buf["Description"].IsString) { throw new SerializationException(); }  Description = _buf["Description"]; }
         { if(!_buf["Gender"].IsNumber) { throw new SerializationException(); }  Gender = (SLG.Gender)_buf["Gender"].AsInt; }
-        { if(!_buf["CharAttr"].IsObject) { throw new SerializationException(); }  CharAttr = SLG.BasicStats.DeserializeBasicStats(_buf["CharAttr"]);  }
-        { if(!_buf["Growth"].IsObject) { throw new SerializationException(); }  Growth = SLG.BasicStats.DeserializeBasicStats(_buf["Growth"]);  }
-        { if(!_buf["CapFix"].IsObject) { throw new SerializationException(); }  CapFix = SLG.BasicStats.DeserializeBasicStats(_buf["CapFix"]);  }
     }
 
     public static CharacterData DeserializeCharacterData(JSONNode _buf)
@@ -35,9 +32,6 @@ public sealed partial class CharacterData : Luban.BeanBase
     public readonly string CharName;
     public readonly string Description;
     public readonly SLG.Gender Gender;
-    public readonly SLG.BasicStats CharAttr;
-    public readonly SLG.BasicStats Growth;
-    public readonly SLG.BasicStats CapFix;
    
     public const int __ID__ = -991456685;
     public override int GetTypeId() => __ID__;
@@ -48,9 +42,6 @@ public sealed partial class CharacterData : Luban.BeanBase
         
         
         
-        CharAttr?.ResolveRef(tables);
-        Growth?.ResolveRef(tables);
-        CapFix?.ResolveRef(tables);
     }
 
     public override string ToString()
@@ -60,9 +51,6 @@ public sealed partial class CharacterData : Luban.BeanBase
         + "CharName:" + CharName + ","
         + "Description:" + Description + ","
         + "Gender:" + Gender + ","
-        + "CharAttr:" + CharAttr + ","
-        + "Growth:" + Growth + ","
-        + "CapFix:" + CapFix + ","
         + "}";
     }
 }

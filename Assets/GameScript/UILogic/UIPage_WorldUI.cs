@@ -70,7 +70,8 @@ public class UIPage_WorldUI : FUIBase
         }
         if (BLogic.recentNPCMark == null)
             ui.showNPCBtn.selectedIndex = 0;
-        else{
+        else
+        {
             ui.showNPCBtn.selectedIndex = 1;
             //BLogic.recentNPCMark.eventType
             ui.btn_NPC.text = "NPC";
@@ -89,11 +90,12 @@ public class UIPage_WorldUI : FUIBase
     void BtnNPC()
     {
         var npcMark = BLogic.recentNPCMark;
-        switch(npcMark._pawn.PawnCfg.MapEvent)
+        switch (npcMark._pawn.PawnCfg.MapEvent)
         {
             case cfg.SLG.PawnMapEvent.Combat:
                 //go to combat
-                Debug.Log("todo : go to combat");
+                BattleDriver.Inst.StartCombat();
+                OnBtnClose();
                 break;
             case cfg.SLG.PawnMapEvent.Store:
                 //store npc show dialogue window

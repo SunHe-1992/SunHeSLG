@@ -6,7 +6,7 @@ namespace SunHeTBS
 {
     public class TopDownCharacterController : MonoBehaviour
     {
-        public float speed;
+        public float speed = 2.0f;
 
         private Animator animator;
         bool faceRight = true;
@@ -46,10 +46,7 @@ namespace SunHeTBS
                 animator.SetTrigger("attack");
             }
             dir.Normalize();
-            float speed = 0;
-            if (dir.magnitude > 0)
-                speed = 1;
-            animator.SetFloat("speed", speed);
+            animator.SetFloat("speed", dir.magnitude > 0 ? 1 : 0);
             //animator.SetBool("IsMoving", dir.magnitude > 0);
 
             GetComponent<Rigidbody2D>().velocity = speed * dir;

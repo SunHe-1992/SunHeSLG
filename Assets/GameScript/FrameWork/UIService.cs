@@ -111,7 +111,7 @@ public class UIService : ISingleton
         {
             return;
         }
-        com.txt_des.text = itemCfg.Description;
+        com.txt_des.text = itemCfg.Name;
 
 
     }
@@ -157,6 +157,28 @@ public class UIService : ISingleton
             };
         }
         return sp;
+    }
+    public void LoadUnitySprite(string name, GLoader gLoader)
+    {
+        Sprite sp = TryFindSprite(name);
+        if (sp != null)
+        {
+            gLoader.texture = new NTexture(sp);
+        }
+        else
+        {
+            var handle = YooAssets.LoadAssetSync<Sprite>(name);
+            handle.Completed += (loadObj) =>
+            {
+                if (loadObj.AssetObject != null)
+                {
+                    sp = loadObj.AssetObject as Sprite;
+                    CacheSprite(name, sp);
+                    gLoader.texture = new NTexture(sp);
+                }
+            };
+        }
+        
     }
     Sprite TryFindSprite(string name)
     {

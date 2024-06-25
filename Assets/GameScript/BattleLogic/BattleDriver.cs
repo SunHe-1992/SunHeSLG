@@ -296,7 +296,6 @@ namespace SunHeTBS
         public void LoadObjInScene()
         {
             LoadNPCMarks();
-            BLogic.Inst.InitHeroPawn();
         }
 
 
@@ -309,7 +308,11 @@ namespace SunHeTBS
             }
         }
         #endregion
-  
 
+        public void StartCombat()
+        {
+            BLogic.Inst.StartCombat();
+            FUIManager.Inst.ShowUI<UIPage_CombatPanel>(FUIDef.FWindow.CombatPanel);
+        }
     }
 }

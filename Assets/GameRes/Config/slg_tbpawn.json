@@ -1,38 +1,50 @@
 [
   {
     "ID": 1,
-    "Name": "MainHero",
-    "Description": "this is a the hero",
+    "Name": "Pawn1",
+    "Description": "this is a test pawn.",
     "triggerDistance": 0,
-    "BaseAttr": {
-      "HPMax": 0,
-      "Str": 0,
-      "Mag": 0,
-      "Dex": 0,
-      "Spd": 0,
-      "Def": 0,
-      "Res": 0,
-      "Luk": 0,
-      "Bld": 0
-    },
+    "baseAttrId": 1,
     "mapEvent": 0
   },
   {
     "ID": 2,
-    "Name": "TestSoilder",
+    "Name": "Pawn2",
     "Description": "this is a test pawn.",
     "triggerDistance": 0.8,
-    "BaseAttr": {
-      "HPMax": 0,
-      "Str": 0,
-      "Mag": 0,
-      "Dex": 0,
-      "Spd": 0,
-      "Def": 0,
-      "Res": 0,
-      "Luk": 0,
-      "Bld": 0
-    },
+    "baseAttrId": 2,
     "mapEvent": 1
+  },
+  {
+    "ID": 3,
+    "Name": "Pawn3",
+    "Description": "this is a test pawn.",
+    "triggerDistance": 0,
+    "baseAttrId": 3,
+    "mapEvent": 0
+  },
+  {
+    "ID": 4,
+    "Name": "Pawn4",
+    "Description": "this is a test pawn.",
+    "triggerDistance": 0,
+    "baseAttrId": 4,
+    "mapEvent": 0
+  },
+  {
+    "ID": 5,
+    "Name": "Pawn5",
+    "Description": "this is a test pawn.",
+    "triggerDistance": 0,
+    "baseAttrId": 5,
+    "mapEvent": 0
+  },
+  {
+    "ID": 6,
+    "Name": "Pawn6",
+    "Description": "this is a test pawn.",
+    "triggerDistance": 0,
+    "baseAttrId": 6,
+    "mapEvent": 0
   }
 ]
