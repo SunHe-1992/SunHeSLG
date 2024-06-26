@@ -32,6 +32,14 @@ namespace SunHeTBS
 
         public void OnUpdate()
         {
+            foreach (var pawn in villianPawnList)
+            {
+                pawn.Update();
+            }
+            foreach (var pawn in teamPawnList)
+            {
+                pawn.Update();
+            }
         }
 
         void OnLandMarkTriggered(IEventMessage msg)
@@ -127,6 +135,10 @@ namespace SunHeTBS
         public int actionPawnIndex = 0;
         //sort 排序 本局所有pawn 按照speed 从高到低排序
         public List<Pawn> actionPawnList = new List<Pawn>();
+        public Pawn GetCurrentActionPawn()
+        {
+            return actionPawnList[actionPawnIndex];
+        }
         void SortActionPawnList()
         {
             actionPawnList.AddRange(teamPawnList);

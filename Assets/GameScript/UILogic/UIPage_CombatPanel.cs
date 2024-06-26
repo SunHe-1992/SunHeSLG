@@ -105,7 +105,7 @@ public partial class UIPage_CombatPanel : FUIBase
         com.SPCom.comBar.color.selectedIndex = 0; //blue bar
         com.SPCom.comBar.value = (float)p.SP / attr.SPMax;
 
-        var actonP = BLogic.Inst.actionPawnList[BLogic.Inst.actionPawnIndex];
+        var actonP = BLogic.Inst.GetCurrentActionPawn();
         bool highLighted = actonP.seqId == p.seqId;
         com.ctrl_highlight.selectedIndex = highLighted ? 1 : 0;
     }

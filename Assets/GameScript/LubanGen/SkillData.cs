@@ -19,6 +19,12 @@ public sealed partial class SkillData : Luban.BeanBase
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["SkillName"].IsString) { throw new SerializationException(); }  SkillName = _buf["SkillName"]; }
+        { if(!_buf["SkillEffect"].IsNumber) { throw new SerializationException(); }  SkillEffect = _buf["SkillEffect"]; }
+        { if(!_buf["SPCost"].IsNumber) { throw new SerializationException(); }  SPCost = _buf["SPCost"]; }
+        { if(!_buf["Multiplier"].IsNumber) { throw new SerializationException(); }  Multiplier = _buf["Multiplier"]; }
+        { if(!_buf["AddDmg"].IsNumber) { throw new SerializationException(); }  AddDmg = _buf["AddDmg"]; }
+        { if(!_buf["AnimTime1"].IsNumber) { throw new SerializationException(); }  AnimTime1 = _buf["AnimTime1"]; }
+        { if(!_buf["AnimTime2"].IsNumber) { throw new SerializationException(); }  AnimTime2 = _buf["AnimTime2"]; }
     }
 
     public static SkillData DeserializeSkillData(JSONNode _buf)
@@ -28,12 +34,42 @@ public sealed partial class SkillData : Luban.BeanBase
 
     public readonly int ID;
     public readonly string SkillName;
+    /// <summary>
+    /// 技能效果
+    /// </summary>
+    public readonly int SkillEffect;
+    /// <summary>
+    /// 消耗SP
+    /// </summary>
+    public readonly int SPCost;
+    /// <summary>
+    /// 伤害倍率
+    /// </summary>
+    public readonly float Multiplier;
+    /// <summary>
+    /// 加值
+    /// </summary>
+    public readonly float AddDmg;
+    /// <summary>
+    /// 前摇动画时间
+    /// </summary>
+    public readonly float AnimTime1;
+    /// <summary>
+    /// 后摇动画时间
+    /// </summary>
+    public readonly float AnimTime2;
    
     public const int __ID__ = -300302981;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        
+        
+        
+        
+        
+        
         
         
     }
@@ -43,6 +79,12 @@ public sealed partial class SkillData : Luban.BeanBase
         return "{ "
         + "ID:" + ID + ","
         + "SkillName:" + SkillName + ","
+        + "SkillEffect:" + SkillEffect + ","
+        + "SPCost:" + SPCost + ","
+        + "Multiplier:" + Multiplier + ","
+        + "AddDmg:" + AddDmg + ","
+        + "AnimTime1:" + AnimTime1 + ","
+        + "AnimTime2:" + AnimTime2 + ","
         + "}";
     }
 }

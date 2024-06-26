@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 using cfg;
 namespace SunHeTBS
 {
-    public class Pawn
+    public abstract class RPGEntity
+    {
+        public virtual void Update()
+        {
+
+        }
+    }
+    public class Pawn : RPGEntity
     {
         public RPGSide side;
         public static int sequenceNum = 0;
@@ -45,6 +52,8 @@ namespace SunHeTBS
                 RefreshNPCMark();
                 this.npcMark.triggerDistance = PawnCfg.TriggerDistance;
             }
+
+            InitSkillList();
         }
 
         void RefreshNPCMark()
@@ -91,9 +100,41 @@ namespace SunHeTBS
         #endregion
 
 
+        #region skills
+        List<RPGSkill> activeSkills = new List<RPGSkill>();
+        RPGSkill normalAttack;
+        void InitSkillList()
+        {
+            activeSkills = new List<RPGSkill>();
+            //默认每个人有个技能普攻 101
+            AddSkill(101);
+        }
+        void AddSkill(int sklId)
+        {
+            normalAttack = new RPGSkill(sklId, this);
+            activeSkills.Add(normalAttack);
+        }
+        public void NormalAttack(Pawn target)
+        {
+            if (this.normalAttack != null)
+            {
+                normalAttack.StartCast(target);
+            }
+        }
 
+        #endregion
 
-
+        #region update
+        public override void Update()
+        {
+            //drive the update
+            base.Update();
+            foreach(var skl in this.activeSkills)
+            {
+                skl.Update();
+            }
+        }
+        #endregion
     }
 
     public enum RPGSide

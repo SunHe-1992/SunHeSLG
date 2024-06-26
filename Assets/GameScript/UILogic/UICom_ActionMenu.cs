@@ -28,8 +28,12 @@ public partial class UIPage_CombatPanel : FUIBase
         }
         else
         {
-            ui.actionCom.visible = false;
+            HideActionMenu();
         }
+    }
+    void HideActionMenu()
+    {
+        ui.actionCom.visible = false;
     }
     List<string> orderList = new List<string>()
     {
@@ -99,8 +103,13 @@ public partial class UIPage_CombatPanel : FUIBase
     {
         if (curAction == strAttack)
         {
+            var caster = BLogic.Inst.GetCurrentActionPawn();
+            var vList = BLogic.Inst.villianPawnList;
+            var target = vList[selectedVillianIndex];
             //do attack: 伤害计算, 界面表现展示, 推进流程
             //伤害计算: 需要 skill对象,普攻skill,配置表
+            caster.NormalAttack(target);
+            HideActionMenu();
         }
     }
     #endregion

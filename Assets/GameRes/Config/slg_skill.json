@@ -1,6 +1,12 @@
 [
   {
     "ID": 101,
-    "SkillName": "NormalAttack"
+    "SkillName": "NormalAttack",
+    "SkillEffect": 101,
+    "SPCost": 0,
+    "Multiplier": 1,
+    "AddDmg": 10,
+    "AnimTime1": 0.3,
+    "AnimTime2": 0.2
   }
 ]
