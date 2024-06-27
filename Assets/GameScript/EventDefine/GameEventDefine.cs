@@ -16,10 +16,10 @@ namespace SunHeTBS
         public static int StartSlotGame = GenID(0, 2);
         public static int StartFishing= GenID(0, 3);
         public static int InputAxis = GenID(0, 4);
-        public static int PhaseSwitch = GenID(0, 5);
-        public static int ShowSelectPawn = GenID(0, 6);
+        public static int TurnSwitch= GenID(0, 5);
+        public static int HPChanged = GenID(0, 6);
         public static int ShowActionMenu = GenID(0, 7);
-        public static int CursorPointToPawn = GenID(0, 8);
+        public static int NextActionPawn = GenID(0, 8);
         public static int ShowWeaponSelectUI = GenID(0, 9);
 
         #endregion

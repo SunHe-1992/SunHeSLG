@@ -128,6 +128,7 @@ namespace SunHeTBS
             currentTurn++;
             SortActionPawnList();
             actionPawnIndex = 0;
+            UniEvent.SendMessage(GameEventDefine.TurnSwitch);
         }
         /// <summary>
         /// index for actionPawnList
@@ -141,12 +142,17 @@ namespace SunHeTBS
         }
         void SortActionPawnList()
         {
+            actionPawnList = new List<Pawn>();
             actionPawnList.AddRange(teamPawnList);
             actionPawnList.AddRange(villianPawnList);
             actionPawnList.Sort(ActionPawnSorter);
         }
         int ActionPawnSorter(Pawn p1, Pawn p2)
         {
+            if (p1.dead != p2.dead)
+            {
+                return p1.dead.CompareTo(p2.dead);
+            }
             int spd1 = p1.GetAttr().Speed;
             int spd2 = p2.GetAttr().Speed;
             if (spd1 != spd2)
@@ -158,6 +164,28 @@ namespace SunHeTBS
                 return p1.seqId.CompareTo(p2.seqId);
             }
         }
+        public void OnPawnActionEnd()
+        {
+            actionPawnIndex++;
+            if (actionPawnIndex < actionPawnList.Count)
+            {
+                //next pawn start action
+                UniEvent.SendMessage(GameEventDefine.NextActionPawn);
+                var curPawn = GetCurrentActionPawn();
+                Debugger.Log("curPawn is player side? " + curPawn.IsPlayerSide());
+                if (curPawn.IsPlayerSide() == false) //AI do nothing and go on;
+                {
+                    OnPawnActionEnd();
+                }
+                UniEvent.SendMessage(GameEventDefine.NextActionPawn);
+            }
+            else //next turn
+            {
+                StartTurn();
+            }
+        }
+
+
         #endregion
     }
 }

@@ -49,11 +49,7 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-        var pawnCfg = ConfigManager.table.TbPawn.Get(1);
-        if (pawnCfg != null)
-        {
-            Debug.Log(pawnCfg.ToString());
-        }
+        
 
     }
 

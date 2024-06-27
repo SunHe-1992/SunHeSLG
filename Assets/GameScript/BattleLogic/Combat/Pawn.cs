@@ -20,7 +20,7 @@ namespace SunHeTBS
         private int pawnId;
         public int seqId;
         PawnData pawnCfg;
-
+        public bool dead = false;
         public PawnData PawnCfg { get => pawnCfg; private set => pawnCfg = value; }
 
         public NPCMark npcMark;
@@ -55,7 +55,16 @@ namespace SunHeTBS
 
             InitSkillList();
         }
+        public override string ToString()
+        {
+            string strP = "";
+            strP += $"name:{pawnCfg.Name} ";
+            strP += $"sid:{seqId} ";
+            strP += $"side:{side} ";
+            strP += $"HP:{HP}/{GetHPMax()} ";
 
+            return strP;
+        }
         void RefreshNPCMark()
         {
             npcMark.RefreshTxtName(this.PawnCfg.Name);
@@ -129,12 +138,52 @@ namespace SunHeTBS
         {
             //drive the update
             base.Update();
-            foreach(var skl in this.activeSkills)
+            if (this.dead == false)
             {
-                skl.Update();
+                foreach (var skl in this.activeSkills)
+                {
+                    skl.Update();
+                }
             }
         }
         #endregion
+
+        public bool IsPlayerSide()
+        {
+            return this.side == RPGSide.Player;
+        }
+
+        #region hp change, damage
+        public void RecieveDamage(float dmg, Pawn source)
+        {
+            HPChange(-Math.Abs(dmg));
+        }
+        void HPChange(float change)
+        {
+            this.HP += (int)change;
+            Debugger.Log("收到伤害 " + change);
+            CheckHP();
+
+        }
+        void CheckHP()
+        {
+            if (this.HP > this.GetHPMax())
+                HP = GetHPMax();
+            if (this.HP <= 0)
+            {
+                ProcessDeath();
+            }
+        }
+        void ProcessDeath()
+        {
+            //todo death
+            this.dead = true;
+        }
+        #endregion
+        public void ProcessAfterSkill()
+        {
+            BLogic.Inst.OnPawnActionEnd();
+        }
     }
 
     public enum RPGSide

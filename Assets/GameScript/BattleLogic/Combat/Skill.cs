@@ -26,6 +26,7 @@ namespace SunHeTBS
         public SkillData skillCfg;
 
         private Pawn targetPawn;
+
         SkillPhase phase = SkillPhase.Default;
         float timer = 0;
         public RPGSkill(int skillId, Pawn caster)
@@ -55,7 +56,13 @@ namespace SunHeTBS
         void ProcessDamageSkill()
         {
             float dmg = CalculateDamage(targetPawn);
-            Debug.Log("造成伤害 " + dmg);
+            Debugger.Log("造成伤害 " + dmg);
+            string dmgStr = "-" + (int)dmg;
+            if (this.Caster.IsPlayerSide())
+                PopupTextControl.CreateTextFairyLeft(dmgStr, FontType.PAtk);
+            else
+                PopupTextControl.CreateTextFairyRight(dmgStr, FontType.PAtk);
+            targetPawn.RecieveDamage(dmg, this.Caster);
         }
 
         float CalculateDamage(Pawn target)
@@ -72,6 +79,10 @@ namespace SunHeTBS
         public override void Update()
         {
             base.Update();
+            if (this.phase == SkillPhase.Default)
+            {
+                return;
+            }
 
             if (this.phase == SkillPhase.BeforeCast)
                 UpdateBeforeCast();
@@ -95,7 +106,12 @@ namespace SunHeTBS
             {
                 timer = 0;
                 phase = SkillPhase.Default;
+                OnSkillEnd();
             }
+        }
+        void OnSkillEnd()
+        {
+            this.Caster.ProcessAfterSkill();
         }
     }
 
