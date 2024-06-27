@@ -7,6 +7,8 @@ namespace PackageBattle
 {
     public partial class UI_VillianStatsCom : GComponent
     {
+        public Controller ctrl_dead;
+        public Controller ctrl_selected;
         public UI_RPGStatsBar stats;
         public const string URL = "ui://fstosj6ivaj1i2";
 
@@ -19,6 +21,8 @@ namespace PackageBattle
         {
             base.ConstructFromXML(xml);
 
+            ctrl_dead = GetController("ctrl_dead");
+            ctrl_selected = GetController("ctrl_selected");
             stats = (UI_RPGStatsBar)GetChild("stats");
         }
     }

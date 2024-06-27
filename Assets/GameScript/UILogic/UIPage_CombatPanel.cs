@@ -85,7 +85,7 @@ public partial class UIPage_CombatPanel : FUIBase
         RefreshTeamStats();
         RefreshVillianStats();
     }
-    void OnBtnClose()
+    public void HideUI()
     {
         FUIManager.Inst.HideUI(this);
     }
@@ -181,6 +181,13 @@ public partial class UIPage_CombatPanel : FUIBase
         mItem.stats.txt_value.text = "" + p.HP;
         mItem.stats.txt_valueMax.text = "" + p.GetHPMax();
         comBar.value = (float)p.HP / p.GetHPMax() * 100f;
+        mItem.ctrl_dead.selectedIndex = p.dead ? 1 : 0;
+
+        bool isSelected = false;
+        if (BLogic.Inst.GetCurrentSide() == RPGSide.Player
+            && BLogic.Inst.selectedPawn == p)
+            isSelected = true;
+        mItem.ctrl_selected.selectedIndex = isSelected ? 1 : 0;
     }
     #endregion
 }

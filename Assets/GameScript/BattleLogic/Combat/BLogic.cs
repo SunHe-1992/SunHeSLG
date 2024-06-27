@@ -16,6 +16,10 @@ namespace SunHeTBS
 
 
         }
+        /// <summary>
+        /// game control state machine
+        /// </summary>
+        public GameControlState GCState = GameControlState.Default;
         public static LandMark recentLandMark;
         public static NPCMark recentNPCMark;
         public void OnCreate(object createParam)
@@ -140,6 +144,14 @@ namespace SunHeTBS
         {
             return actionPawnList[actionPawnIndex];
         }
+        /// <summary>
+        /// get current action pawn's side
+        /// </summary>
+        /// <returns></returns>
+        public RPGSide GetCurrentSide()
+        {
+            return GetCurrentActionPawn().side;
+        }
         void SortActionPawnList()
         {
             actionPawnList = new List<Pawn>();
@@ -187,5 +199,69 @@ namespace SunHeTBS
 
 
         #endregion
+        #region game play end check
+        public bool combatWin = false;
+        public void CheckCombatEnd()
+        {
+            bool allVillianDead = true;
+            foreach (var p in villianPawnList)
+            {
+                if (p.dead == false)
+                {
+                    allVillianDead = false;
+                    break;
+                }
+            }
+
+            bool allPlayerDead = true;
+            foreach (var p in teamPawnList)
+            {
+                if (p.dead == false)
+                {
+                    allPlayerDead = false;
+                    break;
+                }
+            }
+            //combat over: show combat end UI
+            if (allVillianDead) //player win 
+            {
+                combatWin = true;
+            }
+            else if (allPlayerDead) //player lose
+            {
+                combatWin = false;
+            }
+
+            if (allVillianDead || allPlayerDead)
+            {
+                UIPage_CombatPanel.Instance.HideUI();
+                FUIManager.Inst.ShowUI<UIPage_CombatEnd>(FUIDef.FWindow.CombatEndUI);
+            }
+        }
+        #endregion
+
+        #region villian auto select
+
+        public Pawn selectedPawn;
+        public void AutoSelectVillian()
+        {
+            foreach (var p in villianPawnList)
+            {
+                if (p.dead == false)
+                {
+                    selectedPawn = p;
+                }
+            }
+        }
+        #endregion
+    }
+
+    public enum GameControlState
+    {
+        Default,
+        ActionMenu,
+        TargetPawnSelecting,
+        CastingSkill,
+        TurnSwitch,
     }
 }

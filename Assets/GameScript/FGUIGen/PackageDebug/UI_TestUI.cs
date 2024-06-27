@@ -14,6 +14,7 @@ namespace PackageDebug
         public GButton btn_addGold100;
         public GButton btn_slot;
         public GButton btn_fishing;
+        public GButton btn_damageVillian;
         public const string URL = "ui://arg2zso7pk0k0";
 
         public static UI_TestUI CreateInstance()
@@ -32,6 +33,7 @@ namespace PackageDebug
             btn_addGold100 = (GButton)GetChild("btn_addGold100");
             btn_slot = (GButton)GetChild("btn_slot");
             btn_fishing = (GButton)GetChild("btn_fishing");
+            btn_damageVillian = (GButton)GetChild("btn_damageVillian");
         }
     }
 }

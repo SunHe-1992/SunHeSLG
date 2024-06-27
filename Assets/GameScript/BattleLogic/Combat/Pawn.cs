@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using cfg;
+using UniFramework.Event;
 namespace SunHeTBS
 {
     public abstract class RPGEntity
@@ -157,13 +158,16 @@ namespace SunHeTBS
         public void RecieveDamage(float dmg, Pawn source)
         {
             HPChange(-Math.Abs(dmg));
+            if (source != null)
+                Debugger.Log($"收到伤害 {dmg} 来源 {source.ToString()}");
+            else
+                Debugger.Log($"收到伤害 {dmg} 来源未知");
         }
         void HPChange(float change)
         {
             this.HP += (int)change;
-            Debugger.Log("收到伤害 " + change);
             CheckHP();
-
+            UniEvent.SendMessage(GameEventDefine.HPChanged);
         }
         void CheckHP()
         {
@@ -178,6 +182,7 @@ namespace SunHeTBS
         {
             //todo death
             this.dead = true;
+            BLogic.Inst.CheckCombatEnd();
         }
         #endregion
         public void ProcessAfterSkill()

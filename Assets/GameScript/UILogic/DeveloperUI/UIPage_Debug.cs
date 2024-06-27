@@ -26,7 +26,7 @@ public class UIPage_Debug : FUIBase
         ui.btn_addGold100.onClick.Set(BtnAddGold);
         ui.btn_slot.onClick.Set(BtnSlotGame);
         ui.btn_fishing.onClick.Set(BtnFishingGame);
-
+        ui.btn_damageVillian.onClick.Set(BtnDmg);
 
     }
     protected override void OnShown()
@@ -49,7 +49,7 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-        
+
 
     }
 
@@ -104,5 +104,14 @@ public class UIPage_Debug : FUIBase
     {
         OnBtnClose();
         FUIManager.Inst.ShowUI<UIPage_Fishing>(FUIDef.FWindow.Fishing);
+    }
+
+    void BtnDmg()
+    {
+        foreach (var p in BLogic.Inst.villianPawnList)
+        {
+            int dmgValue = p.HP - 1;
+            p.RecieveDamage(dmgValue, null);
+        }
     }
 }

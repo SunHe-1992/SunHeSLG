@@ -92,12 +92,12 @@ public partial class UIPage_CombatPanel : FUIBase
     #endregion
 
     #region targetSelect
-    int selectedVillianIndex = 0;
     void EnterTargetSelect()
     {
         //先固定写死选择第一个敌人
-        selectedVillianIndex = 0;
+        BLogic.Inst.AutoSelectVillian();
         ConfirmTargetSelect();
+        RefreshVillianStats();
     }
     void ConfirmTargetSelect()
     {
@@ -105,7 +105,7 @@ public partial class UIPage_CombatPanel : FUIBase
         {
             var caster = BLogic.Inst.GetCurrentActionPawn();
             var vList = BLogic.Inst.villianPawnList;
-            var target = vList[selectedVillianIndex];
+            var target = BLogic.Inst.selectedPawn;
             //do attack: 伤害计算, 界面表现展示, 推进流程
             //伤害计算: 需要 skill对象,普攻skill,配置表
             caster.NormalAttack(target);

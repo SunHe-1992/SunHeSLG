@@ -18,6 +18,7 @@ public class FUIDef
         Fishing,
         BankHeist,
         WorldPanel,
+        CombatEndUI,
     }
     /// <summary>
     /// package names
@@ -48,5 +49,6 @@ public class FUIDef
         {FWindow.Fishing, FPackage.PackageMinigame},
         {FWindow.BankHeist, FPackage.PackageMinigame},
         {FWindow.WorldPanel, FPackage.PackageBattle},
+        {FWindow.CombatEndUI, FPackage.PackageBattle},
     };
 }
