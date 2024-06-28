@@ -72,19 +72,19 @@ public partial class UIPage_CombatPanel : FUIBase
         }
         else if (orderStr == strSkill)
         {
-
+            BLogic.Inst.OnPawnActionEnd();
         }
         else if (orderStr == strItems)
         {
-
+            BLogic.Inst.OnPawnActionEnd();
         }
         else if (orderStr == strDefend)
         {
-
+            BLogic.Inst.OnPawnActionEnd();
         }
         else if (orderStr == strFlee)
         {
-
+            BLogic.Inst.OnPawnActionEnd();
         }
 
 

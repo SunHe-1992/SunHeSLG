@@ -7,6 +7,7 @@ namespace PackageBattle
 {
     public partial class UI_RPGPawnBlock : GComponent
     {
+        public Controller ctrl_side;
         public GLoader headLoader;
         public GTextField txt_name;
         public const string URL = "ui://fstosj6ivaj1i0";
@@ -20,6 +21,7 @@ namespace PackageBattle
         {
             base.ConstructFromXML(xml);
 
+            ctrl_side = GetController("ctrl_side");
             headLoader = (GLoader)GetChild("headLoader");
             txt_name = (GTextField)GetChild("txt_name");
         }

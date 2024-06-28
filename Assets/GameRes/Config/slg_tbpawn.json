@@ -1,7 +1,7 @@
 [
   {
     "ID": 1,
-    "Name": "Pawn1",
+    "Name": "Warrior",
     "Description": "this is a test pawn.",
     "triggerDistance": 0,
     "baseAttrId": 1,
@@ -9,7 +9,7 @@
   },
   {
     "ID": 2,
-    "Name": "Pawn2",
+    "Name": "Mage",
     "Description": "this is a test pawn.",
     "triggerDistance": 0.8,
     "baseAttrId": 2,
@@ -17,7 +17,7 @@
   },
   {
     "ID": 3,
-    "Name": "Pawn3",
+    "Name": "Thief",
     "Description": "this is a test pawn.",
     "triggerDistance": 0,
     "baseAttrId": 3,
@@ -25,7 +25,7 @@
   },
   {
     "ID": 4,
-    "Name": "Pawn4",
+    "Name": "Cleric",
     "Description": "this is a test pawn.",
     "triggerDistance": 0,
     "baseAttrId": 4,
@@ -33,7 +33,7 @@
   },
   {
     "ID": 5,
-    "Name": "Pawn5",
+    "Name": "Hunter",
     "Description": "this is a test pawn.",
     "triggerDistance": 0,
     "baseAttrId": 5,
@@ -41,7 +41,7 @@
   },
   {
     "ID": 6,
-    "Name": "Pawn6",
+    "Name": "Merchant",
     "Description": "this is a test pawn.",
     "triggerDistance": 0,
     "baseAttrId": 6,

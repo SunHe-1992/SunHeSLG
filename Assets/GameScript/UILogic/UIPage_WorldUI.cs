@@ -25,7 +25,7 @@ public class UIPage_WorldUI : FUIBase
     protected override void OnShown()
     {
         base.OnShown();
-
+        InputReceiver.SwitchInputToMap();
     }
 
 

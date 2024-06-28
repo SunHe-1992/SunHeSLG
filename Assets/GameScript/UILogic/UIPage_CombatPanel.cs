@@ -40,6 +40,7 @@ public partial class UIPage_CombatPanel : FUIBase
     protected override void OnShown()
     {
         base.OnShown();
+        InputReceiver.SwitchInputToUI();
         LoadBG();
         UniEvent.AddListener(GameEventDefine.TurnSwitch, RefreshContent);
         UniEvent.AddListener(GameEventDefine.NextActionPawn, RefreshContent);
@@ -128,6 +129,7 @@ public partial class UIPage_CombatPanel : FUIBase
         var actonP = BLogic.Inst.GetCurrentActionPawn();
         bool highLighted = actonP.seqId == p.seqId;
         com.ctrl_highlight.selectedIndex = highLighted ? 1 : 0;
+        com.txt_name.text = p.PawnCfg.Name;
     }
     #endregion
 
@@ -149,6 +151,7 @@ public partial class UIPage_CombatPanel : FUIBase
         var p = aList[index + BLogic.Inst.actionPawnIndex];
         var mItem = obj as UI_RPGPawnBlock;
         mItem.txt_name.text = $"{p.side} {p.PawnCfg.Name}";
+        mItem.ctrl_side.selectedIndex = p.IsPlayerSide() ? 0 : 1;
     }
     #endregion
 
@@ -188,6 +191,7 @@ public partial class UIPage_CombatPanel : FUIBase
             && BLogic.Inst.selectedPawn == p)
             isSelected = true;
         mItem.ctrl_selected.selectedIndex = isSelected ? 1 : 0;
+        mItem.txt_name.text = p.PawnCfg.Name;
     }
     #endregion
 }

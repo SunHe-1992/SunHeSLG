@@ -175,6 +175,7 @@ namespace SunHeTBS
                 HP = GetHPMax();
             if (this.HP <= 0)
             {
+                this.HP = 0;
                 ProcessDeath();
             }
         }

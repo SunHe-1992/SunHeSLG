@@ -116,7 +116,7 @@ namespace SunHeTBS
         #endregion
         public void StartCombat()
         {
-
+            this.ClearBattleField();
             InitHeroPawn();
             AddTestTeamPawns();
             AddVillianPawns();
@@ -155,8 +155,16 @@ namespace SunHeTBS
         void SortActionPawnList()
         {
             actionPawnList = new List<Pawn>();
-            actionPawnList.AddRange(teamPawnList);
-            actionPawnList.AddRange(villianPawnList);
+            foreach (var p in teamPawnList)
+            {
+                if (p.dead == false)
+                    actionPawnList.Add(p);
+            }
+            foreach (var p in villianPawnList)
+            {
+                if (p.dead == false)
+                    actionPawnList.Add(p);
+            }
             actionPawnList.Sort(ActionPawnSorter);
         }
         int ActionPawnSorter(Pawn p1, Pawn p2)
@@ -254,6 +262,17 @@ namespace SunHeTBS
             }
         }
         #endregion
+
+        public void ClearBattleField()
+        {
+            this.villianPawnList.Clear();
+            this.teamPawnList.Clear();
+            this.actionPawnList.Clear();
+            this.HeroPawn = null;
+            this.actionPawnIndex = 0;
+            this.selectedPawn = null;
+            this.combatWin = false;
+        }
     }
 
     public enum GameControlState
