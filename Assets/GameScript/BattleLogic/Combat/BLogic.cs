@@ -80,16 +80,9 @@ namespace SunHeTBS
 
 
         #region Pawn management
-        public List<Pawn> mapPawnList = new List<Pawn>();
         public List<Pawn> teamPawnList = new List<Pawn>();
         public List<Pawn> villianPawnList = new List<Pawn>();
         public Pawn HeroPawn;
-        public void CreatePawn(NPCMark nm)
-        {
-            if (mapPawnList == null)
-                mapPawnList = new List<Pawn>();
-            mapPawnList.Add(new Pawn(nm));
-        }
 
         public void InitHeroPawn()
         {

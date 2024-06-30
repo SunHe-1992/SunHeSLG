@@ -295,18 +295,9 @@ namespace SunHeTBS
 
         public void LoadObjInScene()
         {
-            LoadNPCMarks();
         }
 
 
-        void LoadNPCMarks()
-        {
-            var npcList = GameObject.FindObjectsOfType<NPCMark>();
-            foreach (var npc in npcList)
-            {
-                BLogic.Inst.CreatePawn(npc);
-            }
-        }
         #endregion
 
         public void StartCombat()

@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 3DUI
+  - 
   - 
   - 
   - 
@@ -35,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - 3DUI
   - 
   m_SortingLayers:
   - name: Default

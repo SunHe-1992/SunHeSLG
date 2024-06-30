@@ -24,17 +24,7 @@ namespace SunHeTBS
         public bool dead = false;
         public PawnData PawnCfg { get => pawnCfg; private set => pawnCfg = value; }
 
-        public NPCMark npcMark;
-        public Pawn(NPCMark nMark)
-        {
-            sequenceNum++;
-            seqId = sequenceNum;
-            npcMark = nMark;
-            npcMark._pawn = this;
-            pawnId = npcMark.NPCId;
-
-            Init();
-        }
+       
 
         public Pawn(int id, RPGSide side)
         {
@@ -48,11 +38,6 @@ namespace SunHeTBS
         {
             PawnCfg = ConfigManager.table.TbPawn.Get(pawnId);
 
-            if (npcMark != null)
-            {
-                RefreshNPCMark();
-                this.npcMark.triggerDistance = PawnCfg.TriggerDistance;
-            }
 
             InitSkillList();
         }
@@ -65,10 +50,6 @@ namespace SunHeTBS
             strP += $"HP:{HP}/{GetHPMax()} ";
 
             return strP;
-        }
-        void RefreshNPCMark()
-        {
-            npcMark.RefreshTxtName(this.PawnCfg.Name);
         }
 
 

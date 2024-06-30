@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using cfg;
 using SunHeTBS;
 using TMPro;
 using UniFramework.Event;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 public class NPCMark : MonoBehaviour
 {
-    public Pawn _pawn;
+    public PawnData PawnCfg;
     public TextMeshProUGUI txt_name;
     public int NPCId = 1;
 
@@ -18,9 +19,15 @@ public class NPCMark : MonoBehaviour
     void Start()
     {
         txt_name = transform.Find("Canvas/txt_name").GetComponent<TextMeshProUGUI>();
-        txt_name.text = "";
+        LoadPawnCfg();
+        txt_name.text = PawnCfg.Name;
     }
 
+    void LoadPawnCfg()
+    {
+        PawnCfg = ConfigManager.table.TbPawn.Get(this.NPCId);
+        this.triggerDistance = PawnCfg.TriggerDistance;
+    }
     // Update is called once per frame
     void Update()
     {

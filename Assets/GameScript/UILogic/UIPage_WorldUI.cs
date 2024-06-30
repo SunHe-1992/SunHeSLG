@@ -90,7 +90,7 @@ public class UIPage_WorldUI : FUIBase
     void BtnNPC()
     {
         var npcMark = BLogic.recentNPCMark;
-        switch (npcMark._pawn.PawnCfg.MapEvent)
+        switch (npcMark.PawnCfg.MapEvent)
         {
             case cfg.SLG.PawnMapEvent.Combat:
                 //go to combat
