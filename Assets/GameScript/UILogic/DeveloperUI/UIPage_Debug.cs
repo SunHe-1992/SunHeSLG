@@ -49,8 +49,8 @@ public class UIPage_Debug : FUIBase
     }
     void BtnTestClick()
     {
-
-
+        OnBtnClose();
+        FUIManager.Inst.ShowUI<UIPage_Dialogue>(FUIDef.FWindow.DialoguePage, null, 1000);
     }
 
 

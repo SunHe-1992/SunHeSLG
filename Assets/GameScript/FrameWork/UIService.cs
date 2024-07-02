@@ -218,13 +218,13 @@ public class UIService : ISingleton
 
     public void RefreshTopBar(GComponent topBar)
     {
-        var topBarCom = topBar as UI_TopbarCom;
-        if (topBarCom != null)
-        {
-            UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num); //gold amount
-            topBarCom.head.txt_lvName.text = TBSPlayer.UserDetail.userName;//user name
-            topBarCom.head.txt_UID.text = "ID: " + TBSPlayer.UserDetail.userId;//user id
-        }
+        //var topBarCom = topBar as UI_TopbarCom;
+        //if (topBarCom != null)
+        //{
+        //    UIService.Inst.RefereshMoneyPointTxt(topBarCom.goldComp.txt_num); //gold amount
+        //    topBarCom.head.txt_lvName.text = TBSPlayer.UserDetail.userName;//user name
+        //    topBarCom.head.txt_UID.text = "ID: " + TBSPlayer.UserDetail.userId;//user id
+        //}
     }
 
     public void ShowMoneyAnim(long moneyValue)

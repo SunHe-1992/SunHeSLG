@@ -23,6 +23,7 @@ public partial class Tables
     public SLG.Skill Skill {get; }
     public SLG.TbPawn TbPawn {get; }
     public SLG.TbAttr TbAttr {get; }
+    public SLG.TbDialogue TbDialogue {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -35,6 +36,7 @@ public partial class Tables
         Skill = new SLG.Skill(loader("slg_skill"));
         TbPawn = new SLG.TbPawn(loader("slg_tbpawn"));
         TbAttr = new SLG.TbAttr(loader("slg_tbattr"));
+        TbDialogue = new SLG.TbDialogue(loader("slg_tbdialogue"));
         ResolveRef();
     }
     
@@ -49,6 +51,7 @@ public partial class Tables
         Skill.ResolveRef(this);
         TbPawn.ResolveRef(this);
         TbAttr.ResolveRef(this);
+        TbDialogue.ResolveRef(this);
     }
 }
 

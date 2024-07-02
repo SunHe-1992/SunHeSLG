@@ -19,6 +19,7 @@ public class FUIDef
         BankHeist,
         WorldPanel,
         CombatEndUI,
+        DialoguePage,
     }
     /// <summary>
     /// package names
@@ -50,5 +51,6 @@ public class FUIDef
         {FWindow.BankHeist, FPackage.PackageMinigame},
         {FWindow.WorldPanel, FPackage.PackageBattle},
         {FWindow.CombatEndUI, FPackage.PackageBattle},
+        {FWindow.DialoguePage, FPackage.CommonPackage},
     };
 }
