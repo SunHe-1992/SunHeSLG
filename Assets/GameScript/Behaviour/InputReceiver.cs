@@ -109,4 +109,21 @@ public class InputReceiver : MonoBehaviour
         Debugger.Log($"SwitchInputTo UI");
     }
 
+
+   
+    public void UIConfirmClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            UniEvent.SendMessage(GameEventDefine.ClickConfirm);
+        }
+    }
+    public void UICancelClick(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            UniEvent.SendMessage(GameEventDefine.ClickCancel);
+        }
+    }
+
 }

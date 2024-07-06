@@ -10,6 +10,8 @@ using SunHeTBS;
 public partial class UIPage_CombatPanel : FUIBase
 {
     #region current pawn action menu
+    GList focusedList = null;
+
     string strAttack = "Attack";
     string strItems = "Items";
     string strSkill = "Skill";
@@ -23,8 +25,10 @@ public partial class UIPage_CombatPanel : FUIBase
         var currentP = aList[BLogic.Inst.actionPawnIndex];
         if (currentP.side == RPGSide.Player)
         {
+            BLogic.GCState = GameControlState.ActionMenu;
             ui.actionCom.visible = true;
             RefreshActionCom();
+            this.focusedList = ui.actionCom.list_action;
         }
         else
         {
@@ -34,6 +38,8 @@ public partial class UIPage_CombatPanel : FUIBase
     void HideActionMenu()
     {
         ui.actionCom.visible = false;
+        this.focusedList = null;
+        BLogic.GCState = GameControlState.Default;
     }
     List<string> orderList = new List<string>()
     {
@@ -94,15 +100,15 @@ public partial class UIPage_CombatPanel : FUIBase
     #region targetSelect
     void EnterTargetSelect()
     {
+        BLogic.GCState = GameControlState.TargetPawnSelecting;
         //先固定写死选择第一个敌人
-        BLogic.Inst.AutoSelectVillian();
-        ConfirmTargetSelect();
-        RefreshVillianStats();
+        //BLogic.Inst.AutoSelectVillian();
     }
     void ConfirmTargetSelect()
     {
         if (curAction == strAttack)
         {
+            BLogic.GCState = GameControlState.CastingSkill;
             var caster = BLogic.Inst.GetCurrentActionPawn();
             var vList = BLogic.Inst.villianPawnList;
             var target = BLogic.Inst.selectedPawn;
@@ -113,4 +119,54 @@ public partial class UIPage_CombatPanel : FUIBase
         }
     }
     #endregion
+
+
+    #region input control
+    void OnInputAxis(IEventMessage msg)
+    {
+        var inputInst = InputReceiver.Inst;
+        //right=x+1 up=z+1
+        int xAdd = 0;
+        int zAdd = 0;
+        if (inputInst.axisDown) zAdd = -1;
+        else if (inputInst.axisUp) zAdd = 1;
+        if (inputInst.axisLeft) xAdd = -1;
+        else if (inputInst.axisRight) xAdd = 1;
+
+        if (InputReceiver.InputInUI)
+        {
+            if (this.isTop)
+            {
+                UIListNavigation();
+            }
+        }
+        else
+        {
+            //BLogic.Inst.OnInputAxis(xAdd, zAdd);
+        }
+
+    }
+    void UIListNavigation()
+    {
+        var inputInst = InputReceiver.Inst;
+        if (focusedList != null)
+        {
+            //list navigation
+            if (inputInst.axisDown)
+                focusedList.OnInputNext();
+            else if (inputInst.axisUp)
+                focusedList.OnInputPrevious();
+        }
+    }
+
+    void OnClickConfirm(IEventMessage msg)
+    {
+
+    }
+    void OnClickCancel(IEventMessage msg)
+    {
+
+    }
+    #endregion
+
 }

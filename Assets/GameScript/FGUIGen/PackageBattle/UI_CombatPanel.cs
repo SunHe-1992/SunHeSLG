@@ -21,6 +21,7 @@ namespace PackageBattle
         public UI_VillianStatsCom villian3;
         public UI_DamagePane ComIndicator;
         public GButton btn_test;
+        public GTextField txt_hud;
         public Transition anim_hide;
         public const string URL = "ui://fstosj6itjjs15";
 
@@ -47,6 +48,7 @@ namespace PackageBattle
             villian3 = (UI_VillianStatsCom)GetChild("villian3");
             ComIndicator = (UI_DamagePane)GetChild("ComIndicator");
             btn_test = (GButton)GetChild("btn_test");
+            txt_hud = (GTextField)GetChild("txt_hud");
             anim_hide = GetTransition("anim_hide");
         }
     }

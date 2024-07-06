@@ -46,6 +46,10 @@ public partial class UIPage_CombatPanel : FUIBase
         UniEvent.AddListener(GameEventDefine.NextActionPawn, RefreshContent);
         UniEvent.AddListener(GameEventDefine.HPChanged, UpdateStats);
         UniEvent.AddListener(GameEventDefine.NextActionPawn, OnNextActionPawn);
+        UniEvent.AddListener(GameEventDefine.InputAxis, OnInputAxis);
+        UniEvent.AddListener(GameEventDefine.ClickConfirm, OnClickConfirm);
+        UniEvent.AddListener(GameEventDefine.ClickCancel, OnClickCancel);
+        this.focusedList = null;
 
     }
 
@@ -63,7 +67,16 @@ public partial class UIPage_CombatPanel : FUIBase
         UniEvent.RemoveListener(GameEventDefine.NextActionPawn, RefreshContent);
         UniEvent.RemoveListener(GameEventDefine.HPChanged, UpdateStats);
         UniEvent.RemoveListener(GameEventDefine.NextActionPawn, OnNextActionPawn);
+        UniEvent.RemoveListener(GameEventDefine.InputAxis, OnInputAxis);
+        UniEvent.RemoveListener(GameEventDefine.ClickConfirm, OnClickConfirm);
+        UniEvent.RemoveListener(GameEventDefine.ClickCancel, OnClickCancel);
+        this.focusedList = null;
+    }
 
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        this.UpdateHud();
     }
     void LoadBG()
     {
@@ -167,7 +180,7 @@ public partial class UIPage_CombatPanel : FUIBase
             if (i < vList.Count)
             {
                 mItem.visible = true;
-                RefreshOneVillianStats(mItem, vList[i]);
+                RefreshOneVillianStats(mItem, vList[i], i);
             }
             else
             {
@@ -176,7 +189,7 @@ public partial class UIPage_CombatPanel : FUIBase
         }
 
     }
-    void RefreshOneVillianStats(UI_VillianStatsCom mItem, Pawn p)
+    void RefreshOneVillianStats(UI_VillianStatsCom mItem, Pawn p, int index)
     {
         var comBar = mItem.stats.comBar;
         comBar.color.selectedIndex = 1;
@@ -192,6 +205,38 @@ public partial class UIPage_CombatPanel : FUIBase
             isSelected = true;
         mItem.ctrl_selected.selectedIndex = isSelected ? 1 : 0;
         mItem.txt_name.text = p.PawnCfg.Name;
+        mItem.txt_number.text = "" + (index + 1);
+        mItem.data = index;
+        mItem.onClick.Set(OnVillianHPItemClick);
+    }
+    void OnVillianHPItemClick(EventContext ec)
+    {
+        if (BLogic.GCState == GameControlState.TargetPawnSelecting)
+        {
+            int idx = (int)(ec.sender as GObject).data;
+            var vList = BLogic.Inst.villianPawnList;
+            var clickPawn = vList[idx];
+            if (clickPawn.dead == false)
+            {
+                BLogic.Inst.selectedPawn = clickPawn;
+                ConfirmTargetSelect();
+                RefreshVillianStats();
+            }
+        }
     }
     #endregion
+
+    void UpdateHud()
+    {
+        bool showGCState = true;
+
+        string hudStr = "";
+
+        if (showGCState)
+        {
+            hudStr += $"game state: {BLogic.GCState}";
+        }
+
+        ui.txt_hud.text = hudStr;
+    }
 }

@@ -14,13 +14,15 @@ namespace SunHeTBS
         #region TBS game events
         public static int LandMarkTriggered = GenID(0, 1);
         public static int StartSlotGame = GenID(0, 2);
-        public static int StartFishing= GenID(0, 3);
+        public static int StartFishing = GenID(0, 3);
         public static int InputAxis = GenID(0, 4);
-        public static int TurnSwitch= GenID(0, 5);
+        public static int TurnSwitch = GenID(0, 5);
         public static int HPChanged = GenID(0, 6);
         public static int ShowActionMenu = GenID(0, 7);
         public static int NextActionPawn = GenID(0, 8);
         public static int ShowWeaponSelectUI = GenID(0, 9);
+        public static int ClickConfirm = GenID(0, 10);
+        public static int ClickCancel = GenID(0, 11);
 
         #endregion
 

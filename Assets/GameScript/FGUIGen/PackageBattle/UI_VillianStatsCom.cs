@@ -11,6 +11,7 @@ namespace PackageBattle
         public Controller ctrl_selected;
         public UI_RPGStatsBar stats;
         public GTextField txt_name;
+        public GTextField txt_number;
         public const string URL = "ui://fstosj6ivaj1i2";
 
         public static UI_VillianStatsCom CreateInstance()
@@ -26,6 +27,7 @@ namespace PackageBattle
             ctrl_selected = GetController("ctrl_selected");
             stats = (UI_RPGStatsBar)GetChild("stats");
             txt_name = (GTextField)GetChild("txt_name");
+            txt_number = (GTextField)GetChild("txt_number");
         }
     }
 }

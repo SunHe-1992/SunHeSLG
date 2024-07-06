@@ -19,7 +19,7 @@ namespace SunHeTBS
         /// <summary>
         /// game control state machine
         /// </summary>
-        public GameControlState GCState = GameControlState.Default;
+        public static GameControlState GCState = GameControlState.Default;
         public static LandMark recentLandMark;
         public static NPCMark recentNPCMark;
         public void OnCreate(object createParam)
