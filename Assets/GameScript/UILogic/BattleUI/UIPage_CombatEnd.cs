@@ -47,10 +47,8 @@ public class UIPage_CombatEnd : FUIBase
 
     void RefreshContent()
     {
-        if (BLogic.Inst.combatWin)
-            ui.txt_result.text = "VICTORY";
-        else
-            ui.txt_result.text = "LOSE";
+        ui.txt_result.text = BLogic.Inst.combatResult + "";
+
     }
     void OnBtnClose()
     {

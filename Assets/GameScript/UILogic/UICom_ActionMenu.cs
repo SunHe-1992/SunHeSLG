@@ -90,7 +90,16 @@ public partial class UIPage_CombatPanel : FUIBase
         }
         else if (orderStr == strFlee)
         {
-            BLogic.Inst.OnPawnActionEnd();
+            bool success = BLogic.Inst.AttemptToFlee();
+            Debug.Log($"AttemptToFlee result is success={success}");
+            if (success)
+            {
+                BLogic.Inst.DoCombatFlee();
+            }
+            else
+            {
+                BLogic.Inst.OnPawnActionEnd();
+            }
         }
 
 

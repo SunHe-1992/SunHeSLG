@@ -201,7 +201,7 @@ namespace SunHeTBS
 
         #endregion
         #region game play end check
-        public bool combatWin = false;
+        public CombatResult combatResult = CombatResult.Default;
         public void CheckCombatEnd()
         {
             bool allVillianDead = true;
@@ -226,18 +226,23 @@ namespace SunHeTBS
             //combat over: show combat end UI
             if (allVillianDead) //player win 
             {
-                combatWin = true;
+                combatResult = CombatResult.Victory;
             }
             else if (allPlayerDead) //player lose
             {
-                combatWin = false;
+                combatResult = CombatResult.Defeated;
             }
 
             if (allVillianDead || allPlayerDead)
             {
-                UIPage_CombatPanel.Instance.HideUI();
-                FUIManager.Inst.ShowUI<UIPage_CombatEnd>(FUIDef.FWindow.CombatEndUI);
+                DoCombatEnd();
             }
+        }
+        public void DoCombatEnd()
+        {
+            UIPage_CombatPanel.Instance.HideUI();
+            FUIManager.Inst.ShowUI<UIPage_CombatEnd>(FUIDef.FWindow.CombatEndUI);
+
         }
         #endregion
 
@@ -264,8 +269,20 @@ namespace SunHeTBS
             this.HeroPawn = null;
             this.actionPawnIndex = 0;
             this.selectedPawn = null;
-            this.combatWin = false;
+            this.combatResult = CombatResult.Default;
         }
+
+        #region Flee
+        public bool AttemptToFlee()
+        {
+            return true;
+        }
+        public void DoCombatFlee()
+        {
+            this.combatResult = CombatResult.Flee;
+            this.DoCombatEnd();
+        }
+        #endregion
     }
 
     public enum GameControlState
@@ -275,5 +292,12 @@ namespace SunHeTBS
         TargetPawnSelecting,
         CastingSkill,
         TurnSwitch,
+    }
+    public enum CombatResult
+    {
+        Default,
+        Victory,
+        Defeated,
+        Flee,
     }
 }
