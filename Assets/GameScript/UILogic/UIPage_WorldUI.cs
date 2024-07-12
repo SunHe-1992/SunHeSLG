@@ -26,6 +26,8 @@ public class UIPage_WorldUI : FUIBase
     {
         base.OnShown();
         InputReceiver.SwitchInputToMap();
+
+        AudioManager.Inst.Play("bgm1", false);
     }
 
 
