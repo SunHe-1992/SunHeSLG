@@ -65,6 +65,7 @@ public class UIPage_Dialogue : FUIBase
     void OnBtnClose()
     {
         FUIManager.Inst.HideUI(this);
+        FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
     }
 
     void OptionRenderer(int index, GObject obj)
