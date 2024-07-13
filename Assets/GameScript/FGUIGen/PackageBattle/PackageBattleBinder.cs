@@ -22,6 +22,9 @@ namespace PackageBattle
             UIObjectFactory.SetPackageItemExtension(UI_StatsCom.URL, typeof(UI_StatsCom));
             UIObjectFactory.SetPackageItemExtension(UI_HPComp.URL, typeof(UI_HPComp));
             UIObjectFactory.SetPackageItemExtension(UI_UnitUI.URL, typeof(UI_UnitUI));
+            UIObjectFactory.SetPackageItemExtension(UI_InventoryUI.URL, typeof(UI_InventoryUI));
+            UIObjectFactory.SetPackageItemExtension(UI_InventoryItem.URL, typeof(UI_InventoryItem));
+            UIObjectFactory.SetPackageItemExtension(UI_ItemDetail.URL, typeof(UI_ItemDetail));
             UIObjectFactory.SetPackageItemExtension(UI_CombatEndUI.URL, typeof(UI_CombatEndUI));
             UIObjectFactory.SetPackageItemExtension(UI_MenuItem.URL, typeof(UI_MenuItem));
             UIObjectFactory.SetPackageItemExtension(UI_ActionMenuComp.URL, typeof(UI_ActionMenuComp));

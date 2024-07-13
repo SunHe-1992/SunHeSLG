@@ -32,6 +32,9 @@ public static class TBSPlayer
         UserDetail.diceCount = 12;
         UserDetail.points.Add(new UserPoint(PointEnum.Gold, 3323));
         UserDetail.points.Add(new UserPoint(PointEnum.Gem, 8888));
+        UserDetail.items.Add(new UserItem(100, 3));
+        UserDetail.items.Add(new UserItem(101, 555));
+
     }
     #region Point management
 
@@ -108,4 +111,10 @@ public class UserItem
 {
     public int itemId;
     public int itemCount;
+
+    public UserItem(int itemId, int itemCount)
+    {
+        this.itemId = itemId;
+        this.itemCount = itemCount;
+    }
 }

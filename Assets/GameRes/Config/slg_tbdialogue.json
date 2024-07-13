@@ -70,5 +70,17 @@
     "OPAction3": 0,
     "Option4": "",
     "OPAction4": 0
+  },
+  {
+    "ID": 2001,
+    "Content": "Oh, you're awake! Finally. We were starting to worry. You'll need your strength for the journey ahead",
+    "Option1": "",
+    "OPAction1": 0,
+    "Option2": "",
+    "OPAction2": 0,
+    "Option3": "",
+    "OPAction3": 0,
+    "Option4": "",
+    "OPAction4": 0
   }
 ]

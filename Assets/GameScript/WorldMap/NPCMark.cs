@@ -25,8 +25,11 @@ public class NPCMark : MonoBehaviour
 
     void LoadPawnCfg()
     {
-        PawnCfg = ConfigManager.table.TbPawn.Get(this.NPCId);
-        this.triggerDistance = PawnCfg.TriggerDistance;
+        if (ConfigManager.table != null)
+        {
+            PawnCfg = ConfigManager.table.TbPawn.Get(this.NPCId);
+            this.triggerDistance = PawnCfg.TriggerDistance;
+        }
     }
     // Update is called once per frame
     void Update()

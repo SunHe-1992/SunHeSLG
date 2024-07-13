@@ -5,10 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Boot.unity
-    guid: 164ee080623d9f5428faadbfc8e03715
   - enabled: 0
-    path: Assets/GameRes/Scene/SLGMapTest.unity
-    guid: 11050ae0c27ad3244bb80028705c056a
+    path: Assets/Scenes/SampleScene.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/TimeLineScene.unity
+    guid: 352f2e64371e4ba4babce5d61f4d238f
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

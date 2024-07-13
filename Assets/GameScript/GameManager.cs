@@ -16,7 +16,6 @@ public class GameManager
             return _instance;
         }
     }
-
     private readonly EventGroup _eventGroup = new EventGroup();
 
     /// <summary>
@@ -54,4 +53,5 @@ public class GameManager
 
         //}
     }
+
 }

@@ -19,6 +19,13 @@ public sealed partial class ItemData : Luban.BeanBase
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
         { if(!_buf["Name"].IsString) { throw new SerializationException(); }  Name = _buf["Name"]; }
+        { if(!_buf["Quality"].IsNumber) { throw new SerializationException(); }  Quality = _buf["Quality"]; }
+        { if(!_buf["Icon"].IsString) { throw new SerializationException(); }  Icon = _buf["Icon"]; }
+        { if(!_buf["Des"].IsString) { throw new SerializationException(); }  Des = _buf["Des"]; }
+        { if(!_buf["effectId"].IsNumber) { throw new SerializationException(); }  EffectId = _buf["effectId"]; }
+        { if(!_buf["useInCombat"].IsBoolean) { throw new SerializationException(); }  UseInCombat = _buf["useInCombat"]; }
+        { if(!_buf["useOutCombat"].IsBoolean) { throw new SerializationException(); }  UseOutCombat = _buf["useOutCombat"]; }
+        { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
     }
 
     public static ItemData DeserializeItemData(JSONNode _buf)
@@ -31,12 +38,26 @@ public sealed partial class ItemData : Luban.BeanBase
     /// Name
     /// </summary>
     public readonly string Name;
+    public readonly int Quality;
+    public readonly string Icon;
+    public readonly string Des;
+    public readonly int EffectId;
+    public readonly bool UseInCombat;
+    public readonly bool UseOutCombat;
+    public readonly int Param1;
    
     public const int __ID__ = 1241678205;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        
+        
+        
+        
+        
+        
+        
         
         
     }
@@ -46,6 +67,13 @@ public sealed partial class ItemData : Luban.BeanBase
         return "{ "
         + "ID:" + ID + ","
         + "Name:" + Name + ","
+        + "Quality:" + Quality + ","
+        + "Icon:" + Icon + ","
+        + "Des:" + Des + ","
+        + "effectId:" + EffectId + ","
+        + "useInCombat:" + UseInCombat + ","
+        + "useOutCombat:" + UseOutCombat + ","
+        + "param1:" + Param1 + ","
         + "}";
     }
 }

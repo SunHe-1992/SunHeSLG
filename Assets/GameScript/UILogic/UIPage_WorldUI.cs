@@ -21,6 +21,7 @@ public class UIPage_WorldUI : FUIBase
         ui.btn_test.onClick.Set(BtnTestClick);
         ui.btn_minigame.onClick.Set(BtnMiniGame);
         ui.btn_NPC.onClick.Set(BtnNPC);
+        ui.btn_inventory.onClick.Set(BtnInventory);
     }
     protected override void OnShown()
     {
@@ -104,5 +105,10 @@ public class UIPage_WorldUI : FUIBase
                 Debug.Log("todo : go to merchant dialogue");
                 break;
         }
+    }
+
+    void BtnInventory()
+    {
+        FUIManager.Inst.ShowUI<UIPage_Inventory>(FUIDef.FWindow.InventoryUI);
     }
 }

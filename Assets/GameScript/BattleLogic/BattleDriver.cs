@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using YooAsset;
 using System;
 using YooAsset;
 using UnityEngine.SceneManagement;
 using UniFramework.Pooling;
 using UniFramework.Singleton;
-
 namespace SunHeTBS
 {
     public enum BattleDriveState
@@ -225,14 +225,16 @@ namespace SunHeTBS
 
         private void OnEnterPreloadResState()
         {
-            //todo load pawns and art resources
+            //load pawns and art resources
             //
             if (UniSpawner == null)
                 UniSpawner = UniPooling.CreateSpawner("DefaultPackage");
 
             //spawner.CreateGameObjectPoolAsync()
             UniSingleton.StartCoroutine(CreateSpawners());
+            this.director = GameObject.Find("PlayableDirector").GetComponent<PlayableDirector>();
 
+            this.director.Play();
         }
         IEnumerator CreateSpawners()
         {
@@ -305,5 +307,10 @@ namespace SunHeTBS
             BLogic.Inst.StartCombat();
             FUIManager.Inst.ShowUI<UIPage_CombatPanel>(FUIDef.FWindow.CombatPanel);
         }
+
+        #region timeline 
+        public PlayableDirector director;
+
+        #endregion
     }
 }

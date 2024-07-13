@@ -20,6 +20,7 @@ public class FUIDef
         WorldPanel,
         CombatEndUI,
         DialoguePage,
+        InventoryUI,
     }
     /// <summary>
     /// package names
@@ -52,5 +53,6 @@ public class FUIDef
         {FWindow.WorldPanel, FPackage.PackageBattle},
         {FWindow.CombatEndUI, FPackage.PackageBattle},
         {FWindow.DialoguePage, FPackage.CommonPackage},
+        {FWindow.InventoryUI, FPackage.PackageBattle},
     };
 }

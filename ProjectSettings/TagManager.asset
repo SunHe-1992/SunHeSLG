@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - trees
   - Water
   - UI
   - 
@@ -25,40 +25,31 @@ TagManager:
   - 
   - 
   - 
-  - Layer 1
-  - Layer 2
-  - Layer 3
-  - 
-  - pawns
   - 
   - 
   - 
   - 
   - 
-  - 3DUI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
-    uniqueID: 3224522713
+  - name: trees
+    uniqueID: 2249760369
     locked: 0
-  - name: New Layer 2
-    uniqueID: 262095309
+  - name: ground
+    uniqueID: 1648398967
     locked: 0
-  - name: New Layer 3
-    uniqueID: 2505610431
+  - name: player
+    uniqueID: 1350308351
     locked: 0
-  - name: New Layer 4
-    uniqueID: 1436420573
-    locked: 0
-  - name: 
-    uniqueID: 3722909835
-    locked: 0
-  - name: 
-    uniqueID: 227975837
-    locked: 0
-  - name: 
-    uniqueID: 1590674301
+  - name: shutter
+    uniqueID: 3529867127
     locked: 0

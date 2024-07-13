@@ -14,6 +14,7 @@ namespace PackageBattle
         public GTextField txt_hud;
         public GButton btn_minigame;
         public GButton btn_NPC;
+        public GButton btn_inventory;
         public const string URL = "ui://fstosj6ipy0fhw";
 
         public static UI_WorldPanel CreateInstance()
@@ -32,6 +33,7 @@ namespace PackageBattle
             txt_hud = (GTextField)GetChild("txt_hud");
             btn_minigame = (GButton)GetChild("btn_minigame");
             btn_NPC = (GButton)GetChild("btn_NPC");
+            btn_inventory = (GButton)GetChild("btn_inventory");
         }
     }
 }

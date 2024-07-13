@@ -178,7 +178,7 @@ public class UIService : ISingleton
                 }
             };
         }
-        
+
     }
     Sprite TryFindSprite(string name)
     {
@@ -239,4 +239,31 @@ public class UIService : ISingleton
         if (sound != null && sound.nativeClip != null)
             Stage.inst.PlayOneShotSound(sound.nativeClip, volumeScale);
     }
+
+    public void ShowItemDetail(UI_ItemDetail com, int itemId, int itemCount)
+    {
+        com.visible = true;
+        com.data = itemId;
+        //todo use item
+        com.btn_use.onClick.Set(() =>
+        {
+            Debugger.Log("Use item id " + itemId);
+            ;
+        });
+
+        ShowItemComp(com.itemCom, itemId, itemCount);
+        var cfg = ConfigManager.table.Item.Get(itemId);
+        com.txt_detail.text = cfg.Des;
+
+    }
+
+    public void ShowItemComp(UI_InventoryItem mItem, int itemId, int itemCount)
+    {
+        mItem.txt_count.text = $"×{itemCount}";
+        var cfg = ConfigManager.table.Item.Get(itemId);
+        mItem.ctrl_quality.selectedIndex = cfg.Quality;
+        mItem.txt_name.text = cfg.Name;
+        mItem.iconLoader.url = $"ItemIcon/{cfg.Icon}";//load from Assets/Resorce 
+    }
+
 }
