@@ -32,8 +32,8 @@ public static class TBSPlayer
         UserDetail.diceCount = 12;
         UserDetail.points.Add(new UserPoint(PointEnum.Gold, 3323));
         UserDetail.points.Add(new UserPoint(PointEnum.Gem, 8888));
-        UserDetail.items.Add(new UserItem(100, 3));
-        UserDetail.items.Add(new UserItem(101, 555));
+        InsertItem(100, 3);
+        InsertItem(101, 55);
 
     }
     #region Point management
@@ -71,9 +71,48 @@ public static class TBSPlayer
     {
         UpdatePointAmount(PointEnum.Gold, changeValue);
     }
+    public static void SpendGold(long changeValue)
+    {
+        UpdateGoldAmount(GetGoldAmount() - changeValue);
+    }
     #endregion
 
- 
+    #region item management
+
+    public static void InsertItem(int itemId, int itemCount)
+    {
+        var findItem = UserDetail.items.Find(p => p.itemId == itemId);
+        if (findItem != null)
+        {
+            findItem.itemCount += itemCount;
+        }
+        else
+        {
+            UserDetail.items.Add(new UserItem(itemId, itemCount));
+        }
+        Debugger.Log($"item inserted itemId={itemId} count={itemCount}");
+    }
+    public static void RemoveItem(int itemId, int itemCount)
+    {
+        var findItem = UserDetail.items.Find(p => p.itemId == itemId);
+        if (findItem != null)
+        {
+            if (findItem.itemCount >= itemCount)
+            {
+                findItem.itemCount -= itemCount;
+                UserDetail.items.RemoveAll(p => p.itemCount <= 0);
+            }
+            else
+            {
+                Debugger.LogWarning("item remove: insufficient, item id: " + itemId);
+            }
+        }
+        else
+        {
+            Debugger.LogWarning("failed to find item to remove, item id: " + itemId);
+        }
+    }
+    #endregion
 }
 public class UserDetail
 {

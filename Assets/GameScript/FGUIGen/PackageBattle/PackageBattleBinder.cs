@@ -8,6 +8,7 @@ namespace PackageBattle
     {
         public static void BindAll()
         {
+            UIObjectFactory.SetPackageItemExtension(UI_StoreUI.URL, typeof(UI_StoreUI));
             UIObjectFactory.SetPackageItemExtension(UI_BattlePrepare.URL, typeof(UI_BattlePrepare));
             UIObjectFactory.SetPackageItemExtension(UI_PhaseComp.URL, typeof(UI_PhaseComp));
             UIObjectFactory.SetPackageItemExtension(UI_ItemComp.URL, typeof(UI_ItemComp));

@@ -21,6 +21,7 @@ public class FUIDef
         CombatEndUI,
         DialoguePage,
         InventoryUI,
+        StoreUI,
     }
     /// <summary>
     /// package names
@@ -54,5 +55,6 @@ public class FUIDef
         {FWindow.CombatEndUI, FPackage.PackageBattle},
         {FWindow.DialoguePage, FPackage.CommonPackage},
         {FWindow.InventoryUI, FPackage.PackageBattle},
+        {FWindow.StoreUI, FPackage.PackageBattle},
     };
 }

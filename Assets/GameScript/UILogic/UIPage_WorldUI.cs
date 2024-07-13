@@ -102,7 +102,7 @@ public class UIPage_WorldUI : FUIBase
                 break;
             case cfg.SLG.PawnMapEvent.Store:
                 //store npc show dialogue window
-                Debug.Log("todo : go to merchant dialogue");
+                OpenStore();
                 break;
         }
     }
@@ -110,5 +110,11 @@ public class UIPage_WorldUI : FUIBase
     void BtnInventory()
     {
         FUIManager.Inst.ShowUI<UIPage_Inventory>(FUIDef.FWindow.InventoryUI);
+    }
+    void OpenStore()
+    {
+        Debug.Log("go to store UI");
+        FUIManager.Inst.ShowUI<UIPage_Store>(FUIDef.FWindow.StoreUI);
+
     }
 }

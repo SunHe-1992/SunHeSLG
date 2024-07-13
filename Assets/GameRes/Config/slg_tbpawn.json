@@ -3,7 +3,7 @@
     "ID": 1,
     "Name": "Warrior",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0,
+    "triggerDistance": 1,
     "baseAttrId": 1,
     "mapEvent": 0
   },
@@ -11,7 +11,7 @@
     "ID": 2,
     "Name": "Mage",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0.8,
+    "triggerDistance": 1,
     "baseAttrId": 2,
     "mapEvent": 1
   },
@@ -19,7 +19,7 @@
     "ID": 3,
     "Name": "Thief",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0,
+    "triggerDistance": 1,
     "baseAttrId": 3,
     "mapEvent": 0
   },
@@ -27,7 +27,7 @@
     "ID": 4,
     "Name": "Cleric",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0,
+    "triggerDistance": 1,
     "baseAttrId": 4,
     "mapEvent": 0
   },
@@ -35,7 +35,7 @@
     "ID": 5,
     "Name": "Hunter",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0,
+    "triggerDistance": 1,
     "baseAttrId": 5,
     "mapEvent": 0
   },
@@ -43,8 +43,8 @@
     "ID": 6,
     "Name": "Merchant",
     "Description": "this is a test pawn.",
-    "triggerDistance": 0,
+    "triggerDistance": 1,
     "baseAttrId": 6,
-    "mapEvent": 0
+    "mapEvent": 2
   }
 ]

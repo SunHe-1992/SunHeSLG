@@ -22,6 +22,7 @@ public sealed partial class ItemData : Luban.BeanBase
         { if(!_buf["Quality"].IsNumber) { throw new SerializationException(); }  Quality = _buf["Quality"]; }
         { if(!_buf["Icon"].IsString) { throw new SerializationException(); }  Icon = _buf["Icon"]; }
         { if(!_buf["Des"].IsString) { throw new SerializationException(); }  Des = _buf["Des"]; }
+        { if(!_buf["Price"].IsNumber) { throw new SerializationException(); }  Price = _buf["Price"]; }
         { if(!_buf["effectId"].IsNumber) { throw new SerializationException(); }  EffectId = _buf["effectId"]; }
         { if(!_buf["useInCombat"].IsBoolean) { throw new SerializationException(); }  UseInCombat = _buf["useInCombat"]; }
         { if(!_buf["useOutCombat"].IsBoolean) { throw new SerializationException(); }  UseOutCombat = _buf["useOutCombat"]; }
@@ -41,6 +42,7 @@ public sealed partial class ItemData : Luban.BeanBase
     public readonly int Quality;
     public readonly string Icon;
     public readonly string Des;
+    public readonly int Price;
     public readonly int EffectId;
     public readonly bool UseInCombat;
     public readonly bool UseOutCombat;
@@ -60,6 +62,7 @@ public sealed partial class ItemData : Luban.BeanBase
         
         
         
+        
     }
 
     public override string ToString()
@@ -70,6 +73,7 @@ public sealed partial class ItemData : Luban.BeanBase
         + "Quality:" + Quality + ","
         + "Icon:" + Icon + ","
         + "Des:" + Des + ","
+        + "Price:" + Price + ","
         + "effectId:" + EffectId + ","
         + "useInCombat:" + UseInCombat + ","
         + "useOutCombat:" + UseOutCombat + ","
