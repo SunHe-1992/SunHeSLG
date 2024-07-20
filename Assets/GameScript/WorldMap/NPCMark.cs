@@ -13,7 +13,7 @@ public class NPCMark : MonoBehaviour
     public int NPCId = 1;
 
     PlayerCharacter hero;
-
+    public int dialogue_bubble_id = 0;
     public float triggerDistance = 0.7f;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,8 @@ public class NPCMark : MonoBehaviour
         txt_name = transform.Find("Canvas/txt_name").GetComponent<TextMeshProUGUI>();
         LoadPawnCfg();
         txt_name.text = PawnCfg.Name;
+        ShowBubble();
+        DelayShowBubble();
     }
 
     void LoadPawnCfg()
@@ -67,5 +69,25 @@ public class NPCMark : MonoBehaviour
     public void RefreshTxtName(string name)
     {
         this.txt_name.text = name;
+    }
+    void ShowBubble()
+    {
+        if (this.dialogue_bubble_id != 0)
+        {
+            DialogueBubble db = GetComponent<DialogueBubble>();
+            db.ShowContent(dialogue_bubble_id);
+        }
+    }
+
+    IEnumerator DelayShowBubble()
+    {
+        while (true)
+        {
+            if (this.gameObject != null && this.gameObject.activeSelf)
+            {
+                ShowBubble();
+                yield return new WaitForSeconds(7);
+            }
+        }
     }
 }

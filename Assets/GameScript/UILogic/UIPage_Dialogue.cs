@@ -106,8 +106,7 @@ public class UIPage_Dialogue : FUIBase
             this.cfgId = opActionList[0];
             RefreshContent();
         }
-
-        if (opActionList == null || opActionList.Count == 0)
+        else if (opActionList == null || opActionList.Count == 0 || opActionList[0] == 0)
         {
             OnBtnClose();
         }

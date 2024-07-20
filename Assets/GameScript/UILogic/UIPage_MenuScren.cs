@@ -34,7 +34,7 @@ public class UIPage_MenuScreen : FUIBase
     {
         base.OnShown();
         //0 rpg game, 1 platform jump
-        ui.ctrl_mode.selectedIndex = 0;
+        ui.ctrl_mode.selectedIndex = Boot.playRPG ? 0 : 1;
     }
 
 
@@ -80,7 +80,7 @@ public class UIPage_MenuScreen : FUIBase
     protected void OnClickBtnNewGame()
     {
         //SceneManager.LoadScene("GameScene");
-      //  UIFrame.Show<UIGameplayScreen>();
+        //  UIFrame.Show<UIGameplayScreen>();
     }
 
     protected void OnClickBtnLoadGame()

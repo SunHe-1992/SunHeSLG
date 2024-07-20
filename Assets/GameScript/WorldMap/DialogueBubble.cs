@@ -26,10 +26,13 @@ public class DialogueBubble : MonoBehaviour
     float waitTime = 5f;
     public void ShowContent(int dialogueId)
     {
+        if (txt_bubble == null) this.Start();
         var cfg = ConfigManager.table.TbDialogue.Get(dialogueId);
         string content = cfg.Content;
+        Debugger.Log("show content " + content);
         //waitTime = content.Length * timeOfStringLength;
         txt_bubble.text = content;
+        DelayShowBubble();
     }
     IEnumerator DelayShowBubble()
     {

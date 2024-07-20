@@ -16,6 +16,7 @@ namespace cfg.SLG
         Default = 0,
         Combat = 1,
         Store = 2,
+        Talk = 3,
     }
 
 } 

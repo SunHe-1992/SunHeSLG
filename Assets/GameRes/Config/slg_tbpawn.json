@@ -37,7 +37,7 @@
     "Description": "this is a test pawn.",
     "triggerDistance": 1,
     "baseAttrId": 5,
-    "mapEvent": 0
+    "mapEvent": 3
   },
   {
     "ID": 6,

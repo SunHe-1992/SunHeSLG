@@ -46,7 +46,7 @@ public class UIPage_WorldUI : FUIBase
     void BtnTestClick()
     {
         FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
-        FUIManager.Inst.HideUI(this);
+        //FUIManager.Inst.HideUI(this);
     }
 
     void RefreshContent()
@@ -104,6 +104,10 @@ public class UIPage_WorldUI : FUIBase
                 //store npc show dialogue window
                 OpenStore();
                 break;
+            case cfg.SLG.PawnMapEvent.Talk:
+                //store npc show dialogue window
+                OpenDialogue();
+                break;
         }
     }
 
@@ -116,5 +120,9 @@ public class UIPage_WorldUI : FUIBase
         Debug.Log("go to store UI");
         FUIManager.Inst.ShowUI<UIPage_Store>(FUIDef.FWindow.StoreUI);
 
+    }
+    void OpenDialogue()
+    {
+        FUIManager.Inst.ShowUI<UIPage_Dialogue>(FUIDef.FWindow.DialoguePage, null, 1000);
     }
 }
