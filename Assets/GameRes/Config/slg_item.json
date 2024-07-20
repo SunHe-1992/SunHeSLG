@@ -22,5 +22,17 @@
     "useInCombat": true,
     "useOutCombat": true,
     "param1": 80
+  },
+  {
+    "ID": 102,
+    "Name": "GoldCoin",
+    "Quality": 2,
+    "Icon": "icon_coin",
+    "Des": "GoldCoin",
+    "Price": 1,
+    "effectId": 0,
+    "useInCombat": false,
+    "useOutCombat": false,
+    "param1": 0
   }
 ]

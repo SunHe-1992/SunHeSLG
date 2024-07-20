@@ -113,6 +113,27 @@ public static class TBSPlayer
         }
     }
     #endregion
+
+    #region quests management
+    public static void GenerateBoardQuests()
+    {
+        foreach (var data in ConfigManager.table.TbQuest.DataList)
+        {
+            //data.DialogueID
+            QuestEntry qe = new QuestEntry(data.ID);
+            UserDetail.boardQuests.Add(data.ID, qe);
+        }
+    }
+
+    public static void AcceptQuest(int questId)
+    {
+        var data = UserDetail.boardQuests[questId];
+        UserDetail.boardQuests.Remove(questId);
+
+        data.status = QuestEntry.QuestStatus.Accepted;
+        UserDetail.myQuests.Add(questId, data);
+    }
+    #endregion
 }
 public class UserDetail
 {
@@ -129,7 +150,8 @@ public class UserDetail
     public int diceCount = 0;
     public List<UserPoint> points = new List<UserPoint>();
     public List<UserItem> items = new List<UserItem>();
-
+    public Dictionary<int, QuestEntry> boardQuests = new Dictionary<int, QuestEntry>();
+    public Dictionary<int, QuestEntry> myQuests = new Dictionary<int, QuestEntry>();
 }
 public enum PointEnum
 {
@@ -155,5 +177,35 @@ public class UserItem
     {
         this.itemId = itemId;
         this.itemCount = itemCount;
+    }
+}
+public class QuestEntry
+{
+    public int questId;
+    public int currentProgress;
+    public int maxProgress;
+    public QuestStatus status = QuestStatus.Onboard;
+
+    public QuestEntry(int questId)
+    {
+        this.questId = questId;
+        var cfg = ConfigManager.table.TbQuest.Get(this.questId);
+        this.maxProgress = cfg.Param1;
+        this.status = QuestStatus.Onboard;
+    }
+
+    public enum QuestStatus
+    {
+        Onboard = 0,
+        Accepted = 1,
+        Finished = 2,
+    }
+    public void UpdateProgress(int progress)
+    {
+        currentProgress = progress;
+        //if (currentProgress >= maxProgress)
+        //{
+        //    status = QuestStatus.Finished;
+        //}
     }
 }

@@ -23,6 +23,10 @@ namespace SunHeTBS
         public static int ShowWeaponSelectUI = GenID(0, 9);
         public static int ClickConfirm = GenID(0, 10);
         public static int ClickCancel = GenID(0, 11);
+        public static int OneVillianDied = GenID(0, 12);
+        public static int DialogueFinished = GenID(0, 13);
+        public static int BuyInShop = GenID(0, 14);
+
 
         #endregion
 

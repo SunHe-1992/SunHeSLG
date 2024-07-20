@@ -22,13 +22,14 @@ public class UIPage_WorldUI : FUIBase
         ui.btn_minigame.onClick.Set(BtnMiniGame);
         ui.btn_NPC.onClick.Set(BtnNPC);
         ui.btn_inventory.onClick.Set(BtnInventory);
+        ui.btn_quest.onClick.Set(BtnQuests);
     }
     protected override void OnShown()
     {
         base.OnShown();
         InputReceiver.SwitchInputToMap();
 
-      
+
     }
 
 
@@ -124,5 +125,9 @@ public class UIPage_WorldUI : FUIBase
     void OpenDialogue()
     {
         FUIManager.Inst.ShowUI<UIPage_Dialogue>(FUIDef.FWindow.DialoguePage, null, 1000);
+    }
+    void BtnQuests()
+    {
+        FUIManager.Inst.ShowUI<UIPage_QuestUI>(FUIDef.FWindow.QuestUI);
     }
 }

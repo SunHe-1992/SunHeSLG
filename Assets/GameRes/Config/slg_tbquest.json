@@ -1,0 +1,29 @@
+[
+  {
+    "ID": 1000,
+    "Title": "Defeat 10 villians",
+    "Content": "Defeat 10 villians",
+    "QuestType": 1,
+    "RewardGold": 123,
+    "Param1": 10,
+    "GoldCount": 132
+  },
+  {
+    "ID": 1001,
+    "Title": "Make dialogue with NPC",
+    "Content": "Make dialogue with NPC",
+    "QuestType": 2,
+    "RewardGold": 345,
+    "Param1": 1,
+    "GoldCount": 555
+  },
+  {
+    "ID": 1002,
+    "Title": "Spend 1 gold at shop",
+    "Content": "Spend 1 gold at shop",
+    "QuestType": 3,
+    "RewardGold": 234,
+    "Param1": 1,
+    "GoldCount": 333
+  }
+]

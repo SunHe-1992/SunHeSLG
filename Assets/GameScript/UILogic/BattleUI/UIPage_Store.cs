@@ -6,7 +6,7 @@ using PackageDebug;
 using UnityEngine;
 using UniFramework.Event;
 using PackageBattle;
-
+using SunHeTBS;
 public class UIPage_Store : FUIBase
 {
 
@@ -117,6 +117,7 @@ public class UIPage_Store : FUIBase
                 TBSPlayer.InsertItem(buyingItem.itemId, 1);
                 HideDetailCom();
                 RefreshContent();
+                UniEvent.SendMessage(GameEventDefine.BuyInShop);
             }
             else
             {

@@ -24,6 +24,7 @@ public class FUIDef
         StoreUI,
         MenuScreenUI,
         SettingUI,
+        QuestUI,
     }
     /// <summary>
     /// package names
@@ -60,5 +61,6 @@ public class FUIDef
         {FWindow.StoreUI, FPackage.PackageBattle},
         {FWindow.MenuScreenUI, FPackage.PackageBattle},
         {FWindow.SettingUI, FPackage.PackageBattle},
+        {FWindow.QuestUI, FPackage.PackageBattle},
     };
 }

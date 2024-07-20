@@ -24,7 +24,7 @@ namespace SunHeTBS
         public bool dead = false;
         public PawnData PawnCfg { get => pawnCfg; private set => pawnCfg = value; }
 
-       
+
 
         public Pawn(int id, RPGSide side)
         {
@@ -165,6 +165,8 @@ namespace SunHeTBS
             //todo death
             this.dead = true;
             BLogic.Inst.CheckCombatEnd();
+            if (this.side == RPGSide.Villian)
+                UniEvent.SendMessage(GameEventDefine.OneVillianDied);
         }
         #endregion
         public void ProcessAfterSkill()

@@ -15,6 +15,7 @@ namespace PackageBattle
         public GButton btn_minigame;
         public GButton btn_NPC;
         public GButton btn_inventory;
+        public GButton btn_quest;
         public const string URL = "ui://fstosj6ipy0fhw";
 
         public static UI_WorldPanel CreateInstance()
@@ -34,6 +35,7 @@ namespace PackageBattle
             btn_minigame = (GButton)GetChild("btn_minigame");
             btn_NPC = (GButton)GetChild("btn_NPC");
             btn_inventory = (GButton)GetChild("btn_inventory");
+            btn_quest = (GButton)GetChild("btn_quest");
         }
     }
 }

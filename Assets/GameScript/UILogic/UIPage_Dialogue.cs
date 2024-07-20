@@ -6,6 +6,7 @@ using CommonPackage;
 using UnityEngine;
 using UniFramework.Event;
 using cfg;
+using SunHeTBS;
 public class UIPage_Dialogue : FUIBase
 {
     UI_DialoguePage ui;
@@ -66,6 +67,7 @@ public class UIPage_Dialogue : FUIBase
     {
         FUIManager.Inst.HideUI(this);
         FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
+        UniEvent.SendMessage(GameEventDefine.DialogueFinished);
     }
 
     void OptionRenderer(int index, GObject obj)

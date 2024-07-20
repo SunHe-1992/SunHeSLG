@@ -10,6 +10,7 @@ public class LocalServer : ISingleton
     public static LocalServer Inst { get; private set; }
     public void OnCreate(object createParam)
     {
+        
     }
 
     public void OnDestroy()

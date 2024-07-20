@@ -25,13 +25,17 @@ namespace SunHeTBS
         public void OnCreate(object createParam)
         {
             UniEvent.AddListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
-
+            UniEvent.AddListener(GameEventDefine.OneVillianDied, OneVillianKilled);
+            UniEvent.AddListener(GameEventDefine.DialogueFinished, OnDialogueFinished);
+            UniEvent.AddListener(GameEventDefine.BuyInShop, OnBuyInShop);
         }
 
         public void OnDestroy()
         {
             UniEvent.RemoveListener(GameEventDefine.LandMarkTriggered, OnLandMarkTriggered);
-
+            UniEvent.RemoveListener(GameEventDefine.OneVillianDied, OneVillianKilled);
+            UniEvent.RemoveListener(GameEventDefine.DialogueFinished, OnDialogueFinished);
+            UniEvent.RemoveListener(GameEventDefine.BuyInShop, OnBuyInShop);
         }
 
         public void OnUpdate()
@@ -283,6 +287,51 @@ namespace SunHeTBS
             this.DoCombatEnd();
         }
         #endregion
+
+        void AddQuestProgress(int questType, int addProgress)
+        {
+            var dic = TBSPlayer.UserDetail.myQuests;
+            foreach (var data in dic.Values)
+            {
+                var cfg = ConfigManager.table.TbQuest.Get(data.questId);
+                if (cfg.QuestType == questType)
+                {
+                    data.currentProgress += addProgress;
+                }
+            }
+            CheckQuestFinish();
+        }
+        void CheckQuestFinish()
+        {
+            var dic = TBSPlayer.UserDetail.myQuests;
+
+            foreach (var data in dic.Values)
+            {
+                if (data.status == QuestEntry.QuestStatus.Accepted && data.currentProgress >= data.maxProgress)
+                {
+                    data.status = QuestEntry.QuestStatus.Finished;
+                    var cfg = ConfigManager.table.TbQuest.Get(data.questId);
+                    int addGold = cfg.GoldCount;
+                    TBSPlayer.UpdateGoldAmount(addGold);
+                    UIService.Inst.ShowMoneyAnim(addGold);
+                }
+
+            }
+
+        }
+        void OneVillianKilled(IEventMessage msg)
+        {
+            AddQuestProgress(1, 1);
+        }
+        void OnDialogueFinished(IEventMessage msg)
+        {
+            AddQuestProgress(2, 1);
+
+        }
+        void OnBuyInShop(IEventMessage msg)
+        {
+            AddQuestProgress(3, 1);
+        }
     }
 
     public enum GameControlState
