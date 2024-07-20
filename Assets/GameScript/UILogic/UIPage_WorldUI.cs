@@ -77,8 +77,21 @@ public class UIPage_WorldUI : FUIBase
         else
         {
             ui.showNPCBtn.selectedIndex = 1;
-            //BLogic.recentNPCMark.eventType
-            ui.btn_NPC.text = "NPC";
+            var npcMark = BLogic.recentNPCMark;
+
+            switch (npcMark.PawnCfg.MapEvent)
+            {
+                case cfg.SLG.PawnMapEvent.Combat:
+                    ui.btn_NPC.text = "Combat";
+                    break;
+                case cfg.SLG.PawnMapEvent.Store:
+                    ui.btn_NPC.text = "Shop";
+                    break;
+                case cfg.SLG.PawnMapEvent.Talk:
+                    ui.btn_NPC.text = "Dialogue";
+                    break;
+            }
+
         }
     }
     void RefreshHUD()
