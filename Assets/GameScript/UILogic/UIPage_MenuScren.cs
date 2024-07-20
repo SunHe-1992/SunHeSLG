@@ -74,7 +74,8 @@ public class UIPage_MenuScreen : FUIBase
     }
     protected void OnClickBtnOptions()
     {
-       //todo ui options
+        //ui options
+        FUIManager.Inst.ShowUI<UIPage_SettingUI>(FUIDef.FWindow.SettingUI);
     }
     protected void OnClickBtnNewGame()
     {
