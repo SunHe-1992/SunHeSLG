@@ -44,6 +44,7 @@ namespace PackageBattle
             UIObjectFactory.SetPackageItemExtension(UI_CombatPanel.URL, typeof(UI_CombatPanel));
             UIObjectFactory.SetPackageItemExtension(UI_CombatHpBar.URL, typeof(UI_CombatHpBar));
             UIObjectFactory.SetPackageItemExtension(UI_ItemInventoryComp.URL, typeof(UI_ItemInventoryComp));
+            UIObjectFactory.SetPackageItemExtension(UI_MenuScreenUI.URL, typeof(UI_MenuScreenUI));
             UIObjectFactory.SetPackageItemExtension(UI_RPGStatsBar.URL, typeof(UI_RPGStatsBar));
             UIObjectFactory.SetPackageItemExtension(UI_RPGStatsCom.URL, typeof(UI_RPGStatsCom));
             UIObjectFactory.SetPackageItemExtension(UI_RPGPawnBlock.URL, typeof(UI_RPGPawnBlock));

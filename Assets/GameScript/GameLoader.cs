@@ -132,7 +132,8 @@ public class GameLoader : MonoBehaviour
                 Destroy(PatchWindow.Inst);
             }
             //show test ui
-            FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+            //FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
+            FUIManager.Inst.ShowUI<UIPage_MenuScreen>(FUIDef.FWindow.MenuScreenUI);
             DontDestroyOnLoad(StageCamera.main);
         }
     }
