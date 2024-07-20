@@ -131,6 +131,7 @@ public class GameLoader : MonoBehaviour
             {
                 Destroy(PatchWindow.Inst);
             }
+            AudioManager.Inst.Play("bgm1", true);
             //show test ui
             //FUIManager.Inst.ShowUI<UIPage_Debug>(FUIDef.FWindow.TestUI);
             FUIManager.Inst.ShowUI<UIPage_MenuScreen>(FUIDef.FWindow.MenuScreenUI);
