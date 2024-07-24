@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace FairyGUI
@@ -184,6 +184,7 @@ namespace FairyGUI
         /// <returns></returns>
         public static Camera CreateCamera(string name, int cullingMask)
         {
+            Debug.LogError("CreateCamera");
             GameObject cameraObject = new GameObject(name);
             Camera camera = cameraObject.AddComponent<Camera>();
             camera.depth = 1;

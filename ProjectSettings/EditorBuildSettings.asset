@@ -8,8 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TimeLineScene.unity
     guid: 352f2e64371e4ba4babce5d61f4d238f
   m_configObjects: {}
-  m_UseUCBPForAssetBundles: 0
