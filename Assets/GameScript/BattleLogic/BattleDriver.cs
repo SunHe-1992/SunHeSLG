@@ -185,18 +185,11 @@ namespace SunHeTBS
                 //TBSMapService.Inst.InitMapCamera();
                 SwitchDriveState(BattleDriveState.STATE_PRELOAD_RES);
 
-                SetWorldCamera();
             };
 
 
         }
-        void SetWorldCamera()
-        {
-            var mainCam = GameObject.Find("Main Camera").GetComponent<Camera>();
-            //find camera
-            var cameraData = FairyGUI.StageCamera.main.GetUniversalAdditionalCameraData();
-            cameraData.cameraStack.Add(mainCam);
-        }
+       
 
         private void OnEnterLoadMapDataState()
         {

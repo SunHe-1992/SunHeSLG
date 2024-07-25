@@ -19,6 +19,7 @@ namespace SunHeTBS
             if (target == null) return;
 
             offset = transform.position - target.position;
+
         }
 
         private void Update()
