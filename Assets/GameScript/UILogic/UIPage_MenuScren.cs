@@ -100,4 +100,16 @@ public class UIPage_MenuScreen : FUIBase
         };
         OnBtnClose();
     }
+    void Load3DGameScene()
+    {
+        //start 3d platform game
+        string mapName = "World1";
+        SceneHandle handle = YooAssets.LoadSceneAsync("Scene/" + mapName, LoadSceneMode.Single);
+        handle.Completed += (scene) =>
+        {
+            BattleDriver.Inst.LoadObjInScene();
+            FUIManager.Inst.ShowUI<UIPage_WorldUI>(FUIDef.FWindow.WorldPanel);
+        };
+        OnBtnClose();
+    }
 }
