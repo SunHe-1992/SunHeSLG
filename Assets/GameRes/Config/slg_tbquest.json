@@ -1,29 +1,92 @@
 [
   {
     "ID": 1000,
+    "platform": false,
     "Title": "Defeat 10 villians",
     "Content": "Defeat 10 villians",
     "QuestType": 1,
     "RewardGold": 123,
     "Param1": 10,
-    "GoldCount": 132
+    "AchievementID": 0
   },
   {
     "ID": 1001,
+    "platform": false,
     "Title": "Make dialogue with NPC",
     "Content": "Make dialogue with NPC",
     "QuestType": 2,
     "RewardGold": 345,
     "Param1": 1,
-    "GoldCount": 555
+    "AchievementID": 0
   },
   {
-    "ID": 1002,
+    "ID": 1014,
+    "platform": true,
     "Title": "Spend 1 gold at shop",
     "Content": "Spend 1 gold at shop",
-    "QuestType": 3,
+    "QuestType": 1014,
     "RewardGold": 234,
     "Param1": 1,
-    "GoldCount": 333
+    "AchievementID": 0
+  },
+  {
+    "ID": 1015,
+    "platform": true,
+    "Title": "Pick 10 gold coins",
+    "Content": "Pick 10 gold coins",
+    "QuestType": 1015,
+    "RewardGold": 99,
+    "Param1": 10,
+    "AchievementID": 1
+  },
+  {
+    "ID": 1016,
+    "platform": true,
+    "Title": "Summon 5 NPCs",
+    "Content": "Summon 5 NPCs",
+    "QuestType": 1016,
+    "RewardGold": 99,
+    "Param1": 5,
+    "AchievementID": 2
+  },
+  {
+    "ID": 1017,
+    "platform": true,
+    "Title": "Pick 10 stars",
+    "Content": "Pick 10 stars",
+    "QuestType": 1017,
+    "RewardGold": 99,
+    "Param1": 10,
+    "AchievementID": 3
+  },
+  {
+    "ID": 1018,
+    "platform": true,
+    "Title": "Pick a Red potion",
+    "Content": "Pick a Red potion",
+    "QuestType": 1018,
+    "RewardGold": 99,
+    "Param1": 2,
+    "AchievementID": 4
+  },
+  {
+    "ID": 1019,
+    "platform": true,
+    "Title": "Pick a Toxic potion",
+    "Content": "Pick a Toxic potion",
+    "QuestType": 1019,
+    "RewardGold": 99,
+    "Param1": 2,
+    "AchievementID": 5
+  },
+  {
+    "ID": 1020,
+    "platform": true,
+    "Title": "Pick a Timer",
+    "Content": "Pick a Timer",
+    "QuestType": 1020,
+    "RewardGold": 99,
+    "Param1": 2,
+    "AchievementID": 6
   }
 ]

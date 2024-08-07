@@ -11,7 +11,7 @@ public class Boot : MonoBehaviour
     /// </summary>
     public EPlayMode PlayMode = EPlayMode.EditorSimulateMode;
     public static EPlayMode GamePlayMode;
-    public static bool playRPG = false;
+    public static bool playRPG = true;
     void Awake()
     {
         Debug.Log($"资源系统运行模式：{PlayMode}");

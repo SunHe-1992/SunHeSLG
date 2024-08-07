@@ -25,6 +25,7 @@ public partial class Tables
     public SLG.TbAttr TbAttr {get; }
     public SLG.TbDialogue TbDialogue {get; }
     public SLG.TbQuest TbQuest {get; }
+    public SLG.TbAchi TbAchi {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -39,6 +40,7 @@ public partial class Tables
         TbAttr = new SLG.TbAttr(loader("slg_tbattr"));
         TbDialogue = new SLG.TbDialogue(loader("slg_tbdialogue"));
         TbQuest = new SLG.TbQuest(loader("slg_tbquest"));
+        TbAchi = new SLG.TbAchi(loader("slg_tbachi"));
         ResolveRef();
     }
     
@@ -55,6 +57,7 @@ public partial class Tables
         TbAttr.ResolveRef(this);
         TbDialogue.ResolveRef(this);
         TbQuest.ResolveRef(this);
+        TbAchi.ResolveRef(this);
     }
 }
 

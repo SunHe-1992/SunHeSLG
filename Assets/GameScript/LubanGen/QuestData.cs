@@ -18,12 +18,13 @@ public sealed partial class QuestData : Luban.BeanBase
     public QuestData(JSONNode _buf) 
     {
         { if(!_buf["ID"].IsNumber) { throw new SerializationException(); }  ID = _buf["ID"]; }
+        { if(!_buf["platform"].IsBoolean) { throw new SerializationException(); }  Platform = _buf["platform"]; }
         { if(!_buf["Title"].IsString) { throw new SerializationException(); }  Title = _buf["Title"]; }
         { if(!_buf["Content"].IsString) { throw new SerializationException(); }  Content = _buf["Content"]; }
         { if(!_buf["QuestType"].IsNumber) { throw new SerializationException(); }  QuestType = _buf["QuestType"]; }
         { if(!_buf["RewardGold"].IsNumber) { throw new SerializationException(); }  RewardGold = _buf["RewardGold"]; }
         { if(!_buf["Param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["Param1"]; }
-        { if(!_buf["GoldCount"].IsNumber) { throw new SerializationException(); }  GoldCount = _buf["GoldCount"]; }
+        { if(!_buf["AchievementID"].IsNumber) { throw new SerializationException(); }  AchievementID = _buf["AchievementID"]; }
     }
 
     public static QuestData DeserializeQuestData(JSONNode _buf)
@@ -32,12 +33,13 @@ public sealed partial class QuestData : Luban.BeanBase
     }
 
     public readonly int ID;
+    public readonly bool Platform;
     public readonly string Title;
     public readonly string Content;
     public readonly int QuestType;
     public readonly int RewardGold;
     public readonly int Param1;
-    public readonly int GoldCount;
+    public readonly int AchievementID;
    
     public const int __ID__ = 220617612;
     public override int GetTypeId() => __ID__;
@@ -51,18 +53,20 @@ public sealed partial class QuestData : Luban.BeanBase
         
         
         
+        
     }
 
     public override string ToString()
     {
         return "{ "
         + "ID:" + ID + ","
+        + "platform:" + Platform + ","
         + "Title:" + Title + ","
         + "Content:" + Content + ","
         + "QuestType:" + QuestType + ","
         + "RewardGold:" + RewardGold + ","
         + "Param1:" + Param1 + ","
-        + "GoldCount:" + GoldCount + ","
+        + "AchievementID:" + AchievementID + ","
         + "}";
     }
 }

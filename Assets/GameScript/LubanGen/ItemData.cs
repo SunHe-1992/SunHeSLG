@@ -27,6 +27,7 @@ public sealed partial class ItemData : Luban.BeanBase
         { if(!_buf["useInCombat"].IsBoolean) { throw new SerializationException(); }  UseInCombat = _buf["useInCombat"]; }
         { if(!_buf["useOutCombat"].IsBoolean) { throw new SerializationException(); }  UseOutCombat = _buf["useOutCombat"]; }
         { if(!_buf["param1"].IsNumber) { throw new SerializationException(); }  Param1 = _buf["param1"]; }
+        { if(!_buf["ModelName"].IsString) { throw new SerializationException(); }  ModelName = _buf["ModelName"]; }
     }
 
     public static ItemData DeserializeItemData(JSONNode _buf)
@@ -47,12 +48,14 @@ public sealed partial class ItemData : Luban.BeanBase
     public readonly bool UseInCombat;
     public readonly bool UseOutCombat;
     public readonly int Param1;
+    public readonly string ModelName;
    
     public const int __ID__ = 1241678205;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        
         
         
         
@@ -78,6 +81,7 @@ public sealed partial class ItemData : Luban.BeanBase
         + "useInCombat:" + UseInCombat + ","
         + "useOutCombat:" + UseOutCombat + ","
         + "param1:" + Param1 + ","
+        + "ModelName:" + ModelName + ","
         + "}";
     }
 }

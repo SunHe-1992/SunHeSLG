@@ -1,0 +1,38 @@
+[
+  {
+    "ID": 1,
+    "Title": "Friendly Converser",
+    "Content": " Make dialogue with an NPC",
+    "Icon": "icon_100303"
+  },
+  {
+    "ID": 2,
+    "Title": "First Purchase",
+    "Content": " Spend 1 gold at the shop",
+    "Icon": "icon_110101"
+  },
+  {
+    "ID": 3,
+    "Title": "Gold Gatherer",
+    "Content": " Pick up 10 gold coins",
+    "Icon": "icon_110102"
+  },
+  {
+    "ID": 4,
+    "Title": "Summoner",
+    "Content": " Summon 5 NPCs",
+    "Icon": "icon_110103"
+  },
+  {
+    "ID": 5,
+    "Title": "Star Collector",
+    "Content": " Pick up 10 stars",
+    "Icon": "icon_110104"
+  },
+  {
+    "ID": 6,
+    "Title": "Potion Picker",
+    "Content": " Pick up a Red potion",
+    "Icon": "icon_110105"
+  }
+]

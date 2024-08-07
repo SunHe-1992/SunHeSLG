@@ -311,7 +311,7 @@ namespace SunHeTBS
                 {
                     data.status = QuestEntry.QuestStatus.Finished;
                     var cfg = ConfigManager.table.TbQuest.Get(data.questId);
-                    int addGold = cfg.GoldCount;
+                    int addGold = cfg.RewardGold;
                     TBSPlayer.UpdateGoldAmount(addGold);
                     UIService.Inst.ShowMoneyAnim(addGold);
                 }

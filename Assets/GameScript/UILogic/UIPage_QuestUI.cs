@@ -81,7 +81,7 @@ public class UIPage_QuestUI : FUIBase
         mItem.btn_accept.data = data.questId;
         mItem.btn_accept.onClick.Set(BtnAcceptQuest);
         //gold coin display
-        UIService.Inst.ShowItemComp(mItem.itemHead, 102, cfg.GoldCount);
+        UIService.Inst.ShowItemComp(mItem.itemHead, 102, cfg.RewardGold);
     }
 
     void BoardListRenderer(int index, GObject obj)
